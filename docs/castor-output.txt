@@ -20,6 +20,7 @@ Available commands:
   help                        Display help for a command
   list                        List commands
  app
+  app:load-fixtures           [load-fixtures] Reset the SQLite database, run the migrations and load the fixtures
   app:reset-database          [reset-database] Reset the SQLite database and run the migrations
   app:secret                  [secret] Write a random APP_SECRET to .env.local, unless it holds one already
  castor

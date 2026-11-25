@@ -5,6 +5,8 @@
 
 declare(strict_types=1);
 
+use App\Account\Domain\Accounts;
+use App\Account\Infrastructure\Persistence\Doctrine\DoctrineAccounts;
 use App\Text\Domain\TitleSlugger;
 use App\Text\Infrastructure\AsciiTitleSlugger;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
@@ -45,14 +47,22 @@ DESCRIPTION;
 
     // src/<Context>/{Domain,Application,Infrastructure}, and src/Shared for what every context uses. In each context,
     // the domain holds plain PHP objects, never services; the application and the infrastructure are services, except
-    // the commands and queries, which are messages.
+    // the commands and queries, which are messages, the Doctrine entities and the data of the forms.
     $services->load('App\\', __DIR__.'/../src')
         ->exclude([
             __DIR__.'/../src/*/Domain/',
             __DIR__.'/../src/*/Application/**/{*Query,*Command}.php',
+            __DIR__.'/../src/*/Infrastructure/Persistence/Doctrine/Entity/',
+            __DIR__.'/../src/*/Infrastructure/Form/*Data.php',
             __DIR__.'/../src/Kernel.php',
         ]);
 
     // The ports of each domain, bound to their adapters in the infrastructure.
     $services->alias(TitleSlugger::class, AsciiTitleSlugger::class);
+    $services->alias(Accounts::class, DoctrineAccounts::class);
+
+    // The fixtures of the dev environment, which the tests load too: see fixtures/ and `castor load-fixtures`.
+    if (\in_array($containerConfigurator->env(), ['dev', 'test'], true)) {
+        $services->load('App\\Fixtures\\', __DIR__.'/../fixtures');
+    }
 };

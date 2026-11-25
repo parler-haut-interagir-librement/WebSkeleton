@@ -1,0 +1,50 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Symfony\Component\DependencyInjection\Loader\Configurator;
+
+/**
+ * Personal data, by phil/privacy-bundle: the redaction of the logs, the consent, and for each member the export of their
+ * data and the deletion of their account, from the privacy choices page, /fr/privacy-choices or /en/privacy-choices.
+ * The deletion waits thirty days, during which the member can cancel it, then exports and erases the data of every
+ * module: the account itself is the module "account" (App\Account\Infrastructure\Privacy\AccountPersonalData).
+ *
+ * @see vendor/phil/privacy-bundle/doc/installation.md
+ */
+return App::config([
+    'phil_privacy' => [
+        // The canonical address of the site, such as https://example.com, that the links sent by email point to.
+        'public_origin' => '%env(default::APP_PUBLIC_ORIGIN)%',
+        'log_redaction' => [
+            // Keys whose values never reach a log line, compared without case or separators; "*" starts or ends a
+            // pattern.
+            'denylist' => [
+                '*password*',
+                '*token*',
+                '*secret*',
+                '*authorization*',
+                '*cookie*',
+                '*apikey',
+                'email',
+                'username',
+            ],
+        ],
+        // The session of a member is necessary: no choice refuses it. A category the visitor chooses is added here, with
+        // what it writes in config/privacy/cookies.yaml.
+        'consent' => [
+            'categories' => [
+                'session' => [
+                    'necessary' => true,
+                    'labels' => ['en' => 'Session', 'fr' => 'Session'],
+                    'descriptions' => ['en' => 'Keeps a member signed in.', 'fr' => 'Garde un membre connecté.'],
+                ],
+            ],
+        ],
+        // The pages are mounted under the language prefix by config/routes/phil_privacy.php, in the layout of the site.
+        'pages' => [
+            'auto_mount' => false,
+            'layout' => 'layout/page.html.twig',
+        ],
+    ],
+]);

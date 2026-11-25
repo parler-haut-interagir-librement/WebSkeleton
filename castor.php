@@ -156,6 +156,20 @@ function reset_database(): int
     return success(exit_code('bin/console doctrine:migrations:migrate --no-interaction --allow-no-migration'));
 }
 
+#[AsTask(namespace: 'app', description: 'Reset the SQLite database, run the migrations and load the fixtures', aliases: ['load-fixtures'])]
+function load_fixtures(): int
+{
+    title('app:load-fixtures');
+    $exitCode = reset_database();
+    if ($exitCode !== 0) {
+        return $exitCode;
+    }
+
+    io()->note('Loading the fixtures: the accounts "admin" and "member", and ten more members...');
+
+    return success(exit_code('bin/console foundry:load-fixtures --env=dev --no-interaction'));
+}
+
 #[AsTask(namespace: 'app', description: 'Write a random APP_SECRET to .env.local, unless it holds one already', aliases: ['secret'])]
 function secret(): int
 {

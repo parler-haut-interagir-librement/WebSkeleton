@@ -21,6 +21,19 @@ built on [WebSymfony](https://github.com/parler-haut-interagir-librement/WebSymf
   every context uses, on `phil/ddd-bundle`: a command bus in a Doctrine transaction, a query bus, the example context
   `Text` of a slug through the three layers; Deptrac checks the layers inside each context and the isolation between
   contexts.
+- Member accounts in the context `Account`: sign-up through the command bus with validation, form login with a CSRF
+  token and throttled attempts, the account page, sign-out by POST with a CSRF token, every page under `/fr` and
+  `/en`; `ROLE_ADMIN` above `ROLE_USER`, the user checked again on each refresh, impersonation off, the session holding a
+  crc32c hash of the password hash; the migration, and the fixtures `admin` and `member` loaded by
+  `castor load-fixtures`. `phil/identity-client-bundle` is documented as the sign-in by OpenID Connect.
+- The administration, EasyAdmin 5 in the theme of PHIL UX by `phil/ux-easyadmin-bundle`, at `/admin` for `ROLE_ADMIN`:
+  the accounts listed and shown, and the errors of the site.
+- The privacy choices of each member under the language prefix — the export of their data, the deletion of their
+  account, the consent — and the redaction of the logs, by `phil/privacy-bundle`, with the account as a module of the
+  export and the erasure.
+- The errors of the requests, messages and commands kept in the database of the site, by `phil/error-tracking-bundle`.
+- The main menu by `phil/menu-bundle`, and the creation and update dates of the accounts by
+  `phil/doctrine-behaviours-bundle`.
 - phil-ux, the stylesheet of `phil/ux-css`, and the recipes `Badge`, `Button`, `Card`, `Table` and `ThemeSwitcher` of
   the PHIL UX kit, light and dark.
 - A Content Security Policy with nonces, the security headers and the violation reports, by
@@ -32,11 +45,10 @@ built on [WebSymfony](https://github.com/parler-haut-interagir-librement/WebSymf
 - `/sitemap.xml` with every page in every language and its alternates, by `phil/sitemap-bundle`;
   `/.well-known/security.txt`, by `phil/well-known-bundle`; the JSON-LD graph of each page, by
   `phil/structured-data-bundle`.
-- The PHIL identity of WebSymfony: logo, copyright of Parler Haut, Interagir Librement, credit to Strangebuzz, a KnpMenu
-  main menu, cross-origin rules on `/api/` by NelmioCorsBundle, Sentry in production.
+- The PHIL identity of WebSymfony: logo, copyright of Parler Haut, Interagir Librement, credit to Strangebuzz,
+  cross-origin rules on `/api/` by NelmioCorsBundle.
 - `compose.yaml` with FrankenPHP in worker mode and PostgreSQL, MySQL documented as the other choice, the Symfony binary
   with SQLite as the lighter one.
 - The five test suites with the code coverage at 100 %, the quality gates of `phil/dev-tools` and the tasks in Castor,
   among them `castor secret`, which writes a random `APP_SECRET` to `.env.local`.
-- The documented steps that add member accounts with `phil/identity-client-bundle`, an administration with EasyAdmin and
-  `phil/ux-easyadmin-bundle`, and more recipes of the PHIL UX kit.
+- The documented steps that sign members in with `phil/identity-client-bundle`, and add more recipes of the PHIL UX kit.

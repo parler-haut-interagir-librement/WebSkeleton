@@ -26,6 +26,11 @@ theme:
 menu:
   home: Accueil
   contact: Contact
+  login: Se connecter
+  signup: S’inscrire
+  account: Mon compte
+  admin: Administration
+  logout: Se déconnecter
 
 home:
   title: Bienvenue
@@ -57,3 +62,48 @@ error:
   title: Erreur %code%
   text: 'Désolé, une erreur est survenue : %text% (%code%).'
   home: Retour à l’accueil
+
+login:
+  title: Se connecter
+  username: Nom d’utilisateur
+  password: Mot de passe
+  submit: Se connecter
+  signup: Pas encore de compte ? S’inscrire
+
+signup:
+  title: S’inscrire
+  username: Nom d’utilisateur
+  email: Adresse courriel
+  password: Mot de passe
+  password_hint: Au moins %count% caractères.
+  confirm: Mot de passe, de nouveau
+  submit: Créer mon compte
+  login: Déjà membre ? Se connecter
+
+account:
+  title: Mon compte
+  welcome: 'Bienvenue, %username%.'
+  username: Nom d’utilisateur
+  email: Adresse courriel
+  roles: Rôles
+  created_at: Membre depuis
+  privacy: Mes choix de confidentialité, l’exportation de mes données et la suppression de mon compte
+  logout: Se déconnecter
+
+admin:
+  menu:
+    dashboard: Tableau de bord
+    users: Utilisateurs
+    errors: Erreurs
+    site: Retour au site
+    account: Mon compte
+  dashboard:
+    title: Administration
+    text: L’administration du site, pour ses administrateurs seulement. Chaque contexte ajoute ses contrôleurs CRUD dans son dossier Infrastructure/Http/Admin, et un lien dans le menu du DashboardController.
+  user:
+    singular: Utilisateur
+    plural: Utilisateurs
+    username: Nom d’utilisateur
+    email: Adresse courriel
+    roles: Rôles
+    created_at: Créé le

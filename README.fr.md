@@ -1,4 +1,4 @@
-<!-- phil-dev source-sha256=2e7347025cbf2d6b80eb2e3971062710cd976eb74a100210cd29da302f5c61f7 -->
+<!-- phil-dev source-sha256=6475b33ca2be6cbaa038065fbb1686955d799fd2ae48bec7260ddf4ed2585b3c -->
 # WebSkeleton 🦴
 
 [![Latest Version](https://img.shields.io/packagist/v/phil/webskeleton.svg?style=flat-square)](https://packagist.org/packages/phil/webskeleton)
@@ -12,8 +12,9 @@
 
 « **Parler** *Haut*, **Interagir** *Librement* » **Web***Skeleton* est la base d'un site [Symfony 8.2](https://symfony.com/8) :
 en français et en anglais, organisé en conception pilotée par le domaine (Domain, Application, Infrastructure), habillé
-par le kit PHIL UX, avec les bundles PHIL dont un site public a besoin dès son premier jour — en-têtes de sécurité,
-mentions légales, politique de confidentialité, déclaration d'accessibilité, formulaire de contact, plan du site,
+par le kit PHIL UX, avec des comptes de membres, une administration EasyAdmin et les bundles PHIL dont un site public a
+besoin dès son premier jour — en-têtes de sécurité, mentions légales, politique de confidentialité, choix de
+confidentialité des membres, déclaration d'accessibilité, formulaire de contact, suivi des erreurs, plan du site,
 `security.txt` et données structurées —, et les mêmes tests et portes de qualité que les autres gabarits de PHIL.
 
 WebSkeleton est bâti sur [WebSymfony](https://github.com/parler-haut-interagir-librement/WebSymfony), lui-même bâti sur
@@ -31,6 +32,7 @@ outils PHIL : phil-ux à la place de Pico CSS, le kit PHIL UX et les bundles PHI
 * [Ce qu'il ajoute à WebSymfony](#ce-quil-ajoute-à-websymfony-)
 * [Langues](#langues-)
 * [Conception pilotée par le domaine](#conception-pilotée-par-le-domaine-)
+* [Comptes et administration](#comptes-et-administration-)
 * [Avant la mise en ligne](#avant-la-mise-en-ligne-)
 * [Étapes facultatives](#étapes-facultatives-)
 * [Tâches](#tâches-)
@@ -104,6 +106,8 @@ Avec le binaire Symfony, mettez la même variable dans `.env.local`, avec l'hôt
 * [Symfony 8.2](https://symfony.com/8), depuis sa version candidate, avec [Messenger](https://symfony.com/doc/current/messenger.html)
   pour les commandes et les requêtes
 * [Doctrine ORM 3 (DBAL 4)](https://www.doctrine-project.org), sur SQLite, PostgreSQL ou MySQL
+* [Symfony Security](https://symfony.com/doc/current/security.html) pour les comptes de membres, et
+  [EasyAdmin 5](https://symfony.com/bundles/EasyAdminBundle/current/index.html) pour l'administration
 * [Twig 3](https://twig.symfony.com) et les [composants Twig](https://symfony.com/bundles/ux-twig-component/current/index.html)
 * [AssetMapper](https://symfony.com/doc/current/frontend/asset_mapper.html), [Stimulus 3.2](https://stimulus.hotwired.dev/)
   et [Turbo 8](https://turbo.hotwired.dev/), sans Node.js
@@ -118,6 +122,12 @@ Avec le binaire Symfony, mettez la même variable dans `.env.local`, avec l'hôt
 |---|---|
 | Le français et l'anglais, chaque page sous `/fr` ou `/en`, le français par défaut | [routes.php](config/routes.php), [services.php](config/services.php), [translations](translations) |
 | Les couches Domain, Application et Infrastructure de chaque contexte délimité, avec les bus de `phil/ddd-bundle` | [src](src), [messenger.php](config/packages/messenger.php) |
+| Les comptes de membres : l'inscription, la connexion, la page du compte et la déconnexion, sous `/fr` et `/en`, dans le contexte `Account` | [src/Account](src/Account), [security.php](config/packages/security.php) |
+| L'administration, EasyAdmin au thème de PHIL UX par `phil/ux-easyadmin-bundle`, pour `ROLE_ADMIN` | [DashboardController](src/Shared/Infrastructure/Http/Admin/DashboardController.php), [phil_ux_easy_admin.php](config/packages/phil_ux_easy_admin.php) |
+| Les choix de confidentialité de chaque membre — l'exportation de ses données, la suppression de son compte, le consentement — et le caviardage des journaux, par `phil/privacy-bundle` | [phil_privacy.php](config/packages/phil_privacy.php), [AccountPersonalData](src/Account/Infrastructure/Privacy/AccountPersonalData.php) |
+| Les erreurs du site gardées dans sa propre base et montrées dans l'administration, par `phil/error-tracking-bundle` | [phil_error_tracking.php](config/packages/phil_error_tracking.php) |
+| Le menu principal, par `phil/menu-bundle` | [MainMenuBuilder](src/Shared/Infrastructure/Menu/MainMenuBuilder.php) |
+| Les dates de création et de modification des comptes, par `phil/doctrine-behaviours-bundle` | [User](src/Account/Infrastructure/Persistence/Doctrine/Entity/User.php), [phil_doctrine_behaviours.php](config/packages/phil_doctrine_behaviours.php) |
 | phil-ux et les recettes du kit PHIL UX dans `templates/components/` | [base.html.twig](templates/base.html.twig), [components](templates/components) |
 | Une politique de sécurité du contenu avec nonces et les en-têtes de sécurité, par `phil/browser-security-bundle` | [phil_browser_security.php](config/packages/phil_browser_security.php) |
 | Les mentions légales et la politique de confidentialité, dans les deux langues, par `phil/legal-notices-bundle` | [phil_legal_notices.php](config/packages/phil_legal_notices.php), [legal](legal) |
@@ -127,13 +137,15 @@ Avec le binaire Symfony, mettez la même variable dans `.env.local`, avec l'hôt
 | `/.well-known/security.txt`, par `phil/well-known-bundle` | [phil_well_known.php](config/packages/phil_well_known.php) |
 | Le graphe JSON-LD de chaque page, par `phil/structured-data-bundle` | [phil_structured_data.php](config/packages/phil_structured_data.php) |
 
-De WebSymfony restent l'identité de PHIL (logo, droits de Parler Haut, Interagir Librement, thèmes clair et sombre), le
-menu principal de KnpMenu, les règles d'origine croisée de NelmioCorsBundle sur `/api/`, Sentry en production, les
-cinq suites de tests, Castor, les portes de qualité et Docker Compose. Les comptes de membres et l'administration ne
-sont pas installés par défaut : chacun est une [étape facultative](#étapes-facultatives-).
+De WebSymfony restent l'identité de PHIL (logo, droits de Parler Haut, Interagir Librement, thèmes clair et sombre), les
+comptes de membres et leur administration, les règles d'origine croisée de NelmioCorsBundle sur `/api/`, les cinq
+suites de tests, Castor, les portes de qualité et Docker Compose. Les bundles PHIL prennent la place de KnpMenu, de
+Sentry et des extensions Doctrine de Gedmo.
 
 Chaque paquet PHIL vient de Packagist. Un paquet de PHIL pas encore publié se prend par un dépôt Composer `path` vers une
 copie locale du monodépôt `phil-prerelease`, jusqu'à sa sortie ; le gabarit n'en a besoin d'aucun aujourd'hui.
+`phil/monitoring-bundle` est requis sans être enregistré : la configuration de `phil/error-tracking-bundle`
+0.1.0-alpha lit une classe qui implémente une de ses interfaces.
 
 ## Langues 🌍
 
@@ -166,17 +178,27 @@ Dans un contexte, les couches :
 | `Infrastructure` | Contrôleurs, adaptateurs des ports, entités Doctrine | Tout ce qu'elle intègre |
 
 Entre les contextes, l'isolement : un contexte peut utiliser la même couche de `src/Shared` et les couches en dessous,
-jamais un autre contexte ; `src/Shared` n'utilise aucun contexte. Ici, `src/Shared/Infrastructure` contient les
-contrôleurs des pages du site, le menu, le fournisseur du plan du site, Twig et les entités Doctrine que tous les
-contextes partagent.
+jamais un autre contexte ; `src/Shared` n'utilise aucun contexte, et nomme les pages des autres par leurs routes. Ici,
+`src/Shared/Infrastructure` contient les contrôleurs des pages du site, le tableau de bord de l'administration, le
+menu, le fournisseur du plan du site, Twig et les entités Doctrine que tous les contextes partagent.
 
 ```text
 src/
 ├── Kernel.php
+├── Account/
+│   ├── Domain/                 # Role, Accounts (the port)
+│   ├── Application/            # SignUpCommand, SignUpHandler
+│   └── Infrastructure/
+│       ├── Form/               # the sign-up form
+│       ├── Http/Admin/         # UserCrudController
+│       ├── Http/Controller/    # login, signup, account, logout
+│       ├── Persistence/Doctrine/  # DoctrineAccounts, Entity/User
+│       └── Privacy/            # AccountPersonalData, for phil/privacy-bundle
 ├── Shared/
 │   ├── Domain/
 │   ├── Application/
 │   └── Infrastructure/
+│       ├── Http/Admin/         # DashboardController, /admin
 │       ├── Http/Controller/    # pages, under /fr and /en
 │       ├── Http/Root/          # "/", which sends to the visitor's language
 │       ├── Menu/
@@ -222,6 +244,46 @@ Pour un contexte nommé `Catalog` :
 5. **Deptrac** : `'Catalog'` ajouté à `$contexts` dans `phil-dev.php`, ce qui lui donne ses trois couches et les deux
    sortes de règles.
 
+## Comptes et administration 🔐
+
+Le contexte `Account` contient les comptes de membres. [User](src/Account/Infrastructure/Persistence/Doctrine/Entity/User.php)
+est une entité Doctrine de son infrastructure, identifiée par un UUID, qui est aussi ce par quoi `phil/privacy-bundle`
+connaît le membre, jamais par son adresse courriel. L'inscription passe par le bus de commandes : `SignUpCommand`, son
+gestionnaire, et le port `Accounts` du domaine, dont l'adaptateur hache le mot de passe et garde le compte.
+
+| Page | Chemin | Ce qu'elle fait |
+|---|---|---|
+| Inscription | `/fr/signup`, `/en/signup` | Un nom d'utilisateur, une adresse courriel et un mot de passe de 12 caractères ou plus, tapé deux fois ; le nom et l'adresse sont uniques. Un formulaire valide crée le compte et le connecte. |
+| Connexion | `/fr/login`, `/en/login` | La connexion par formulaire de Symfony, avec un jeton CSRF ; cinq essais ratés par minute sont permis par nom d'utilisateur et adresse. |
+| Compte | `/fr/account`, `/en/account` | Le compte du membre, un lien vers ses choix de confidentialité et le bouton qui le déconnecte. |
+| Déconnexion | `/fr/logout`, `/en/logout` | Par POST avec un jeton CSRF seulement : un lien ou une image ne déconnecte jamais personne. |
+| Choix de confidentialité | `/fr/privacy-choices`, `/en/privacy-choices` | L'exportation des données du membre, la suppression de son compte après trente jours, le consentement ; la suppression redemande le mot de passe quand la session n'est pas récente. |
+| Administration | `/admin` | Pour `ROLE_ADMIN` seulement, qui comprend `ROLE_USER` : les comptes, listés et montrés, jamais créés ni modifiés là, et les erreurs du site. |
+
+Le pare-feu vérifie de nouveau le compte chaque fois qu'il est rechargé de la session (`user_checker_on_refresh: true`) :
+un compte modifié ou désactivé est déconnecté à sa requête suivante. La session garde un hachage crc32c du hachage du
+mot de passe, jamais le hachage lui-même ; un mot de passe changé déconnecte les autres sessions. L'usurpation
+d'identité reste désactivée ; si un site l'active, seulement par POST avec un jeton CSRF, jamais par un paramètre
+d'adresse.
+
+`castor load-fixtures` remet la base SQLite à zéro et charge deux comptes nommés et dix autres membres, pour le
+développement seulement :
+
+| Nom d'utilisateur | Mot de passe | Rôles |
+|---|---|---|
+| `admin` | `admin-password` | `ROLE_ADMIN` |
+| `member` | `member-password` | `ROLE_USER` |
+
+Un contexte ajoute ses propres pages à l'administration par un contrôleur CRUD dans son dossier `Infrastructure/Http/Admin/`,
+et un lien dans le menu du [DashboardController](src/Shared/Infrastructure/Http/Admin/DashboardController.php), par le
+nom qu'EasyAdmin donne à ses routes. Ses renseignements personnels prennent part à l'exportation et à l'effacement d'un
+membre par un `PersonalDataExporter` et un `PersonalDataEraser`, comme le fait `AccountPersonalData`.
+
+Pour connecter les membres par un fournisseur d'identité, par OpenID Connect, au lieu des mots de passe, remplacez la
+connexion par formulaire par [`phil/identity-client-bundle`](https://github.com/parler-haut-interagir-librement/identity-client-bundle),
+comme le montre son guide d'installation : le pare-feu garde `user_checker_on_refresh: true`, et l'inscription, les
+mots de passe et leurs données de développement s'en vont.
+
 ## Avant la mise en ligne 🚀
 
 Le gabarit ne commence avec rien qui affirme ce que personne n'a vérifié. Avant qu'un site soit public :
@@ -238,32 +300,28 @@ Le gabarit ne commence avec rien qui affirme ce que personne n'a vérifié. Avan
 5. **`security.txt`** : remplacez le contact dans [phil_well_known.php](config/packages/phil_well_known.php) et
    repoussez sa date d'expiration, d'au plus un an.
 6. **Plusieurs serveurs** : donnez au verrou (`LOCK_DSN`) et à `cache.app` un stockage que tous les serveurs
-   partagent, et retirez `single_server` de [phil_browser_security.php](config/packages/phil_browser_security.php).
+   partagent, et retirez `single_server` de [phil_browser_security.php](config/packages/phil_browser_security.php) et de
+   [phil_error_tracking.php](config/packages/phil_error_tracking.php).
+7. **Les comptes** : ne chargez jamais les données de développement, dont les mots de passe sont publics ; créez le
+   premier administrateur en vous inscrivant, puis donnez au compte `ROLE_ADMIN` dans la base.
+8. **Les renseignements personnels** : réglez `APP_PUBLIC_ORIGIN` à l'adresse du site, faites les suppressions de
+   comptes échues avec `bin/console messenger:consume scheduler_phil_privacy` (avec `symfony/scheduler`) ou `bin/console
+   phil:privacy:deletions` par cron, et déclarez dans [config/privacy/cookies.yaml](config/privacy/cookies.yaml) chaque
+   témoin que le site ajoute.
+9. **Les erreurs** : réglez `APP_RELEASE` à la version qui tourne, et purgez les vieux événements avec
+   `bin/console phil:error-tracking:purge` par cron.
 
 ## Étapes facultatives 🧩
 
-### Comptes de membres
+### Connexion par OpenID Connect
 
-Aucun compte par défaut. Pour en ajouter, avec le fournisseur d'identité de votre choix par OpenID Connect :
+Les comptes se connectent par mot de passe par défaut. Pour les connecter par le fournisseur d'identité de votre choix :
 
-    composer require phil/identity-client-bundle symfony/security-bundle
+    composer require phil/identity-client-bundle
 
-Déclarez le pare-feu dans `config/packages/security.php` avec `user_checker_on_refresh: true`, pour qu'un compte
-désactivé ou modifié soit déconnecté à sa requête suivante, et importez les routes d'`oidc_login` comme le montre le
+Remplacez `form_login` dans [security.php](config/packages/security.php) par l'authentificateur du bundle, gardez
+`user_checker_on_refresh: true`, et importez les routes d'`oidc_login` comme le montre le
 [guide d'installation du bundle](https://github.com/parler-haut-interagir-librement/identity-client-bundle/blob/main/doc/installation.md).
-L'usurpation d'identité reste désactivée ; si un site l'active, seulement par POST avec un jeton CSRF, jamais par un
-paramètre d'adresse. Avec des comptes, [`phil/privacy-bundle`](https://github.com/parler-haut-interagir-librement/privacy-bundle)
-ajoute l'exportation et l'effacement des données d'un membre, le consentement aux témoins et le caviardage des
-renseignements personnels dans les journaux.
-
-### Administration
-
-Aucune administration par défaut. Pour en ajouter une, aux couleurs de PHIL UX :
-
-    composer require easycorp/easyadmin-bundle phil/ux-easyadmin-bundle
-
-Générez ensuite un tableau de bord avec `bin/console make:admin:dashboard`, placez-le sous
-`src/Shared/Infrastructure/Http/Admin/`, et protégez `/admin` par un rôle une fois les comptes de membres en place.
 
 ### D'autres recettes du kit PHIL UX
 
@@ -282,6 +340,7 @@ appartiennent au site. Les autres viennent du kit avec le Symfony UX Toolkit :
 | `castor up`, `castor down` | FrankenPHP en mode worker, PostgreSQL et Mailpit, avec Docker Compose. |
 | `castor secret` | Un `APP_SECRET` aléatoire dans `.env.local`, s'il n'en contient pas. |
 | `castor reset-database` | La base SQLite remise à zéro et migrée. |
+| `castor load-fixtures` | La base SQLite remise à zéro et migrée, avec les comptes `admin` et `member` et dix autres. |
 | `castor test` | Toutes les suites PHPUnit ; `--filter` et `--options` passent à PHPUnit. |
 | `castor test:unit`, `test:integration`, `test:api`, `test:functional`, `test:e2e` | Une suite. |
 | `castor test:next` | Les tests sur la prochaine version de PHP, dans son image Docker. |
@@ -315,7 +374,7 @@ propre à l'application, chaque exception avec sa raison.
 ## Ce qu'il ne livre pas 🙅
 
 * Aucun fichier de déploiement : chaque site apporte le sien.
-* Aucun compte de membre ni administration : chacun est une [étape facultative](#étapes-facultatives-).
+* Aucune connexion par un fournisseur d'identité : c'est une [étape facultative](#étapes-facultatives-).
 * Aucun document légal publié ni déclaration d'accessibilité : le site les publie quand ils disent quelque chose de vrai.
 * Aucune compilation Node.js : AssetMapper sert le JavaScript et phil-ux tels quels.
 

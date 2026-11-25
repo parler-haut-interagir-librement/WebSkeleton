@@ -9,7 +9,7 @@ declare(strict_types=1);
 return [
     // Released on Packagist as phil/webskeleton: its CHANGELOG has the usual sections.
     'docs' => ['public' => true],
-    'paths' => ['src', 'tests', 'migrations', 'bin', 'public', 'importmap.php'],
+    'paths' => ['src', 'tests', 'fixtures', 'migrations', 'bin', 'public', 'importmap.php'],
     // The functional tests share one SQLite file: they run one after the other, with PHPUnit.
     'phpunit' => ['parallel' => false],
     // The layers of DDD, by bounded context: src/<Context>/{Domain,Application,Infrastructure}, and src/Shared for what
@@ -18,10 +18,12 @@ return [
     // Between contexts, a context sees the same layers of Shared, never another context; Shared sees no context.
     // A new context is one more name in $contexts below.
     'deptrac' => (static function (): array {
-        $contexts = ['Text'];
+        $contexts = ['Account', 'Text'];
         $integrated = [
             'DefaultAllowed', 'PhilDddBundleDomain', 'PhilDddBundleApplication', 'PhilSitemap', 'AllowedDoctrine',
-            'AllowedKnpMenu', 'AllowedSymfonyBridgeDoctrine', 'AllowedSymfonyBundleFrameworkBundle', 'AllowedTwig',
+            'AllowedEasyCorpBundleEasyAdminBundle', 'AllowedSymfonyBridgeDoctrine', 'AllowedSymfonyBundleFrameworkBundle',
+            'AllowedSymfonyBundleSecurityBundle', 'AllowedTwig', 'PhilDoctrineBehaviours', 'PhilErrorTrackingBundleInfrastructure',
+            'PhilMenuBundleDomain', 'PhilMenuBundleApplication', 'PhilPrivacyBundleDomain', 'PhilPrivacyBundleApplication',
         ];
         /** @var array<string, string> $layers */
         $layers = [];
@@ -54,9 +56,10 @@ return [
             // new one is added here on purpose, after it is required by composer.json.
             'allow' => [
                 '^Doctrine\\\\(Bundle\\\\DoctrineBundle|DBAL|ORM|Persistence)\\\\.*',
-                '^Knp\\\\Menu\\\\.*',
+                '^EasyCorp\\\\Bundle\\\\EasyAdminBundle\\\\.*',
                 '^Symfony\\\\Bridge\\\\Doctrine\\\\.*',
                 '^Symfony\\\\Bundle\\\\FrameworkBundle\\\\.*',
+                '^Symfony\\\\Bundle\\\\SecurityBundle\\\\.*',
                 '^Twig\\\\.*',
             ],
             'layers' => $layers,
@@ -67,16 +70,10 @@ return [
     'js' => ['paths' => ['assets/controllers', 'assets/app.js', 'assets/bootstrap.js']],
     // Used through the configuration, the templates, the front controller or the console, never by a class of src/.
     'unused' => ['ignore' => [
-        'ext-ctype', 'ext-iconv', 'ext-simplexml', 'symfony/asset', 'symfony/intl', 'symfony/security-csrf',
-        'symfony/translation', 'symfony/twig-bundle', 'twig/extra-bundle', 'doctrine/migrations', 'doctrine/doctrine-migrations-bundle',
-        'symfony/asset-mapper', 'symfony/dotenv', 'symfony/flex', 'symfony/monolog-bundle',
-        'symfony/runtime', 'symfony/stimulus-bundle', 'symfony/ux-turbo', 'symfony/ux-twig-component',
-        'symfony/web-link', 'symfony/yaml', 'twig/intl-extra', 'symfony/lock', 'phil/sitemap-bundle',
-        'knplabs/knp-menu-bundle', 'nelmio/cors-bundle', 'symfony/rate-limiter', 'symfony/mailer',
-        'sentry/sentry-symfony', 'doctrine/orm', 'doctrine/persistence', 'doctrine/doctrine-bundle',
-        'symfony/doctrine-bridge',
-        'phil/accessibility-statement-bundle', 'phil/browser-security-bundle', 'phil/contact-form-bundle',
-        'phil/legal-notices-bundle', 'phil/spam-protection-bundle',
-        'phil/structured-data-bundle', 'phil/ux-bundle', 'phil/ux-css', 'phil/ux-kit', 'phil/well-known-bundle',
+        'ext-iconv', 'ext-simplexml', 'doctrine/migrations', 'doctrine/doctrine-migrations-bundle', 'symfony/dotenv',
+        'symfony/flex', 'symfony/monolog-bundle', 'symfony/runtime', 'symfony/ux-turbo', 'symfony/web-link',
+        'nelmio/cors-bundle', 'phil/accessibility-statement-bundle', 'phil/browser-security-bundle',
+        'phil/contact-form-bundle', 'phil/spam-protection-bundle', 'phil/ux-bundle', 'phil/ux-css',
+        'phil/well-known-bundle', 'phil/doctrine-behaviours-bundle', 'phil/ux-easyadmin-bundle',
     ]],
 ];

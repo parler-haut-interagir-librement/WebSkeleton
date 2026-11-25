@@ -35,8 +35,17 @@
             "migrations/.gitignore"
         ]
     },
-    "knplabs/knp-menu-bundle": {
-        "version": "v3.8.0"
+    "easycorp/easyadmin-bundle": {
+        "version": "5.10",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "4.14",
+            "ref": "13b3e524d1038a6861ad6c7fc64e31b644ba0c54"
+        },
+        "files": [
+            "config/routes/easyadmin.yaml"
+        ]
     },
     "kocal/biome-js-bundle": {
         "version": "1.4",
@@ -78,8 +87,23 @@
     "phil/ddd-bundle": {
         "version": "0.1.1-alpha"
     },
+    "phil/doctrine-behaviours-bundle": {
+        "version": "0.3.0-alpha"
+    },
+    "phil/error-tracking-bundle": {
+        "version": "0.1.0-alpha"
+    },
     "phil/legal-notices-bundle": {
         "version": "0.1.0-alpha"
+    },
+    "phil/menu-bundle": {
+        "version": "0.1.1-alpha"
+    },
+    "phil/monitoring-bundle": {
+        "version": "0.1.1-alpha"
+    },
+    "phil/privacy-bundle": {
+        "version": "0.3.0-alpha"
     },
     "phil/sitemap-bundle": {
         "version": "0.1.1-alpha"
@@ -92,6 +116,9 @@
     },
     "phil/ux-bundle": {
         "version": "0.1.1-alpha"
+    },
+    "phil/ux-easyadmin-bundle": {
+        "version": "0.1.0-alpha"
     },
     "phil/ux-kit": {
         "version": "0.6.0-alpha"
@@ -123,18 +150,6 @@
             ".env.test",
             "phpunit.xml.dist",
             "tests/bootstrap.php"
-        ]
-    },
-    "sentry/sentry-symfony": {
-        "version": "5.17",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "main",
-            "version": "5.0",
-            "ref": "aac2bc5220e9ab5b9e3838a7a4da90e7f74e6148"
-        },
-        "files": [
-            "config/packages/sentry.yaml"
         ]
     },
     "symfony/asset-mapper": {
@@ -276,6 +291,18 @@
             "config/packages/monolog.yaml"
         ]
     },
+    "symfony/notifier": {
+        "version": "8.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "8.2",
+            "ref": "59a850f2e18e98b324e6bfcaf84081c0cef39426"
+        },
+        "files": [
+            "config/packages/notifier.yaml"
+        ]
+    },
     "symfony/property-info": {
         "version": "7.3",
         "recipe": {
@@ -308,6 +335,19 @@
         "files": [
             "config/packages/routing.yaml",
             "config/routes.yaml"
+        ]
+    },
+    "symfony/security-bundle": {
+        "version": "8.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "8.2",
+            "ref": "c0af0228ae2d5825bbbca9f32a4c054f1c40e88d"
+        },
+        "files": [
+            "config/packages/security.yaml",
+            "config/routes/security.yaml"
         ]
     },
     "symfony/security-csrf": {
@@ -411,7 +451,29 @@
             "config/routes/web_profiler.yaml"
         ]
     },
+    "symfony/workflow": {
+        "version": "8.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "8.2",
+            "ref": "46c0212530169ce92351ce7d58336db04f77c2a6"
+        }
+    },
     "twig/extra-bundle": {
         "version": "v3.5.1"
+    },
+    "zenstruck/foundry": {
+        "version": "2.17",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "2.15",
+            "ref": "ce0c9d62f1d5192dcd958c2f2f21fd8d9c23dcaa"
+        },
+        "files": [
+            "config/packages/zenstruck_foundry.yaml",
+            "src/Story/AppStory.php"
+        ]
     }
 }

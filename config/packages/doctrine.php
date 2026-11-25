@@ -17,6 +17,13 @@ return App::config([
             // One mapping per context, for the entities of its infrastructure: Doctrine maps them, the domain never
             // sees them. A new context adds its own mapping here.
             'mappings' => [
+                'Account' => [
+                    'type' => 'attribute',
+                    'is_bundle' => false,
+                    'dir' => '%kernel.project_dir%/src/Account/Infrastructure/Persistence/Doctrine/Entity',
+                    'prefix' => 'App\Account\Infrastructure\Persistence\Doctrine\Entity',
+                    'alias' => 'Account',
+                ],
                 'Shared' => [
                     'type' => 'attribute',
                     'is_bundle' => false,
