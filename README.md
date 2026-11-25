@@ -114,13 +114,13 @@ With the Symfony binary, set the same variable in `.env.local`, with the host of
 | Feature | Where |
 |---|---|
 | French and English, every page under `/fr` or `/en`, French by default | [routes.php](config/routes.php), [services.php](config/services.php), [translations](translations) |
-| Domain, Application and Infrastructure layers, with the buses of `phil/ddd-bundle` | [src](src), [messenger.php](config/packages/messenger.php) |
+| Domain, Application and Infrastructure layers in each bounded context, with the buses of `phil/ddd-bundle` | [src](src), [messenger.php](config/packages/messenger.php) |
 | phil-ux and the recipes of the PHIL UX kit in `templates/components/` | [base.html.twig](templates/base.html.twig), [components](templates/components) |
 | A Content Security Policy with nonces and the security headers, by `phil/browser-security-bundle` | [phil_browser_security.php](config/packages/phil_browser_security.php) |
 | The legal notice and the privacy policy, in both languages, by `phil/legal-notices-bundle` | [phil_legal_notices.php](config/packages/phil_legal_notices.php), [legal](legal) |
 | The accessibility statement, by `phil/accessibility-statement-bundle` | [phil_accessibility_statement.php](config/packages/phil_accessibility_statement.php) |
 | A contact form protected against spam, by `phil/contact-form-bundle` and `phil/spam-protection-bundle` | [phil_contact_form.php](config/packages/phil_contact_form.php) |
-| `/sitemap.xml`, every page in every language with its alternates, by `phil/sitemap-bundle` | [LocalizedPagesUrlProvider](src/Infrastructure/Sitemap/LocalizedPagesUrlProvider.php) |
+| `/sitemap.xml`, every page in every language with its alternates, by `phil/sitemap-bundle` | [LocalizedPagesUrlProvider](src/Shared/Infrastructure/Sitemap/LocalizedPagesUrlProvider.php) |
 | `/.well-known/security.txt`, by `phil/well-known-bundle` | [phil_well_known.php](config/packages/phil_well_known.php) |
 | The JSON-LD graph of each page, by `phil/structured-data-bundle` | [phil_structured_data.php](config/packages/phil_structured_data.php) |
 
@@ -150,23 +150,71 @@ The pages of `/es` then exist, with the routes of the PHIL bundles under the sam
 
 ## Domain-driven design 🧭
 
-`src/` is organised in three layers, which Deptrac checks (`castor lint:architecture`, rules in `phil-dev.php`):
+`src/` is organised by bounded context: each context has its own three layers, `src/<Context>/Domain`,
+`src/<Context>/Application` and `src/<Context>/Infrastructure`, and `src/Shared` holds what every context uses.
+Deptrac checks both kinds of rules (`castor lint:architecture`, rules in `phil-dev.php`).
+
+Inside a context, the layers:
 
 | Layer | Holds | May use |
 |---|---|---|
-| `src/Domain` | Value objects, entities of the model, ports (interfaces): plain PHP, never services | PHP, the Symfony components, the domain of `phil/ddd-bundle` |
-| `src/Application` | Commands, queries and their handlers | The domain, the buses of `phil/ddd-bundle` |
-| `src/Infrastructure` | Controllers, adapters of the ports, Doctrine entities, Twig, menus, the sitemap | Everything it integrates |
+| `Domain` | Value objects, entities of the model, ports (interfaces): plain PHP, never services | PHP, the Symfony components, the domain of `phil/ddd-bundle` |
+| `Application` | Commands, queries and their handlers | The domain, the buses of `phil/ddd-bundle` |
+| `Infrastructure` | Controllers, adapters of the ports, Doctrine entities | Everything it integrates |
 
-The example runs through the three layers: [Slug](src/Domain/Text/Slug.php) is a value object that validates itself
-and throws the `InvalidValue` of `phil/ddd-bundle`; [TitleSlugger](src/Domain/Text/TitleSlugger.php) is its port;
-[SlugifyTitleQuery](src/Application/Text/SlugifyTitleQuery.php) and its handler answer on the query bus;
-[AsciiTitleSlugger](src/Infrastructure/Text/AsciiTitleSlugger.php) is the adapter on Symfony's slugger, bound to the
-port in [services.php](config/services.php); [SlugifyAction](src/Infrastructure/Http/Api/SlugifyAction.php) asks the
-bus and answers JSON, which the home page calls through a Stimulus controller.
+Between contexts, the isolation: a context may use the same layer of `src/Shared` and the layers below it, never
+another context; `src/Shared` uses no context. Here, `src/Shared/Infrastructure` holds the controllers of the site
+pages, the menu, the sitemap provider, Twig and the Doctrine entities every context shares.
+
+```text
+src/
+├── Kernel.php
+├── Shared/
+│   ├── Domain/
+│   ├── Application/
+│   └── Infrastructure/
+│       ├── Http/Controller/    # pages, under /fr and /en
+│       ├── Http/Root/          # "/", which sends to the visitor's language
+│       ├── Menu/
+│       ├── Persistence/Doctrine/Entity/
+│       ├── Sitemap/
+│       └── Twig/
+└── Text/
+    ├── Domain/                 # Slug, TitleSlugger
+    ├── Application/            # SlugifyTitleQuery, SlugifyTitleHandler
+    └── Infrastructure/
+        ├── AsciiTitleSlugger.php
+        ├── Http/Api/           # /api/slugify
+        └── Persistence/Doctrine/Entity/
+```
+
+The example context, `Text`, runs through the three layers: [Slug](src/Text/Domain/Slug.php) is a value object that
+validates itself and throws the `InvalidValue` of `phil/ddd-bundle`; [TitleSlugger](src/Text/Domain/TitleSlugger.php)
+is its port; [SlugifyTitleQuery](src/Text/Application/SlugifyTitleQuery.php) and its handler answer on the query bus;
+[AsciiTitleSlugger](src/Text/Infrastructure/AsciiTitleSlugger.php) is the adapter on Symfony's slugger, bound to the
+port in [services.php](config/services.php); [SlugifyAction](src/Text/Infrastructure/Http/Api/SlugifyAction.php) asks
+the bus and answers JSON, which the home page calls through a Stimulus controller.
 
 The command bus runs in a Doctrine transaction, the query bus does not; both are synchronous until a message is routed
 to a transport in [messenger.php](config/packages/messenger.php). Messages carry identifiers, never whole objects.
+
+### Adding a context
+
+For a context named `Catalog`:
+
+1. **The folders**: `src/Catalog/Domain`, `src/Catalog/Application` and `src/Catalog/Infrastructure`, with the
+   namespaces `App\Catalog\Domain`, `App\Catalog\Application` and `App\Catalog\Infrastructure`; its tests mirror them
+   under `tests/Unit/Catalog/` and `tests/Integration/Catalog/`.
+2. **The services**: nothing to add for the folders, since [services.php](config/services.php) loads `src/` and leaves
+   out every `src/*/Domain/` and the commands and queries of every `src/*/Application/`. Each port of the domain gets
+   its alias to its adapter there, next to `TitleSlugger`.
+3. **The routes**: nothing to add either: [routes.php](config/routes.php) finds the controllers of every context in
+   `Infrastructure/Http/Controller` (under the language prefix), `Infrastructure/Http/Api` (under `/api`) and
+   `Infrastructure/Http/Root`.
+4. **The Doctrine mapping**: a `Catalog` mapping in [doctrine.php](config/packages/doctrine.php), on
+   `src/Catalog/Infrastructure/Persistence/Doctrine/Entity`, like the `Text` one.
+5. **Deptrac**: `'Catalog'` added to `$contexts` in `phil-dev.php`, which gives it its three layers and both kinds of
+   rules.
 
 ## Before going live 🚀
 
@@ -207,8 +255,8 @@ No administration by default. To add one, in the colours of PHIL UX:
 
     composer require easycorp/easyadmin-bundle phil/ux-easyadmin-bundle
 
-Then generate a dashboard with `bin/console make:admin:dashboard`, put it under `src/Infrastructure/Http/Admin/`, and
-protect `/admin` with a role once member accounts exist.
+Then generate a dashboard with `bin/console make:admin:dashboard`, put it under
+`src/Shared/Infrastructure/Http/Admin/`, and protect `/admin` with a role once member accounts exist.
 
 ### More recipes of the PHIL UX kit
 

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\E2E;
 
-use App\Infrastructure\Http\Controller\HomeAction;
+use App\Shared\Infrastructure\Http\Controller\HomeAction;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase as E2ETestCase;
 

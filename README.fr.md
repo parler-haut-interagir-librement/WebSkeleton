@@ -1,4 +1,4 @@
-<!-- phil-dev source-sha256=cc996bcffc855488c4c6c84765738172d5c892e130958618872b51e747222fc0 -->
+<!-- phil-dev source-sha256=2e7347025cbf2d6b80eb2e3971062710cd976eb74a100210cd29da302f5c61f7 -->
 # WebSkeleton 🦴
 
 [![Latest Version](https://img.shields.io/packagist/v/phil/webskeleton.svg?style=flat-square)](https://packagist.org/packages/phil/webskeleton)
@@ -117,13 +117,13 @@ Avec le binaire Symfony, mettez la même variable dans `.env.local`, avec l'hôt
 | Fonctionnalité | Où |
 |---|---|
 | Le français et l'anglais, chaque page sous `/fr` ou `/en`, le français par défaut | [routes.php](config/routes.php), [services.php](config/services.php), [translations](translations) |
-| Les couches Domain, Application et Infrastructure, avec les bus de `phil/ddd-bundle` | [src](src), [messenger.php](config/packages/messenger.php) |
+| Les couches Domain, Application et Infrastructure de chaque contexte délimité, avec les bus de `phil/ddd-bundle` | [src](src), [messenger.php](config/packages/messenger.php) |
 | phil-ux et les recettes du kit PHIL UX dans `templates/components/` | [base.html.twig](templates/base.html.twig), [components](templates/components) |
 | Une politique de sécurité du contenu avec nonces et les en-têtes de sécurité, par `phil/browser-security-bundle` | [phil_browser_security.php](config/packages/phil_browser_security.php) |
 | Les mentions légales et la politique de confidentialité, dans les deux langues, par `phil/legal-notices-bundle` | [phil_legal_notices.php](config/packages/phil_legal_notices.php), [legal](legal) |
 | La déclaration d'accessibilité, par `phil/accessibility-statement-bundle` | [phil_accessibility_statement.php](config/packages/phil_accessibility_statement.php) |
 | Un formulaire de contact protégé du pourriel, par `phil/contact-form-bundle` et `phil/spam-protection-bundle` | [phil_contact_form.php](config/packages/phil_contact_form.php) |
-| `/sitemap.xml`, chaque page dans chaque langue avec ses alternatives, par `phil/sitemap-bundle` | [LocalizedPagesUrlProvider](src/Infrastructure/Sitemap/LocalizedPagesUrlProvider.php) |
+| `/sitemap.xml`, chaque page dans chaque langue avec ses alternatives, par `phil/sitemap-bundle` | [LocalizedPagesUrlProvider](src/Shared/Infrastructure/Sitemap/LocalizedPagesUrlProvider.php) |
 | `/.well-known/security.txt`, par `phil/well-known-bundle` | [phil_well_known.php](config/packages/phil_well_known.php) |
 | Le graphe JSON-LD de chaque page, par `phil/structured-data-bundle` | [phil_structured_data.php](config/packages/phil_structured_data.php) |
 
@@ -153,24 +153,74 @@ Les pages de `/es` existent alors, avec les routes des bundles PHIL sous le mêm
 
 ## Conception pilotée par le domaine 🧭
 
-`src/` est organisé en trois couches, que Deptrac vérifie (`castor lint:architecture`, règles dans `phil-dev.php`) :
+`src/` est organisé par contexte délimité : chaque contexte a ses trois couches, `src/<Contexte>/Domain`,
+`src/<Contexte>/Application` et `src/<Contexte>/Infrastructure`, et `src/Shared` contient ce que tous les contextes
+utilisent. Deptrac vérifie les deux sortes de règles (`castor lint:architecture`, règles dans `phil-dev.php`).
+
+Dans un contexte, les couches :
 
 | Couche | Contient | Peut utiliser |
 |---|---|---|
-| `src/Domain` | Objets-valeurs, entités du modèle, ports (interfaces) : du PHP simple, jamais des services | PHP, les composants Symfony, le domaine de `phil/ddd-bundle` |
-| `src/Application` | Commandes, requêtes et leurs gestionnaires | Le domaine, les bus de `phil/ddd-bundle` |
-| `src/Infrastructure` | Contrôleurs, adaptateurs des ports, entités Doctrine, Twig, menus, plan du site | Tout ce qu'elle intègre |
+| `Domain` | Objets-valeurs, entités du modèle, ports (interfaces) : du PHP simple, jamais des services | PHP, les composants Symfony, le domaine de `phil/ddd-bundle` |
+| `Application` | Commandes, requêtes et leurs gestionnaires | Le domaine, les bus de `phil/ddd-bundle` |
+| `Infrastructure` | Contrôleurs, adaptateurs des ports, entités Doctrine | Tout ce qu'elle intègre |
 
-L'exemple traverse les trois couches : [Slug](src/Domain/Text/Slug.php) est un objet-valeur qui se valide lui-même et
-lance l'`InvalidValue` de `phil/ddd-bundle` ; [TitleSlugger](src/Domain/Text/TitleSlugger.php) est son port ;
-[SlugifyTitleQuery](src/Application/Text/SlugifyTitleQuery.php) et son gestionnaire répondent sur le bus de requêtes ;
-[AsciiTitleSlugger](src/Infrastructure/Text/AsciiTitleSlugger.php) est l'adaptateur sur le slugger de Symfony, lié au
-port dans [services.php](config/services.php) ; [SlugifyAction](src/Infrastructure/Http/Api/SlugifyAction.php)
-interroge le bus et répond en JSON, ce que la page d'accueil appelle par un contrôleur Stimulus.
+Entre les contextes, l'isolement : un contexte peut utiliser la même couche de `src/Shared` et les couches en dessous,
+jamais un autre contexte ; `src/Shared` n'utilise aucun contexte. Ici, `src/Shared/Infrastructure` contient les
+contrôleurs des pages du site, le menu, le fournisseur du plan du site, Twig et les entités Doctrine que tous les
+contextes partagent.
+
+```text
+src/
+├── Kernel.php
+├── Shared/
+│   ├── Domain/
+│   ├── Application/
+│   └── Infrastructure/
+│       ├── Http/Controller/    # pages, under /fr and /en
+│       ├── Http/Root/          # "/", which sends to the visitor's language
+│       ├── Menu/
+│       ├── Persistence/Doctrine/Entity/
+│       ├── Sitemap/
+│       └── Twig/
+└── Text/
+    ├── Domain/                 # Slug, TitleSlugger
+    ├── Application/            # SlugifyTitleQuery, SlugifyTitleHandler
+    └── Infrastructure/
+        ├── AsciiTitleSlugger.php
+        ├── Http/Api/           # /api/slugify
+        └── Persistence/Doctrine/Entity/
+```
+
+Le contexte d'exemple, `Text`, traverse les trois couches : [Slug](src/Text/Domain/Slug.php) est un objet-valeur qui
+se valide lui-même et lance l'`InvalidValue` de `phil/ddd-bundle` ; [TitleSlugger](src/Text/Domain/TitleSlugger.php)
+est son port ; [SlugifyTitleQuery](src/Text/Application/SlugifyTitleQuery.php) et son gestionnaire répondent sur le
+bus de requêtes ; [AsciiTitleSlugger](src/Text/Infrastructure/AsciiTitleSlugger.php) est l'adaptateur sur le slugger
+de Symfony, lié au port dans [services.php](config/services.php) ;
+[SlugifyAction](src/Text/Infrastructure/Http/Api/SlugifyAction.php) interroge le bus et répond en JSON, ce que la page
+d'accueil appelle par un contrôleur Stimulus.
 
 Le bus de commandes s'exécute dans une transaction Doctrine, le bus de requêtes non ; les deux sont synchrones tant
 qu'aucun message n'est routé vers un transport dans [messenger.php](config/packages/messenger.php). Les messages
 portent des identifiants, jamais des objets entiers.
+
+### Ajouter un contexte
+
+Pour un contexte nommé `Catalog` :
+
+1. **Les dossiers** : `src/Catalog/Domain`, `src/Catalog/Application` et `src/Catalog/Infrastructure`, avec les
+   espaces de noms `App\Catalog\Domain`, `App\Catalog\Application` et `App\Catalog\Infrastructure` ; ses tests les
+   reprennent sous `tests/Unit/Catalog/` et `tests/Integration/Catalog/`.
+2. **Les services** : rien à ajouter pour les dossiers, puisque [services.php](config/services.php) charge `src/` et
+   écarte chaque `src/*/Domain/` ainsi que les commandes et requêtes de chaque `src/*/Application/`. Chaque port du
+   domaine y reçoit son alias vers son adaptateur, à côté de `TitleSlugger`.
+3. **Les routes** : rien à ajouter non plus : [routes.php](config/routes.php) trouve les contrôleurs de chaque contexte
+   dans `Infrastructure/Http/Controller` (sous le préfixe de langue), `Infrastructure/Http/Api` (sous `/api`) et
+   `Infrastructure/Http/Root`.
+4. **Le mapping Doctrine** : un mapping `Catalog` dans [doctrine.php](config/packages/doctrine.php), sur
+   `src/Catalog/Infrastructure/Persistence/Doctrine/Entity`, comme celui de `Text`.
+5. **Deptrac** : `'Catalog'` ajouté à `$contexts` dans `phil-dev.php`, ce qui lui donne ses trois couches et les deux
+   sortes de règles.
 
 ## Avant la mise en ligne 🚀
 
@@ -213,7 +263,7 @@ Aucune administration par défaut. Pour en ajouter une, aux couleurs de PHIL UX 
     composer require easycorp/easyadmin-bundle phil/ux-easyadmin-bundle
 
 Générez ensuite un tableau de bord avec `bin/console make:admin:dashboard`, placez-le sous
-`src/Infrastructure/Http/Admin/`, et protégez `/admin` par un rôle une fois les comptes de membres en place.
+`src/Shared/Infrastructure/Http/Admin/`, et protégez `/admin` par un rôle une fois les comptes de membres en place.
 
 ### D'autres recettes du kit PHIL UX
 

@@ -12,35 +12,57 @@ return [
     'paths' => ['src', 'tests', 'migrations', 'bin', 'public', 'importmap.php'],
     // The functional tests share one SQLite file: they run one after the other, with PHPUnit.
     'phpunit' => ['parallel' => false],
-    // Besides the Symfony components, the classes of src/ may use these libraries and bundles, and no other: a new one
-    // is added here on purpose, after it is required by composer.json.
-    'deptrac' => [
-        'allow' => [
-            '^Doctrine\\\\(Bundle\\\\DoctrineBundle|DBAL|ORM|Persistence)\\\\.*',
-            '^Knp\\\\Menu\\\\.*',
-            '^Symfony\\\\Bridge\\\\Doctrine\\\\.*',
-            '^Symfony\\\\Bundle\\\\FrameworkBundle\\\\.*',
-            '^Twig\\\\.*',
-        ],
-        // The layers of DDD: the domain sees PHP, the Symfony components and the domain of phil/ddd-bundle; the
-        // application sees the domain and the buses; the infrastructure sees everything it integrates.
-        'layers' => [
-            'AppDomain' => '^App\\\\Domain\\\\.*',
-            'AppApplication' => '^App\\\\Application\\\\.*',
-            'AppInfrastructure' => '^App\\\\Infrastructure\\\\.*',
-            'App' => '^App\\\\[^\\\\]+$',
-        ],
-        'ruleset' => [
-            'AppDomain' => ['DefaultAllowed', 'PhilDddBundleDomain'],
-            'AppApplication' => ['AppDomain', 'DefaultAllowed', 'PhilDddBundleDomain', 'PhilDddBundleApplication'],
-            'AppInfrastructure' => [
-                'AppDomain', 'AppApplication', 'DefaultAllowed', 'PhilDddBundleDomain', 'PhilDddBundleApplication',
-                'PhilSitemap', 'AllowedDoctrine', 'AllowedKnpMenu', 'AllowedSymfonyBridgeDoctrine',
-                'AllowedSymfonyBundleFrameworkBundle', 'AllowedTwig',
+    // The layers of DDD, by bounded context: src/<Context>/{Domain,Application,Infrastructure}, and src/Shared for what
+    // every context uses. Inside a context, the domain sees PHP, the Symfony components and the domain of
+    // phil/ddd-bundle; the application sees the domain and the buses; the infrastructure sees everything it integrates.
+    // Between contexts, a context sees the same layers of Shared, never another context; Shared sees no context.
+    // A new context is one more name in $contexts below.
+    'deptrac' => (static function (): array {
+        $contexts = ['Text'];
+        $integrated = [
+            'DefaultAllowed', 'PhilDddBundleDomain', 'PhilDddBundleApplication', 'PhilSitemap', 'AllowedDoctrine',
+            'AllowedKnpMenu', 'AllowedSymfonyBridgeDoctrine', 'AllowedSymfonyBundleFrameworkBundle', 'AllowedTwig',
+        ];
+        /** @var array<string, string> $layers */
+        $layers = [];
+        /** @var array<string, list<string>> $ruleset */
+        $ruleset = [];
+
+        foreach (['Shared', ...$contexts] as $context) {
+            $shared = 'Shared' === $context ? [] : ['SharedDomain'];
+            $layers[$context.'Domain'] = '^App\\\\'.$context.'\\\\Domain\\\\.*';
+            $layers[$context.'Application'] = '^App\\\\'.$context.'\\\\Application\\\\.*';
+            $layers[$context.'Infrastructure'] = '^App\\\\'.$context.'\\\\Infrastructure\\\\.*';
+            $ruleset[$context.'Domain'] = [...$shared, 'DefaultAllowed', 'PhilDddBundleDomain'];
+            $ruleset[$context.'Application'] = [
+                $context.'Domain', ...$shared, ...('Shared' === $context ? [] : ['SharedApplication']),
+                'DefaultAllowed', 'PhilDddBundleDomain', 'PhilDddBundleApplication',
+            ];
+            $ruleset[$context.'Infrastructure'] = [
+                $context.'Domain', $context.'Application',
+                ...('Shared' === $context ? [] : ['SharedDomain', 'SharedApplication', 'SharedInfrastructure']),
+                ...$integrated,
+            ];
+        }
+
+        // The kernel, at the root of App.
+        $layers['App'] = '^App\\\\[^\\\\]+$';
+        $ruleset['App'] = ['DefaultAllowed', 'AllowedSymfonyBundleFrameworkBundle'];
+
+        return [
+            // Besides the Symfony components, the classes of src/ may use these libraries and bundles, and no other: a
+            // new one is added here on purpose, after it is required by composer.json.
+            'allow' => [
+                '^Doctrine\\\\(Bundle\\\\DoctrineBundle|DBAL|ORM|Persistence)\\\\.*',
+                '^Knp\\\\Menu\\\\.*',
+                '^Symfony\\\\Bridge\\\\Doctrine\\\\.*',
+                '^Symfony\\\\Bundle\\\\FrameworkBundle\\\\.*',
+                '^Twig\\\\.*',
             ],
-            'App' => ['DefaultAllowed', 'AllowedSymfonyBundleFrameworkBundle'],
-        ],
-    ],
+            'layers' => $layers,
+            'ruleset' => $ruleset,
+        ];
+    })(),
     // The Stimulus controllers and the scripts of the application; assets/vendor holds the packages of the importmap.
     'js' => ['paths' => ['assets/controllers', 'assets/app.js', 'assets/bootstrap.js']],
     // Used through the configuration, the templates, the front controller or the console, never by a class of src/.

@@ -12,12 +12,17 @@ Stimulus, Turbo, phil-ux and the recipes of the PHIL UX kit, plus the PHIL bundl
 `phil/contact-form-bundle`, `phil/spam-protection-bundle`, `phil/sitemap-bundle`, `phil/well-known-bundle`,
 `phil/structured-data-bundle`. French and English, every page under `/fr` or `/en`, French by default.
 
-`src/` is organised in DDD layers, checked by Deptrac:
+`src/` is organised by bounded context, `src/<Context>/{Domain,Application,Infrastructure}`, with `src/Shared` for
+what every context uses; Deptrac checks the layers inside each context and that a context uses only itself and
+`src/Shared` (contexts listed in `$contexts` of `phil-dev.php`):
 
-- `src/Domain`: value objects and ports, plain PHP, never services; they throw the `InvalidValue` of `phil/ddd-bundle`.
-- `src/Application`: commands, queries and their handlers, on the buses of `phil/ddd-bundle`.
-- `src/Infrastructure`: controllers (`Http/Controller` under the language prefix, `Http/Api` under `/api`, `Http/Root`
-  at the root), adapters of the ports, Doctrine entities, Twig, menus, the sitemap.
+- `Domain`: value objects and ports, plain PHP, never services; they throw the `InvalidValue` of `phil/ddd-bundle`.
+- `Application`: commands, queries and their handlers, on the buses of `phil/ddd-bundle`.
+- `Infrastructure`: controllers (`Http/Controller` under the language prefix, `Http/Api` under `/api`, `Http/Root`
+  at the root, found in every context by `config/routes.php`), adapters of the ports, Doctrine entities (one mapping
+  per context in `config/packages/doctrine.php`).
+- `src/Shared/Infrastructure`: the controllers of the site pages, the menu, the sitemap provider, Twig; `src/Text`:
+  the example context, a slug through the three layers.
 
 ## Tasks
 

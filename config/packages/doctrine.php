@@ -14,14 +14,22 @@ return App::config([
             'validate_xml_mapping' => true,
             'naming_strategy' => 'doctrine.orm.naming_strategy.underscore_number_aware',
             'auto_mapping' => true,
-            // The entities of the infrastructure: Doctrine maps them, the domain never sees them.
+            // One mapping per context, for the entities of its infrastructure: Doctrine maps them, the domain never
+            // sees them. A new context adds its own mapping here.
             'mappings' => [
-                'App' => [
+                'Shared' => [
                     'type' => 'attribute',
                     'is_bundle' => false,
-                    'dir' => '%kernel.project_dir%/src/Infrastructure/Persistence/Doctrine/Entity',
-                    'prefix' => 'App\Infrastructure\Persistence\Doctrine\Entity',
-                    'alias' => 'App',
+                    'dir' => '%kernel.project_dir%/src/Shared/Infrastructure/Persistence/Doctrine/Entity',
+                    'prefix' => 'App\Shared\Infrastructure\Persistence\Doctrine\Entity',
+                    'alias' => 'Shared',
+                ],
+                'Text' => [
+                    'type' => 'attribute',
+                    'is_bundle' => false,
+                    'dir' => '%kernel.project_dir%/src/Text/Infrastructure/Persistence/Doctrine/Entity',
+                    'prefix' => 'App\Text\Infrastructure\Persistence\Doctrine\Entity',
+                    'alias' => 'Text',
                 ],
             ],
         ],

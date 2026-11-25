@@ -17,8 +17,10 @@ built on [WebSymfony](https://github.com/parler-haut-interagir-librement/WebSymf
 - French and English: every page under `/fr` or `/en`, French by default, `/` sending a visitor to the language their
   browser prefers; the languages in one list, `app.locales`, one more by configuration; a language switcher and
   `hreflang` alternates in the layout.
-- Domain, Application and Infrastructure layers with `phil/ddd-bundle`: a command bus in a Doctrine transaction, a
-  query bus, the example of a slug through the three layers, the layers checked by Deptrac.
+- Domain, Application and Infrastructure layers in each bounded context, `src/<Context>/`, with `src/Shared` for what
+  every context uses, on `phil/ddd-bundle`: a command bus in a Doctrine transaction, a query bus, the example context
+  `Text` of a slug through the three layers; Deptrac checks the layers inside each context and the isolation between
+  contexts.
 - phil-ux, the stylesheet of `phil/ux-css`, and the recipes `Badge`, `Button`, `Card`, `Table` and `ThemeSwitcher` of
   the PHIL UX kit, light and dark.
 - A Content Security Policy with nonces, the security headers and the violation reports, by

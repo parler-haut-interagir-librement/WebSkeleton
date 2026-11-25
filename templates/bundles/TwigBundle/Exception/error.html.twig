@@ -5,5 +5,5 @@
 {% block body %}
     <h1>{{ 'error.title'|trans({'%code%': status_code}) }}</h1>
     <p>{{ 'error.text'|trans({'%text%': status_text, '%code%': status_code}) }}</p>
-    <p><a href="{{ path('App\\Infrastructure\\Http\\Controller\\HomeAction', {_locale: app.request.locale}) }}">{{ 'error.home'|trans }}</a></p>
+    <p><a href="{{ path('App\\Shared\\Infrastructure\\Http\\Controller\\HomeAction', {_locale: app.request.locale}) }}">{{ 'error.home'|trans }}</a></p>
 {% endblock %}

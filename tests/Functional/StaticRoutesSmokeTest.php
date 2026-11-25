@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional;
 
-use App\Infrastructure\Http\Api\SlugifyAction;
-use App\Infrastructure\Http\Controller\HomeAction;
-use App\Infrastructure\Http\Root\LocaleRedirectAction;
+use App\Shared\Infrastructure\Http\Controller\HomeAction;
+use App\Shared\Infrastructure\Http\Root\LocaleRedirectAction;
+use App\Text\Infrastructure\Http\Api\SlugifyAction;
 use Generator;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;

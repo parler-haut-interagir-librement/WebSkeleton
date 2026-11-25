@@ -5,8 +5,8 @@
 
 declare(strict_types=1);
 
-use App\Domain\Text\TitleSlugger;
-use App\Infrastructure\Text\AsciiTitleSlugger;
+use App\Text\Domain\TitleSlugger;
+use App\Text\Infrastructure\AsciiTitleSlugger;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\HttpKernel\Kernel;
 
@@ -43,14 +43,16 @@ DESCRIPTION;
         ->bind('array $locales', '%app.locales%')
     ;
 
-    // The domain holds plain PHP objects, never services; the application and the infrastructure are services.
+    // src/<Context>/{Domain,Application,Infrastructure}, and src/Shared for what every context uses. In each context,
+    // the domain holds plain PHP objects, never services; the application and the infrastructure are services, except
+    // the commands and queries, which are messages.
     $services->load('App\\', __DIR__.'/../src')
         ->exclude([
-            __DIR__.'/../src/Domain/',
-            __DIR__.'/../src/Application/**/{*Query,*Command}.php',
+            __DIR__.'/../src/*/Domain/',
+            __DIR__.'/../src/*/Application/**/{*Query,*Command}.php',
             __DIR__.'/../src/Kernel.php',
         ]);
 
-    // The ports of the domain, bound to their adapters in the infrastructure.
+    // The ports of each domain, bound to their adapters in the infrastructure.
     $services->alias(TitleSlugger::class, AsciiTitleSlugger::class);
 };
