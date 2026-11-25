@@ -1,0 +1,11 @@
+{#-
+ # The contact page of phil/contact-form-bundle in the layout of the site.
+ #}
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'contact.title'|trans }} · {{ parent() }}{% endblock %}
+
+{% block body %}
+    <h1>{{ 'contact.title'|trans }}</h1>
+    {{ include('@PhilContactForm/_form.html.twig') }}
+{% endblock %}

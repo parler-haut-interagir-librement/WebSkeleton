@@ -27,8 +27,4 @@ return [
     '@hotwired/turbo' => [
         'version' => '8.0.23',
     ],
-    '@picocss/pico/css/pico.min.css' => [
-        'version' => '2.1.1',
-        'type' => 'css',
-    ],
 ];

@@ -3,20 +3,10 @@
 // This file is the entry point to configure your own services.
 // Files in the packages/ subdirectory configure your dependencies.
 
-// Put parameters here that don't need to change on each machine where the app is deployed
-// @see https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
-
-// The PHP configuration files have been generated with symplify/config-transformer.
-// @see https://github.com/symplify/config-transformer
-
-// In each PHP config file the "ContainerConfigurator" service is injected.
-// If you want to use the fluent interface you can add the specific extension configurator
-// Check out the full example in "config/packages/framework.php".
-// This feature is only available for "root" services corresponding to the
-// "var/cache/dev/Symfony/Config/*Config.php" configurators.
-
 declare(strict_types=1);
 
+use App\Domain\Text\TitleSlugger;
+use App\Infrastructure\Text\AsciiTitleSlugger;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\HttpKernel\Kernel;
 
@@ -27,17 +17,22 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     // System parameters: https://symfony.com/doc/current/performance.html#dump-the-service-container-into-a-single-file
     $parameters->set('.container.dumper.inline_factories', true);
 
+    // The languages of the site, the default one first: each is a path prefix (/fr, /en) and a translations file.
+    // Add a language here and in translations/, and its pages exist.
+    $locales = ['fr', 'en'];
+    $parameters->set('app.locales', $locales)
+        ->set('app.locale_requirement', implode('|', $locales));
+
     // Application parameters ——————————————————————————————————————————————————
     $sfVersion = substr(Kernel::VERSION, 0, 3); // minor Symfony version
     $description = <<<DESCRIPTION
-A Symfony <b>$sfVersion</b> application template on steroids, ready to use.
+A Symfony <b>$sfVersion</b> site skeleton: bilingual, organised in DDD, with the PHIL UX kit and the PHIL bundles a site needs.
 DESCRIPTION;
-    $parameters->set('brand', 'WebSymfony')
-        ->set('brand_html', '<b>Web</b><i>Symfony</i>')
-        ->set('brand_emoji', '🕸️')
-        ->set('website', 'https://github.com/parler-haut-interagir-librement/WebSymfony')
+    $parameters->set('brand', 'WebSkeleton')
+        ->set('brand_html', '<b>Web</b><i>Skeleton</i>')
+        ->set('website', 'https://github.com/parler-haut-interagir-librement/WebSkeleton')
         ->set('copyright_url', 'https://ph-il.ca')
-        ->set('version', '1.0.0')
+        ->set('version', '8.2.0-RC1')
         ->set('description', $description);
 
     // Services ————————————————————————————————————————————————————————————————
@@ -45,18 +40,17 @@ DESCRIPTION;
     $services->defaults()
         ->autowire()      // Automatically injects dependencies in your services.
         ->autoconfigure() // Automatically registers your services as commands, event subscribers, etc.
-
-        // bind examples
-        ->bind('string $environment', '%kernel.environment%')
-        ->bind('bool $debug', '%kernel.debug%')
+        ->bind('array $locales', '%app.locales%')
     ;
 
+    // The domain holds plain PHP objects, never services; the application and the infrastructure are services.
     $services->load('App\\', __DIR__.'/../src')
         ->exclude([
-            __DIR__.'/../src/Dto/',
-            __DIR__.'/../src/DependencyInjection/',
-            __DIR__.'/../src/Entity/',
-            __DIR__.'/../src/Enum/',
+            __DIR__.'/../src/Domain/',
+            __DIR__.'/../src/Application/**/{*Query,*Command}.php',
             __DIR__.'/../src/Kernel.php',
         ]);
+
+    // The ports of the domain, bound to their adapters in the infrastructure.
+    $services->alias(TitleSlugger::class, AsciiTitleSlugger::class);
 };

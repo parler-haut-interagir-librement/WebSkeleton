@@ -1,21 +1,30 @@
-# AGENTS.md - WebSymfony development guidelines
+# AGENTS.md - WebSkeleton development guidelines
 
-Guidelines for coding assistants working on this repository, the WebSymfony application template of PHIL
-(`phil/websymfony`), built on MicroSymfony, which follows [strangebuzz/MicroSymfony](https://github.com/strangebuzz/MicroSymfony).
+Guidelines for coding assistants working on this repository, the WebSkeleton site template of PHIL
+(`phil/webskeleton`), built on WebSymfony and MicroSymfony, which follows
+[strangebuzz/MicroSymfony](https://github.com/strangebuzz/MicroSymfony).
 
 ## Project overview
 
-A Symfony 8.2 application template on PHP 8.5 or later, with Doctrine ORM on SQLite, Twig, AssetMapper, Stimulus,
-Turbo and Pico CSS, plus Symfony Security (form sign-in, sign-up, roles), EasyAdmin, NelmioSecurityBundle,
-NelmioCorsBundle, KnpMenu, the Doctrine extensions, English and French, and Sentry in production. It uses no PHIL
-package at run time. It keeps the usual layout of a Symfony application: no layers, no domain directories.
+A Symfony 8.2 site template on PHP 8.5 or later, with Doctrine ORM on SQLite, Twig and Twig components, AssetMapper,
+Stimulus, Turbo, phil-ux and the recipes of the PHIL UX kit, plus the PHIL bundles a site needs: `phil/ddd-bundle`,
+`phil/browser-security-bundle`, `phil/legal-notices-bundle`, `phil/accessibility-statement-bundle`,
+`phil/contact-form-bundle`, `phil/spam-protection-bundle`, `phil/sitemap-bundle`, `phil/well-known-bundle`,
+`phil/structured-data-bundle`. French and English, every page under `/fr` or `/en`, French by default.
+
+`src/` is organised in DDD layers, checked by Deptrac:
+
+- `src/Domain`: value objects and ports, plain PHP, never services; they throw the `InvalidValue` of `phil/ddd-bundle`.
+- `src/Application`: commands, queries and their handlers, on the buses of `phil/ddd-bundle`.
+- `src/Infrastructure`: controllers (`Http/Controller` under the language prefix, `Http/Api` under `/api`, `Http/Root`
+  at the root), adapters of the ports, Doctrine entities, Twig, menus, the sitemap.
 
 ## Tasks
 
 Every task runs through [Castor](https://castor.jolicode.com) (`castor.php`); `composer.json` holds no task script.
 
 ```bash
-castor start                     # SQLite, migrations, fixtures, then the Symfony binary's web server
+castor start                     # APP_SECRET, SQLite and migrations, then the Symfony binary's web server
 castor up                        # FrankenPHP in worker mode and PostgreSQL with Docker Compose
 castor test                      # every PHPUnit suite
 castor test:unit                 # one suite: unit, integration, api, functional, e2e
@@ -36,6 +45,8 @@ castor ci                        # coverage, then every lint
 5. Dates are never compared with `==` nor `===`: compare their timestamps or use `<` and `>`.
 6. JavaScript goes in Stimulus controllers, loaded by AssetMapper: no Node.js build, no Webpack Encore.
 7. Configuration files are PHP, under `config/`.
+8. A port of the domain is bound to its adapter in `config/services.php`; messages carry identifiers only.
+9. Every text of a page is a translation key, in `translations/messages.fr.yaml` and `messages.en.yaml`.
 
 ## Tests
 

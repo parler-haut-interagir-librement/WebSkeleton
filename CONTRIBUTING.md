@@ -1,13 +1,13 @@
-# Contributing to WebSymfony
+# Contributing to WebSkeleton
 
-Thank you for contributing. This guide covers this template, `phil/websymfony`, built on MicroSymfony. A change that would also suit
+Thank you for contributing. This guide covers this template, `phil/webskeleton`, built on WebSymfony and MicroSymfony. A change that would also suit
 [strangebuzz/MicroSymfony](https://github.com/strangebuzz/MicroSymfony), the template it follows, is welcome there
 too: see its own contributing guide.
 
 ## Reporting a bug
 
 Before reporting a bug, read the [README](README.md) and check that the bug is not
-[already reported](https://github.com/parler-haut-interagir-librement/WebSymfony/issues?q=is%3Aopen+is%3Aissue+label%3Abug).
+[already reported](https://github.com/parler-haut-interagir-librement/WebSkeleton/issues?q=is%3Aopen+is%3Aissue+label%3Abug).
 Then open an issue with a title that sums it up and the steps that reproduce it, with your operating system, your PHP
 version and its extensions.
 
@@ -26,7 +26,7 @@ castor ci      # the tests with their coverage threshold, then every lint and th
 A pull request:
 
 - adds tests for what it changes, each naming what it covers with `#[CoversClass]` or `#[CoversNothing]`; the
-  [smoke tests](tests/Functional/Controller/StaticRoutesSmokeTest.php) already request every route;
+  [smoke tests](tests/Functional/StaticRoutesSmokeTest.php) already request every route;
 - keeps `castor ci` green, the coverage at its threshold and PHPStan at the maximum level without a new exception;
 - documents what it changes in the README and in the `Unreleased` section of the [CHANGELOG](CHANGELOG.md);
 - holds only the commits of its change.

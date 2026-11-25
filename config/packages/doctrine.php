@@ -14,12 +14,13 @@ return App::config([
             'validate_xml_mapping' => true,
             'naming_strategy' => 'doctrine.orm.naming_strategy.underscore_number_aware',
             'auto_mapping' => true,
+            // The entities of the infrastructure: Doctrine maps them, the domain never sees them.
             'mappings' => [
                 'App' => [
                     'type' => 'attribute',
                     'is_bundle' => false,
-                    'dir' => '%kernel.project_dir%/src/Entity',
-                    'prefix' => 'App\Entity',
+                    'dir' => '%kernel.project_dir%/src/Infrastructure/Persistence/Doctrine/Entity',
+                    'prefix' => 'App\Infrastructure\Persistence\Doctrine\Entity',
                     'alias' => 'App',
                 ],
             ],
@@ -28,9 +29,9 @@ return App::config([
     'when@test' => [
         'doctrine' => [
             'dbal' => [
-                // The test database MUST be isolated from the dev one: the Foundry
-                // "ResetDatabase" trait drops the schema, so a shared database means
-                // running the test suite wipes the data you are working with.
+                // The test database MUST be isolated from the dev one: tests may drop the
+                // schema, so a shared database means running the test suite wipes the data
+                // you are working with.
                 //
                 // This suffix has NO effect on SQLite (the default driver here), which is
                 // why the test DSN is overridden in .env.test. It takes over as soon as you

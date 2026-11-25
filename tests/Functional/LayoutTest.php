@@ -4,73 +4,58 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional;
 
-use App\Controller\HomeAction;
-use App\Menu\MainMenuBuilder;
-use DOMElement;
-use PHPUnit\Framework\Attributes\CoversClass;
+use App\Infrastructure\Twig\EnvExtension;
+use PHPUnit\Framework\Attributes\CoversNothing;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
- * What every page shares: the security headers, the language of the visitor, the menu, Pico CSS and the PHIL identity.
+ * The layout: phil-ux, the PHIL identity, the security headers and the JSON-LD of every page.
  */
-#[CoversClass(HomeAction::class)]
-#[CoversClass(MainMenuBuilder::class)]
+#[CoversNothing]
 final class LayoutTest extends WebTestCase
 {
-    public function testEveryResponseCarriesTheSecurityHeaders(): void
+    public function testTheLayoutCarriesTheStylesheetAndTheIdentity(): void
     {
         $client = self::createClient();
-        $client->request('GET', '/hello-world');
+        $crawler = $client->request('GET', '/en');
 
         self::assertResponseIsSuccessful();
-        self::assertResponseHeaderSame('X-Frame-Options', 'DENY');
-        self::assertResponseHeaderSame('X-Content-Type-Options', 'nosniff');
-        self::assertResponseHeaderSame('Referrer-Policy', 'no-referrer, strict-origin-when-cross-origin');
-        $policy = (string) $client->getResponse()->headers->get('Content-Security-Policy');
-        self::assertStringContainsString("default-src 'self'", $policy);
-        self::assertStringContainsString("object-src 'none'", $policy);
-        self::assertStringContainsString("frame-ancestors 'none'", $policy);
-        self::assertMatchesRegularExpression("/script-src 'self' 'nonce-[^']+'/", $policy);
+        self::assertCount(1, $crawler->filter('link[rel="stylesheet"][href*="phil-ux"]'));
+        self::assertSelectorExists('a.isSkipLink[href="#content"]');
+        self::assertSelectorExists('fieldset.isThemeSwitcher');
+        self::assertSelectorTextContains('footer', 'Proclaim Honestly, Interact Liberally');
+        self::assertSelectorTextContains('footer', 'COil/Strangebuzz');
+        self::assertSelectorExists('footer a[href="https://ph-il.ca"]');
+        self::assertSelectorExists('script[type="application/ld+json"]');
+        self::assertStringNotContainsString('pico', (string) $client->getResponse()->getContent());
     }
 
-    public function testTheInlineScriptsCarryTheNonceOfThePolicy(): void
+    public function testEveryPageSendsTheSecurityHeaders(): void
     {
         $client = self::createClient();
-        $crawler = $client->request('GET', '/hello-world');
+        $crawler = $client->request('GET', '/fr');
 
-        self::assertSame(1, preg_match("/'nonce-([^']+)'/", (string) $client->getResponse()->headers->get('Content-Security-Policy'), $nonce));
+        $headers = $client->getResponse()->headers;
+        $policy = (string) $headers->get('Content-Security-Policy');
+        self::assertStringContainsString("default-src 'self'", $policy);
+        self::assertStringContainsString("frame-ancestors 'none'", $policy);
+        self::assertSame('DENY', $headers->get('X-Frame-Options'));
+        self::assertSame('nosniff', $headers->get('X-Content-Type-Options'));
+
+        // The inline scripts carry the nonce of the policy.
         foreach ($crawler->filter('script:not([src])') as $script) {
-            self::assertInstanceOf(DOMElement::class, $script);
-            self::assertSame($nonce[1], $script->getAttribute('nonce'));
+            $nonce = $script->attributes?->getNamedItem('nonce')?->nodeValue;
+            self::assertNotNull($nonce);
+            self::assertStringContainsString("'nonce-".$nonce."'", $policy);
         }
     }
 
-    public function testThePageIsInEnglishByDefaultAndInFrenchWhenAsked(): void
+    public function testTheFooterShowsTheVersions(): void
     {
         $client = self::createClient();
-        $client->request('GET', '/hello-world');
-        self::assertSelectorExists('html[lang="en"]');
-        self::assertSelectorTextContains('header', 'Sign in');
-        self::assertResponseHeaderSame('Content-Language', 'en');
+        $client->request('GET', '/en');
 
-        $client->request('GET', '/hello-world', server: ['HTTP_ACCEPT_LANGUAGE' => 'fr-CA,fr;q=0.9,en;q=0.5']);
-        self::assertSelectorExists('html[lang="fr"]');
-        self::assertSelectorTextContains('header', 'Se connecter');
-        self::assertSelectorTextContains('header nav', 'Bonjour le monde !');
-        self::assertSelectorTextContains('footer', 'Tous droits réservés');
-        self::assertResponseHeaderSame('Content-Language', 'fr');
-    }
-
-    public function testThePageLoadsPicoThroughTheImportmapAndOffersTheMenuAndTheThemeSwitch(): void
-    {
-        $client = self::createClient();
-        $client->request('GET', '/hello-world');
-
-        self::assertSelectorExists('link[rel="stylesheet"][href*="pico"]');
-        self::assertSelectorExists('header[data-controller="header"]');
-        self::assertSelectorExists('header nav a[href="/hello-world"][aria-current="page"]');
-        self::assertSelectorCount(1, 'header nav a[aria-current]');
-        self::assertSelectorTextContains('footer', 'Proclaim Honestly, Interact Liberally');
-        self::assertSelectorExists('footer a[href="https://ph-il.ca"]');
+        $globals = new EnvExtension()->getGlobals();
+        self::assertSelectorTextContains('footer', 'Symfony '.$globals['sf_version']);
     }
 }

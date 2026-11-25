@@ -1,23 +1,25 @@
-# WebSymfony 🕸️
+# WebSkeleton 🦴
 
-[![Latest Version](https://img.shields.io/packagist/v/phil/websymfony.svg?style=flat-square)](https://packagist.org/packages/phil/websymfony)
-[![PHP Version Require](https://poser.pugx.org/phil/websymfony/require/php?style=flat-square)](https://packagist.org/packages/phil/websymfony)
+[![Latest Version](https://img.shields.io/packagist/v/phil/webskeleton.svg?style=flat-square)](https://packagist.org/packages/phil/webskeleton)
+[![PHP Version Require](https://poser.pugx.org/phil/webskeleton/require/php?style=flat-square)](https://packagist.org/packages/phil/webskeleton)
 [![Symfony Version](https://img.shields.io/badge/Symfony-8.2-black?logo=symfony)](https://symfony.com/8)
 [![PHPStan level](https://img.shields.io/badge/PHPStan-level%20max-success?style=flat-square)](phpstan.neon)
 [![Software License](https://img.shields.io/badge/License-MIT-brightgreen.svg?style=flat-square)](LICENSE)
-[![Build Status (GitHub)](https://img.shields.io/github/actions/workflow/status/parler-haut-interagir-librement/WebSymfony/symfony.yml?branch=main&style=flat-square)](https://github.com/parler-haut-interagir-librement/WebSymfony/actions?query=workflow%3ASymfony+branch%3Amain)
+[![Build Status (GitHub)](https://img.shields.io/github/actions/workflow/status/parler-haut-interagir-librement/WebSkeleton/symfony.yml?branch=main&style=flat-square)](https://github.com/parler-haut-interagir-librement/WebSkeleton/actions?query=workflow%3ASymfony+branch%3Amain)
 
 ## About 🖋
 
-“**Proclaim** *Honestly*, **Interact** *Liberally*” **Web***Symfony* is a [Symfony 8.2](https://symfony.com/8) web
-application template on steroids, ready to use: everything [MicroSymfony](https://github.com/parler-haut-interagir-librement/MicroSymfony)
-gives, plus what a web site needs from its first day — member accounts, security headers, an administration, a menu,
-English and French —, with the same tests and quality gates.
+“**Proclaim** *Honestly*, **Interact** *Liberally*” **Web***Skeleton* is the base of a [Symfony 8.2](https://symfony.com/8)
+site: French and English, organised in domain-driven design (Domain, Application, Infrastructure), dressed by the PHIL
+UX kit, with the PHIL bundles a public site needs from its first day — security headers, legal notice, privacy policy,
+accessibility statement, contact form, sitemap, `security.txt` and structured data —, and the same tests and quality
+gates as the other templates of PHIL.
 
-WebSymfony is built on MicroSymfony, the PHIL version of [strangebuzz/MicroSymfony](https://github.com/strangebuzz/MicroSymfony),
-created and maintained by [COil](https://github.com/COil) of [Strangebuzz](https://www.strangebuzz.com). It keeps its
-name, its layout, its look (Pico CSS) and its spirit. It uses no PHIL package at run time: the PHIL tools — the PHIL UX
-kit, phil-ux and the PHIL bundles — start with [WebSkeleton](#others-proclaim-honestly-interact-liberally-skeletons-).
+WebSkeleton is built on [WebSymfony](https://github.com/parler-haut-interagir-librement/WebSymfony), itself built on
+[MicroSymfony](https://github.com/parler-haut-interagir-librement/MicroSymfony), the PHIL version of
+[strangebuzz/MicroSymfony](https://github.com/strangebuzz/MicroSymfony), created and maintained by
+[COil](https://github.com/COil) of [Strangebuzz](https://www.strangebuzz.com). It is the first of these templates with
+the PHIL tools: phil-ux in place of Pico CSS, the PHIL UX kit, and the PHIL bundles.
 
 ## Table of Contents 📖
 
@@ -25,11 +27,13 @@ kit, phil-ux and the PHIL bundles — start with [WebSkeleton](#others-proclaim-
 * [Quick-start](#quick-start-)
 * [Requirements](#requirements-)
 * [Stack](#stack-)
-* [What it adds to MicroSymfony](#what-it-adds-to-microsymfony-)
-* [Accounts and security](#accounts-and-security-)
+* [What it adds to WebSymfony](#what-it-adds-to-websymfony-)
+* [Languages](#languages-)
+* [Domain-driven design](#domain-driven-design-)
+* [Before going live](#before-going-live-)
+* [Optional steps](#optional-steps-)
 * [Tasks](#tasks-)
 * [Quality gates](#quality-gates-)
-* [Notes](#notes-)
 * [What it doesn't ship](#what-it-doesnt-ship-)
 * [References](#references-)
 * [Others “Proclaim Honestly, Interact Liberally” Skeletons](#others-proclaim-honestly-interact-liberally-skeletons-)
@@ -37,17 +41,17 @@ kit, phil-ux and the PHIL bundles — start with [WebSkeleton](#others-proclaim-
 * [Security](#security-)
 * [Credits](#credits-)
 * [License](#license-)
-* [Built with WebSymfony](#built-with-websymfony-)
+* [Built with WebSkeleton](#built-with-webskeleton-)
 
 ## Demo 🌈
 
-A demo of WebSymfony will run in the browser on [ph-il.ca](https://ph-il.ca), with the other templates of PHIL.
+A demo of WebSkeleton will run in the browser on [ph-il.ca](https://ph-il.ca), with the other templates of PHIL.
 
 ## Quick-start ⚡
 
 Create a new project from the latest release:
 
-    composer create-project phil/websymfony my-project && cd my-project
+    composer create-project phil/webskeleton my-site && cd my-site
 
 The repository is also a GitHub template repository: the "Use this template" button creates a new repository from the
 main branch, whose commits all pass the continuous integration.
@@ -59,21 +63,21 @@ You need the [Symfony binary](https://symfony.com/download#step-1-install-symfon
 
     castor start
 
-Open [https://127.0.0.1:8000](https://127.0.0.1:8000) (if port 8000 is free). The fixtures create two accounts:
-`admin` (password `admin-password`), which reaches the administration, and `member` (password `member-password`);
-never load them where the site is public. `castor stop` stops the server and
-deletes the database.
+The task writes a random `APP_SECRET` to `.env.local` when it holds none, prepares the database and starts the server.
+Open [https://127.0.0.1:8000](https://127.0.0.1:8000) (if port 8000 is free): `/` sends you to `/fr` or `/en`, after
+the language of your browser. `castor stop` stops the server and deletes the database.
 
 ### With FrankenPHP and PostgreSQL 🧟
 
 You need [Docker](https://www.docker.com/). `compose.yaml` serves the application with
 [FrankenPHP](https://frankenphp.dev/) in worker mode, which boots the kernel once and serves request after request,
-and restarts its workers when a file changes; the database is PostgreSQL 17:
+and restarts its workers when a file changes; the database is PostgreSQL 17, and
+[Mailpit](https://mailpit.axllent.org/) catches the messages of the contact form:
 
-    castor up
+    castor secret && castor up
 
 Open [https://localhost](https://localhost). `castor down` stops the services. The image of `docker/Dockerfile` is
-for development: an application deployed from this template brings its own deployment.
+for development: a site built from this template brings its own deployment.
 
 ### With MySQL 🐬
 
@@ -82,54 +86,136 @@ MySQL is the other database the template supports. In `compose.yaml`, replace th
 
     mysql://app:app@database:3306/app?serverVersion=8.4&charset=utf8mb4
 
-With the Symfony binary, set the same variable in `.env.local`, with the host of your server. The migration is written
-in the SQL of the database it runs on, so it needs no change.
+With the Symfony binary, set the same variable in `.env.local`, with the host of your server.
+
 ## Requirements ⚙
 
-* [PHP 8.5](https://www.php.net/releases/8.5/en.php) or later, with the extensions of `composer.json`, and
-  [Castor](https://castor.jolicode.com)
+* [PHP 8.5](https://www.php.net/releases/8.5/en.php) or later, with the extensions of `composer.json`, `intl` and
+  `sodium`, and [Castor](https://castor.jolicode.com)
 * The [Symfony binary](https://symfony.com/download), or [Docker](https://www.docker.com)
 * The [Xdebug](https://xdebug.org/) or [PCOV](https://github.com/krakjoe/pcov) extension for the code coverage report
+
 ## Stack 🔗
 
 * [PHP 8.5](https://www.php.net/releases/8.5/en.php)
-* [Symfony 8.2](https://symfony.com/8), from its release candidate, with [Symfony Security](https://symfony.com/doc/current/security.html)
-* [Doctrine ORM 3 (DBAL 4)](https://www.doctrine-project.org), on SQLite, PostgreSQL or MySQL, with the
-  [Doctrine extensions](https://github.com/doctrine-extensions/DoctrineExtensions)
-* [Twig 3](https://twig.symfony.com) and [Symfony forms](https://symfony.com/doc/current/forms.html)
-* [AssetMapper](https://symfony.com/doc/current/frontend/asset_mapper.html), [Stimulus 3.2](https://stimulus.hotwired.dev/) and [Turbo 8](https://turbo.hotwired.dev/), without Node.js
-* [Pico CSS 2](https://picocss.com)
-* [EasyAdmin 5](https://symfony.com/bundles/EasyAdminBundle/current/index.html)
+* [Symfony 8.2](https://symfony.com/8), from its release candidate, with [Messenger](https://symfony.com/doc/current/messenger.html)
+  carrying the commands and queries
+* [Doctrine ORM 3 (DBAL 4)](https://www.doctrine-project.org), on SQLite, PostgreSQL or MySQL
+* [Twig 3](https://twig.symfony.com) and [Twig components](https://symfony.com/bundles/ux-twig-component/current/index.html)
+* [AssetMapper](https://symfony.com/doc/current/frontend/asset_mapper.html), [Stimulus 3.2](https://stimulus.hotwired.dev/)
+  and [Turbo 8](https://turbo.hotwired.dev/), without Node.js
+* [phil-ux](https://github.com/parler-haut-interagir-librement/ux-css), the stylesheet of PHIL, light and dark, and the
+  recipes of the [PHIL UX kit](https://github.com/parler-haut-interagir-librement/ux-kit)
 * [PHPUnit 13](https://phpunit.de)
 * [FrankenPHP](https://frankenphp.dev/) in worker mode, through Docker Compose
 
-## What it adds to MicroSymfony 🚀
+## What it adds to WebSymfony 🚀
 
 | Feature | Where |
 |---|---|
-| Sign-up, sign-in and sign-out, an account page | [src/Controller/Security](src/Controller/Security), [AccountAction](src/Controller/AccountAction.php) |
-| Users with hashed passwords and roles, `ROLE_ADMIN` above `ROLE_USER` | [User](src/Entity/User.php), [security.php](config/packages/security.php) |
-| An administration for `ROLE_ADMIN`, with the list of users | [src/Controller/Admin](src/Controller/Admin) |
-| Security headers and a Content Security Policy with a nonce, by NelmioSecurityBundle | [nelmio_security.php](config/packages/nelmio_security.php) |
-| Cross-origin requests on `/api/` only, by NelmioCorsBundle | [nelmio_cors.php](config/packages/nelmio_cors.php) |
-| A main menu built by KnpMenu | [MainMenuBuilder](src/Menu/MainMenuBuilder.php) |
-| English and French, chosen from the browser's language | [translations](translations), [translation.php](config/packages/translation.php) |
-| Dates set by the Timestampable extension | [stof_doctrine_extensions.php](config/packages/stof_doctrine_extensions.php) |
-| Errors sent to Sentry in production, when `SENTRY_DSN` is set | [sentry.php](config/packages/sentry.php) |
-| The PHIL identity: logo, copyright, light and dark themes | [base.html.twig](templates/base.html.twig) |
+| French and English, every page under `/fr` or `/en`, French by default | [routes.php](config/routes.php), [services.php](config/services.php), [translations](translations) |
+| Domain, Application and Infrastructure layers, with the buses of `phil/ddd-bundle` | [src](src), [messenger.php](config/packages/messenger.php) |
+| phil-ux and the recipes of the PHIL UX kit in `templates/components/` | [base.html.twig](templates/base.html.twig), [components](templates/components) |
+| A Content Security Policy with nonces and the security headers, by `phil/browser-security-bundle` | [phil_browser_security.php](config/packages/phil_browser_security.php) |
+| The legal notice and the privacy policy, in both languages, by `phil/legal-notices-bundle` | [phil_legal_notices.php](config/packages/phil_legal_notices.php), [legal](legal) |
+| The accessibility statement, by `phil/accessibility-statement-bundle` | [phil_accessibility_statement.php](config/packages/phil_accessibility_statement.php) |
+| A contact form protected against spam, by `phil/contact-form-bundle` and `phil/spam-protection-bundle` | [phil_contact_form.php](config/packages/phil_contact_form.php) |
+| `/sitemap.xml`, every page in every language with its alternates, by `phil/sitemap-bundle` | [LocalizedPagesUrlProvider](src/Infrastructure/Sitemap/LocalizedPagesUrlProvider.php) |
+| `/.well-known/security.txt`, by `phil/well-known-bundle` | [phil_well_known.php](config/packages/phil_well_known.php) |
+| The JSON-LD graph of each page, by `phil/structured-data-bundle` | [phil_structured_data.php](config/packages/phil_structured_data.php) |
 
-Everything MicroSymfony has stays: the examples, the five test suites, Castor, the quality gates, Docker Compose.
+From WebSymfony stay the PHIL identity (logo, copyright of Parler Haut, Interagir Librement, light and dark themes),
+the KnpMenu main menu, the cross-origin rules of NelmioCorsBundle on `/api/`, Sentry in production, the five test
+suites, Castor, the quality gates and Docker Compose. Member accounts and the administration are not installed by
+default: each is an [optional step](#optional-steps-).
 
-## Accounts and security 🔐
+Every PHIL package comes from Packagist. A package of PHIL not published yet is taken by a Composer `path` repository
+to a local copy of the `phil-prerelease` monorepo, until its release; the template needs none today.
 
-* Passwords are hashed by the `auto` hasher; the session keeps a crc32c of the hash, never the hash, so a changed
-  password still signs the other sessions out.
-* The firewall checks the user again each time it is refreshed from the session (`user_checker_on_refresh`): a disabled
-  or changed account is signed out on its next request.
-* The sign-in, the sign-up and the sign-out carry a CSRF token; the sign-out is a POST.
-* Five failed sign-ins a minute per user name and IP address, through `login_throttling`.
-* Impersonation is off; when it is turned on, only by POST with a CSRF token.
-* `/account` asks for `ROLE_USER`, `/admin` for `ROLE_ADMIN`.
+## Languages 🌍
+
+Every page lives under the prefix of its language: `/fr`, `/en`. French is the default: `/` sends a visitor to the
+language their browser prefers among those of the site, French when it prefers none of them. The layout links each
+page to its other languages, and the sitemap lists them as alternates.
+
+The languages are one list, `app.locales` in [config/services.php](config/services.php), the default one first. To
+add Spanish:
+
+1. add `'es'` to the list;
+2. copy `translations/messages.en.yaml` to `translations/messages.es.yaml` and translate it;
+3. give the legal documents their `es` body in `legal/` and in
+   [phil_legal_notices.php](config/packages/phil_legal_notices.php).
+
+The pages of `/es` then exist, with the routes of the PHIL bundles under the same prefix.
+
+## Domain-driven design 🧭
+
+`src/` is organised in three layers, which Deptrac checks (`castor lint:architecture`, rules in `phil-dev.php`):
+
+| Layer | Holds | May use |
+|---|---|---|
+| `src/Domain` | Value objects, entities of the model, ports (interfaces): plain PHP, never services | PHP, the Symfony components, the domain of `phil/ddd-bundle` |
+| `src/Application` | Commands, queries and their handlers | The domain, the buses of `phil/ddd-bundle` |
+| `src/Infrastructure` | Controllers, adapters of the ports, Doctrine entities, Twig, menus, the sitemap | Everything it integrates |
+
+The example runs through the three layers: [Slug](src/Domain/Text/Slug.php) is a value object that validates itself
+and throws the `InvalidValue` of `phil/ddd-bundle`; [TitleSlugger](src/Domain/Text/TitleSlugger.php) is its port;
+[SlugifyTitleQuery](src/Application/Text/SlugifyTitleQuery.php) and its handler answer on the query bus;
+[AsciiTitleSlugger](src/Infrastructure/Text/AsciiTitleSlugger.php) is the adapter on Symfony's slugger, bound to the
+port in [services.php](config/services.php); [SlugifyAction](src/Infrastructure/Http/Api/SlugifyAction.php) asks the
+bus and answers JSON, which the home page calls through a Stimulus controller.
+
+The command bus runs in a Doctrine transaction, the query bus does not; both are synchronous until a message is routed
+to a transport in [messenger.php](config/packages/messenger.php). Messages carry identifiers, never whole objects.
+
+## Before going live 🚀
+
+The template starts with nothing that claims what no one has checked. Before a site is public:
+
+1. **The secret**: set `APP_SECRET` in the environment of the server, or in the Symfony secrets.
+2. **The legal documents**: fill the identity of the site in
+   [phil_legal_notices.php](config/packages/phil_legal_notices.php), adapt the bodies in `legal/`, then publish each
+   version (a `published_at` date, `state` removed). Until then `/fr/legal` and `/fr/privacy` answer 404.
+   `bin/console phil:legal-notices:check` reports what a body lacks.
+3. **The accessibility statement**: write its first version once the site is evaluated; until then its page answers
+   404 and the footer does not link to it.
+4. **The contact form**: replace the example sender and recipient in
+   [phil_contact_form.php](config/packages/phil_contact_form.php) and set `MAILER_DSN`.
+5. **`security.txt`**: replace the contact in [phil_well_known.php](config/packages/phil_well_known.php) and push its
+   expiry date back, at most a year ahead.
+6. **Several servers**: give the lock (`LOCK_DSN`) and `cache.app` a store every server shares, and remove
+   `single_server` from [phil_browser_security.php](config/packages/phil_browser_security.php).
+
+## Optional steps 🧩
+
+### Member accounts
+
+No account by default. To add them, with the identity provider of your choice through OpenID Connect:
+
+    composer require phil/identity-client-bundle symfony/security-bundle
+
+Declare the firewall in `config/packages/security.php` with `user_checker_on_refresh: true`, so that a disabled or
+changed account is signed out on its next request, and import the routes of `oidc_login` as the
+[installation guide of the bundle](https://github.com/parler-haut-interagir-librement/identity-client-bundle/blob/main/doc/installation.md)
+shows. Impersonation stays off; if a site turns it on, only by POST with a CSRF token, never by a query parameter.
+With accounts, [`phil/privacy-bundle`](https://github.com/parler-haut-interagir-librement/privacy-bundle) adds the
+export and the erasure of a member's data, the consent to cookies and the redaction of personal data in the logs.
+
+### Administration
+
+No administration by default. To add one, in the colours of PHIL UX:
+
+    composer require easycorp/easyadmin-bundle phil/ux-easyadmin-bundle
+
+Then generate a dashboard with `bin/console make:admin:dashboard`, put it under `src/Infrastructure/Http/Admin/`, and
+protect `/admin` with a role once member accounts exist.
+
+### More recipes of the PHIL UX kit
+
+The recipes in `templates/components/` — `Badge`, `Button`, `Card`, `Table`, `ThemeSwitcher` — are copies the site
+owns. Others come from the kit with the Symfony UX Toolkit:
+
+    bin/console ux:install accordion --kit=github.com/parler-haut-interagir-librement/ux-kit
 
 ## Tasks 🧰
 
@@ -137,9 +223,10 @@ Everything MicroSymfony has stays: the examples, the five test suites, Castor, t
 
 | Task | What it does |
 |---|---|
-| `castor start`, `castor stop` | The Symfony binary's web server with SQLite, its migrations and its fixtures. |
-| `castor up`, `castor down` | FrankenPHP in worker mode and PostgreSQL, with Docker Compose. |
-| `castor load-fixtures` | The SQLite database reset, migrated and filled. |
+| `castor start`, `castor stop` | The Symfony binary's web server with SQLite and its migrations. |
+| `castor up`, `castor down` | FrankenPHP in worker mode, PostgreSQL and Mailpit, with Docker Compose. |
+| `castor secret` | A random `APP_SECRET` in `.env.local`, unless it holds one. |
+| `castor reset-database` | The SQLite database reset and migrated. |
 | `castor test` | Every PHPUnit suite; `--filter` and `--options` pass on to PHPUnit. |
 | `castor test:unit`, `test:integration`, `test:api`, `test:functional`, `test:e2e` | One suite. |
 | `castor test:next` | The tests on the next PHP version, in its Docker image. |
@@ -149,6 +236,7 @@ Everything MicroSymfony has stays: the examples, the five test suites, Castor, t
 | `castor fix` | Rector, PHP-CS-Fixer, Twig-CS-Fixer, Biome and composer-normalize. |
 | `castor ci` | The continuous integration, locally: coverage, then every lint. |
 | `castor hooks` | The git hooks: the fast checks on the staged files before each commit. |
+
 ## Quality gates 🚦
 
 The checks come from [`phil/dev-tools`](https://packagist.org/packages/phil/dev-tools), the shared tooling of PHIL,
@@ -167,53 +255,33 @@ its reason.
 | `castor lint:yaml`, `lint:container`, `lint:doctrine` | The YAML files, the container and the Doctrine mapping. |
 | `castor stan` | PHPStan at the maximum level, with type coverage at 100 %, a cognitive complexity limit and forbidden calls. |
 | `castor lint:rector` | Rector has nothing left to change. |
-| `castor lint:architecture` | Arkitect on the shape of the classes; Deptrac on the libraries `src/` may use, listed in `phil-dev.php`. |
-## Notes 📒
-
-### Symfony UX
-
-Turbo forms are disabled in [assets/app.js](assets/app.js). To enable them for a form, add the `data-turbo="true"`
-attribute to it, or set `Turbo.setFormMode` to `on` to enable them everywhere. In both cases, the controller has to be
-[adapted](https://symfony.com/bundles/ux-turbo/current/index.html#3-form-response-code-changes).
-
-### PHP configuration files
-
-A Flex recipe can add YAML files to the project. They are loaded as they are; to convert them to PHP, follow the
-other files of `config/packages`.
+| `castor lint:architecture` | Arkitect on the shape of the classes; Deptrac on the layers of DDD and the libraries each may use. |
 
 ## What it doesn't ship 🙅
 
-* No deployment file: each application brings its own.
-* No PHIL package at run time: the PHIL UX kit, phil-ux and the PHIL bundles come with WebSkeleton.
-* No e-mail: the sign-up asks for no confirmation and there is no password reset; add
-  [symfonycasts/verify-email-bundle](https://github.com/SymfonyCasts/verify-email-bundle) and
-  [symfonycasts/reset-password-bundle](https://github.com/SymfonyCasts/reset-password-bundle) when the site sends mail.
+* No deployment file: each site brings its own.
+* No member account and no administration: each is an [optional step](#optional-steps-).
+* No published legal document and no accessibility statement: the site publishes them once they say something true.
+* No Node.js build: AssetMapper serves the JavaScript and phil-ux as they are.
 
 ## References 📚
 
 * [Introducing the MicroSymfony application template](https://www.strangebuzz.com/en/blog/introducing-the-microsymfony-application-template) (strangebuzz.com)
 * [MicroSymfony 8: ready for the LTS promise](https://www.strangebuzz.com/en/blog/microsymfony-8-ready-for-the-lts-promise) (strangebuzz.com)
-* [Initializing your Symfony project with solid foundations](https://www.strangebuzz.com/en/blog/initializing-your-symfony-project-with-solid-foundations) (strangebuzz.com)
 * [Organizing your Symfony project tests](https://www.strangebuzz.com/en/blog/organizing-your-symfony-project-tests) (strangebuzz.com)
 * [A better ADR pattern for your Symfony controllers](https://www.strangebuzz.com/en/blog/a-better-adr-pattern-for-your-symfony-controllers) (strangebuzz.com)
 * [Castor, a journey across the sea of task runners](https://jolicode.com/blog/castor-a-journey-across-the-sea-of-task-runners) (jolicode.com)
-* [PHPStan 2.0 Released With Level 10 and Elephpants!](https://phpstan.org/blog/phpstan-2-0-released-level-10-elephpants) (phpstan.org)
-* [You should be using PHPStan's bleeding edge](https://backendtea.com/post/use-phpstan-bleeding-edge/) (backendtea.com)
-* [A Good Naming Convention for Routes, Controllers and Templates?](https://jolicode.com/blog/a-good-naming-convention-for-routes-controllers-and-templates) (jolicode.com)
-* [Front-end application development, Symfony-style(s)](https://dunglas.dev/2024/04/front-end-application-development-symfony-styles/) (dunglas.dev)
+* [Messenger: sync and queued message handling](https://symfony.com/doc/current/messenger.html) (symfony.com)
+* [Localized routes](https://symfony.com/doc/current/routing.html#localized-routes-i18n) (symfony.com)
 * [The Symfony Framework Best Practices](https://symfony.com/doc/current/best_practices.html) (symfony.com)
+
 ## Others “**Proclaim** Honestly, **Interact** Liberally” Skeletons 🩻
 
 * [MicroSymfony](https://github.com/parler-haut-interagir-librement/MicroSymfony) (`phil/microsymfony`): the micro
-  template WebSymfony is built on, with no database, Pico CSS, Stimulus and Turbo, Castor, the tests and quality gates.
-* [WebSkeleton](https://github.com/parler-haut-interagir-librement/WebSkeleton) (`phil/webskeleton`): WebSymfony and the
-  PHIL tools, organised in DDD (Domain, Application, Infrastructure):
-  * the [PHIL UX kit](https://github.com/parler-haut-interagir-librement/ux-kit) for the Symfony UX Toolkit and
-    [`phil/ux-css`](https://github.com/parler-haut-interagir-librement/ux-css), the phil-ux stylesheet;
-  * PHIL bundles: `phil/ddd-bundle`, `phil/doctrine-behaviours-bundle`, and, by a documented step,
-    `phil/identity-client-bundle` for member accounts and `phil/ux-easyadmin-bundle` for an administration in the
-    colours of PHIL UX;
-  * French and English, routes prefixed `/fr` and `/en`, French by default.
+  template, with no database, Pico CSS, Stimulus and Turbo, Castor, the tests and quality gates.
+* [WebSymfony](https://github.com/parler-haut-interagir-librement/WebSymfony) (`phil/websymfony`): MicroSymfony and
+  what a web application needs — Doctrine, member accounts, security headers, an administration, English and French —,
+  in the usual layout of Symfony and on Pico CSS.
 * [ApiSymfony](https://github.com/parler-haut-interagir-librement/ApiSymfony) (`phil/apisymfony`): an API with
   [API Platform](https://api-platform.com), Castor, the tests and quality gates.
 
@@ -230,13 +298,17 @@ See [SECURITY](SECURITY.md).
 * [Philippe Gamache](https://ph-il.ca), maintainer, for [Parler Haut, Interagir Librement](https://ph-il.ca)
 * [COil](https://github.com/COil), author of [strangebuzz/MicroSymfony](https://github.com/strangebuzz/MicroSymfony),
   and [its contributors](https://github.com/strangebuzz/MicroSymfony/graphs/contributors)
-* [All the contributors of WebSymfony](https://github.com/parler-haut-interagir-librement/WebSymfony/graphs/contributors)
+* [All the contributors of WebSkeleton](https://github.com/parler-haut-interagir-librement/WebSkeleton/graphs/contributors)
 
 ## License ⚖️
 
 The MIT License, with the attribution to the original repository it asks for. See the [license file](LICENSE).
 
-## Built with WebSymfony 🛠️
+## Built with WebSkeleton 🛠️
 
-* [WebSkeleton](https://github.com/parler-haut-interagir-librement/WebSkeleton), and through it
-  [Parler Haut, Interagir Librement](https://ph-il.ca) and [TiltTek](https://tilttek.com)
+* IRL Assemble Online
+* [La Page à Melkor](https://lapageamelkor.org)
+* [Parler Haut, Interagir Librement](https://ph-il.ca)
+* RPG Assemble Online
+* [TiltTek](https://tilttek.com)
+* [TTRPG Maker](https://ttrpgmaker.com)

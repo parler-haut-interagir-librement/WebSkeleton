@@ -12,22 +12,38 @@ return new Configuration()
     ->addPathToScan(__DIR__.'/src', isDev: false)
     ->addPathToScan(__DIR__.'/migrations', isDev: false)
     ->addPathToScan(__DIR__.'/tests', isDev: true)
-    // The factories and the story load the fixtures of the dev and test environments only, where Foundry is installed.
-    ->ignoreErrorsOnPackageAndPaths('zenstruck/foundry', [__DIR__.'/src/Factory', __DIR__.'/src/Story'], [ErrorType::DEV_DEPENDENCY_IN_PROD])
-    // Used through the configuration, the templates, the front controller or the console, never by a class of src/.
+    // Used through the configuration, the templates, the front controller or the console, never by a class of src/;
+    // Doctrine is ready for the entities of src/Infrastructure/Persistence/Doctrine/Entity/.
     ->ignoreErrorsOnPackages([
+        'doctrine/dbal',
+        'doctrine/doctrine-bundle',
         'doctrine/doctrine-migrations-bundle',
+        'doctrine/migrations',
+        'doctrine/orm',
+        'doctrine/persistence',
         'knplabs/knp-menu-bundle',
-        'league/commonmark',
         'nelmio/cors-bundle',
-        'nelmio/security-bundle',
+        'phil/accessibility-statement-bundle',
+        'phil/browser-security-bundle',
+        'phil/contact-form-bundle',
+        'phil/legal-notices-bundle',
+        'phil/sitemap-bundle',
+        'phil/spam-protection-bundle',
+        'phil/structured-data-bundle',
+        'phil/ux-bundle',
+        'phil/ux-css',
+        'phil/ux-kit',
+        'phil/well-known-bundle',
         'sentry/sentry-symfony',
-        'stof/doctrine-extensions-bundle',
         'symfony/asset',
         'symfony/asset-mapper',
         'symfony/console',
         'symfony/flex',
+        'symfony/doctrine-bridge',
         'symfony/intl',
+        'symfony/lock',
+        'symfony/mailer',
+        'symfony/messenger',
         'symfony/monolog-bundle',
         'symfony/rate-limiter',
         'symfony/runtime',
@@ -35,11 +51,13 @@ return new Configuration()
         'symfony/stimulus-bundle',
         'symfony/translation',
         'symfony/twig-bundle',
+        'symfony/uid',
         'symfony/ux-turbo',
+        'symfony/ux-twig-component',
         'symfony/web-link',
         'symfony/yaml',
         'twig/extra-bundle',
-        'twig/markdown-extra',
+        'twig/intl-extra',
     ], [ErrorType::UNUSED_DEPENDENCY])
     // The .env files are read by the front controller and the console through the runtime, the tests read them directly.
     ->ignoreErrorsOnPackage('symfony/dotenv', [ErrorType::PROD_DEPENDENCY_ONLY_IN_DEV])

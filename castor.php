@@ -70,7 +70,7 @@ function aggregate(int ...$exitCodes): int
 function start(): int
 {
     title('symfony:start');
-    $exitCode = loadFixtures();
+    $exitCode = aggregate(secret(), reset_database());
     if ($exitCode !== 0) {
         aborted('The database could not be prepared: the web server has NOT been started.');
 
@@ -99,10 +99,7 @@ function up(): int
         return success($exitCode);
     }
 
-    return success(aggregate(
-        exit_code('docker compose exec php bin/console doctrine:migrations:migrate --no-interaction'),
-        exit_code('docker compose exec php bin/console foundry:load-fixtures --no-interaction'),
-    ));
+    return success(exit_code('docker compose exec php bin/console doctrine:migrations:migrate --no-interaction --allow-no-migration'));
 }
 
 #[AsTask(namespace: 'docker', description: 'Stop the Docker Compose services', aliases: ['down'])]
@@ -149,20 +146,31 @@ function purge(): int
 
 // Database ———————————————————————————————————————————————————————————————————
 
-#[AsTask(namespace: 'app', description: 'Reset the SQLite database, run the migrations and load the fixtures', aliases: ['load-fixtures'])]
-function loadFixtures(): int
+#[AsTask(namespace: 'app', description: 'Reset the SQLite database and run the migrations', aliases: ['reset-database'])]
+function reset_database(): int
 {
-    title('app:load-fixtures');
+    title('app:reset-database');
     resetDatabase();
     io()->note('Running the migrations...');
-    $exitCode = exit_code('bin/console doctrine:migrations:migrate --no-interaction');
-    if ($exitCode !== 0) {
-        return success($exitCode);
+
+    return success(exit_code('bin/console doctrine:migrations:migrate --no-interaction --allow-no-migration'));
+}
+
+#[AsTask(namespace: 'app', description: 'Write a random APP_SECRET to .env.local, unless it holds one already', aliases: ['secret'])]
+function secret(): int
+{
+    title('app:secret');
+    $file = '.env.local';
+    $content = is_file($file) ? (string) file_get_contents($file) : '';
+    if (preg_match('/^APP_SECRET=.+$/m', $content) === 1) {
+        io()->note('.env.local already holds an APP_SECRET: nothing changed.');
+
+        return success(0);
     }
 
-    io()->note('Loading the fixtures...');
+    file_put_contents($file, rtrim($content, "\n").($content === '' ? '' : "\n").'APP_SECRET='.bin2hex(random_bytes(32))."\n");
 
-    return success(exit_code('bin/console foundry:load-fixtures --env=dev --no-interaction'));
+    return success(0);
 }
 
 function resetDatabase(): void

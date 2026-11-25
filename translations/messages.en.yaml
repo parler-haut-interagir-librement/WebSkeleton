@@ -1,75 +1,59 @@
 brand:
-  name: 'Proclaim Honestly, Interact Liberally: WebSymfony'
+  name: 'Proclaim Honestly, Interact Liberally: WebSkeleton'
   copyright: 'Proclaim Honestly, Interact Liberally'
-  info: WebSymfony is a Symfony web application template on steroids, ready to use.
+  info: WebSkeleton is the base of a Symfony site, bilingual, organised in DDD, with the PHIL UX kit and the PHIL bundles a site needs.
 
 footer:
   all_rights: All rights reserved
-  credits: 'Built on MicroSymfony, by %strangebuzz% and <a href="%website%/graphs/contributors">its contributors</a>.'
-  symfony: Symfony™ is a trademark of <a target="_blank" rel="noopener noreferrer" href="https://symfony.com/license">Symfony SAS</a>.
+  credits: 'Built on WebSymfony and MicroSymfony, by %strangebuzz% and its contributors.'
+  symfony: Symfony™ is a trademark of <a rel="noopener noreferrer" href="https://symfony.com/license">Symfony SAS</a>.
 
 layout:
   skip: Skip to the content
   menu: Main menu
-  account: Account
-  my_account: My account
-  admin: Administration
-  login: Sign in
-  signup: Sign up
-  logout: Sign out
-  github: 'The WebSymfony GitHub repository'
+  languages: Languages
+
+language:
+  fr: Français
+  en: English
 
 theme:
-  to_dark: Switch to dark mode
-  to_light: Switch to light mode
+  label: Theme
+  light: Light
+  dark: Dark
+  system: System
 
 menu:
-  readme: README
-  hello: Hello world!
-  stimulus: JavaScript with Stimulus
-  composer: The composer.json file
-  form: Form example
-  users: Users list
-  error: Custom error page
+  home: Home
+  contact: Contact
 
-login:
-  title: Sign in
-  username: User name
-  password: Password
-  submit: Sign in
-  signup: No account yet? Sign up
+home:
+  title: Welcome
+  features: What the skeleton brings
+  feature:
+    languages:
+      title: French and English
+      text: Every page under /fr or /en, French by default; one more language is one line of configuration and a translation file.
+    ddd:
+      title: Domain-driven design
+      text: Domain, Application and Infrastructure layers, with the identifiers, errors and command and query buses of phil/ddd-bundle.
+    ux:
+      title: PHIL UX
+      text: The phil-ux stylesheet and the recipes of the PHIL UX kit, light and dark, without a build step.
+    bundles:
+      title: What a site needs
+      text: Security headers, legal notices, privacy policy, accessibility statement, contact form, sitemap, security.txt and structured data.
+  slugify:
+    title: A query through the bus
+    text: The slug below is asked of the application through the query bus, on each keystroke, by a Stimulus controller.
+    input: Title
+    output: Slug
+  contact: Write to us
 
-signup:
-  title: Sign up
-  username: User name
-  email: Email address
-  password: Password
-  confirm: Password again
-  password_hint: At least %count% characters.
-  submit: Create my account
-  login: Already a member? Sign in
+contact:
+  title: Contact
 
-account:
-  title: My account
-  welcome: 'Welcome, %username%.'
-  username: User name
-  email: Email address
-  roles: Roles
-  created_at: Member since
-
-admin:
-  menu:
-    dashboard: Dashboard
-    users: Users
-    site: Back to the site
-    logout: Sign out
-  dashboard:
-    title: Administration
-    text: The administration of the site, for its administrators only. Add a CRUD controller in src/Controller/Admin/ and a link in DashboardController::configureMenuItems().
-  user:
-    singular: User
-    plural: Users
-    username: User name
-    email: Email address
-    roles: Roles
-    created_at: Created at
+error:
+  title: Error %code%
+  text: 'Sorry, an error occurred: %text% (%code%).'
+  home: Back to the home page

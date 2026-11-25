@@ -10,8 +10,6 @@ return App::config([
         'globals' => [
             'brand' => '%brand%',
             'brand_html' => '%brand_html%',
-            'brand_emoji' => '%brand_emoji%',
-            'description' => '%description%',
             'website' => '%website%',
             'version' => '%version%',
             'copyright_url' => '%copyright_url%',

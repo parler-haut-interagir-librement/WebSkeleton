@@ -1,109 +1,78 @@
+{#-
+ # The layout of every page: phil-ux, the stylesheet of phil/ux-css, the recipes of the PHIL UX kit in
+ # templates/components/, the language switcher, and the JSON-LD graph of phil/structured-data-bundle at the end.
+ # Scripts carry the nonce of the Content Security Policy of phil/browser-security-bundle.
+ #}
+{%- set _route = app.request.attributes.get('_canonical_route') ?? app.request.attributes.get('_route') -%}
+{%- set _params = app.request.attributes.get('_route_params') ?? {} -%}
 <!DOCTYPE html>
 <html lang="{{ app.request.locale }}">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="color-scheme" content="light dark" />
-    <title>{% block title %}{{ brand }}{% endblock %}</title>
-    <meta name="description" content="{% block description %}{{ description|striptags }}{% endblock %}" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <title>{% block title %}{{ 'brand.name'|trans }}{% endblock %}</title>
+    <meta name="description" content="{% block description %}{{ 'brand.info'|trans }}{% endblock %}">
     <link rel="icon" href="{{ asset('img/phil_img_logo.svg') }}" type="image/svg+xml">
-
+    {%- if _route and _params._locale is defined %}
+        {%- for locale in app.enabled_locales %}
+    <link rel="alternate" hreflang="{{ locale }}" href="{{ url(_route, _params|merge({_locale: locale})) }}">
+        {%- endfor %}
+    {%- endif %}
+    <twig:ThemeSwitcher:Script nonce="{{ csp_nonce('script') }}" />
+    <link rel="stylesheet" href="{{ asset('phil-ux/phil-ux.css') }}">
     {% block stylesheets %}{% endblock %}
-
-    {#- The importmap is an inline script: it carries the nonce of the Content Security Policy. #}
-    {% block javascripts %}{{ importmap('app', {nonce: csp_nonce('script')}) }}{% endblock %}
+    {% block javascripts %}{{ importmap('app') }}{% endblock %}
 </head>
-
-{% macro gitHubIcon(placement) %}
-    <a aria-label="{{ 'layout.github'|trans }}" class="contrast" data-tooltip="{{ website }}" data-placement="{{ placement }}" href="{{ website }}" target="_blank" rel="noopener noreferrer">
-        <img src="{{ asset('img/github.svg') }}" width="24" height="24" alt="">
-    </a>
-{% endmacro %}
-
 <body>
+<a class="isSkipLink" href="#content">{{ 'layout.skip'|trans }}</a>
 
-<header class="container" {{ stimulus_controller('header') }}>
-    <div class="grid">
-        <div>
-            <hgroup>
-                <h1>
-                    <a href="{{ path('App\\Controller\\HomeAction') }}"><img src="{{ asset('img/phil_img_logo.svg') }}" width="40" height="40" alt=""> {{ brand_html|raw }}</a>
-                </h1>
-                <p>{{ 'brand.info'|trans }}</p>
-            </hgroup>
-        </div>
+<header class="isCluster">
+    <a href="{{ path('App\\Infrastructure\\Http\\Controller\\HomeAction') }}" class="isLogo">
+        <img src="{{ asset('img/phil_img_logo.svg') }}" width="40" height="40" alt=""> {{ brand_html|raw }}
+    </a>
 
-        <div>
-            <nav aria-label="{{ 'layout.menu'|trans }}">
-                <ul>
-                    <li>
-                        <details class="dropdown">
-                            <summary role="button" class="primary">{{ 'layout.menu'|trans }}</summary>
-                            <ul>
-                                {% for item in knp_menu_get('main').children %}
-                                    <li><a href="{{ item.uri }}"{{ aria_current_page_if(item.uri == app.request.pathInfo)|raw }}>{{ item.label|trans }}</a></li>
-                                {% endfor %}
-                                <li><a href="{{ app.environment == 'dev' ? '/_error/404.html' : '/404' }}">{{ 'menu.error'|trans }}</a></li>
-                            </ul>
-                        </details>
-                    </li>
-                    {% if app.user %}
-                        <li><a href="{{ path('App\\Controller\\AccountAction') }}">{{ 'layout.my_account'|trans }}</a></li>
-                        {% if is_granted('ROLE_ADMIN') %}
-                            <li><a href="{{ path('admin') }}">{{ 'layout.admin'|trans }}</a></li>
-                        {% endif %}
-                        <li>
-                            <form method="post" action="{{ logout_path() }}">
-                                <input type="hidden" name="_csrf_token" value="{{ csrf_token('logout') }}">
-                                <button type="submit" class="secondary outline">{{ 'layout.logout'|trans }}</button>
-                            </form>
-                        </li>
-                    {% else %}
-                        <li><a href="{{ path('App\\Controller\\Security\\LoginAction') }}">{{ 'layout.login'|trans }}</a></li>
-                        <li><a href="{{ path('App\\Controller\\Security\\SignupAction') }}">{{ 'layout.signup'|trans }}</a></li>
-                    {% endif %}
-                    <li>{{ _self.gitHubIcon('bottom') }}</li>
-                    <li>
-                        <a rel="nofollow" href="#" class="theme-icon" {{ stimulus_target('header', 'lightEmoji') }} {{ stimulus_action('header', 'setDarkMode', 'click') }} data-tooltip="{{ 'theme.to_dark'|trans }}" data-placement="bottom">🔆</a>
-                        <a rel="nofollow" href="#" class="theme-icon" {{ stimulus_target('header', 'darkEmoji') }} {{ stimulus_action('header', 'setLightMode', 'click') }} data-tooltip="{{ 'theme.to_light'|trans }}" data-placement="bottom">🌘</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </div>
+    <nav aria-label="{{ 'layout.menu'|trans }}">
+        <ul class="isCluster">
+            {%- for item in knp_menu_get('main').children %}
+            <li><a href="{{ item.uri }}"{{ item.uri == app.request.pathInfo ? ' aria-current="page"' }}>{{ item.label|trans }}</a></li>
+            {%- endfor %}
+        </ul>
+    </nav>
 
-    <hr/>
+    <nav aria-label="{{ 'layout.languages'|trans }}">
+        <ul class="isCluster">
+            {%- for locale in app.enabled_locales %}
+            {%- set _href = _route and _params._locale is defined ? path(_route, _params|merge({_locale: locale})) : path('App\\Infrastructure\\Http\\Controller\\HomeAction', {_locale: locale}) %}
+            <li><a href="{{ _href }}" hreflang="{{ locale }}" lang="{{ locale }}"{{ locale == app.request.locale ? ' aria-current="true"' }}>{{ ('language.' ~ locale)|trans }}</a></li>
+            {%- endfor %}
+        </ul>
+    </nav>
+
+    <twig:ThemeSwitcher label="{{ 'theme.label'|trans }}" lightLabel="{{ 'theme.light'|trans }}" darkLabel="{{ 'theme.dark'|trans }}" systemLabel="{{ 'theme.system'|trans }}" />
 </header>
 
-<main class="container">
+<main id="content" class="isStack">
     {% for type, messages in app.flashes %}
         {% for message in messages %}
-            <article role="alert" class="flash-{{ type }}">{{ message|trans }}</article>
+            <p role="alert" class="isAlert">{{ message|trans }}</p>
         {% endfor %}
     {% endfor %}
 
     {% block body %}{% endblock %}
 </main>
 
-<footer class="container">
-    <hr/>
-
-    <div class="grid">
-        <div>
-            <span class="versions">{{ brand }} · Symfony {{ sf_version }} ({{ 'frankenphp' in php_sapi ? php_sapi : 'PHP ' ~ php_sapi }} {{ php_version }})</span>
-
-            <small>
-                © <a href="{{ copyright_url }}">{{ 'brand.copyright'|trans }}</a> · {{ 'footer.all_rights'|trans }}<br/>
-                {{ 'footer.credits'|trans({'%strangebuzz%': '<a href="https://www.strangebuzz.com" target="_blank" rel="noopener noreferrer">COil/Strangebuzz 🐝</a>', '%website%': website})|raw }}<br/>
-                {{ 'footer.symfony'|trans|raw }}
-            </small>
-        </div>
-
-        <div class="github">
-            {{ _self.gitHubIcon('top') }}
-        </div>
-    </div>
+<footer class="isStack">
+    {{ include('@PhilLegalNotices/_links.html.twig') }}
+    {{ phil_accessibility_statement_link() }}
+    <p class="isMuted">
+        {{ brand }} · Symfony {{ sf_version }} ({{ 'frankenphp' in php_sapi ? php_sapi : 'PHP ' ~ php_sapi }} {{ php_version }})<br>
+        © <a href="{{ copyright_url }}">{{ 'brand.copyright'|trans }}</a> · {{ 'footer.all_rights'|trans }}<br>
+        {{ 'footer.credits'|trans({'%strangebuzz%': '<a href="https://www.strangebuzz.com" rel="noopener noreferrer">COil/Strangebuzz</a>'})|raw }}<br>
+        {{ 'footer.symfony'|trans|raw }}
+    </p>
 </footer>
 
+{{ structured_data() }}
 </body>
 </html>

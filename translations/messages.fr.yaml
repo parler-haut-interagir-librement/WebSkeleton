@@ -1,75 +1,59 @@
 brand:
-  name: 'Parler Haut, Interagir Librement : WebSymfony'
+  name: 'Parler Haut, Interagir Librement : WebSkeleton'
   copyright: 'Parler Haut, Interagir Librement'
-  info: WebSymfony est un gabarit d’application web Symfony sous stéroïdes, prêt à l’emploi.
+  info: WebSkeleton est la base d’un site Symfony, bilingue, organisé en DDD, avec le kit PHIL UX et les bundles PHIL dont un site a besoin.
 
 footer:
   all_rights: Tous droits réservés
-  credits: 'Bâti sur MicroSymfony, par %strangebuzz% et <a href="%website%/graphs/contributors">ses contributeurs</a>.'
-  symfony: Symfony™ est une marque de commerce de <a target="_blank" rel="noopener noreferrer" href="https://symfony.com/license">Symfony SAS</a>.
+  credits: 'Construit sur WebSymfony et MicroSymfony, de %strangebuzz% et de ses contributeurs.'
+  symfony: Symfony™ est une marque de commerce de <a rel="noopener noreferrer" href="https://symfony.com/license">Symfony SAS</a>.
 
 layout:
   skip: Aller au contenu
   menu: Menu principal
-  account: Compte
-  my_account: Mon compte
-  admin: Administration
-  login: Se connecter
-  signup: S’inscrire
-  logout: Se déconnecter
-  github: 'Le dépôt GitHub de WebSymfony'
+  languages: Langues
+
+language:
+  fr: Français
+  en: English
 
 theme:
-  to_dark: Passer au mode sombre
-  to_light: Passer au mode clair
+  label: Thème
+  light: Clair
+  dark: Sombre
+  system: Système
 
 menu:
-  readme: README
-  hello: Bonjour le monde !
-  stimulus: JavaScript avec Stimulus
-  composer: Le fichier composer.json
-  form: Exemple de formulaire
-  users: Liste des utilisateurs
-  error: Page d’erreur personnalisée
+  home: Accueil
+  contact: Contact
 
-login:
-  title: Connexion
-  username: Nom d’utilisateur
-  password: Mot de passe
-  submit: Se connecter
-  signup: Pas encore de compte ? Inscrivez-vous
+home:
+  title: Bienvenue
+  features: Ce qu’apporte le squelette
+  feature:
+    languages:
+      title: Français et anglais
+      text: Chaque page sous /fr ou /en, le français par défaut ; une langue de plus tient en une ligne de configuration et un fichier de traductions.
+    ddd:
+      title: Conception pilotée par le domaine
+      text: Les couches Domain, Application et Infrastructure, avec les identifiants, les erreurs et les bus de commandes et de requêtes de phil/ddd-bundle.
+    ux:
+      title: PHIL UX
+      text: La feuille de style phil-ux et les recettes du kit PHIL UX, en clair et en sombre, sans étape de compilation.
+    bundles:
+      title: Ce dont un site a besoin
+      text: En-têtes de sécurité, mentions légales, politique de confidentialité, déclaration d’accessibilité, formulaire de contact, plan du site, security.txt et données structurées.
+  slugify:
+    title: Une requête par le bus
+    text: Le slug ci-dessous est demandé à l’application par le bus de requêtes, à chaque frappe, par un contrôleur Stimulus.
+    input: Titre
+    output: Slug
+  contact: Nous écrire
 
-signup:
-  title: Inscription
-  username: Nom d’utilisateur
-  email: Adresse courriel
-  password: Mot de passe
-  confirm: Mot de passe, encore
-  password_hint: Au moins %count% caractères.
-  submit: Créer mon compte
-  login: Déjà membre ? Connectez-vous
+contact:
+  title: Contact
 
-account:
-  title: Mon compte
-  welcome: 'Bienvenue, %username%.'
-  username: Nom d’utilisateur
-  email: Adresse courriel
-  roles: Rôles
-  created_at: Membre depuis
-
-admin:
-  menu:
-    dashboard: Tableau de bord
-    users: Utilisateurs
-    site: Retour au site
-    logout: Se déconnecter
-  dashboard:
-    title: Administration
-    text: L’administration du site, pour ses administrateurs seulement. Ajoutez un contrôleur CRUD dans src/Controller/Admin/ et un lien dans DashboardController::configureMenuItems().
-  user:
-    singular: Utilisateur
-    plural: Utilisateurs
-    username: Nom d’utilisateur
-    email: Adresse courriel
-    roles: Rôles
-    created_at: Créé le
+error:
+  title: Erreur %code%
+  text: 'Désolé, une erreur est survenue : %text% (%code%).'
+  home: Retour à l’accueil

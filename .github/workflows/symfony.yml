@@ -45,7 +45,7 @@ jobs:
       - name: Install the dependencies
         run: composer install --no-interaction --no-progress --prefer-dist
       - name: Prepare the database
-        run: castor load-fixtures
+        run: castor reset-database
       - name: Run the tests with their coverage threshold
         run: castor coverage
 
