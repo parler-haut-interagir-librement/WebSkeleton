@@ -1,0 +1,74 @@
+castor v1.9.1
+
+Usage:
+  command [options] [arguments]
+
+Options:
+  -h, --help                       Display help for the given command. When no command is given display help for the list command
+      --silent                     Do not output any message
+  -q, --quiet                      Only errors are displayed. All other output is suppressed
+  -V, --version                    Display this application version
+      --ansi|--no-ansi             Force (or disable --no-ansi) ANSI output
+  -n, --no-interaction             Do not ask any interactive question
+      --no-remote                  Skip the import of all remote remote packages
+      --update-remotes             Force the update of remote packages
+      --castor-file[=CASTOR-FILE]  Specify an alternative castor file to use instead of the default "castor.php"
+  -v|vv|vvv, --verbose             Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
+
+Available commands:
+  completion                  Dump the shell completion script
+  help                        Display help for a command
+  list                        List commands
+ app
+  app:reset-database          [reset-database] Reset the SQLite database and run the migrations
+  app:secret                  [secret] Write a random APP_SECRET to .env.local, unless it holds one already
+ castor
+  castor:composer             [composer] Interact with built-in Composer for castor
+  castor:execute              [execute] Execute a remote task from a packagist directory
+  castor:llm:configure        Configures which LLM CLI Castor uses
+  castor:llm:debug            Shows which LLM CLI Castor uses, and why
+  castor:self-update          [self-update] Updates Castor to the latest version
+ ci
+  ci:all                      [ci] Run the continuous integration locally: coverage, then every lint
+ docker
+  docker:down                 [down] Stop the Docker Compose services
+  docker:up                   [up] Start FrankenPHP in worker mode and PostgreSQL with Docker Compose
+ fix
+  fix:all                     [fix] Run every fixer
+  fix:composer                [fix-composer] Normalize composer.json
+  fix:js                      [fix-js] Fix the Stimulus controllers and the styles with Biome
+  fix:php                     [fix-php] Fix the code style of the PHP files with PHP-CS-Fixer
+  fix:rector                  [fix-rector] Apply the changes of Rector
+  fix:twig                    [fix-twig] Fix the code style of the Twig templates
+ helpers
+  helpers:check-requirements  [check-requirements] Check the requirements of Symfony
+  helpers:hooks               [hooks] Install the git hooks: the fast checks on the staged files before each commit
+  helpers:versions            [versions] Output the versions of the stack
+ lint
+  lint:all                    [lint] Run every lint and the static analysis
+  lint:analyse                [analyse|stan] Run PHPStan at the maximum level, then check its witnesses
+  lint:architecture           [lint-architecture] Check the shape of the classes with Arkitect and the layers with Deptrac
+  lint:composer               [lint-composer] Check the dependencies: analysis, advisories, unused packages, normalized composer.json
+  lint:container              [lint-container] Lint the Symfony container
+  lint:doctrine               [lint-doctrine] Validate the Doctrine mapping and schema
+  lint:js                     [lint-js] Check the Stimulus controllers and the styles with Biome
+  lint:php                    [lint-php] Check the code style of the PHP files with PHP-CS-Fixer
+  lint:rector                 [lint-rector] Check that Rector has nothing left to change
+  lint:twig                   [lint-twig] Lint the Twig templates and check their code style
+  lint:yaml                   [lint-yaml] Lint the YAML files
+ symfony
+  symfony:go-dev              [go-dev] Switch to the development environment
+  symfony:go-prod             [go-prod] Switch to the production environment
+  symfony:purge               [purge] Purge all Symfony cache and logs
+  symfony:start               [start] Serve the application with the Symfony binary and SQLite
+  symfony:stop                [stop] Stop the web server of the Symfony binary
+ test
+  test:all                    [test] Run every test suite, eg: "castor test --filter=slug --options=--testdox"
+  test:api                    [test-api] Run the API tests only
+  test:coverage               [coverage] Generate the HTML code coverage report (var/coverage) and check its threshold
+  test:e2e                    [test-e2e] Run the end-to-end tests only
+  test:functional             [test-functional] Run the functional tests only
+  test:infection              [infection] Mutation testing with Infection
+  test:integration            [test-integration] Run the integration tests only
+  test:next                   Run the tests on the next PHP version, in its Docker image
+  test:unit                   [test-unit] Run the unit tests only

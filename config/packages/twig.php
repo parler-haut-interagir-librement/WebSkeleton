@@ -1,0 +1,23 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Symfony\Component\DependencyInjection\Loader\Configurator;
+
+return App::config([
+    'twig' => [
+        'default_path' => '%kernel.project_dir%/templates',
+        'globals' => [
+            'brand' => '%brand%',
+            'brand_html' => '%brand_html%',
+            'website' => '%website%',
+            'version' => '%version%',
+            'copyright_url' => '%copyright_url%',
+        ],
+    ],
+    'when@test' => [
+        'twig' => [
+            'strict_variables' => true,
+        ],
+    ],
+]);

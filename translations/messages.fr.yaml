@@ -1,0 +1,59 @@
+brand:
+  name: 'Parler Haut, Interagir Librement : WebSkeleton'
+  copyright: 'Parler Haut, Interagir Librement'
+  info: WebSkeleton est la base d’un site Symfony, bilingue, organisé en DDD, avec le kit PHIL UX et les bundles PHIL dont un site a besoin.
+
+footer:
+  all_rights: Tous droits réservés
+  credits: 'Construit sur WebSymfony et MicroSymfony, de %strangebuzz% et de ses contributeurs.'
+  symfony: Symfony™ est une marque de commerce de <a rel="noopener noreferrer" href="https://symfony.com/license">Symfony SAS</a>.
+
+layout:
+  skip: Aller au contenu
+  menu: Menu principal
+  languages: Langues
+
+language:
+  fr: Français
+  en: English
+
+theme:
+  label: Thème
+  light: Clair
+  dark: Sombre
+  system: Système
+
+menu:
+  home: Accueil
+  contact: Contact
+
+home:
+  title: Bienvenue
+  features: Ce qu’apporte le squelette
+  feature:
+    languages:
+      title: Français et anglais
+      text: Chaque page sous /fr ou /en, le français par défaut ; une langue de plus tient en une ligne de configuration et un fichier de traductions.
+    ddd:
+      title: Conception pilotée par le domaine
+      text: Les couches Domain, Application et Infrastructure, avec les identifiants, les erreurs et les bus de commandes et de requêtes de phil/ddd-bundle.
+    ux:
+      title: PHIL UX
+      text: La feuille de style phil-ux et les recettes du kit PHIL UX, en clair et en sombre, sans étape de compilation.
+    bundles:
+      title: Ce dont un site a besoin
+      text: En-têtes de sécurité, mentions légales, politique de confidentialité, déclaration d’accessibilité, formulaire de contact, plan du site, security.txt et données structurées.
+  slugify:
+    title: Une requête par le bus
+    text: Le slug ci-dessous est demandé à l’application par le bus de requêtes, à chaque frappe, par un contrôleur Stimulus.
+    input: Titre
+    output: Slug
+  contact: Nous écrire
+
+contact:
+  title: Contact
+
+error:
+  title: Erreur %code%
+  text: 'Désolé, une erreur est survenue : %text% (%code%).'
+  home: Retour à l’accueil

@@ -1,0 +1,78 @@
+{#-
+ # The layout of every page: phil-ux, the stylesheet of phil/ux-css, the recipes of the PHIL UX kit in
+ # templates/components/, the language switcher, and the JSON-LD graph of phil/structured-data-bundle at the end.
+ # Scripts carry the nonce of the Content Security Policy of phil/browser-security-bundle.
+ #}
+{%- set _route = app.request.attributes.get('_canonical_route') ?? app.request.attributes.get('_route') -%}
+{%- set _params = app.request.attributes.get('_route_params') ?? {} -%}
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <title>{% block title %}{{ 'brand.name'|trans }}{% endblock %}</title>
+    <meta name="description" content="{% block description %}{{ 'brand.info'|trans }}{% endblock %}">
+    <link rel="icon" href="{{ asset('img/phil_img_logo.svg') }}" type="image/svg+xml">
+    {%- if _route and _params._locale is defined %}
+        {%- for locale in app.enabled_locales %}
+    <link rel="alternate" hreflang="{{ locale }}" href="{{ url(_route, _params|merge({_locale: locale})) }}">
+        {%- endfor %}
+    {%- endif %}
+    <twig:ThemeSwitcher:Script nonce="{{ csp_nonce('script') }}" />
+    <link rel="stylesheet" href="{{ asset('phil-ux/phil-ux.css') }}">
+    {% block stylesheets %}{% endblock %}
+    {% block javascripts %}{{ importmap('app') }}{% endblock %}
+</head>
+<body>
+<a class="isSkipLink" href="#content">{{ 'layout.skip'|trans }}</a>
+
+<header class="isCluster">
+    <a href="{{ path('App\\Infrastructure\\Http\\Controller\\HomeAction') }}" class="isLogo">
+        <img src="{{ asset('img/phil_img_logo.svg') }}" width="40" height="40" alt=""> {{ brand_html|raw }}
+    </a>
+
+    <nav aria-label="{{ 'layout.menu'|trans }}">
+        <ul class="isCluster">
+            {%- for item in knp_menu_get('main').children %}
+            <li><a href="{{ item.uri }}"{{ item.uri == app.request.pathInfo ? ' aria-current="page"' }}>{{ item.label|trans }}</a></li>
+            {%- endfor %}
+        </ul>
+    </nav>
+
+    <nav aria-label="{{ 'layout.languages'|trans }}">
+        <ul class="isCluster">
+            {%- for locale in app.enabled_locales %}
+            {%- set _href = _route and _params._locale is defined ? path(_route, _params|merge({_locale: locale})) : path('App\\Infrastructure\\Http\\Controller\\HomeAction', {_locale: locale}) %}
+            <li><a href="{{ _href }}" hreflang="{{ locale }}" lang="{{ locale }}"{{ locale == app.request.locale ? ' aria-current="true"' }}>{{ ('language.' ~ locale)|trans }}</a></li>
+            {%- endfor %}
+        </ul>
+    </nav>
+
+    <twig:ThemeSwitcher label="{{ 'theme.label'|trans }}" lightLabel="{{ 'theme.light'|trans }}" darkLabel="{{ 'theme.dark'|trans }}" systemLabel="{{ 'theme.system'|trans }}" />
+</header>
+
+<main id="content" class="isStack">
+    {% for type, messages in app.flashes %}
+        {% for message in messages %}
+            <p role="alert" class="isAlert">{{ message|trans }}</p>
+        {% endfor %}
+    {% endfor %}
+
+    {% block body %}{% endblock %}
+</main>
+
+<footer class="isStack">
+    {{ include('@PhilLegalNotices/_links.html.twig') }}
+    {{ phil_accessibility_statement_link() }}
+    <p class="isMuted">
+        {{ brand }} · Symfony {{ sf_version }} ({{ 'frankenphp' in php_sapi ? php_sapi : 'PHP ' ~ php_sapi }} {{ php_version }})<br>
+        © <a href="{{ copyright_url }}">{{ 'brand.copyright'|trans }}</a> · {{ 'footer.all_rights'|trans }}<br>
+        {{ 'footer.credits'|trans({'%strangebuzz%': '<a href="https://www.strangebuzz.com" rel="noopener noreferrer">COil/Strangebuzz</a>'})|raw }}<br>
+        {{ 'footer.symfony'|trans|raw }}
+    </p>
+</footer>
+
+{{ structured_data() }}
+</body>
+</html>

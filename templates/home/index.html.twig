@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <hgroup>
+        <h1>{{ 'home.title'|trans }}</h1>
+        <p>{{ 'brand.info'|trans }}</p>
+    </hgroup>
+
+    <section class="isGrid" aria-label="{{ 'home.features'|trans }}">
+        {%- for feature in ['languages', 'ddd', 'ux', 'bundles'] %}
+        <twig:Card>
+            <twig:Card:Header>
+                <twig:Card:Title>{{ ('home.feature.' ~ feature ~ '.title')|trans }}</twig:Card:Title>
+            </twig:Card:Header>
+            <twig:Card:Content>
+                <p>{{ ('home.feature.' ~ feature ~ '.text')|trans }}</p>
+            </twig:Card:Content>
+        </twig:Card>
+        {%- endfor %}
+    </section>
+
+    <section {{ stimulus_controller('api', {url: path('App\\Infrastructure\\Http\\Api\\SlugifyAction')}) }} aria-labelledby="slugify-title">
+        <h2 id="slugify-title">{{ 'home.slugify.title'|trans }}</h2>
+        <p>{{ 'home.slugify.text'|trans }}</p>
+        <label for="slugify-input">{{ 'home.slugify.input'|trans }}</label>
+        <input id="slugify-input" type="text" {{ stimulus_target('api', 'title') }} {{ stimulus_action('api', 'slugify', 'input') }}>
+        <label for="slugify-output">{{ 'home.slugify.output'|trans }}</label>
+        <input id="slugify-output" type="text" readonly {{ stimulus_target('api', 'slug') }}>
+    </section>
+
+    <p>
+        <twig:Button as="a" href="{{ path('phil_contact_form') }}">{{ 'home.contact'|trans }}</twig:Button>
+    </p>
+{% endblock %}

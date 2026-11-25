@@ -1,0 +1,13 @@
+/*
+ * The site's own styles, outside any cascade layer: they win over phil-ux without !important. Change its tokens
+ * (--phil-*) here rather than its rules.
+ */
+
+body > header {
+    justify-content: space-between;
+    padding-block: var(--phil-space-m, 1rem);
+}
+
+body > header .isLogo {
+    text-decoration: none;
+}

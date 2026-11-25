@@ -1,0 +1,59 @@
+brand:
+  name: 'Proclaim Honestly, Interact Liberally: WebSkeleton'
+  copyright: 'Proclaim Honestly, Interact Liberally'
+  info: WebSkeleton is the base of a Symfony site, bilingual, organised in DDD, with the PHIL UX kit and the PHIL bundles a site needs.
+
+footer:
+  all_rights: All rights reserved
+  credits: 'Built on WebSymfony and MicroSymfony, by %strangebuzz% and its contributors.'
+  symfony: Symfony™ is a trademark of <a rel="noopener noreferrer" href="https://symfony.com/license">Symfony SAS</a>.
+
+layout:
+  skip: Skip to the content
+  menu: Main menu
+  languages: Languages
+
+language:
+  fr: Français
+  en: English
+
+theme:
+  label: Theme
+  light: Light
+  dark: Dark
+  system: System
+
+menu:
+  home: Home
+  contact: Contact
+
+home:
+  title: Welcome
+  features: What the skeleton brings
+  feature:
+    languages:
+      title: French and English
+      text: Every page under /fr or /en, French by default; one more language is one line of configuration and a translation file.
+    ddd:
+      title: Domain-driven design
+      text: Domain, Application and Infrastructure layers, with the identifiers, errors and command and query buses of phil/ddd-bundle.
+    ux:
+      title: PHIL UX
+      text: The phil-ux stylesheet and the recipes of the PHIL UX kit, light and dark, without a build step.
+    bundles:
+      title: What a site needs
+      text: Security headers, legal notices, privacy policy, accessibility statement, contact form, sitemap, security.txt and structured data.
+  slugify:
+    title: A query through the bus
+    text: The slug below is asked of the application through the query bus, on each keystroke, by a Stimulus controller.
+    input: Title
+    output: Slug
+  contact: Write to us
+
+contact:
+  title: Contact
+
+error:
+  title: Error %code%
+  text: 'Sorry, an error occurred: %text% (%code%).'
+  home: Back to the home page

@@ -1,0 +1,17 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Symfony\Component\DependencyInjection\Loader\Configurator;
+
+/**
+ * twig/extra-bundle: its Intl extension is left to phil/legal-notices-bundle, which registers the same one; with both,
+ * Twig refuses the second. format_date, format_number and format_list stay available.
+ */
+return App::config([
+    'twig_extra' => [
+        'intl' => [
+            'enabled' => false,
+        ],
+    ],
+]);

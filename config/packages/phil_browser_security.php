@@ -1,0 +1,43 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Symfony\Component\DependencyInjection\Loader\Configurator;
+
+/**
+ * phil/browser-security-bundle: the Content Security Policy of every response, its nonces on importmap() and on
+ * csp_nonce() in Twig, the neighbouring security headers, no framing, HTTPS and HSTS when kernel.debug is off, and the
+ * violation reports on POST /_csp/report. The throttle of the reports keeps its counts in cache.app: on several
+ * servers, give it a pool they share and remove single_server.
+ *
+ * @see https://github.com/parler-haut-interagir-librement/browser-security-bundle
+ */
+return App::config([
+    'phil_browser_security' => [
+        'policies' => [
+            'default' => [
+                'directives' => [
+                    'default-src' => ["'self'"],
+                    'script-src' => ["'self'"],
+                    'style-src' => ["'self'"],
+                    'img-src' => ["'self'", 'data:'],
+                    'connect-src' => ["'self'"],
+                    'object-src' => ["'none'"],
+                    'base-uri' => ["'self'"],
+                    'form-action' => ["'self'"],
+                    'frame-ancestors' => ["'none'"],
+                ],
+            ],
+        ],
+        'headers' => [
+            'frame_options' => [
+                'default' => 'DENY',
+            ],
+        ],
+        'reporting' => [
+            'rate_limit' => [
+                'single_server' => true,
+            ],
+        ],
+    ],
+]);
