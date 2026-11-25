@@ -32,10 +32,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $description = <<<DESCRIPTION
 A Symfony <b>$sfVersion</b> application template on steroids, ready to use.
 DESCRIPTION;
-    $parameters->set('brand', 'MicroSymfony')
-        ->set('brand_html', '<b>Micro</b>Symfony 🎶')
-        ->set('brand_emoji', '🎶️')
-        ->set('website', 'https://github.com/parler-haut-interagir-librement/MicroSymfony')
+    $parameters->set('brand', 'WebSymfony')
+        ->set('brand_html', '<b>Web</b><i>Symfony</i>')
+        ->set('brand_emoji', '🕸️')
+        ->set('website', 'https://github.com/parler-haut-interagir-librement/WebSymfony')
+        ->set('copyright_url', 'https://ph-il.ca')
         ->set('version', '1.0.0')
         ->set('description', $description);
 

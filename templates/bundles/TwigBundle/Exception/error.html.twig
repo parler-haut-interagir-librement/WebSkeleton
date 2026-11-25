@@ -15,23 +15,8 @@
             &raquo; About this error code: <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/{{ status_code }}">
                 https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/{{ status_code }}</a>
             <br/>
-            &raquo; <a href="/">Homepage</a><br/>
+            &raquo; <a href="{{ path('App\\Controller\\HomeAction') }}">Homepage</a><br/>
         </p>
 
-        <hr/>
-
-        <div class="grid">
-            <div></div>
-
-            <div>
-                <img src="https://frankenphp.dev/img/elephant_footer.svg" width="250" alt="The FrankenPHP elePHPant" /  >
-            </div>
-
-            <div></div>
-        </div>
-
-        <footer>
-            Logo by <a data-tooltip="https://frankenphp.dev" href="https://frankenphp.dev">FrankenPHP</a>
-        </footer>
     </article>
 {% endblock %}

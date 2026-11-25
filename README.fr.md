@@ -1,59 +1,60 @@
-<!-- phil-dev source-sha256=54d274f3706c28dc24dbbad08a0125accc9bc5a8fcc662fb3da09fd1d63de0c2 -->
-# MicroSymfony 🎶
+<!-- phil-dev source-sha256=0f03755c24964dfc3e6918162a0048707f555088d34de32651012bd7c7b9030e -->
+# WebSymfony 🕸️
 
-[![Latest Version](https://img.shields.io/packagist/v/phil/micro-symfony.svg?style=flat-square)](https://packagist.org/packages/phil/micro-symfony)
-[![PHP Version Require](https://poser.pugx.org/phil/micro-symfony/require/php?style=flat-square)](https://packagist.org/packages/phil/micro-symfony)
+[![Latest Version](https://img.shields.io/packagist/v/phil/websymfony.svg?style=flat-square)](https://packagist.org/packages/phil/websymfony)
+[![PHP Version Require](https://poser.pugx.org/phil/websymfony/require/php?style=flat-square)](https://packagist.org/packages/phil/websymfony)
 [![Symfony Version](https://img.shields.io/badge/Symfony-8.2-black?logo=symfony)](https://symfony.com/8)
-[![Symfony Style](https://img.shields.io/badge/code%20style-symfony-black?logo=symfony)](https://symfony.com/doc/current/contributing/code/standards.html)
 [![PHPStan level](https://img.shields.io/badge/PHPStan-level%20max-success?style=flat-square)](phpstan.neon)
 [![Software License](https://img.shields.io/badge/License-MIT-brightgreen.svg?style=flat-square)](LICENSE)
-[![Build Status (GitHub)](https://img.shields.io/github/actions/workflow/status/parler-haut-interagir-librement/MicroSymfony/symfony.yml?branch=main&style=flat-square)](https://github.com/parler-haut-interagir-librement/MicroSymfony/actions?query=workflow%3ASymfony+branch%3Amain)
+[![Build Status (GitHub)](https://img.shields.io/github/actions/workflow/status/parler-haut-interagir-librement/WebSymfony/symfony.yml?branch=main&style=flat-square)](https://github.com/parler-haut-interagir-librement/WebSymfony/actions?query=workflow%3ASymfony+branch%3Amain)
 
 ## À propos 🖋
 
-MicroSymfony est un gabarit d'application [Symfony 8.2](https://symfony.com/8) survitaminé et prêt à l'emploi : un bac
-à sable aux valeurs par défaut raisonnables, des tests de tous les types et des portes de qualité strictes, pour
-démarrer une preuve de concept, essayer une idée ou construire une petite application.
+« **Parler** *Haut*, **Interagir** *Librement* » **Web***Symfony* est un gabarit d'application web
+[Symfony 8.2](https://symfony.com/8) survitaminé et prêt à l'emploi : tout ce que donne
+[MicroSymfony](https://github.com/parler-haut-interagir-librement/MicroSymfony), plus ce dont un site web a besoin dès
+son premier jour — des comptes de membres, des en-têtes de sécurité, une administration, un menu, le français et
+l'anglais —, avec les mêmes tests et les mêmes portes de qualité.
 
-Ce gabarit est la version PHIL de [strangebuzz/MicroSymfony](https://github.com/strangebuzz/MicroSymfony), créé et
-maintenu par [COil](https://github.com/COil) de [Strangebuzz](https://www.strangebuzz.com). Il garde son nom, ses
-fonctionnalités et son esprit, et suit ses versions. Ce qui diffère, et pourquoi, est listé dans
-[Différences avec strangebuzz/MicroSymfony](#différences-avec-strangebuzzmicrosymfony-). L'auteur explique la
-philosophie du gabarit :
-
-* [Introducing the MicroSymfony application template](https://www.strangebuzz.com/en/blog/introducing-the-microsymfony-application-template)
-* [MicroSymfony 8: ready for the LTS promise](https://www.strangebuzz.com/en/blog/microsymfony-8-ready-for-the-lts-promise)
+WebSymfony est bâti sur MicroSymfony, la version PHIL de [strangebuzz/MicroSymfony](https://github.com/strangebuzz/MicroSymfony),
+créé et maintenu par [COil](https://github.com/COil) de [Strangebuzz](https://www.strangebuzz.com). Il en garde le nom,
+la disposition, l'allure (Pico CSS) et l'esprit. Il n'utilise aucun paquet PHIL à l'exécution : les outils PHIL — le kit
+PHIL UX, phil-ux et les bundles PHIL — commencent avec [WebSkeleton](#les-autres-gabarits--parler-haut-interagir-librement--).
 
 ## Table des matières 📖
 
+* [Démo](#démo-)
 * [Démarrage rapide](#démarrage-rapide-)
-  * [Avec le binaire Symfony](#avec-le-binaire-symfony-)
-  * [Avec FrankenPHP et PostgreSQL](#avec-frankenphp-et-postgresql-)
-  * [Avec MySQL](#avec-mysql-)
 * [Prérequis](#prérequis-)
 * [Pile technologique](#pile-technologique-)
-* [Fonctionnalités](#fonctionnalités-)
+* [Ce qu'il ajoute à MicroSymfony](#ce-quil-ajoute-à-microsymfony-)
+* [Comptes et sécurité](#comptes-et-sécurité-)
 * [Tâches](#tâches-)
 * [Portes de qualité](#portes-de-qualité-)
-* [Différences avec strangebuzz/MicroSymfony](#différences-avec-strangebuzzmicrosymfony-)
 * [Notes](#notes-)
-* [ADR](#adr-)
+* [Ce qu'il ne livre pas](#ce-quil-ne-livre-pas-)
 * [Références](#références-)
+* [Les autres gabarits « Parler Haut, Interagir Librement »](#les-autres-gabarits--parler-haut-interagir-librement--)
 * [Contribuer](#contribuer-)
 * [Sécurité](#sécurité-)
 * [Crédits](#crédits-)
 * [Licence](#licence-)
+* [Bâti avec WebSymfony](#bâti-avec-websymfony-)
+
+## Démo 🌈
+
+Une démo de WebSymfony tournera dans le navigateur sur [ph-il.ca](https://ph-il.ca), avec les autres gabarits de PHIL.
 
 ## Démarrage rapide ⚡
 
 Créez un nouveau projet à partir de la dernière version :
 
-    composer create-project phil/micro-symfony my-project && cd my-project
+    composer create-project phil/websymfony my-project && cd my-project
 
 Le dépôt est aussi un dépôt gabarit de GitHub : le bouton « Use this template » crée un nouveau dépôt à partir de la
 branche principale, dont tous les commits passent l'intégration continue.
 
-### Avec le binaire Symfony 🎶
+### Avec le binaire Symfony 🕸️
 
 Il vous faut le [binaire Symfony](https://symfony.com/download#step-1-install-symfony-cli) et
 [Castor](https://castor.jolicode.com/getting-started/installation/). La base de données est un fichier SQLite dans
@@ -61,7 +62,9 @@ Il vous faut le [binaire Symfony](https://symfony.com/download#step-1-install-sy
 
     castor start
 
-Ouvrez [https://127.0.0.1:8000](https://127.0.0.1:8000) (si le port 8000 est libre). `castor stop` arrête le serveur
+Ouvrez [https://127.0.0.1:8000](https://127.0.0.1:8000) (si le port 8000 est libre). Les données de départ créent deux
+comptes : `admin` (mot de passe `admin-password`), qui accède à l'administration, et `member` (mot de passe
+`member-password`) ; ne les chargez jamais là où le site est public. `castor stop` arrête le serveur
 et supprime la base de données.
 
 ### Avec FrankenPHP et PostgreSQL 🧟
@@ -84,7 +87,6 @@ MySQL est l'autre base de données que le gabarit prend en charge. Dans `compose
 
 Avec le binaire Symfony, définissez la même variable dans `.env.local`, avec l'hôte de votre serveur. La migration
 est écrite dans le SQL de la base de données sur laquelle elle s'exécute : elle n'a besoin d'aucun changement.
-
 ## Prérequis ⚙
 
 * [PHP 8.5](https://www.php.net/releases/8.5/en.php) ou plus récent, avec les extensions de `composer.json`, et
@@ -92,38 +94,47 @@ est écrite dans le SQL de la base de données sur laquelle elle s'exécute : el
 * Le [binaire Symfony](https://symfony.com/download), ou [Docker](https://www.docker.com)
 * L'extension [Xdebug](https://xdebug.org/) ou [PCOV](https://github.com/krakjoe/pcov) pour le rapport de couverture
   de code
-
 ## Pile technologique 🔗
 
 * [PHP 8.5](https://www.php.net/releases/8.5/en.php)
-* [Symfony 8.2](https://symfony.com/8), dès sa version candidate
-* [Doctrine ORM 3 (DBAL 4)](https://www.doctrine-project.org), sur SQLite, PostgreSQL ou MySQL
-* [Twig 3](https://twig.symfony.com)
+* [Symfony 8.2](https://symfony.com/8), dès sa version candidate, avec [Symfony Security](https://symfony.com/doc/current/security.html)
+* [Doctrine ORM 3 (DBAL 4)](https://www.doctrine-project.org), sur SQLite, PostgreSQL ou MySQL, avec les
+  [extensions Doctrine](https://github.com/doctrine-extensions/DoctrineExtensions)
+* [Twig 3](https://twig.symfony.com) et les [formulaires Symfony](https://symfony.com/doc/current/forms.html)
 * [AssetMapper](https://symfony.com/doc/current/frontend/asset_mapper.html), [Stimulus 3.2](https://stimulus.hotwired.dev/) et [Turbo 8](https://turbo.hotwired.dev/), sans Node.js
+* [Pico CSS 2](https://picocss.com)
+* [EasyAdmin 5](https://symfony.com/bundles/EasyAdminBundle/current/index.html)
 * [PHPUnit 13](https://phpunit.de)
-* [Pico CSS 2.1](https://picocss.com)
-* [FrankenPHP](https://frankenphp.dev/) en mode *worker*, avec Docker Compose
+* [FrankenPHP](https://frankenphp.dev/) en mode worker, par Docker Compose
 
-## Fonctionnalités 🚀
+## Ce qu'il ajoute à MicroSymfony 🚀
 
-* Des tâches exécutées par [Castor](https://castor.jolicode.com) ([source](castor.php), [sortie](docs/castor-output.txt))
-* L'analyse statique avec [PHPStan 2](https://phpstan.org) au niveau maximal, avec les règles strictes, d'obsolescence,
-  Symfony, Doctrine et PHPUnit ([configuration](phpstan.neon))
-* Les standards de code avec [PHP-CS-Fixer](https://github.com/PHP-CS-Fixer/PHP-CS-Fixer), Twig-CS-Fixer et
-  [Biome](https://biomejs.dev) pour les contrôleurs Stimulus
-* Des tests de tous les types, avec un exemple de chacun :
-  * unitaire : [StringHelperTest](tests/Unit/Helper/StringHelperTest.php)
-  * intégration : [RoutingExtensionTest](tests/Integration/Twig/Extension/RoutingExtensionTest.php)
-  * fonctionnel : [ComposerActionTest](tests/Functional/Controller/ComposerActionTest.php)
-  * API : [SlugifyActionTest](tests/Api/Controller/SlugifyActionTest.php)
-  * de bout en bout : [AppControllerTest](tests/E2E/Controller/AppControllerTest.php)
-* Une couverture de code de 100 % (le seuil est une constante de `castor.php`)
-* Un workflow GitHub Actions : sécurité, tests sur PHP 8.5 et 8.6, *linters*
-* Doctrine avec une entité `User`, sa [fabrique](src/Factory/UserFactory.php) et son [histoire](src/Story/AppStory.php)
-  pour [Foundry](https://github.com/zenstruck/foundry), et une [liste d'utilisateurs](src/Controller/ListUsersAction.php)
-* AssetMapper et Stimulus : un contrôleur standard ([source](assets/controllers/hello_controller.js)) et un autre qui
-  récupère du JSON auprès d'un point de terminaison de l'application ([source](assets/controllers/api_controller.js))
-* Un gabarit d'erreur personnalisé ([source](templates/bundles/TwigBundle/Exception/error.html.twig))
+| Fonctionnalité | Où |
+|---|---|
+| Inscription, connexion et déconnexion, une page de compte | [src/Controller/Security](src/Controller/Security), [AccountAction](src/Controller/AccountAction.php) |
+| Des utilisateurs aux mots de passe hachés et aux rôles, `ROLE_ADMIN` au-dessus de `ROLE_USER` | [User](src/Entity/User.php), [security.php](config/packages/security.php) |
+| Une administration pour `ROLE_ADMIN`, avec la liste des utilisateurs | [src/Controller/Admin](src/Controller/Admin) |
+| Des en-têtes de sécurité et une politique de sécurité du contenu avec un nonce, par NelmioSecurityBundle | [nelmio_security.php](config/packages/nelmio_security.php) |
+| Les requêtes d'autres origines sur `/api/` seulement, par NelmioCorsBundle | [nelmio_cors.php](config/packages/nelmio_cors.php) |
+| Un menu principal construit par KnpMenu | [MainMenuBuilder](src/Menu/MainMenuBuilder.php) |
+| L'anglais et le français, choisis d'après la langue du navigateur | [translations](translations), [translation.php](config/packages/translation.php) |
+| Des dates posées par l'extension Timestampable | [stof_doctrine_extensions.php](config/packages/stof_doctrine_extensions.php) |
+| Les erreurs envoyées à Sentry en production, quand `SENTRY_DSN` est défini | [sentry.php](config/packages/sentry.php) |
+| L'identité PHIL : logo, droit d'auteur, thèmes clair et sombre | [base.html.twig](templates/base.html.twig) |
+
+Tout ce que MicroSymfony contient reste : les exemples, les cinq suites de tests, Castor, les portes de qualité, Docker
+Compose.
+
+## Comptes et sécurité 🔐
+
+* Les mots de passe sont hachés par le hacheur `auto` ; la session garde un crc32c du haché, jamais le haché, si bien
+  qu'un mot de passe changé déconnecte encore les autres sessions.
+* Le pare-feu vérifie l'utilisateur chaque fois qu'il est rechargé depuis la session (`user_checker_on_refresh`) : un
+  compte désactivé ou changé est déconnecté à sa requête suivante.
+* La connexion, l'inscription et la déconnexion portent un jeton CSRF ; la déconnexion est un POST.
+* Cinq connexions échouées par minute par nom d'utilisateur et adresse IP, par `login_throttling`.
+* L'usurpation d'identité est désactivée ; une fois activée, seulement par POST avec un jeton CSRF.
+* `/account` demande `ROLE_USER`, `/admin` demande `ROLE_ADMIN`.
 
 ## Tâches 🧰
 
@@ -143,7 +154,6 @@ est écrite dans le SQL de la base de données sur laquelle elle s'exécute : el
 | `castor fix` | Rector, PHP-CS-Fixer, Twig-CS-Fixer, Biome et composer-normalize. |
 | `castor ci` | L'intégration continue, en local : la couverture, puis tous les *linters*. |
 | `castor hooks` | Les crochets git : les vérifications rapides sur les fichiers indexés avant chaque commit. |
-
 ## Portes de qualité 🚦
 
 Les vérifications viennent de [`phil/dev-tools`](https://packagist.org/packages/phil/dev-tools), l'outillage commun de
@@ -163,29 +173,6 @@ l'application, chaque exception avec sa raison.
 | `castor stan` | PHPStan au niveau maximal, avec une couverture des types de 100 %, une limite de complexité cognitive et des appels interdits. |
 | `castor lint:rector` | Rector n'a plus rien à changer. |
 | `castor lint:architecture` | Arkitect sur la forme des classes ; Deptrac sur les bibliothèques que `src/` peut utiliser, listées dans `phil-dev.php`. |
-
-## Différences avec strangebuzz/MicroSymfony 🔀
-
-Ce gabarit suit les versions de [strangebuzz/MicroSymfony](https://github.com/strangebuzz/MicroSymfony). Il diffère là
-où les principes de PHIL l'exigent :
-
-| strangebuzz/MicroSymfony | Ce gabarit | Pourquoi |
-|---|---|---|
-| La dernière version stable de Symfony (8.1) | Symfony 8.2 dès sa première version candidate, `minimum-stability` à `beta` | PHIL teste la prochaine version de Symfony dès que sa version candidate est publiée. Symfony n'étiquette que les composants qui ont changé depuis la dernière bêta : `beta` est donc la plus basse stabilité qui installe 8.2.0-RC1 ; `prefer-stable` prend d'abord les versions stables. |
-| PHP 8.4 ou plus récent | PHP 8.5 ou plus récent | Le plancher de tous les paquets et gabarits PHIL ; l'intégration continue exécute aussi la prochaine version de PHP. |
-| Make et Castor | Castor seulement, aucun script de tâche dans `composer.json` | Un seul exécuteur de tâches, écrit en PHP ; Composer reste un gestionnaire de dépendances. |
-| PHPStan et PHP-CS-Fixer, Biome par un bundle | Les portes de `phil/dev-tools` : PHPStan avec ses extensions, Rector, Arkitect, Deptrac, Twig-CS-Fixer, Biome, l'analyse des dépendances, composer-unused, composer-normalize, CaptainHook, Infection | Les vérifications que passe chaque dépôt PHIL, pour qu'une application démarre au même niveau d'exigence. |
-| Tests PHPUnit, métadonnées de couverture facultatives | `#[CoversClass]` ou `#[CoversNothing]` obligatoire, les dépréciations, avis et avertissements font échouer les tests | La couverture ne compte que ce qu'un test vise à tester, et une dépréciation est corrigée avant que la prochaine version la retire. |
-| Une migration initiale propre à SQLite | La même migration décrite par l'API de schéma de DBAL, écrite dans le SQL de la plateforme | Le gabarit fonctionne sur SQLite, PostgreSQL et MySQL. |
-| Une démo FrankenPHP avec `docker run` | `compose.yaml` avec FrankenPHP en mode *worker* et PostgreSQL | Une seule commande pour l'installation proche de la production ; le binaire Symfony avec SQLite reste le choix léger. |
-| Tâches de déploiement, configuration Apache, Scrutinizer | Aucun | Un gabarit ne contient aucun déploiement : chaque application apporte le sien. |
-| Une procédure pour revenir à Symfony 7.4 LTS | Aucune | PHIL ne prend en charge que la dernière version de Symfony. |
-| Dates typées `DateTimeInterface` | `DateTimeImmutable`, définies par le constructeur | Correspond au mappage `datetime_immutable` et ne laisse aucune propriété non initialisée. |
-| Codes de sortie des tâches agrégées additionnés | Codes de sortie réduits à 0 ou 1 | Un interpréteur de commandes garde les codes de sortie modulo 256 : une somme de 256 se lit comme un succès. |
-
-Le gabarit ne requiert aucun paquet PHIL à l'exécution : `phil/dev-tools` est une dépendance de développement
-seulement, et l'application reste micro.
-
 ## Notes 📒
 
 ### Symfony UX
@@ -200,27 +187,14 @@ Dans les deux cas, le contrôleur doit être
 Une recette Flex peut ajouter des fichiers YAML au projet. Ils sont chargés tels quels ; pour les convertir en PHP,
 suivez les autres fichiers de `config/packages`.
 
-### Sans Doctrine
+## Ce qu'il ne livre pas 🙅
 
-[`agents/remove-doctrine.md`](agents/remove-doctrine.md) liste les étapes qui retirent Doctrine, pour une application
-qui n'a besoin d'aucune base de données.
-
-## ADR 📝
-
-[Architecture Decision Records](https://adr.github.io/) de strangebuzz/MicroSymfony, que ce gabarit conserve :
-
-* [2026-01-17] Use Doctrine ORM as the default database layer ([PR](https://github.com/strangebuzz/MicroSymfony/pull/219))
-* [2025-12-29] Use the new PHP configuration ([PR](https://github.com/strangebuzz/MicroSymfony/pull/197))
-* [2025-01-25] Include the FrankenPHP runtime by default ([PR](https://github.com/strangebuzz/MicroSymfony/pull/54))
-* [2025-01-21] Add PHPUnit test suites ([PR](https://github.com/strangebuzz/MicroSymfony/pull/155))
-* [2024-12-18] Use PicoCSS instead of BareCSS as the CSS framework ([PR](https://github.com/strangebuzz/MicroSymfony/pull/85))
-* [2024-12-05] Convert all configuration files to PHP (fluent interface) ([PR](https://github.com/strangebuzz/MicroSymfony/pull/129))
-* [2024-09-22] Use the ADR pattern for all controllers ([PR](https://github.com/strangebuzz/MicroSymfony/pull/58))
-
-Ceux de ce gabarit :
-
-* [2026-11-25] Symfony 8.2 dès sa version candidate, PHP 8.5, les portes de `phil/dev-tools`, Castor seulement,
-  FrankenPHP en mode *worker* avec PostgreSQL dans `compose.yaml`
+* Aucun fichier de déploiement : chaque application apporte le sien.
+* Aucun paquet PHIL à l'exécution : le kit PHIL UX, phil-ux et les bundles PHIL viennent avec WebSkeleton.
+* Aucun courriel : l'inscription ne demande pas de confirmation et il n'y a pas de réinitialisation du mot de passe ;
+  ajoutez [symfonycasts/verify-email-bundle](https://github.com/SymfonyCasts/verify-email-bundle) et
+  [symfonycasts/reset-password-bundle](https://github.com/SymfonyCasts/reset-password-bundle) quand le site envoie du
+  courriel.
 
 ## Références 📚
 
@@ -235,22 +209,42 @@ Ceux de ce gabarit :
 * [A Good Naming Convention for Routes, Controllers and Templates?](https://jolicode.com/blog/a-good-naming-convention-for-routes-controllers-and-templates) (jolicode.com)
 * [Front-end application development, Symfony-style(s)](https://dunglas.dev/2024/04/front-end-application-development-symfony-styles/) (dunglas.dev)
 * [The Symfony Framework Best Practices](https://symfony.com/doc/current/best_practices.html) (symfony.com)
+## Les autres gabarits « **Parler** Haut, **Interagir** Librement » 🩻
+
+* [MicroSymfony](https://github.com/parler-haut-interagir-librement/MicroSymfony) (`phil/microsymfony`) : le gabarit
+  micro sur lequel WebSymfony est bâti, sans base de données, avec Pico CSS, Stimulus et Turbo, Castor, les tests et les
+  portes de qualité.
+* [WebSkeleton](https://github.com/parler-haut-interagir-librement/WebSkeleton) (`phil/webskeleton`) : WebSymfony et les
+  outils PHIL, organisé en DDD (Domain, Application, Infrastructure) :
+  * le [kit PHIL UX](https://github.com/parler-haut-interagir-librement/ux-kit) pour le Toolkit de Symfony UX et
+    [`phil/ux-css`](https://github.com/parler-haut-interagir-librement/ux-css), la feuille de style phil-ux ;
+  * des bundles PHIL : `phil/ddd-bundle`, `phil/doctrine-behaviours-bundle` et, par une étape documentée,
+    `phil/identity-client-bundle` pour les comptes de membres et `phil/ux-easyadmin-bundle` pour une administration aux
+    couleurs de PHIL UX ;
+  * le français et l'anglais, des routes préfixées `/fr` et `/en`, le français par défaut.
+* [ApiSymfony](https://github.com/parler-haut-interagir-librement/ApiSymfony) (`phil/apisymfony`) : une API avec
+  [API Platform](https://api-platform.com), Castor, les tests et les portes de qualité.
 
 ## Contribuer 🤝
 
-Voir [CONTRIBUTING](CONTRIBUTING.md) et le [Code de conduite](CODE_OF_CONDUCT.md).
+Voyez [CONTRIBUTING](CONTRIBUTING.md) et le [code de conduite](CODE_OF_CONDUCT.md).
 
 ## Sécurité 🧯
 
-Voir [SECURITY](SECURITY.md).
+Voyez [SECURITY](SECURITY.md).
 
 ## Crédits 🙏
 
+* [Philippe Gamache](https://ph-il.ca), mainteneur, pour [Parler Haut, Interagir Librement](https://ph-il.ca)
 * [COil](https://github.com/COil), auteur de [strangebuzz/MicroSymfony](https://github.com/strangebuzz/MicroSymfony),
   et [ses contributeurs](https://github.com/strangebuzz/MicroSymfony/graphs/contributors)
-* [Philippe Gamache](https://ph-il.ca), mainteneur de ce gabarit, pour
-  [Parler Haut, Interagir Librement](https://ph-il.ca)
+* [Tous les contributeurs de WebSymfony](https://github.com/parler-haut-interagir-librement/WebSymfony/graphs/contributors)
 
 ## Licence ⚖️
 
-The MIT License, avec l'attribution au dépôt d'origine qu'elle demande. Voir le [fichier de licence](LICENSE).
+La licence MIT, avec l'attribution au dépôt d'origine qu'elle demande. Voyez le [fichier de licence](LICENSE).
+
+## Bâti avec WebSymfony 🛠️
+
+* [WebSkeleton](https://github.com/parler-haut-interagir-librement/WebSkeleton), et par lui
+  [Parler Haut, Interagir Librement](https://ph-il.ca) et [TiltTek](https://tilttek.com)

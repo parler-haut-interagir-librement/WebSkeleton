@@ -5,17 +5,25 @@ declare(strict_types=1);
 namespace App\Factory;
 
 use App\Entity\User;
-// use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Override;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
 
 /**
+ * Users with a hashed password: the plain one is given as "password", and hashed after instantiation.
+ *
  * @extends PersistentObjectFactory<User>
  *
  * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories
  */
 final class UserFactory extends PersistentObjectFactory
 {
+    public function __construct(
+        private readonly UserPasswordHasherInterface $passwordHasher,
+    ) {
+        parent::__construct();
+    }
+
     #[Override]
     public static function class(): string
     {
@@ -31,9 +39,15 @@ final class UserFactory extends PersistentObjectFactory
         return [
             'email' => self::faker()->unique()->email(),
             'username' => self::faker()->unique()->userName(),
-            // @todo If you enable the security layer, the password must be hashed.
-            // @see https://symfony.com/doc/current/security/passwords.html
-            'password' => self::faker()->password(),
+            'password' => self::faker()->password(12),
         ];
+    }
+
+    #[Override]
+    protected function initialize(): static
+    {
+        return $this->afterInstantiate(function (User $user): void {
+            $user->setPassword($this->passwordHasher->hashPassword($user, $user->getPassword()));
+        });
     }
 }

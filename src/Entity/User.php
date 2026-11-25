@@ -6,28 +6,30 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use DateTimeImmutable;
-// use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use LogicException;
 use Override;
 use Stringable;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 use function Symfony\Component\String\u;
 
 /**
- * For a complete example, check out the Symfony demo entity.
- * To enable security, check out the Symfony demo User class (link below).
+ * An account of the application: it signs in with its user name and its hashed password. Its dates are set by the
+ * Timestampable extension of stof/doctrine-extensions-bundle.
  *
  * @see https://github.com/symfony/demo/blob/main/src/Entity/User.php
  */
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
-#[ORM\HasLifecycleCallbacks]
-final class User implements Stringable, UserInterface /* , PasswordAuthenticatedUserInterface */
+final class User implements Stringable, UserInterface, PasswordAuthenticatedUserInterface
 {
     public const string ROLE_USER = 'ROLE_USER';
+
+    public const string ROLE_ADMIN = 'ROLE_ADMIN';
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -35,10 +37,20 @@ final class User implements Stringable, UserInterface /* , PasswordAuthenticated
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: false)]
+    #[Gedmo\Timestampable(on: 'create')]
     private DateTimeImmutable $createdAt;
 
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: false)]
+    #[Gedmo\Timestampable(on: 'update')]
     private DateTimeImmutable $updatedAt;
+
+    /**
+     * The roles granted besides ROLE_USER, which every account has.
+     *
+     * @var list<string>
+     */
+    #[ORM\Column(type: Types::JSON, nullable: false)]
+    private array $roles = [];
 
     public function __construct(
         #[ORM\Column(type: Types::STRING, length: 255, unique: true)]
@@ -69,11 +81,14 @@ final class User implements Stringable, UserInterface /* , PasswordAuthenticated
     }
 
     /**
+     * The user as the session keeps it: the hashed password is hashed once more with crc32c, so the session never holds
+     * it, and a changed password still signs the other sessions out.
+     *
      * @return array{int|null, string, string, string}
      */
     public function __serialize(): array
     {
-        return [$this->id, $this->username, $this->password, $this->email];
+        return [$this->id, $this->username, hash('crc32c', $this->password), $this->email];
     }
 
     /**
@@ -95,12 +110,24 @@ final class User implements Stringable, UserInterface /* , PasswordAuthenticated
     }
 
     /**
-     * Returns the roles or permissions granted to the user for security.
+     * Returns the roles granted to the user: ROLE_USER, then the others, each once.
+     *
+     * @return list<string>
      */
     #[Override]
     public function getRoles(): array
     {
-        return [self::ROLE_USER];
+        return array_values(array_unique([self::ROLE_USER, ...$this->roles]));
+    }
+
+    /**
+     * @param list<string> $roles the roles besides ROLE_USER
+     */
+    public function setRoles(array $roles): self
+    {
+        $this->roles = array_values(array_diff(array_unique($roles), [self::ROLE_USER]));
+
+        return $this;
     }
 
     public function getEmail(): string
@@ -118,6 +145,7 @@ final class User implements Stringable, UserInterface /* , PasswordAuthenticated
         return $this;
     }
 
+    #[Override]
     public function getPassword(): string
     {
         return $this->password;
@@ -150,24 +178,5 @@ final class User implements Stringable, UserInterface /* , PasswordAuthenticated
     public function getUpdatedAt(): DateTimeImmutable
     {
         return $this->updatedAt;
-    }
-
-    /**
-     * Auto set updatedAt and createdAt on persist.
-     */
-    #[ORM\PrePersist]
-    public function onPrePersist(): void
-    {
-        $this->createdAt = new DateTimeImmutable();
-        $this->updatedAt = new DateTimeImmutable();
-    }
-
-    /**
-     * Auto set updatedAt on update.
-     */
-    #[ORM\PreUpdate]
-    public function onPreUpdate(): void
-    {
-        $this->updatedAt = new DateTimeImmutable();
     }
 }

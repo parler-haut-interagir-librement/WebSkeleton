@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
-const ZENSTRUCK_FOUNDRY = [
+// A variable, not a constant: the file may be loaded twice in one process, by debug:config for example.
+$foundry = [
     // See full configuration: https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#full-default-bundle-configuration
     'zenstruck_foundry' => [
         'enable_auto_refresh_with_lazy_objects' => true,
@@ -24,6 +25,6 @@ const ZENSTRUCK_FOUNDRY = [
 ];
 
 return App::config([
-    'when@dev' => ZENSTRUCK_FOUNDRY,
-    'when@test' => ZENSTRUCK_FOUNDRY,
+    'when@dev' => $foundry,
+    'when@test' => $foundry,
 ]);

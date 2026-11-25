@@ -7,6 +7,8 @@ declare(strict_types=1);
  * See vendor/phil/dev-tools/doc/configuration.md for every section.
  */
 return [
+    // Released on Packagist since 2023: its CHANGELOG has the usual sections.
+    'docs' => ['public' => true],
     'paths' => ['src', 'tests', 'migrations', 'bin', 'public', 'importmap.php'],
     // The functional tests share one SQLite file: they run one after the other, with PHPUnit.
     'phpunit' => ['parallel' => false],
@@ -14,7 +16,11 @@ return [
     // is added here on purpose, after it is required by composer.json.
     'deptrac' => ['allow' => [
         '^Doctrine\\\\(Bundle\\\\DoctrineBundle|DBAL|ORM|Persistence)\\\\.*',
-        '^Symfony\\\\Bundle\\\\FrameworkBundle\\\\.*',
+        '^EasyCorp\\\\Bundle\\\\EasyAdminBundle\\\\.*',
+        '^Gedmo\\\\Mapping\\\\.*',
+        '^Knp\\\\Menu\\\\.*',
+        '^Symfony\\\\Bridge\\\\Doctrine\\\\.*',
+        '^Symfony\\\\Bundle\\\\(FrameworkBundle|SecurityBundle)\\\\.*',
         '^Twig\\\\.*',
         '^Zenstruck\\\\Foundry\\\\.*',
     ]],
@@ -22,9 +28,11 @@ return [
     'js' => ['paths' => ['assets/controllers', 'assets/app.js', 'assets/bootstrap.js']],
     // Used through the configuration, the templates, the front controller or the console, never by a class of src/.
     'unused' => ['ignore' => [
-        'ext-iconv', 'ext-simplexml', 'doctrine/migrations', 'doctrine/doctrine-migrations-bundle', 'league/commonmark', 'symfony/asset',
-        'symfony/asset-mapper', 'symfony/dotenv', 'symfony/flex', 'symfony/intl', 'symfony/monolog-bundle',
-        'symfony/runtime', 'symfony/security-csrf', 'symfony/stimulus-bundle', 'symfony/twig-bundle', 'symfony/ux-turbo',
-        'symfony/web-link', 'symfony/yaml', 'twig/extra-bundle', 'twig/markdown-extra',
+        'ext-iconv', 'ext-simplexml', 'doctrine/migrations', 'doctrine/doctrine-migrations-bundle', 'league/commonmark',
+        'symfony/asset-mapper', 'symfony/dotenv', 'symfony/flex', 'symfony/monolog-bundle',
+        'symfony/runtime', 'symfony/stimulus-bundle', 'symfony/ux-turbo',
+        'symfony/web-link', 'symfony/yaml', 'twig/markdown-extra',
+        'knplabs/knp-menu-bundle', 'nelmio/cors-bundle', 'nelmio/security-bundle',
+        'stof/doctrine-extensions-bundle', 'symfony/rate-limiter', 'sentry/sentry-symfony',
     ]],
 ];

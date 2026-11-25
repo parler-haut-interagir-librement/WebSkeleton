@@ -1,12 +1,14 @@
-# AGENTS.md - MicroSymfony development guidelines
+# AGENTS.md - WebSymfony development guidelines
 
-Guidelines for coding assistants working on this repository, the MicroSymfony application template of PHIL
-(`phil/micro-symfony`), which follows [strangebuzz/MicroSymfony](https://github.com/strangebuzz/MicroSymfony).
+Guidelines for coding assistants working on this repository, the WebSymfony application template of PHIL
+(`phil/websymfony`), built on MicroSymfony, which follows [strangebuzz/MicroSymfony](https://github.com/strangebuzz/MicroSymfony).
 
 ## Project overview
 
 A Symfony 8.2 application template on PHP 8.5 or later, with Doctrine ORM on SQLite, Twig, AssetMapper, Stimulus,
-Turbo and Pico CSS. It keeps the usual layout of a Symfony application: no layers, no domain directories.
+Turbo and Pico CSS, plus Symfony Security (form sign-in, sign-up, roles), EasyAdmin, NelmioSecurityBundle,
+NelmioCorsBundle, KnpMenu, the Doctrine extensions, English and French, and Sentry in production. It uses no PHIL
+package at run time. It keeps the usual layout of a Symfony application: no layers, no domain directories.
 
 ## Tasks
 

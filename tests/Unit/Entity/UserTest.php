@@ -32,21 +32,27 @@ final class UserTest extends TestCase
         self::assertSame(['ROLE_USER'], $user->getRoles());
     }
 
-    public function testDatesAreSetByTheConstructorAndTheLifecycleCallbacks(): void
+    public function testDatesAreSetByTheConstructor(): void
     {
         $before = time();
         $user = new User('email', 'password', 'username');
         self::assertGreaterThanOrEqual($before, $user->getCreatedAt()->getTimestamp());
         self::assertSame($user->getCreatedAt()->getTimestamp(), $user->getUpdatedAt()->getTimestamp());
+    }
 
-        $user->onPrePersist();
-        $created = $user->getCreatedAt();
-        self::assertGreaterThanOrEqual($before, $created->getTimestamp());
-        self::assertGreaterThanOrEqual($before, $user->getUpdatedAt()->getTimestamp());
+    public function testRolesAlwaysHoldRoleUserOnce(): void
+    {
+        $user = new User('email', 'password', 'username');
+        self::assertSame([User::ROLE_USER], $user->getRoles());
 
-        $user->onPreUpdate();
-        self::assertSame($created, $user->getCreatedAt());
-        self::assertGreaterThanOrEqual($created->getTimestamp(), $user->getUpdatedAt()->getTimestamp());
+        $user->setRoles([User::ROLE_ADMIN, User::ROLE_USER, User::ROLE_ADMIN]);
+        self::assertSame([User::ROLE_USER, User::ROLE_ADMIN], $user->getRoles());
+
+        $user->setRoles([User::ROLE_USER, 'ROLE_EDITOR', User::ROLE_ADMIN]);
+        self::assertSame([User::ROLE_USER, 'ROLE_EDITOR', User::ROLE_ADMIN], $user->getRoles());
+
+        $user->setRoles([]);
+        self::assertSame([User::ROLE_USER], $user->getRoles());
     }
 
     public function testUserGetUserIdentifier(): void
@@ -60,8 +66,10 @@ final class UserTest extends TestCase
     public function testUserSerialize(): void
     {
         $user = new User('email', 'password', 'serialized');
-        $serializedUser = 'O:15:"App\Entity\User":4:{i:0;N;i:1;s:10:"serialized";i:2;s:8:"password";i:3;s:5:"email";}';
+        // The session keeps the crc32c of the hashed password, never the hashed password itself.
+        $serializedUser = \sprintf('O:15:"App\Entity\User":4:{i:0;N;i:1;s:10:"serialized";i:2;s:8:"%s";i:3;s:5:"email";}', hash('crc32c', 'password'));
         self::assertSame($serializedUser, serialize($user));
+        self::assertStringNotContainsString('"password"', serialize($user));
     }
 
     public function testUserUnserialize(): void

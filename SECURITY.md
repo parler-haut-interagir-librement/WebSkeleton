@@ -15,7 +15,7 @@ vulnerability private until a fixed version is published; we will agree with you
 credit you in the advisory, unless you prefer not to be named.
 
 A vulnerability that also exists in [strangebuzz/MicroSymfony](https://github.com/strangebuzz/MicroSymfony), the
-template this one follows, is reported to its maintainers as well.
+template this one is built on, is reported to its maintainers as well.
 
 ## How a vulnerability is fixed
 

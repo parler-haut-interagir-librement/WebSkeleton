@@ -1,13 +1,13 @@
-# Contributing to MicroSymfony
+# Contributing to WebSymfony
 
-Thank you for contributing. This guide covers this template, `phil/micro-symfony`. A change that would also suit
+Thank you for contributing. This guide covers this template, `phil/websymfony`, built on MicroSymfony. A change that would also suit
 [strangebuzz/MicroSymfony](https://github.com/strangebuzz/MicroSymfony), the template it follows, is welcome there
 too: see its own contributing guide.
 
 ## Reporting a bug
 
 Before reporting a bug, read the [README](README.md) and check that the bug is not
-[already reported](https://github.com/parler-haut-interagir-librement/MicroSymfony/issues?q=is%3Aopen+is%3Aissue+label%3Abug).
+[already reported](https://github.com/parler-haut-interagir-librement/WebSymfony/issues?q=is%3Aopen+is%3Aissue+label%3Abug).
 Then open an issue with a title that sums it up and the steps that reproduce it, with your operating system, your PHP
 version and its extensions.
 

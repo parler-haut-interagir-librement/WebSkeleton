@@ -14,6 +14,7 @@ return App::config([
             'description' => '%description%',
             'website' => '%website%',
             'version' => '%version%',
+            'copyright_url' => '%copyright_url%',
         ],
     ],
     'when@test' => [
