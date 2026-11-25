@@ -28,7 +28,7 @@
 <a class="isSkipLink" href="#content">{{ 'layout.skip'|trans }}</a>
 
 <header class="isCluster">
-    <a href="{{ path('App\\Infrastructure\\Http\\Controller\\HomeAction') }}" class="isLogo">
+    <a href="{{ path('App\\Shared\\Infrastructure\\Http\\Controller\\HomeAction') }}" class="isLogo">
         <img src="{{ asset('img/phil_img_logo.svg') }}" width="40" height="40" alt=""> {{ brand_html|raw }}
     </a>
 
@@ -43,7 +43,7 @@
     <nav aria-label="{{ 'layout.languages'|trans }}">
         <ul class="isCluster">
             {%- for locale in app.enabled_locales %}
-            {%- set _href = _route and _params._locale is defined ? path(_route, _params|merge({_locale: locale})) : path('App\\Infrastructure\\Http\\Controller\\HomeAction', {_locale: locale}) %}
+            {%- set _href = _route and _params._locale is defined ? path(_route, _params|merge({_locale: locale})) : path('App\\Shared\\Infrastructure\\Http\\Controller\\HomeAction', {_locale: locale}) %}
             <li><a href="{{ _href }}" hreflang="{{ locale }}" lang="{{ locale }}"{{ locale == app.request.locale ? ' aria-current="true"' }}>{{ ('language.' ~ locale)|trans }}</a></li>
             {%- endfor %}
         </ul>

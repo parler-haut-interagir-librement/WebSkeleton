@@ -13,7 +13,7 @@ return new Configuration()
     ->addPathToScan(__DIR__.'/migrations', isDev: false)
     ->addPathToScan(__DIR__.'/tests', isDev: true)
     // Used through the configuration, the templates, the front controller or the console, never by a class of src/;
-    // Doctrine is ready for the entities of src/Infrastructure/Persistence/Doctrine/Entity/.
+    // Doctrine is ready for the entities of src/<Context>/Infrastructure/Persistence/Doctrine/Entity/.
     ->ignoreErrorsOnPackages([
         'doctrine/dbal',
         'doctrine/doctrine-bundle',

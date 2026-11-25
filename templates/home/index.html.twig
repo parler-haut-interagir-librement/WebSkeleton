@@ -19,7 +19,7 @@
         {%- endfor %}
     </section>
 
-    <section {{ stimulus_controller('api', {url: path('App\\Infrastructure\\Http\\Api\\SlugifyAction')}) }} aria-labelledby="slugify-title">
+    <section {{ stimulus_controller('api', {url: path('App\\Text\\Infrastructure\\Http\\Api\\SlugifyAction')}) }} aria-labelledby="slugify-title">
         <h2 id="slugify-title">{{ 'home.slugify.title'|trans }}</h2>
         <p>{{ 'home.slugify.text'|trans }}</p>
         <label for="slugify-input">{{ 'home.slugify.input'|trans }}</label>

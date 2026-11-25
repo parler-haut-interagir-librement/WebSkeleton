@@ -13,7 +13,7 @@ return App::config([
     'twig_component' => [
         'anonymous_template_directory' => 'components/',
         'defaults' => [
-            'App\Infrastructure\Twig\Component\\' => 'components/',
+            'App\Shared\Infrastructure\Twig\Component\\' => 'components/',
         ],
     ],
 ]);
