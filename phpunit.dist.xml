@@ -59,6 +59,7 @@
     </source>
 
     <extensions>
+        <bootstrap class="Zenstruck\Foundry\PHPUnit\FoundryExtension" />
         <bootstrap class="Ergebnis\PHPUnit\SlowTestDetector\Extension" />
         <!-- Install symfony/panther as a development dependency before enabling this extension. -->
         <!-- <bootstrap class="Symfony\Component\Panther\ServerExtension" /> -->

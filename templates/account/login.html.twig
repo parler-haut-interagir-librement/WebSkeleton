@@ -1,0 +1,28 @@
+{#-
+ # The sign-in page: the firewall reads the form it posts, with its CSRF token "authenticate".
+ #}
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'login.title'|trans }} · {{ parent() }}{% endblock %}
+
+{% block body %}
+    <h1>{{ 'login.title'|trans }}</h1>
+
+    <form method="post" action="{{ path('account_login') }}" class="isStack">
+        {% if error %}
+            <p id="login-error" role="alert" class="isAlert">{{ error.messageKey|trans(error.messageData, 'security') }}</p>
+        {% endif %}
+
+        <label for="login-username">{{ 'login.username'|trans }}</label>
+        <input id="login-username" type="text" name="_username" value="{{ last_username }}" autocomplete="username" required{% if last_username is empty %} autofocus{% endif %}{% if error %} aria-invalid="true" aria-describedby="login-error"{% endif %}>
+
+        <label for="login-password">{{ 'login.password'|trans }}</label>
+        <input id="login-password" type="password" name="_password" autocomplete="current-password" required{% if last_username is not empty %} autofocus{% endif %}{% if error %} aria-invalid="true" aria-describedby="login-error"{% endif %}>
+
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+        <p><twig:Button type="submit">{{ 'login.submit'|trans }}</twig:Button></p>
+    </form>
+
+    <p><a href="{{ path('account_signup') }}">{{ 'login.signup'|trans }}</a></p>
+{% endblock %}

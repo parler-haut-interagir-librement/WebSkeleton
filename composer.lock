@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "52f539616cb137bf16931b1574a78e56",
+    "content-hash": "b693cdf8bbdf0a4ccbe0f862fdafbc76",
     "packages": [
         {
             "name": "composer/semver",
@@ -1221,6 +1221,117 @@
             "published-time": "2026-02-08T16:22:50+00:00"
         },
         {
+            "name": "easycorp/easyadmin-bundle",
+            "version": "v5.10.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/EasyCorp/EasyAdminBundle.git",
+                "reference": "b34737840ab175ae8e903475d10471bd97537637"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/EasyCorp/EasyAdminBundle/zipball/b34737840ab175ae8e903475d10471bd97537637",
+                "reference": "b34737840ab175ae8e903475d10471bd97537637",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/dbal": "^3.10|^4.4",
+                "doctrine/doctrine-bundle": "^2.18|^3.2",
+                "doctrine/orm": "^2.20|^3.6",
+                "php": ">=8.2",
+                "symfony/asset": "^6.4|^7.0|^8.0",
+                "symfony/cache": "^6.4.33|^7.0|^8.0",
+                "symfony/config": "^6.4.32|^7.0|^8.0",
+                "symfony/dependency-injection": "^6.4.32|^7.0|^8.0",
+                "symfony/deprecation-contracts": "^3.0",
+                "symfony/doctrine-bridge": "^6.4.32|^7.0|^8.0",
+                "symfony/event-dispatcher": "^6.4.32|^7.0|^8.0",
+                "symfony/filesystem": "^6.4.30|^7.0|^8.0",
+                "symfony/form": "^6.4.32|^7.0|^8.0",
+                "symfony/framework-bundle": "^6.4.33|^7.0|^8.0",
+                "symfony/http-foundation": "^6.4.33|^7.0|^8.0",
+                "symfony/http-kernel": "^6.4.33|^7.0|^8.0",
+                "symfony/intl": "^6.4.32|^7.0|^8.0",
+                "symfony/property-access": "^6.4.32|^7.0|^8.0",
+                "symfony/security-bundle": "^6.4.32|^7.0|^8.0",
+                "symfony/string": "^6.4.30|^7.0|^8.0",
+                "symfony/translation": "^6.4.32|^7.0|^8.0",
+                "symfony/twig-bridge": "^6.4.32|^7.1.9|^7.2|^8.0",
+                "symfony/twig-bundle": "^6.4.32|^7.0|^8.0",
+                "symfony/uid": "^6.4.32|^7.0|^8.0",
+                "symfony/ux-twig-component": "^2.32|^3.0",
+                "symfony/validator": "^6.4.33|^7.0|^8.0",
+                "twig/extra-bundle": "^3.23",
+                "twig/html-extra": "^3.23",
+                "twig/twig": "^3.23"
+            },
+            "require-dev": {
+                "brianium/paratest": "^7.6.1",
+                "dama/doctrine-test-bundle": "^8.2",
+                "league/flysystem": "^3.10",
+                "moneyphp/money": "^4.8",
+                "phpstan/extension-installer": "^1.4",
+                "phpstan/phpstan": "^2.0",
+                "phpstan/phpstan-phpunit": "^2.0",
+                "phpstan/phpstan-strict-rules": "^2.0",
+                "phpstan/phpstan-symfony": "^2.0",
+                "phpunit/phpunit": "^11.5.24",
+                "psr/log": "^1.0|^2.0|^3.0",
+                "symfony/browser-kit": "^6.4.32|^7.0|^8.0",
+                "symfony/css-selector": "^6.4.24|^7.0|^8.0",
+                "symfony/debug-bundle": "^6.4.27|^7.0|^8.0",
+                "symfony/dom-crawler": "^6.4.32|^7.0|^8.0",
+                "symfony/expression-language": "^6.4.32|^7.0|^8.0",
+                "symfony/process": "^6.4.33|^7.0|^8.0",
+                "symfony/web-link": "^6.4.32|^7.0|^8.0",
+                "vincentlanglet/twig-cs-fixer": "^4.1",
+                "zenstruck/foundry": "^2.11"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "EasyCorp\\Bundle\\EasyAdminBundle\\": "src/"
+                },
+                "exclude-from-classmap": [
+                    "/tests/Functional/Apps/*/config/reference.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Project Contributors",
+                    "homepage": "https://github.com/EasyCorp/EasyAdminBundle/graphs/contributors"
+                }
+            ],
+            "description": "Admin generator for Symfony applications",
+            "homepage": "https://github.com/EasyCorp/EasyAdminBundle",
+            "keywords": [
+                "admin",
+                "backend",
+                "generator"
+            ],
+            "support": {
+                "issues": "https://github.com/EasyCorp/EasyAdminBundle/issues",
+                "source": "https://github.com/EasyCorp/EasyAdminBundle/tree/v5.10.4"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/javiereguiluz",
+                    "type": "github"
+                }
+            ],
+            "time": "2026-11-25T08:06:35+00:00",
+            "published-time": "2026-11-25T08:08:19+00:00"
+        },
+        {
             "name": "egulias/email-validator",
             "version": "4.0.5",
             "source": {
@@ -1287,331 +1398,6 @@
             ],
             "time": "2026-11-22T16:52:20+00:00",
             "published-time": "2026-11-22T22:05:57+00:00"
-        },
-        {
-            "name": "guzzlehttp/psr7",
-            "version": "3.6.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/guzzle/psr7.git",
-                "reference": "1fa0f8319c046b7dec80030460254283d851388e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/1fa0f8319c046b7dec80030460254283d851388e",
-                "reference": "1fa0f8319c046b7dec80030460254283d851388e",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.4 || ^8.0",
-                "psr/http-factory": "^1.1",
-                "psr/http-message": "^2.0",
-                "symfony/deprecation-contracts": "^2.5 || ^3.0",
-                "symfony/polyfill-php80": "^1.25",
-                "symfony/polyfill-php82": "^1.27"
-            },
-            "provide": {
-                "psr/http-factory-implementation": "1.1",
-                "psr/http-message-implementation": "2.0"
-            },
-            "require-dev": {
-                "bamarni/composer-bin-plugin": "^1.8.2",
-                "http-interop/http-factory-tests": "1.1.0",
-                "jshttp/mime-db": "1.54.0.1",
-                "php-http/psr7-integration-tests": "^1.5.1",
-                "phpunit/phpunit": "^9.6.34"
-            },
-            "suggest": {
-                "ext-intl": "Convert internationalized hosts with Idna",
-                "laminas/laminas-httphandlerrunner": "Emit PSR-7 responses"
-            },
-            "type": "library",
-            "extra": {
-                "bamarni-bin": {
-                    "bin-links": true,
-                    "forward-command": false
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "GuzzleHttp\\Psr7\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Graham Campbell",
-                    "email": "hello@gjcampbell.co.uk",
-                    "homepage": "https://github.com/GrahamCampbell"
-                },
-                {
-                    "name": "Michael Dowling",
-                    "email": "mtdowling@gmail.com",
-                    "homepage": "https://github.com/mtdowling"
-                },
-                {
-                    "name": "George Mponos",
-                    "email": "gmponos@gmail.com",
-                    "homepage": "https://github.com/gmponos"
-                },
-                {
-                    "name": "Tobias Nyholm",
-                    "email": "tobias.nyholm@gmail.com",
-                    "homepage": "https://github.com/Nyholm"
-                },
-                {
-                    "name": "Márk Sági-Kazár",
-                    "email": "mark.sagikazar@gmail.com",
-                    "homepage": "https://github.com/sagikazarmark"
-                },
-                {
-                    "name": "Tobias Schultze",
-                    "email": "webmaster@tubo-world.de",
-                    "homepage": "https://github.com/Tobion"
-                },
-                {
-                    "name": "Márk Sági-Kazár",
-                    "email": "mark.sagikazar@gmail.com",
-                    "homepage": "https://sagikazarmark.hu"
-                }
-            ],
-            "description": "PSR-7 message implementation that also provides common utility methods",
-            "keywords": [
-                "http",
-                "message",
-                "psr-7",
-                "request",
-                "response",
-                "stream",
-                "uri",
-                "url"
-            ],
-            "support": {
-                "issues": "https://github.com/guzzle/psr7/issues",
-                "source": "https://github.com/guzzle/psr7/tree/3.6.0"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/GrahamCampbell",
-                    "type": "github"
-                },
-                {
-                    "url": "https://github.com/Nyholm",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/guzzlehttp/psr7",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2026-11-22T00:00:35+00:00",
-            "published-time": "2026-11-22T00:01:04+00:00"
-        },
-        {
-            "name": "jean85/pretty-package-versions",
-            "version": "2.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Jean85/pretty-package-versions.git",
-                "reference": "4d7aa5dab42e2a76d99559706022885de0e18e1a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Jean85/pretty-package-versions/zipball/4d7aa5dab42e2a76d99559706022885de0e18e1a",
-                "reference": "4d7aa5dab42e2a76d99559706022885de0e18e1a",
-                "shasum": ""
-            },
-            "require": {
-                "composer-runtime-api": "^2.1.0",
-                "php": "^7.4|^8.0"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.2",
-                "jean85/composer-provided-replaced-stub-package": "^1.0",
-                "phpstan/phpstan": "^2.0",
-                "phpunit/phpunit": "^7.5|^8.5|^9.6",
-                "rector/rector": "^2.0",
-                "vimeo/psalm": "^4.3 || ^5.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Jean85\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Alessandro Lai",
-                    "email": "alessandro.lai85@gmail.com"
-                }
-            ],
-            "description": "A library to get pretty versions strings of installed dependencies",
-            "keywords": [
-                "composer",
-                "package",
-                "release",
-                "versions"
-            ],
-            "support": {
-                "issues": "https://github.com/Jean85/pretty-package-versions/issues",
-                "source": "https://github.com/Jean85/pretty-package-versions/tree/2.1.1"
-            },
-            "time": "2025-03-19T14:43:43+00:00",
-            "published-time": "2025-03-19T14:50:06+00:00"
-        },
-        {
-            "name": "knplabs/knp-menu",
-            "version": "v3.8.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/KnpLabs/KnpMenu.git",
-                "reference": "79d325909a1d428a93f1a0f55e90177830e283bb"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/KnpMenu/zipball/79d325909a1d428a93f1a0f55e90177830e283bb",
-                "reference": "79d325909a1d428a93f1a0f55e90177830e283bb",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^8.1"
-            },
-            "conflict": {
-                "symfony/http-foundation": "<5.4",
-                "twig/twig": "<2.16"
-            },
-            "require-dev": {
-                "phpstan/phpstan": "^2.1",
-                "phpunit/phpunit": "^9.6",
-                "psr/container": "^1.0 || ^2.0",
-                "symfony/http-foundation": "^5.4 || ^6.0 || ^7.0",
-                "symfony/phpunit-bridge": "^7.0",
-                "symfony/routing": "^5.4 || ^6.0 || ^7.0",
-                "twig/twig": "^2.16 || ^3.0"
-            },
-            "suggest": {
-                "twig/twig": "for the TwigRenderer and the integration with your templates"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Knp\\Menu\\": "src/Knp/Menu"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "KnpLabs",
-                    "homepage": "https://knplabs.com"
-                },
-                {
-                    "name": "Christophe Coevoet",
-                    "email": "stof@notk.org"
-                },
-                {
-                    "name": "The Community",
-                    "homepage": "https://github.com/KnpLabs/KnpMenu/contributors"
-                }
-            ],
-            "description": "An object oriented menu library",
-            "homepage": "https://knplabs.com",
-            "keywords": [
-                "menu",
-                "tree"
-            ],
-            "support": {
-                "issues": "https://github.com/KnpLabs/KnpMenu/issues",
-                "source": "https://github.com/KnpLabs/KnpMenu/tree/v3.8.0"
-            },
-            "time": "2025-06-13T15:03:33+00:00",
-            "published-time": "2025-06-13T15:06:30+00:00"
-        },
-        {
-            "name": "knplabs/knp-menu-bundle",
-            "version": "v3.8.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/KnpLabs/KnpMenuBundle.git",
-                "reference": "52407da3ac631077fc64f1c2641f35e06e07bbf8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/KnpMenuBundle/zipball/52407da3ac631077fc64f1c2641f35e06e07bbf8",
-                "reference": "52407da3ac631077fc64f1c2641f35e06e07bbf8",
-                "shasum": ""
-            },
-            "require": {
-                "knplabs/knp-menu": "^3.8",
-                "php": "^8.2",
-                "symfony/config": "^6.4 || ^7.4 || ^8.0",
-                "symfony/dependency-injection": "^6.4 || ^7.4 || ^8.0",
-                "symfony/deprecation-contracts": "^2.5 || ^3.3",
-                "symfony/http-kernel": "^6.4 || ^7.4 || ^8.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^11.5 || ^12.5 || ^13.2",
-                "symfony/expression-language": "^6.4 || ^7.4 || ^8.0",
-                "symfony/phpunit-bridge": "^7.4 || ^8.0"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Knp\\Bundle\\MenuBundle\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Knplabs",
-                    "homepage": "http://knplabs.com"
-                },
-                {
-                    "name": "Christophe Coevoet",
-                    "email": "stof@notk.org"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://github.com/KnpLabs/KnpMenuBundle/contributors"
-                }
-            ],
-            "description": "This bundle provides an integration of the KnpMenu library",
-            "keywords": [
-                "menu"
-            ],
-            "support": {
-                "issues": "https://github.com/KnpLabs/KnpMenuBundle/issues",
-                "source": "https://github.com/KnpLabs/KnpMenuBundle/tree/v3.8.0"
-            },
-            "time": "2026-10-11T15:22:17+00:00",
-            "published-time": "2026-10-11T15:23:14+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -2353,6 +2139,248 @@
             "published-time": "2026-11-18T01:36:54+00:00"
         },
         {
+            "name": "phil/doctrine-behaviours",
+            "version": "0.3.1-alpha",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/parler-haut-interagir-librement/doctrine-behaviours.git",
+                "reference": "d3ba0fa49061ea151f1311de0a71908003ea6418"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/parler-haut-interagir-librement/doctrine-behaviours/zipball/d3ba0fa49061ea151f1311de0a71908003ea6418",
+                "reference": "d3ba0fa49061ea151f1311de0a71908003ea6418",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/collections": "^3.1",
+                "doctrine/dbal": "^4.6",
+                "doctrine/orm": "^3.8",
+                "doctrine/persistence": "^4.2",
+                "phil/locale-dimensions": "^0.1@dev",
+                "php": ">=8.5",
+                "psr/clock": "^1.0",
+                "symfony/polyfill-php86": "^1.43"
+            },
+            "require-dev": {
+                "doctrine/event-manager": "^2.1",
+                "ext-pdo": "*",
+                "phil/slug": "^0.1@dev",
+                "phpunit/phpunit": "^13.4",
+                "symfony/clock": "^8.2",
+                "symfony/event-dispatcher": "^8.2",
+                "symfony/uid": "^8.2",
+                "symfony/workflow": "^8.2"
+            },
+            "suggest": {
+                "phil/slug": "For the slug carried by an entity",
+                "symfony/uid": "For the dated identifier, a UUID v7",
+                "symfony/workflow": "For the publication state and its dates"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "0.3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Phil\\DoctrineBehaviours\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Philippe Gamache",
+                    "email": "philippe@ph-il.ca",
+                    "homepage": "https://github.com/ph-il",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Twelve opt-in behaviours for Doctrine entities, from timestamps, soft delete and trees to positions, slugs, translations and versions.",
+            "homepage": "https://ph-il.ca",
+            "keywords": [
+                "Blameable",
+                "doctrine",
+                "sluggable",
+                "soft-delete",
+                "sortable",
+                "timestampable",
+                "tree",
+                "versioning",
+                "workflow"
+            ],
+            "support": {
+                "issues": "https://github.com/parler-haut-interagir-librement/doctrine-behaviours/issues",
+                "source": "https://github.com/parler-haut-interagir-librement/doctrine-behaviours/tree/0.3.1-alpha"
+            },
+            "time": "2026-11-24T22:00:00+00:00",
+            "published-time": "2026-11-25T03:51:37+00:00"
+        },
+        {
+            "name": "phil/doctrine-behaviours-bundle",
+            "version": "0.3.0-alpha",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/parler-haut-interagir-librement/doctrine-behaviours-bundle.git",
+                "reference": "091a8b80bbd2c6f23fd1a34c8f72bf0ed7b66ee9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/parler-haut-interagir-librement/doctrine-behaviours-bundle/zipball/091a8b80bbd2c6f23fd1a34c8f72bf0ed7b66ee9",
+                "reference": "091a8b80bbd2c6f23fd1a34c8f72bf0ed7b66ee9",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/doctrine-bundle": "^3.3",
+                "phil/doctrine-behaviours": "^0.3@dev",
+                "php": ">=8.5",
+                "symfony/clock": "^8.2",
+                "symfony/config": "^8.2",
+                "symfony/dependency-injection": "^8.2"
+            },
+            "require-dev": {
+                "doctrine/dbal": "^4.5",
+                "doctrine/orm": "^3.7",
+                "phil/locale-dimensions": "^0.1@dev",
+                "phil/privacy-bundle": "^0.1@dev",
+                "phil/search-bundle": "^0.1@dev",
+                "phil/slug": "^0.1@dev",
+                "phil/slug-bundle": "^0.1@dev || ^0.2@dev",
+                "phpunit/phpunit": "^13.4",
+                "psr/log": "^3.0",
+                "symfony/console": "^8.2",
+                "symfony/event-dispatcher": "^8.2",
+                "symfony/framework-bundle": "^8.2",
+                "symfony/http-kernel": "^8.2",
+                "symfony/security-core": "^8.2",
+                "symfony/uid": "^8.2",
+                "symfony/workflow": "^8.2",
+                "symfony/yaml": "^8.2"
+            },
+            "suggest": {
+                "phil/privacy-bundle": "For the blame and the owner in the access and erasure requests of a person",
+                "phil/slug-bundle": "For the sluggable behaviour, its sluggers",
+                "symfony/console": "For phil:doctrine-behaviours:strip-versions, which takes the personal fields out of the versions already written",
+                "symfony/security-bundle": "For the blame and owner of the authenticated user, and the right to go back to a past version",
+                "symfony/uid": "For the dated identifier, a UUID v7",
+                "symfony/workflow": "For the publication state and its dates"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "0.3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Phil\\DoctrineBehavioursBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Philippe Gamache",
+                    "email": "philippe@ph-il.ca",
+                    "homepage": "https://github.com/ph-il",
+                    "role": "Developer"
+                }
+            ],
+            "description": "phil/doctrine-behaviours in Symfony: timestamps, blame, soft delete, trees, translations, versions and more, switched on by configuration.",
+            "homepage": "https://ph-il.ca",
+            "keywords": [
+                "Blameable",
+                "doctrine",
+                "sluggable",
+                "soft-delete",
+                "symfony-bundle",
+                "timestampable",
+                "tree",
+                "versioning",
+                "workflow"
+            ],
+            "support": {
+                "issues": "https://github.com/parler-haut-interagir-librement/doctrine-behaviours-bundle/issues",
+                "source": "https://github.com/parler-haut-interagir-librement/doctrine-behaviours-bundle/tree/0.3.0-alpha"
+            },
+            "time": "2026-11-20T22:00:00+00:00",
+            "published-time": "2026-11-21T02:56:12+00:00"
+        },
+        {
+            "name": "phil/email-address",
+            "version": "0.1.0-alpha",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/parler-haut-interagir-librement/email-address.git",
+                "reference": "59f143ba25ec7960823b6cc6b0b8b394b31afc96"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/parler-haut-interagir-librement/email-address/zipball/59f143ba25ec7960823b6cc6b0b8b394b31afc96",
+                "reference": "59f143ba25ec7960823b6cc6b0b8b394b31afc96",
+                "shasum": ""
+            },
+            "require": {
+                "ext-ctype": "*",
+                "ext-filter": "*",
+                "ext-intl": "*",
+                "php": ">=8.5",
+                "symfony/filesystem": "^8.2",
+                "symfony/validator": "^8.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^13.4"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "0.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Phil\\EmailAddress\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Philippe Gamache",
+                    "email": "philippe@ph-il.ca",
+                    "homepage": "https://github.com/ph-il",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Email addresses a mail server can deliver to: RFC 5321 mailbox syntax with international domains and the RFC 6531 forms an application allows, MX, null MX and A records through a port, disposable domains and IANA top-level domains imported as data, denied and allowed domains, and suggestions for slips such as gmial.com, with a Symfony constraint",
+            "homepage": "https://ph-il.ca",
+            "keywords": [
+                "MX",
+                "RFC5321",
+                "disposable-email",
+                "email",
+                "email-address",
+                "idn",
+                "symfony-validator",
+                "typo",
+                "validation"
+            ],
+            "support": {
+                "issues": "https://github.com/parler-haut-interagir-librement/email-address/issues",
+                "source": "https://github.com/parler-haut-interagir-librement/email-address/tree/0.1.0-alpha"
+            },
+            "time": "2026-11-12T18:01:35+00:00",
+            "published-time": "2026-11-12T23:51:32+00:00"
+        },
+        {
             "name": "phil/enums",
             "version": "0.3.1",
             "source": {
@@ -2415,6 +2443,193 @@
             "published-time": "2026-11-18T01:36:56+00:00"
         },
         {
+            "name": "phil/error-tracking",
+            "version": "0.1.1-alpha",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/parler-haut-interagir-librement/error-tracking.git",
+                "reference": "012683739b51e62b2a0ed441a7800406149069ba"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/parler-haut-interagir-librement/error-tracking/zipball/012683739b51e62b2a0ed441a7800406149069ba",
+                "reference": "012683739b51e62b2a0ed441a7800406149069ba",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "ext-sodium": "*",
+                "phil/ip-anonymizer": "^0.1@dev",
+                "php": ">=8.5",
+                "psr/clock": "^1.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^13.4"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "0.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Phil\\ErrorTracking\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Philippe Gamache",
+                    "email": "philippe@ph-il.ca",
+                    "homepage": "https://github.com/ph-il",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Keep your application's errors at home: grouped by fingerprint, scrubbed of personal data and secrets, and told apart as new, repeated or back again.",
+            "homepage": "https://ph-il.ca",
+            "keywords": [
+                "Fingerprint",
+                "error-tracking",
+                "exceptions",
+                "grouping",
+                "privacy",
+                "scrubbing",
+                "self-hosted"
+            ],
+            "support": {
+                "issues": "https://github.com/parler-haut-interagir-librement/error-tracking/issues",
+                "source": "https://github.com/parler-haut-interagir-librement/error-tracking/tree/0.1.1-alpha"
+            },
+            "time": "2026-11-20T22:00:00+00:00",
+            "published-time": "2026-11-21T02:55:48+00:00"
+        },
+        {
+            "name": "phil/error-tracking-bundle",
+            "version": "0.1.0-alpha",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/parler-haut-interagir-librement/error-tracking-bundle.git",
+                "reference": "1d0bf326df4aabfdf4c59d8a4e9cfe85cb3cc6f3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/parler-haut-interagir-librement/error-tracking-bundle/zipball/1d0bf326df4aabfdf4c59d8a4e9cfe85cb3cc6f3",
+                "reference": "1d0bf326df4aabfdf4c59d8a4e9cfe85cb3cc6f3",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/dbal": "^4.5",
+                "ext-mbstring": "*",
+                "phil/error-tracking": "^0.1.1@dev",
+                "phil/ip-anonymizer": "^0.1@dev",
+                "phil/rate-limit": "^0.1.1@dev",
+                "phil/url": "^0.1.4@dev",
+                "php": ">=8.5",
+                "psr/clock": "^1.0",
+                "psr/log": "^3.0",
+                "symfony/config": "^8.2",
+                "symfony/dependency-injection": "^8.2",
+                "symfony/http-foundation": "^8.2",
+                "symfony/http-kernel": "^8.2",
+                "symfony/notifier": "^8.2",
+                "symfony/service-contracts": "^3.6"
+            },
+            "require-dev": {
+                "doctrine/doctrine-bundle": "^3.3",
+                "doctrine/orm": "^3.7",
+                "easycorp/easyadmin-bundle": "^5.8",
+                "monolog/monolog": "^3.0",
+                "phil/monitoring-bundle": "^0.1.1@dev",
+                "phil/notifications-bundle": "^0.1@dev || ^0.2@dev",
+                "phil/privacy-bundle": "^0.1.1@dev",
+                "phil/rate-limit-bundle": "^0.1.1@dev",
+                "phpunit/phpunit": "^13.4",
+                "psr/event-dispatcher": "^1.0",
+                "symfony/asset-mapper": "^8.2",
+                "symfony/browser-kit": "^8.2",
+                "symfony/cache": "^8.2",
+                "symfony/clock": "^8.2",
+                "symfony/console": "^8.2",
+                "symfony/css-selector": "^8.2",
+                "symfony/dom-crawler": "^8.2",
+                "symfony/event-dispatcher": "^8.2",
+                "symfony/event-dispatcher-contracts": "^3.6",
+                "symfony/framework-bundle": "^8.2",
+                "symfony/messenger": "^8.2",
+                "symfony/process": "^8.2",
+                "symfony/rate-limiter": "^8.2",
+                "symfony/routing": "^8.2",
+                "symfony/security-bundle": "^8.2",
+                "symfony/security-core": "^8.2",
+                "symfony/security-csrf": "^8.2",
+                "symfony/twig-bridge": "^8.2",
+                "symfony/twig-bundle": "^8.2",
+                "symfony/ux-twig-component": "^3.7",
+                "symfony/yaml": "^8.2",
+                "twig/extra-bundle": "^3.24",
+                "twig/twig": "^3.21"
+            },
+            "suggest": {
+                "doctrine/orm": "For the tables added to the schema the ORM generates",
+                "easycorp/easyadmin-bundle": "To graft the administration pages on the dashboards of an EasyAdmin back office",
+                "monolog/monolog": "For the handler that captures the error records",
+                "phil/monitoring-bundle": "For the health check of the store of the errors",
+                "phil/notifications-bundle": "To send the alerts to recipients or an audience as notifications",
+                "phil/rate-limit-bundle": "To count the browsers' reports with a named limiter, beside the others of the application",
+                "symfony/asset-mapper": "For the Stimulus controller without a build step",
+                "symfony/console": "For the capture of the commands' errors and phil:error-tracking:purge",
+                "symfony/messenger": "For the capture of the failed messages and the queued alerts",
+                "symfony/rate-limiter": "For the throttles of the groups and of the browsers' reports, which the bundle refuses to build without unless they are disabled",
+                "symfony/routing": "For the administration pages and the endpoint of the browsers",
+                "symfony/security-core": "For the role of the administration pages",
+                "symfony/security-csrf": "For the actions of the administration pages",
+                "twig/twig": "For the administration pages"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "0.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Phil\\ErrorTrackingBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Philippe Gamache",
+                    "email": "philippe@ph-il.ca",
+                    "homepage": "https://github.com/ph-il",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Catch your Symfony errors at home: requests, workers, commands and browsers grouped, kept with a retention purge, shown by role, with chat alerts on new issues.",
+            "homepage": "https://ph-il.ca",
+            "keywords": [
+                "Messenger",
+                "error-tracking",
+                "exceptions",
+                "monolog",
+                "self-hosted",
+                "symfony-bundle"
+            ],
+            "support": {
+                "issues": "https://github.com/parler-haut-interagir-librement/error-tracking-bundle/issues",
+                "source": "https://github.com/parler-haut-interagir-librement/error-tracking-bundle/tree/0.1.0-alpha"
+            },
+            "time": "2026-11-20T22:00:00+00:00",
+            "published-time": "2026-11-21T03:03:54+00:00"
+        },
+        {
             "name": "phil/indexing-consent",
             "version": "0.1.0-alpha",
             "source": {
@@ -2472,6 +2687,70 @@
             },
             "time": "2026-11-12T14:43:40+00:00",
             "published-time": "2026-11-12T23:51:44+00:00"
+        },
+        {
+            "name": "phil/ip-anonymizer",
+            "version": "0.1.0-alpha",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/parler-haut-interagir-librement/ip-anonymizer.git",
+                "reference": "f08072fa878f5595ce331a871bfa0a6a89898c69"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/parler-haut-interagir-librement/ip-anonymizer/zipball/f08072fa878f5595ce331a871bfa0a6a89898c69",
+                "reference": "f08072fa878f5595ce331a871bfa0a6a89898c69",
+                "shasum": ""
+            },
+            "require": {
+                "ext-sodium": "*",
+                "php": ">=8.5",
+                "psr/clock": "^1.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^13.4"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "0.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Phil\\IpAnonymizer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Philippe Gamache",
+                    "email": "philippe@ph-il.ca",
+                    "homepage": "https://github.com/ph-il",
+                    "role": "Developer"
+                }
+            ],
+            "description": "IP addresses anonymized before they are kept: IPv4 and IPv6 parsed strictly with IPv4-mapped addresses unmapped, truncation to a prefix of each family, keyed BLAKE2b digests with a random salt forgotten each day, and generalisation to a network, a special-purpose scope or a label from a table of networks, as strategies that compose",
+            "homepage": "https://ph-il.ca",
+            "keywords": [
+                "IP",
+                "anonymization",
+                "gdpr",
+                "ip-address",
+                "ipv6",
+                "privacy",
+                "pseudonymization",
+                "truncation"
+            ],
+            "support": {
+                "issues": "https://github.com/parler-haut-interagir-librement/ip-anonymizer/issues",
+                "source": "https://github.com/parler-haut-interagir-librement/ip-anonymizer/tree/0.1.0-alpha"
+            },
+            "time": "2026-11-12T14:43:40+00:00",
+            "published-time": "2026-11-12T23:51:47+00:00"
         },
         {
             "name": "phil/legal-notices",
@@ -2637,6 +2916,351 @@
             },
             "time": "2026-11-15T22:00:00+00:00",
             "published-time": "2026-11-16T01:17:55+00:00"
+        },
+        {
+            "name": "phil/locale-dimensions",
+            "version": "0.1.1-alpha",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/parler-haut-interagir-librement/locale-dimensions.git",
+                "reference": "fdec06fe78b4189c335c99ecb7cf3d330a9fab25"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/parler-haut-interagir-librement/locale-dimensions/zipball/fdec06fe78b4189c335c99ecb7cf3d330a9fab25",
+                "reference": "fdec06fe78b4189c335c99ecb7cf3d330a9fab25",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.5",
+                "symfony/translation": "^8.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^13.4",
+                "roave/security-advisories": "dev-latest"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "0.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Phil\\LocaleDimensions\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Philippe Gamache",
+                    "email": "philippe@ph-il.ca",
+                    "homepage": "https://github.com/ph-il",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Locales, versions and declared fallback chains between locales, as plain value objects for content, translations, sitemaps and hreflang",
+            "homepage": "https://ph-il.ca",
+            "support": {
+                "issues": "https://github.com/parler-haut-interagir-librement/locale-dimensions/issues",
+                "source": "https://github.com/parler-haut-interagir-librement/locale-dimensions/tree/0.1.1-alpha"
+            },
+            "time": "2026-11-14T22:00:00+00:00",
+            "published-time": "2026-11-15T03:20:40+00:00"
+        },
+        {
+            "name": "phil/menu-bundle",
+            "version": "0.1.1-alpha",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/parler-haut-interagir-librement/menu-bundle.git",
+                "reference": "00072f2d21216795e9469b88bd8b7778deaed757"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/parler-haut-interagir-librement/menu-bundle/zipball/00072f2d21216795e9469b88bd8b7778deaed757",
+                "reference": "00072f2d21216795e9469b88bd8b7778deaed757",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "phil/url": "^0.1.3@dev",
+                "php": ">=8.5",
+                "symfony/config": "^8.2",
+                "symfony/dependency-injection": "^8.2",
+                "symfony/http-foundation": "^8.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^13.4",
+                "psr/log": "^3.0",
+                "symfony/event-dispatcher": "^8.2",
+                "symfony/framework-bundle": "^8.2",
+                "symfony/http-kernel": "^8.2",
+                "symfony/routing": "^8.2",
+                "symfony/translation": "^8.2",
+                "symfony/translation-contracts": "^3.6",
+                "symfony/twig-bridge": "^8.2",
+                "symfony/twig-bundle": "^8.2",
+                "twig/twig": "^3.21"
+            },
+            "suggest": {
+                "symfony/routing": "For the routes of items in the templates, and their absolute URLs in menu_breadcrumb_schema",
+                "symfony/translation-contracts": "For the labels translated in menu_breadcrumb_schema, as the templates translate them",
+                "twig/twig": "For menu, menu_breadcrumb, menu_breadcrumb_schema and the templates"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "0.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Phil\\MenuBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Philippe Gamache",
+                    "email": "philippe@ph-il.ca",
+                    "homepage": "https://github.com/ph-il",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Menus for Symfony: trees of items built in code, decorated by the application — counts, classes, badges —, their current item and ancestors marked from the request, a breadcrumb, and lists or cards in Twig",
+            "homepage": "https://ph-il.ca",
+            "keywords": [
+                "breadcrumb",
+                "menu",
+                "navigation",
+                "symfony-bundle"
+            ],
+            "support": {
+                "issues": "https://github.com/parler-haut-interagir-librement/menu-bundle/issues",
+                "source": "https://github.com/parler-haut-interagir-librement/menu-bundle/tree/0.1.1-alpha"
+            },
+            "time": "2026-11-11T21:49:27+00:00",
+            "published-time": "2026-11-11T21:54:37+00:00"
+        },
+        {
+            "name": "phil/monitoring-bundle",
+            "version": "0.1.1-alpha",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/parler-haut-interagir-librement/monitoring-bundle.git",
+                "reference": "be9bae90bed7953097f927bfa9dc44f2cfe89db9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/parler-haut-interagir-librement/monitoring-bundle/zipball/be9bae90bed7953097f927bfa9dc44f2cfe89db9",
+                "reference": "be9bae90bed7953097f927bfa9dc44f2cfe89db9",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">=8.5",
+                "psr/cache": "^3.0",
+                "psr/clock": "^1.0",
+                "psr/container": "^2.0",
+                "psr/log": "^3.0",
+                "symfony/config": "^8.2",
+                "symfony/console": "^8.2",
+                "symfony/dependency-injection": "^8.2",
+                "symfony/filesystem": "^8.2",
+                "symfony/http-foundation": "^8.2",
+                "symfony/http-kernel": "^8.2",
+                "symfony/lock": "^8.2",
+                "symfony/messenger": "^8.2",
+                "symfony/notifier": "^8.2"
+            },
+            "require-dev": {
+                "doctrine/dbal": "^4.5",
+                "league/flysystem": "^3.30",
+                "league/flysystem-memory": "^3.29",
+                "phpunit/phpunit": "^13.4",
+                "symfony/browser-kit": "^8.2",
+                "symfony/cache": "^8.2",
+                "symfony/clock": "^8.2",
+                "symfony/framework-bundle": "^8.2",
+                "symfony/routing": "^8.2",
+                "symfony/scheduler": "^8.2",
+                "symfony/security-core": "^8.2",
+                "symfony/security-csrf": "^8.2",
+                "symfony/twig-bridge": "^8.2",
+                "symfony/twig-bundle": "^8.2",
+                "twig/twig": "^3.21"
+            },
+            "suggest": {
+                "doctrine/dbal": "To check DBAL connections",
+                "league/flysystem": "To check Flysystem storages",
+                "symfony/routing": "For the health endpoints and the page of the queues",
+                "symfony/scheduler": "To beat a task each time its scheduled message runs",
+                "symfony/security-core": "For the roles of the maintenance mode and of the page of the queues",
+                "symfony/security-csrf": "For the actions of the page of the queues",
+                "twig/twig": "For the maintenance page and the page of the queues"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "0.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Phil\\MonitoringBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Philippe Gamache",
+                    "email": "philippe@ph-il.ca",
+                    "homepage": "https://github.com/ph-il",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Watch a Symfony site: health checks, endpoints for uptime monitors, a maintenance mode, heartbeats for scheduled tasks, and a page of Messenger queues.",
+            "homepage": "https://ph-il.ca",
+            "keywords": [
+                "health-check",
+                "maintenance",
+                "monitoring",
+                "symfony-bundle",
+                "uptime"
+            ],
+            "support": {
+                "issues": "https://github.com/parler-haut-interagir-librement/monitoring-bundle/issues",
+                "source": "https://github.com/parler-haut-interagir-librement/monitoring-bundle/tree/0.1.1-alpha"
+            },
+            "time": "2026-11-18T22:00:00+00:00",
+            "published-time": "2026-11-19T00:41:46+00:00"
+        },
+        {
+            "name": "phil/privacy-bundle",
+            "version": "0.3.0-alpha",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/parler-haut-interagir-librement/privacy-bundle.git",
+                "reference": "beb015d537eaffa9b0b9d3be5a79c44084e49c1a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/parler-haut-interagir-librement/privacy-bundle/zipball/beb015d537eaffa9b0b9d3be5a79c44084e49c1a",
+                "reference": "beb015d537eaffa9b0b9d3be5a79c44084e49c1a",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "ext-sodium": "*",
+                "monolog/monolog": "^3.13",
+                "phil/email-address": "^0.1@dev",
+                "phil/url": "^0.1@dev",
+                "php": ">=8.5",
+                "psr/clock": "^1.0",
+                "psr/log": "^3.0",
+                "symfony/clock": "^8.2",
+                "symfony/config": "^8.2",
+                "symfony/dependency-injection": "^8.2",
+                "symfony/event-dispatcher-contracts": "^3.8",
+                "symfony/filesystem": "^8.2",
+                "symfony/http-foundation": "^8.2",
+                "symfony/http-kernel": "^8.2",
+                "symfony/lock": "^8.2",
+                "symfony/messenger": "^8.2",
+                "symfony/routing": "^8.2",
+                "symfony/security-core": "^8.2",
+                "symfony/security-csrf": "^8.2",
+                "symfony/security-http": "^8.2",
+                "symfony/workflow": "^8.2",
+                "symfony/yaml": "^8.2",
+                "twig/twig": "^3.31"
+            },
+            "require-dev": {
+                "doctrine/dbal": "^4.6",
+                "doctrine/orm": "^3.8",
+                "doctrine/persistence": "^4.2",
+                "ext-pdo": "*",
+                "ext-zip": "*",
+                "phil/legal-notices": "^0.1@dev",
+                "phil/outbox": "^0.2@dev",
+                "phil/outbox-bundle": "^0.2@dev",
+                "phpunit/phpunit": "^13.4",
+                "psr/cache": "^3.0",
+                "symfony/asset-mapper": "^8.2",
+                "symfony/browser-kit": "^8.2",
+                "symfony/cache": "^8.2",
+                "symfony/console": "^8.2",
+                "symfony/css-selector": "^8.2",
+                "symfony/dom-crawler": "^8.2",
+                "symfony/event-dispatcher": "^8.2",
+                "symfony/framework-bundle": "^8.2",
+                "symfony/mailer": "^8.2",
+                "symfony/mime": "^8.2",
+                "symfony/monolog-bundle": "^4.1",
+                "symfony/rate-limiter": "^8.2",
+                "symfony/scheduler": "^8.2",
+                "symfony/security-bundle": "^8.2",
+                "symfony/stimulus-bundle": "^3.8",
+                "symfony/translation": "^8.2",
+                "symfony/twig-bridge": "^8.2",
+                "symfony/twig-bundle": "^8.2"
+            },
+            "suggest": {
+                "doctrine/dbal": "For phil:privacy:anonymize, and the tables of the account deletions, the consent proofs, the requests without an account, the incidents and the erasure requests",
+                "doctrine/orm": "To draw the anonymization plan from #[Anonymize] and #[PersonalData] on Doctrine entities",
+                "doctrine/persistence": "To draw the register of processing from every Doctrine entity",
+                "ext-zlib": "To compress the archives of an export, which are stored without it",
+                "phil/legal-notices-bundle": "To fill the drafts of the notices of an incident with the name, the registration and the privacy officer of the site",
+                "phil/outbox-bundle": "For erasure_workflow: one message per module through the outbox, written in the transaction of the request",
+                "phpunit/phpunit": "For AssertsDeclaredCookies, which fails a functional test on a response that sets an undeclared cookie",
+                "symfony/asset-mapper": "To serve the Stimulus controllers of the consent and of the frames held until it without a build step",
+                "symfony/console": "For phil:privacy:export, phil:privacy:erase, phil:privacy:register, phil:privacy:anonymize, phil:privacy:retention, phil:privacy:deletions, phil:privacy:incident, phil:privacy:incidents, phil:privacy:incident-notice and phil:privacy:erasure",
+                "symfony/mailer": "To send the links of the requests made without an account",
+                "symfony/rate-limiter": "Required by the requests made without an account, guest_requests.enabled",
+                "symfony/scheduler": "For the schedule phil_privacy, which runs the account deletions and the retention schedule",
+                "symfony/stimulus-bundle": "To register the Stimulus controllers of the consent and of the frames held until it"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "0.3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Phil\\PrivacyBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Philippe Gamache",
+                    "email": "philippe@ph-il.ca",
+                    "homepage": "https://github.com/ph-il",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Privacy law in a Symfony application: personal fields declared, logs redacted, data export and erasure, retention purges, cookie consent and anonymized copies.",
+            "homepage": "https://ph-il.ca",
+            "support": {
+                "issues": "https://github.com/parler-haut-interagir-librement/privacy-bundle/issues",
+                "source": "https://github.com/parler-haut-interagir-librement/privacy-bundle/tree/0.3.0-alpha"
+            },
+            "time": "2026-11-24T22:00:00+00:00",
+            "published-time": "2026-11-25T03:53:30+00:00"
         },
         {
             "name": "phil/rate-limit",
@@ -3346,6 +3970,85 @@
             "published-time": "2026-11-25T03:52:09+00:00"
         },
         {
+            "name": "phil/ux-easyadmin-bundle",
+            "version": "0.1.0-alpha",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/parler-haut-interagir-librement/ux-easyadmin-bundle.git",
+                "reference": "4218afcc85eb319375ba9338ab501f234970d09e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/parler-haut-interagir-librement/ux-easyadmin-bundle/zipball/4218afcc85eb319375ba9338ab501f234970d09e",
+                "reference": "4218afcc85eb319375ba9338ab501f234970d09e",
+                "shasum": ""
+            },
+            "require": {
+                "composer-runtime-api": "^2.2",
+                "easycorp/easyadmin-bundle": "^5.10",
+                "phil/ux-css": ">=0.1.0-alpha <1.0",
+                "php": ">=8.5",
+                "symfony/asset-mapper": "^8.2",
+                "symfony/config": "^8.2",
+                "symfony/dependency-injection": "^8.2",
+                "symfony/http-kernel": "^8.2"
+            },
+            "require-dev": {
+                "doctrine/doctrine-bundle": "^3.3",
+                "php-webdriver/webdriver": "^1.16",
+                "phpunit/phpunit": "^13.4",
+                "psr/log": "^3.0",
+                "symfony/browser-kit": "^8.2",
+                "symfony/framework-bundle": "^8.2",
+                "symfony/http-foundation": "^8.2",
+                "symfony/panther": "^2.4",
+                "symfony/routing": "^8.2",
+                "symfony/security-bundle": "^8.2",
+                "symfony/twig-bundle": "^8.2",
+                "symfony/ux-twig-component": "^3.7",
+                "twig/extra-bundle": "^3.23"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "0.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Phil\\UxEasyAdminBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Philippe Gamache",
+                    "email": "philippe@ph-il.ca",
+                    "homepage": "https://github.com/ph-il",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHIL UX in the EasyAdmin back-office: EasyAdmin's colours, corners and fonts taken from the tokens of phil/ux-css, light and dark, in EasyAdmin's cascade layers, linked on every page of every dashboard",
+            "homepage": "https://ph-il.ca",
+            "keywords": [
+                "asset-mapper",
+                "css",
+                "dark-mode",
+                "design-system",
+                "easyadmin",
+                "symfony-bundle"
+            ],
+            "support": {
+                "issues": "https://github.com/parler-haut-interagir-librement/ux-easyadmin-bundle/issues",
+                "source": "https://github.com/parler-haut-interagir-librement/ux-easyadmin-bundle/tree/0.1.0-alpha"
+            },
+            "time": "2026-11-13T15:18:50+00:00",
+            "published-time": "2026-11-13T22:46:46+00:00"
+        },
+        {
             "name": "phil/ux-kit",
             "version": "0.6.0-alpha",
             "source": {
@@ -3725,116 +4428,6 @@
             "published-time": "2019-03-25T15:31:44+00:00"
         },
         {
-            "name": "psr/http-factory",
-            "version": "1.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-fig/http-factory.git",
-                "reference": "2b4765fddfe3b508ac62f829e852b1501d3f6e8a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/http-factory/zipball/2b4765fddfe3b508ac62f829e852b1501d3f6e8a",
-                "reference": "2b4765fddfe3b508ac62f829e852b1501d3f6e8a",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.1",
-                "psr/http-message": "^1.0 || ^2.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Psr\\Http\\Message\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "PHP-FIG",
-                    "homepage": "https://www.php-fig.org/"
-                }
-            ],
-            "description": "PSR-17: Common interfaces for PSR-7 HTTP message factories",
-            "keywords": [
-                "factory",
-                "http",
-                "message",
-                "psr",
-                "psr-17",
-                "psr-7",
-                "request",
-                "response"
-            ],
-            "support": {
-                "source": "https://github.com/php-fig/http-factory"
-            },
-            "time": "2024-04-15T12:06:14+00:00",
-            "published-time": "2024-05-10T07:32:19+00:00"
-        },
-        {
-            "name": "psr/http-message",
-            "version": "2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-fig/http-message.git",
-                "reference": "402d35bcb92c70c026d1a6a9883f06b2ead23d71"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/http-message/zipball/402d35bcb92c70c026d1a6a9883f06b2ead23d71",
-                "reference": "402d35bcb92c70c026d1a6a9883f06b2ead23d71",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.2 || ^8.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Psr\\Http\\Message\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "PHP-FIG",
-                    "homepage": "https://www.php-fig.org/"
-                }
-            ],
-            "description": "Common interface for HTTP messages",
-            "homepage": "https://github.com/php-fig/http-message",
-            "keywords": [
-                "http",
-                "http-message",
-                "psr",
-                "psr-7",
-                "request",
-                "response"
-            ],
-            "support": {
-                "source": "https://github.com/php-fig/http-message/tree/2.0"
-            },
-            "time": "2023-04-04T09:54:51+00:00",
-            "published-time": "2023-04-04T09:55:35+00:00"
-        },
-        {
             "name": "psr/link",
             "version": "2.0.1",
             "source": {
@@ -3941,207 +4534,6 @@
             },
             "time": "2024-09-11T13:17:53+00:00",
             "published-time": "2024-09-11T13:21:14+00:00"
-        },
-        {
-            "name": "sentry/sentry",
-            "version": "4.38.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/getsentry/sentry-php.git",
-                "reference": "9e5f09ccb8f741dde2717f48b1c6df820f95b7c5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/getsentry/sentry-php/zipball/9e5f09ccb8f741dde2717f48b1c6df820f95b7c5",
-                "reference": "9e5f09ccb8f741dde2717f48b1c6df820f95b7c5",
-                "shasum": ""
-            },
-            "require": {
-                "ext-curl": "*",
-                "ext-json": "*",
-                "ext-mbstring": "*",
-                "guzzlehttp/psr7": "^1.8.4|^2.1.1|^3.0.0",
-                "jean85/pretty-package-versions": "^1.5|^2.0.4",
-                "php": "^7.2|^8.0",
-                "psr/log": "^1.0|^2.0|^3.0",
-                "symfony/options-resolver": "^4.4.30|^5.0.11|^6.0|^7.0|^8.0"
-            },
-            "conflict": {
-                "raven/raven": "*"
-            },
-            "require-dev": {
-                "carthage-software/mago": "1.60.2",
-                "friendsofphp/php-cs-fixer": "^3.4",
-                "guzzlehttp/guzzle": "^7.0|^8.0",
-                "guzzlehttp/promises": "^2.0.3|^3.0.0",
-                "monolog/monolog": "^1.6|^2.0|^3.0",
-                "nyholm/psr7": "^1.8",
-                "open-telemetry/api": "^1.1",
-                "open-telemetry/context": "^1.1",
-                "open-telemetry/exporter-otlp": "^1.1",
-                "open-telemetry/gen-otlp-protobuf": "^1.2.1",
-                "open-telemetry/sdk": "^1.1",
-                "open-telemetry/sem-conv": "^1.27",
-                "phpstan/phpstan": "^2.2",
-                "phpunit/phpunit": "^8.5.52|^9.6.34",
-                "spiral/roadrunner-http": "^3.6",
-                "spiral/roadrunner-worker": "^3.6"
-            },
-            "suggest": {
-                "ext-excimer": "Enable Sentry profiling with the Excimer PHP extension.",
-                "monolog/monolog": "Allow sending log messages to Sentry by using the included Monolog handler."
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "src/functions.php"
-                ],
-                "psr-4": {
-                    "Sentry\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Sentry",
-                    "email": "accounts@sentry.io"
-                }
-            ],
-            "description": "PHP SDK for Sentry (http://sentry.io)",
-            "homepage": "http://sentry.io",
-            "keywords": [
-                "crash-reporting",
-                "crash-reports",
-                "error-handler",
-                "error-monitoring",
-                "log",
-                "logging",
-                "profiling",
-                "sentry",
-                "tracing"
-            ],
-            "support": {
-                "issues": "https://github.com/getsentry/sentry-php/issues",
-                "source": "https://github.com/getsentry/sentry-php/tree/4.38.0"
-            },
-            "funding": [
-                {
-                    "url": "https://sentry.io/",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://sentry.io/pricing/",
-                    "type": "custom"
-                }
-            ],
-            "time": "2026-11-19T10:49:48+00:00",
-            "published-time": "2026-11-19T11:52:05+00:00"
-        },
-        {
-            "name": "sentry/sentry-symfony",
-            "version": "5.17.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/getsentry/sentry-symfony.git",
-                "reference": "1209ceddd7b0d86fa10b9734bee424ad3fd496f4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/getsentry/sentry-symfony/zipball/1209ceddd7b0d86fa10b9734bee424ad3fd496f4",
-                "reference": "1209ceddd7b0d86fa10b9734bee424ad3fd496f4",
-                "shasum": ""
-            },
-            "require": {
-                "guzzlehttp/psr7": "^2.1.1|^3.0",
-                "jean85/pretty-package-versions": "^1.5||^2.0",
-                "php": "^7.2||^8.0",
-                "sentry/sentry": "^4.38.0",
-                "symfony/cache-contracts": "^1.1||^2.4||^3.0",
-                "symfony/config": "^4.4.20||^5.0.11||^6.0||^7.0||^8.0",
-                "symfony/console": "^4.4.20||^5.0.11||^6.0||^7.0||^8.0",
-                "symfony/dependency-injection": "^4.4.20||^5.0.11||^6.0||^7.0||^8.0",
-                "symfony/event-dispatcher": "^4.4.20||^5.0.11||^6.0||^7.0||^8.0",
-                "symfony/http-kernel": "^4.4.20||^5.0.11||^6.0||^7.0||^8.0",
-                "symfony/polyfill-php80": "^1.22",
-                "symfony/psr-http-message-bridge": "^1.2||^2.0||^6.4||^7.0||^8.0",
-                "symfony/yaml": "^4.4.20||^5.0.11||^6.0||^7.0||^8.0"
-            },
-            "require-dev": {
-                "doctrine/dbal": "^2.13||^3.3||^4.0",
-                "doctrine/doctrine-bundle": "^2.6||^3.0",
-                "friendsofphp/php-cs-fixer": "^2.19||^3.40",
-                "masterminds/html5": "^2.8",
-                "phpstan/extension-installer": "^1.0",
-                "phpstan/phpstan": "1.12.5",
-                "phpstan/phpstan-phpunit": "1.4.0",
-                "phpstan/phpstan-symfony": "1.4.10",
-                "phpunit/phpunit": "^8.5.52||^9.6.34",
-                "symfony/browser-kit": "^4.4.20||^5.0.11||^6.0||^7.0||^8.0",
-                "symfony/cache": "^4.4.20||^5.0.11||^6.0||^7.0||^8.0",
-                "symfony/dom-crawler": "^4.4.20||^5.0.11||^6.0||^7.0||^8.0",
-                "symfony/framework-bundle": "^4.4.20||^5.0.11||^6.0||^7.0||^8.0",
-                "symfony/http-client": "^4.4.20||^5.0.11||^6.0||^7.0||^8.0",
-                "symfony/messenger": "^4.4.20||^5.0.11||^6.0||^7.0||^8.0",
-                "symfony/monolog-bundle": "^3.4||^4.0",
-                "symfony/phpunit-bridge": "^5.2.6||^6.0||^7.0||^8.0",
-                "symfony/process": "^4.4.20||^5.0.11||^6.0||^7.0||^8.0",
-                "symfony/security-core": "^4.4.20||^5.0.11||^6.0||^7.0||^8.0",
-                "symfony/security-http": "^4.4.20||^5.0.11||^6.0||^7.0||^8.0",
-                "symfony/twig-bundle": "^4.4.20||^5.0.11||^6.0||^7.0||^8.0",
-                "vimeo/psalm": "^4.3||^5.16.0"
-            },
-            "suggest": {
-                "doctrine/doctrine-bundle": "Allow distributed tracing of database queries using Sentry.",
-                "monolog/monolog": "Allow sending log messages to Sentry by using the included Monolog handler.",
-                "symfony/cache": "Allow distributed tracing of cache pools using Sentry.",
-                "symfony/twig-bundle": "Allow distributed tracing of Twig template rendering using Sentry."
-            },
-            "type": "symfony-bundle",
-            "autoload": {
-                "files": [
-                    "src/aliases.php"
-                ],
-                "psr-4": {
-                    "Sentry\\SentryBundle\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Sentry",
-                    "email": "accounts@sentry.io"
-                }
-            ],
-            "description": "Symfony integration for Sentry (http://getsentry.com)",
-            "homepage": "http://getsentry.com",
-            "keywords": [
-                "errors",
-                "logging",
-                "sentry",
-                "symfony"
-            ],
-            "support": {
-                "issues": "https://github.com/getsentry/sentry-symfony/issues",
-                "source": "https://github.com/getsentry/sentry-symfony/tree/5.17.0"
-            },
-            "funding": [
-                {
-                    "url": "https://sentry.io/",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://sentry.io/pricing/",
-                    "type": "custom"
-                }
-            ],
-            "time": "2026-11-19T14:41:16+00:00",
-            "published-time": "2026-11-19T14:44:57+00:00"
         },
         {
             "name": "symfony/asset",
@@ -6879,6 +7271,96 @@
             "published-time": "2026-09-12T21:35:28+00:00"
         },
         {
+            "name": "symfony/notifier",
+            "version": "v8.2.0-RC1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/notifier.git",
+                "reference": "bae37121b92b2aa45fd1d894ec9097eec8ca49bf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/notifier/zipball/bae37121b92b2aa45fd1d894ec9097eec8ca49bf",
+                "reference": "bae37121b92b2aa45fd1d894ec9097eec8ca49bf",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.4.1",
+                "psr/log": "^1|^2|^3",
+                "symfony/deprecation-contracts": "^2.5|^3"
+            },
+            "conflict": {
+                "symfony/config": "<8.2",
+                "symfony/dependency-injection": "<8.2",
+                "symfony/event-dispatcher-contracts": "<2.5",
+                "symfony/http-client-contracts": "<2.5"
+            },
+            "require-dev": {
+                "symfony/clock": "^7.4|^8.0",
+                "symfony/config": "^8.2",
+                "symfony/dependency-injection": "^8.2",
+                "symfony/event-dispatcher": "^6.4|^7.0|^8.0",
+                "symfony/event-dispatcher-contracts": "^2.5|^3",
+                "symfony/http-client": "^7.4|^8.0",
+                "symfony/http-client-contracts": "^2.5|^3",
+                "symfony/http-foundation": "^7.4|^8.0",
+                "symfony/messenger": "^7.4|^8.0",
+                "symfony/webhook": "^7.4|^8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Notifier\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Sends notifications via one or more channels (email, SMS, ...)",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "notification",
+                "notifier"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/notifier/tree/v8.2.0-RC1"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2026-11-14T13:58:34+00:00",
+            "published-time": "2026-11-25T09:34:55+00:00"
+        },
+        {
             "name": "symfony/options-resolver",
             "version": "v8.2.0-BETA1",
             "source": {
@@ -7810,94 +8292,6 @@
             "published-time": "2026-11-25T09:34:34+00:00"
         },
         {
-            "name": "symfony/psr-http-message-bridge",
-            "version": "v8.2.0-RC1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/psr-http-message-bridge.git",
-                "reference": "3d6c3785ee0aa498f6d912f1af7cf48fd978705b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/psr-http-message-bridge/zipball/3d6c3785ee0aa498f6d912f1af7cf48fd978705b",
-                "reference": "3d6c3785ee0aa498f6d912f1af7cf48fd978705b",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=8.4.1",
-                "psr/http-message": "^1.0|^2.0",
-                "symfony/http-foundation": "^7.4|^8.0"
-            },
-            "conflict": {
-                "php-http/discovery": "<1.15"
-            },
-            "require-dev": {
-                "nyholm/psr7": "^1.1",
-                "php-http/discovery": "^1.15",
-                "psr/log": "^1.1.4|^2|^3",
-                "symfony/browser-kit": "^7.4|^8.0",
-                "symfony/config": "^7.4|^8.0",
-                "symfony/event-dispatcher": "^7.4|^8.0",
-                "symfony/framework-bundle": "^7.4|^8.0",
-                "symfony/http-kernel": "^7.4|^8.0",
-                "symfony/runtime": "^7.4|^8.0"
-            },
-            "type": "symfony-bridge",
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Bridge\\PsrHttpMessage\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "PSR HTTP message bridge",
-            "homepage": "https://symfony.com",
-            "keywords": [
-                "http",
-                "http-message",
-                "psr-17",
-                "psr-7"
-            ],
-            "support": {
-                "source": "https://github.com/symfony/psr-http-message-bridge/tree/v8.2.0-RC1"
-            },
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://github.com/nicolas-grekas",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2026-11-24T14:12:36+00:00",
-            "published-time": "2026-11-25T09:36:38+00:00"
-        },
-        {
             "name": "symfony/rate-limiter",
             "version": "v8.2.0-RC1",
             "source": {
@@ -8156,6 +8550,114 @@
             "published-time": "2026-11-13T17:31:52+00:00"
         },
         {
+            "name": "symfony/security-bundle",
+            "version": "v8.2.0-RC1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/security-bundle.git",
+                "reference": "7ef47cf2b6eefb9893f671539828f36c8753dd2d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/security-bundle/zipball/7ef47cf2b6eefb9893f671539828f36c8753dd2d",
+                "reference": "7ef47cf2b6eefb9893f671539828f36c8753dd2d",
+                "shasum": ""
+            },
+            "require": {
+                "composer-runtime-api": ">=2.1",
+                "ext-xml": "*",
+                "php": ">=8.4.1",
+                "symfony/clock": "^7.4|^8.0",
+                "symfony/config": "^8.2",
+                "symfony/dependency-injection": "^8.2",
+                "symfony/deprecation-contracts": "^2.5|^3",
+                "symfony/event-dispatcher": "^8.2",
+                "symfony/http-foundation": "^7.4.23|^8.1.11",
+                "symfony/http-kernel": "^7.4|^8.0",
+                "symfony/password-hasher": "^7.4|^8.0",
+                "symfony/security-core": "^8.2",
+                "symfony/security-csrf": "^8.2",
+                "symfony/security-http": "^8.2",
+                "symfony/service-contracts": "^2.5|^3"
+            },
+            "conflict": {
+                "symfony/console": "<8.2",
+                "symfony/framework-bundle": "<8.2"
+            },
+            "require-dev": {
+                "symfony/asset": "^7.4|^8.0",
+                "symfony/browser-kit": "^7.4|^8.0",
+                "symfony/console": "^8.2",
+                "symfony/css-selector": "^7.4|^8.0",
+                "symfony/dom-crawler": "^7.4|^8.0",
+                "symfony/expression-language": "^7.4|^8.0",
+                "symfony/form": "^7.4|^8.0",
+                "symfony/framework-bundle": "^8.2",
+                "symfony/http-client": "^7.4|^8.0",
+                "symfony/ldap": "^7.4|^8.0",
+                "symfony/lock": "^7.4|^8.0",
+                "symfony/process": "^7.4|^8.0",
+                "symfony/property-info": "^7.4|^8.0",
+                "symfony/rate-limiter": "^7.4|^8.0",
+                "symfony/runtime": "^7.4|^8.0",
+                "symfony/serializer": "^7.4|^8.0",
+                "symfony/translation": "^7.4|^8.0",
+                "symfony/twig-bridge": "^8.2",
+                "symfony/twig-bundle": "^7.4|^8.0",
+                "symfony/validator": "^7.4|^8.0",
+                "symfony/yaml": "^7.4|^8.0",
+                "web-token/jwt-library": "^3.3.2|^4.0"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Bundle\\SecurityBundle\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Provides a tight integration of the Security component into the Symfony full-stack framework",
+            "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/security-bundle/tree/v8.2.0-RC1"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2026-11-24T18:01:43+00:00",
+            "published-time": "2026-11-25T09:35:28+00:00"
+        },
+        {
             "name": "symfony/security-core",
             "version": "v8.2.0-RC1",
             "source": {
@@ -8314,6 +8816,100 @@
             ],
             "time": "2026-08-03T16:34:37+00:00",
             "published-time": "2026-11-04T12:38:43+00:00"
+        },
+        {
+            "name": "symfony/security-http",
+            "version": "v8.2.0-RC1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/security-http.git",
+                "reference": "2a239c8ee0ec749be0245f2ff310158ea0410565"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/security-http/zipball/2a239c8ee0ec749be0245f2ff310158ea0410565",
+                "reference": "2a239c8ee0ec749be0245f2ff310158ea0410565",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.4.1",
+                "symfony/deprecation-contracts": "^2.5|^3",
+                "symfony/http-foundation": "^7.4|^8.0",
+                "symfony/http-kernel": "^8.2",
+                "symfony/polyfill-mbstring": "^1.0",
+                "symfony/property-access": "^7.4|^8.0",
+                "symfony/security-core": "^8.2",
+                "symfony/service-contracts": "^2.5|^3"
+            },
+            "conflict": {
+                "symfony/event-dispatcher": "<8.2",
+                "symfony/http-client-contracts": "<3.0",
+                "symfony/rate-limiter": "<7.4.5|>=8,<8.0.5",
+                "symfony/security-bundle": "<8.2"
+            },
+            "require-dev": {
+                "psr/log": "^1|^2|^3",
+                "symfony/cache": "^7.4.8|^8.0.8",
+                "symfony/clock": "^7.4|^8.0",
+                "symfony/console": "^7.4|^8.0",
+                "symfony/expression-language": "^7.4|^8.0",
+                "symfony/http-client": "^7.4|^8.0",
+                "symfony/http-client-contracts": "^3.0",
+                "symfony/notifier": "^7.4|^8.0",
+                "symfony/rate-limiter": "^7.4|^8.0",
+                "symfony/routing": "^7.4|^8.0",
+                "symfony/security-csrf": "^7.4|^8.0",
+                "symfony/translation": "^7.4|^8.0",
+                "web-token/jwt-library": "^3.3.2|^4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Security\\Http\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Security Component - HTTP Integration",
+            "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/security-http/tree/v8.2.0-RC1"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2026-11-24T18:01:43+00:00",
+            "published-time": "2026-11-25T09:34:44+00:00"
         },
         {
             "name": "symfony/service-contracts",
@@ -9758,6 +10354,104 @@
             "published-time": "2026-11-04T12:38:06+00:00"
         },
         {
+            "name": "symfony/workflow",
+            "version": "v8.2.0-RC1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/workflow.git",
+                "reference": "e4b293daeaab3ecb7451dffe2c8ead5ae9010ee4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/workflow/zipball/e4b293daeaab3ecb7451dffe2c8ead5ae9010ee4",
+                "reference": "e4b293daeaab3ecb7451dffe2c8ead5ae9010ee4",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.4.1"
+            },
+            "conflict": {
+                "symfony/config": "<8.2",
+                "symfony/console": "<8.2",
+                "symfony/dependency-injection": "<8.2",
+                "symfony/event-dispatcher": "<8.2"
+            },
+            "require-dev": {
+                "psr/log": "^1|^2|^3",
+                "symfony/config": "^8.2",
+                "symfony/console": "^8.2",
+                "symfony/dependency-injection": "^8.2",
+                "symfony/error-handler": "^7.4|^8.0",
+                "symfony/event-dispatcher": "^8.2",
+                "symfony/expression-language": "^7.4|^8.0",
+                "symfony/finder": "^7.4|^8.0",
+                "symfony/http-kernel": "^7.4|^8.0",
+                "symfony/security-core": "^7.4|^8.0",
+                "symfony/stopwatch": "^7.4|^8.0",
+                "symfony/validator": "^7.4|^8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Workflow\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Grégoire Pineau",
+                    "email": "lyrixx@lyrixx.info"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Provides tools for managing a workflow or finite state machine",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "petrinet",
+                "place",
+                "state",
+                "statemachine",
+                "transition",
+                "workflow"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/workflow/tree/v8.2.0-RC1"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2026-11-14T13:58:34+00:00",
+            "published-time": "2026-11-25T09:34:27+00:00"
+        },
+        {
             "name": "symfony/yaml",
             "version": "v8.2.0-RC1",
             "source": {
@@ -10356,6 +11050,70 @@
             "published-time": "2026-11-24T15:50:07+00:00"
         },
         {
+            "name": "fakerphp/faker",
+            "version": "v1.24.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FakerPHP/Faker.git",
+                "reference": "e0ee18eb1e6dc3cda3ce9fd97e5a0689a88a64b5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FakerPHP/Faker/zipball/e0ee18eb1e6dc3cda3ce9fd97e5a0689a88a64b5",
+                "reference": "e0ee18eb1e6dc3cda3ce9fd97e5a0689a88a64b5",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4 || ^8.0",
+                "psr/container": "^1.0 || ^2.0",
+                "symfony/deprecation-contracts": "^2.2 || ^3.0"
+            },
+            "conflict": {
+                "fzaninotto/faker": "*"
+            },
+            "require-dev": {
+                "bamarni/composer-bin-plugin": "^1.4.1",
+                "doctrine/persistence": "^1.3 || ^2.0",
+                "ext-intl": "*",
+                "phpunit/phpunit": "^9.5.26",
+                "symfony/phpunit-bridge": "^5.4.16"
+            },
+            "suggest": {
+                "doctrine/orm": "Required to use Faker\\ORM\\Doctrine",
+                "ext-curl": "Required by Faker\\Provider\\Image to download images.",
+                "ext-dom": "Required by Faker\\Provider\\HtmlLorem for generating random HTML.",
+                "ext-iconv": "Required by Faker\\Provider\\ru_RU\\Text::realText() for generating real Russian text.",
+                "ext-mbstring": "Required for multibyte Unicode string functionality."
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Faker\\": "src/Faker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "François Zaninotto"
+                }
+            ],
+            "description": "Faker is a PHP library that generates fake data for you.",
+            "keywords": [
+                "data",
+                "faker",
+                "fixtures"
+            ],
+            "support": {
+                "issues": "https://github.com/FakerPHP/Faker/issues",
+                "source": "https://github.com/FakerPHP/Faker/tree/v1.24.1"
+            },
+            "time": "2024-11-21T13:46:39+00:00",
+            "published-time": "2024-11-21T13:47:18+00:00"
+        },
+        {
             "name": "fidry/cpu-core-counter",
             "version": "1.4.1",
             "source": {
@@ -10417,6 +11175,67 @@
             ],
             "time": "2026-09-29T22:11:39+00:00",
             "published-time": "2026-09-29T22:12:43+00:00"
+        },
+        {
+            "name": "jean85/pretty-package-versions",
+            "version": "2.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Jean85/pretty-package-versions.git",
+                "reference": "4d7aa5dab42e2a76d99559706022885de0e18e1a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Jean85/pretty-package-versions/zipball/4d7aa5dab42e2a76d99559706022885de0e18e1a",
+                "reference": "4d7aa5dab42e2a76d99559706022885de0e18e1a",
+                "shasum": ""
+            },
+            "require": {
+                "composer-runtime-api": "^2.1.0",
+                "php": "^7.4|^8.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.2",
+                "jean85/composer-provided-replaced-stub-package": "^1.0",
+                "phpstan/phpstan": "^2.0",
+                "phpunit/phpunit": "^7.5|^8.5|^9.6",
+                "rector/rector": "^2.0",
+                "vimeo/psalm": "^4.3 || ^5.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Jean85\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alessandro Lai",
+                    "email": "alessandro.lai85@gmail.com"
+                }
+            ],
+            "description": "A library to get pretty versions strings of installed dependencies",
+            "keywords": [
+                "composer",
+                "package",
+                "release",
+                "versions"
+            ],
+            "support": {
+                "issues": "https://github.com/Jean85/pretty-package-versions/issues",
+                "source": "https://github.com/Jean85/pretty-package-versions/tree/2.1.1"
+            },
+            "time": "2025-03-19T14:43:43+00:00",
+            "published-time": "2025-03-19T14:50:06+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -13076,6 +13895,199 @@
             ],
             "time": "2026-11-14T13:58:34+00:00",
             "published-time": "2026-11-25T09:34:44+00:00"
+        },
+        {
+            "name": "zenstruck/assert",
+            "version": "v1.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zenstruck/assert.git",
+                "reference": "1e32d48847d4e82c345112ca226b21a1a792af0a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zenstruck/assert/zipball/1e32d48847d4e82c345112ca226b21a1a792af0a",
+                "reference": "1e32d48847d4e82c345112ca226b21a1a792af0a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1",
+                "symfony/polyfill-php81": "^1.23",
+                "symfony/var-exporter": "^5.4|^6.0|^7.0|^8.0"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^1.4",
+                "phpunit/phpunit": "^9.5.21",
+                "symfony/phpunit-bridge": "^6.3|^7.0|^8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Zenstruck\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kevin Bond",
+                    "email": "kevinbond@gmail.com"
+                }
+            ],
+            "description": "Standalone, lightweight, framework agnostic, test assertion library.",
+            "homepage": "https://github.com/zenstruck/assert",
+            "keywords": [
+                "assertion",
+                "phpunit",
+                "test"
+            ],
+            "support": {
+                "issues": "https://github.com/zenstruck/assert/issues",
+                "source": "https://github.com/zenstruck/assert/tree/v1.7.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/kbond",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/nikophil",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-12-07T01:59:12+00:00",
+            "published-time": "2025-12-07T01:59:15+00:00"
+        },
+        {
+            "name": "zenstruck/foundry",
+            "version": "v2.17.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zenstruck/foundry.git",
+                "reference": "af9a39400231bf92ea128235b81b30c2287443ba"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zenstruck/foundry/zipball/af9a39400231bf92ea128235b81b30c2287443ba",
+                "reference": "af9a39400231bf92ea128235b81b30c2287443ba",
+                "shasum": ""
+            },
+            "require": {
+                "fakerphp/faker": "^1.24",
+                "php": ">=8.1",
+                "symfony/deprecation-contracts": "^2.2|^3.0",
+                "symfony/polyfill-deepclone": "^1.42",
+                "symfony/polyfill-php84": "^1.32",
+                "symfony/polyfill-php85": "^1.33",
+                "symfony/property-access": "^6.4|^7.0|^8.0",
+                "symfony/property-info": "^6.4|^7.0|^8.0",
+                "symfony/var-exporter": "^6.4.9|~7.0.9|^7.1.2|^8.0",
+                "zenstruck/assert": "^1.4"
+            },
+            "conflict": {
+                "doctrine/cache": "<1.12.1",
+                "doctrine/persistence": "<2.0"
+            },
+            "require-dev": {
+                "bamarni/composer-bin-plugin": "^1.8",
+                "dama/doctrine-test-bundle": "^8.0",
+                "doctrine/collections": "^1.7|^2.0",
+                "doctrine/common": "^3.2.2",
+                "doctrine/doctrine-bundle": "^2.10|^3.0",
+                "doctrine/doctrine-migrations-bundle": "^2.2|^3.0|^4.0",
+                "doctrine/mongodb-odm": "^2.4",
+                "doctrine/mongodb-odm-bundle": "^4.6|^5.0",
+                "doctrine/orm": "^2.16|^3.0",
+                "doctrine/persistence": "^2.0|^3.0|^4.0",
+                "phpunit/phpunit": "^9.5.0 || ^10.0 || ^11.0 || ^12.0 || ~13.1.0",
+                "symfony/browser-kit": "^6.4|^7.0|^8.0",
+                "symfony/console": "^6.4|^7.0|^8.0",
+                "symfony/dotenv": "^6.4|^7.0|^8.0",
+                "symfony/event-dispatcher": "^6.4|^7.0|^8.0",
+                "symfony/flex": "^2.10",
+                "symfony/framework-bundle": "^6.4|^7.0|^8.0",
+                "symfony/maker-bundle": "^1.55",
+                "symfony/phpunit-bridge": "^6.4.26|^7.0|^8.0",
+                "symfony/routing": "^6.4|^7.0|^8.0",
+                "symfony/runtime": "^6.4|^7.0|^8.0",
+                "symfony/translation-contracts": "^3.4",
+                "symfony/uid": "^6.4|^7.0|^8.0",
+                "symfony/var-dumper": "^6.4|^7.0|^8.0",
+                "symfony/yaml": "^6.4|^7.0|^8.0",
+                "webmozart/assert": "^1.11"
+            },
+            "type": "library",
+            "extra": {
+                "psalm": {
+                    "pluginClass": "Zenstruck\\Foundry\\Psalm\\FoundryPlugin"
+                },
+                "symfony": {
+                    "allow-contrib": false
+                },
+                "bamarni-bin": {
+                    "bin-links": true,
+                    "forward-command": false,
+                    "target-directory": "bin/tools"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/functions.php",
+                    "src/Persistence/functions.php",
+                    "src/symfony_console.php"
+                ],
+                "psr-4": {
+                    "Zenstruck\\Foundry\\": "src/",
+                    "Zenstruck\\Foundry\\Psalm\\": "utils/psalm",
+                    "Zenstruck\\Foundry\\Utils\\Rector\\": "utils/rector/src/"
+                },
+                "exclude-from-classmap": [
+                    "src/Test/Behat/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kevin Bond",
+                    "email": "kevinbond@gmail.com"
+                },
+                {
+                    "name": "Nicolas PHILIPPE",
+                    "email": "nikophil@gmail.com"
+                }
+            ],
+            "description": "A model factory library for creating expressive, auto-completable, on-demand dev/test fixtures with Symfony and Doctrine.",
+            "homepage": "https://github.com/zenstruck/foundry",
+            "keywords": [
+                "Fixture",
+                "dev",
+                "doctrine",
+                "factory",
+                "faker",
+                "symfony",
+                "test"
+            ],
+            "support": {
+                "issues": "https://github.com/zenstruck/foundry/issues",
+                "source": "https://github.com/zenstruck/foundry/tree/v2.17.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/kbond",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/nikophil",
+                    "type": "github"
+                }
+            ],
+            "time": "2026-11-18T11:18:19+00:00",
+            "published-time": "2026-11-18T11:18:24+00:00"
         }
     ],
     "aliases": [],
@@ -13086,13 +14098,20 @@
         "phil/contact-form-bundle": 15,
         "phil/ddd-bundle": 15,
         "phil/dev-tools": 15,
+        "phil/doctrine-behaviours": 15,
+        "phil/doctrine-behaviours-bundle": 15,
+        "phil/error-tracking-bundle": 15,
         "phil/legal-notices-bundle": 15,
+        "phil/menu-bundle": 15,
+        "phil/monitoring-bundle": 15,
+        "phil/privacy-bundle": 15,
         "phil/sitemap": 15,
         "phil/sitemap-bundle": 15,
         "phil/spam-protection-bundle": 15,
         "phil/structured-data-bundle": 15,
         "phil/ux-bundle": 15,
         "phil/ux-css": 15,
+        "phil/ux-easyadmin-bundle": 15,
         "phil/ux-kit": 15,
         "phil/well-known-bundle": 15
     },

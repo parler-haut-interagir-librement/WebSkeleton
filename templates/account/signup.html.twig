@@ -1,0 +1,26 @@
+{#-
+ # The sign-up page: the account is created by the command bus, then signed in.
+ #}
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'signup.title'|trans }} · {{ parent() }}{% endblock %}
+
+{% block body %}
+    <h1>{{ 'signup.title'|trans }}</h1>
+
+    {{ form_start(form, {attr: {class: 'isStack'}}) }}
+        {{ form_errors(form) }}
+        {{ form_row(form.username, {label: 'signup.username', attr: {autocomplete: 'username'}}) }}
+        {{ form_row(form.email, {label: 'signup.email', attr: {autocomplete: 'email'}}) }}
+        {{ form_row(form.plainPassword.first, {
+            label: 'signup.password',
+            help: 'signup.password_hint',
+            help_translation_parameters: {'%count%': password_min_length},
+            attr: {autocomplete: 'new-password', minlength: password_min_length},
+        }) }}
+        {{ form_row(form.plainPassword.second, {label: 'signup.confirm', attr: {autocomplete: 'new-password'}}) }}
+        <p><twig:Button type="submit">{{ 'signup.submit'|trans }}</twig:Button></p>
+    {{ form_end(form) }}
+
+    <p><a href="{{ path('account_login') }}">{{ 'signup.login'|trans }}</a></p>
+{% endblock %}

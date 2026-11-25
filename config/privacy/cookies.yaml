@@ -1,0 +1,6 @@
+# What the site writes in the browser, by consent category of phil_privacy.consent.categories: the cookie policy and
+# the page of the choices are drawn from it. A cookie the site starts writing is declared here first.
+session:
+    PHPSESSID:
+        purpose: { en: Keeps you signed in, fr: Garde votre session ouverte }
+        duration: session

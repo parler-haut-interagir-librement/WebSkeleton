@@ -1,0 +1,39 @@
+{#-
+ # The page of the signed-in member: its account, a link to its privacy choices and the button that signs it out.
+ #}
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'account.title'|trans }} · {{ parent() }}{% endblock %}
+
+{% block body %}
+    <hgroup>
+        <h1>{{ 'account.title'|trans }}</h1>
+        <p>{{ 'account.welcome'|trans({'%username%': user.userIdentifier}) }}</p>
+    </hgroup>
+
+    <table>
+        <tr>
+            <th scope="row">{{ 'account.username'|trans }}</th>
+            <td>{{ user.username }}</td>
+        </tr>
+        <tr>
+            <th scope="row">{{ 'account.email'|trans }}</th>
+            <td>{{ user.email }}</td>
+        </tr>
+        <tr>
+            <th scope="row">{{ 'account.roles'|trans }}</th>
+            <td>{% for role in user.roles %}<twig:Badge>{{ role }}</twig:Badge> {% endfor %}</td>
+        </tr>
+        <tr>
+            <th scope="row">{{ 'account.created_at'|trans }}</th>
+            <td>{{ user.createdAt|format_datetime('medium', 'short') }}</td>
+        </tr>
+    </table>
+
+    <p><a href="{{ path('phil_privacy_preferences') }}">{{ 'account.privacy'|trans }}</a></p>
+
+    <form method="post" action="{{ path('account_logout') }}">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('logout') }}">
+        <twig:Button type="submit">{{ 'account.logout'|trans }}</twig:Button>
+    </form>
+{% endblock %}

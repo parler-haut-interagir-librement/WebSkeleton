@@ -26,6 +26,11 @@ theme:
 menu:
   home: Home
   contact: Contact
+  login: Sign in
+  signup: Sign up
+  account: My account
+  admin: Administration
+  logout: Sign out
 
 home:
   title: Welcome
@@ -57,3 +62,48 @@ error:
   title: Error %code%
   text: 'Sorry, an error occurred: %text% (%code%).'
   home: Back to the home page
+
+login:
+  title: Sign in
+  username: User name
+  password: Password
+  submit: Sign in
+  signup: No account yet? Sign up
+
+signup:
+  title: Sign up
+  username: User name
+  email: Email address
+  password: Password
+  password_hint: At least %count% characters.
+  confirm: Password, again
+  submit: Create my account
+  login: Already a member? Sign in
+
+account:
+  title: My account
+  welcome: 'Welcome, %username%.'
+  username: User name
+  email: Email address
+  roles: Roles
+  created_at: Member since
+  privacy: My privacy choices, the export of my data and the deletion of my account
+  logout: Sign out
+
+admin:
+  menu:
+    dashboard: Dashboard
+    users: Users
+    errors: Errors
+    site: Back to the site
+    account: My account
+  dashboard:
+    title: Administration
+    text: The administration of the site, for its administrators only. Each context adds its CRUD controllers in its Infrastructure/Http/Admin folder, and a link in the menu of the DashboardController.
+  user:
+    singular: User
+    plural: Users
+    username: User name
+    email: Email address
+    roles: Roles
+    created_at: Created on

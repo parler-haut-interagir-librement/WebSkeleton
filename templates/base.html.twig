@@ -34,11 +34,19 @@
 
     <nav aria-label="{{ 'layout.menu'|trans }}">
         <ul class="isCluster">
-            {%- for item in knp_menu_get('main').children %}
-            <li><a href="{{ item.uri }}"{{ item.uri == app.request.pathInfo ? ' aria-current="page"' }}>{{ item.label|trans }}</a></li>
+            {%- set _menu = menu('main') %}
+            {%- for item in _menu.items %}
+            <li><a href="{{ path(item.route, item.routeParameters) }}"{{ item.current ? ' aria-current="page"' }}>{{ item.label|trans({}, _menu.translationDomain) }}</a></li>
             {%- endfor %}
         </ul>
     </nav>
+
+    {%- if is_granted('IS_AUTHENTICATED') %}
+    <form method="post" action="{{ path('account_logout') }}">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('logout') }}">
+        <twig:Button type="submit" variant="secondary">{{ 'menu.logout'|trans }}</twig:Button>
+    </form>
+    {%- endif %}
 
     <nav aria-label="{{ 'layout.languages'|trans }}">
         <ul class="isCluster">

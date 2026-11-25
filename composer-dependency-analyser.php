@@ -12,34 +12,32 @@ return new Configuration()
     ->addPathToScan(__DIR__.'/src', isDev: false)
     ->addPathToScan(__DIR__.'/migrations', isDev: false)
     ->addPathToScan(__DIR__.'/tests', isDev: true)
+    ->addPathToScan(__DIR__.'/fixtures', isDev: true)
     // Used through the configuration, the templates, the front controller or the console, never by a class of src/;
-    // Doctrine is ready for the entities of src/<Context>/Infrastructure/Persistence/Doctrine/Entity/.
+    // phil/monitoring-bundle only gives the interface phil/error-tracking-bundle 0.1.0-alpha needs: see phil-dev.php.
     ->ignoreErrorsOnPackages([
-        'doctrine/dbal',
         'doctrine/doctrine-bundle',
         'doctrine/doctrine-migrations-bundle',
-        'doctrine/migrations',
-        'doctrine/orm',
         'doctrine/persistence',
-        'knplabs/knp-menu-bundle',
         'nelmio/cors-bundle',
         'phil/accessibility-statement-bundle',
         'phil/browser-security-bundle',
         'phil/contact-form-bundle',
+        'phil/doctrine-behaviours-bundle',
         'phil/legal-notices-bundle',
+        'phil/monitoring-bundle',
         'phil/sitemap-bundle',
         'phil/spam-protection-bundle',
         'phil/structured-data-bundle',
         'phil/ux-bundle',
         'phil/ux-css',
+        'phil/ux-easyadmin-bundle',
         'phil/ux-kit',
         'phil/well-known-bundle',
-        'sentry/sentry-symfony',
         'symfony/asset',
         'symfony/asset-mapper',
         'symfony/console',
         'symfony/flex',
-        'symfony/doctrine-bridge',
         'symfony/intl',
         'symfony/lock',
         'symfony/mailer',
@@ -51,7 +49,6 @@ return new Configuration()
         'symfony/stimulus-bundle',
         'symfony/translation',
         'symfony/twig-bundle',
-        'symfony/uid',
         'symfony/ux-turbo',
         'symfony/ux-twig-component',
         'symfony/web-link',
