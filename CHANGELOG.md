@@ -54,4 +54,6 @@ built on [WebSymfony](https://github.com/parler-haut-interagir-librement/WebSymf
   the migrations on a fresh SQLite database and compares its schema with the Doctrine mapping.
 - A GitHub Actions workflow: security, tests on PHP 8.5 and 8.6 with the coverage threshold and the migrations against
   the Doctrine mapping, lints without a database; every action pinned to a commit, the checkout without credentials.
+- The security files of `phil/dev-tools` in `.github/`: Dependabot with a cooldown of seven days for the root, each
+  tool of `vendor-bin/` and the actions, the OpenSSF Scorecard and zizmor, their actions pinned to a commit.
 - The documented steps that sign members in with `phil/identity-client-bundle`, and add more recipes of the PHIL UX kit.
