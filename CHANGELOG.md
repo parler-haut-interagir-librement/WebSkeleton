@@ -50,5 +50,8 @@ built on [WebSymfony](https://github.com/parler-haut-interagir-librement/WebSymf
 - `compose.yaml` with FrankenPHP in worker mode and PostgreSQL, MySQL documented as the other choice, the Symfony binary
   with SQLite as the lighter one.
 - The five test suites with the code coverage at 100 %, the quality gates of `phil/dev-tools` and the tasks in Castor,
-  among them `castor secret`, which writes a random `APP_SECRET` to `.env.local`.
+  among them `castor secret`, which writes a random `APP_SECRET` to `.env.local`, and `castor test:schema`, which runs
+  the migrations on a fresh SQLite database and compares its schema with the Doctrine mapping.
+- A GitHub Actions workflow: security, tests on PHP 8.5 and 8.6 with the coverage threshold and the migrations against
+  the Doctrine mapping, lints without a database; every action pinned to a commit, the checkout without credentials.
 - The documented steps that sign members in with `phil/identity-client-bundle`, and add more recipes of the PHIL UX kit.

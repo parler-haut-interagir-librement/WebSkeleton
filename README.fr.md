@@ -1,4 +1,4 @@
-<!-- phil-dev source-sha256=6475b33ca2be6cbaa038065fbb1686955d799fd2ae48bec7260ddf4ed2585b3c -->
+<!-- phil-dev source-sha256=2bbb4d8fe0f18a2f8a639245078b5bb42841004344bb255390983f2d72ae27fa -->
 # WebSkeleton 🦴
 
 [![Latest Version](https://img.shields.io/packagist/v/phil/webskeleton.svg?style=flat-square)](https://packagist.org/packages/phil/webskeleton)
@@ -344,11 +344,12 @@ appartiennent au site. Les autres viennent du kit avec le Symfony UX Toolkit :
 | `castor test` | Toutes les suites PHPUnit ; `--filter` et `--options` passent à PHPUnit. |
 | `castor test:unit`, `test:integration`, `test:api`, `test:functional`, `test:e2e` | Une suite. |
 | `castor test:next` | Les tests sur la prochaine version de PHP, dans son image Docker. |
+| `castor test:schema` | Les migrations sur une base SQLite neuve, puis son schéma comparé au mappage Doctrine. |
 | `castor coverage` | Le rapport de couverture HTML dans `var/coverage/`, et son seuil. |
 | `castor infection` | Les tests de mutation. |
 | `castor lint` | Toutes les vérifications et l'analyse statique. |
 | `castor fix` | Rector, PHP-CS-Fixer, Twig-CS-Fixer, Biome et composer-normalize. |
-| `castor ci` | L'intégration continue, en local : la couverture, puis toutes les vérifications. |
+| `castor ci` | L'intégration continue, en local : la couverture, `test:schema`, puis toutes les vérifications. |
 | `castor hooks` | Les crochets git : les vérifications rapides des fichiers indexés avant chaque commit. |
 
 ## Portes de qualité 🚦
