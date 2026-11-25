@@ -1,0 +1,75 @@
+brand:
+  name: 'Proclaim Honestly, Interact Liberally: WebSymfony'
+  copyright: 'Proclaim Honestly, Interact Liberally'
+  info: WebSymfony is a Symfony web application template on steroids, ready to use.
+
+footer:
+  all_rights: All rights reserved
+  credits: 'Built on MicroSymfony, by %strangebuzz% and <a href="%website%/graphs/contributors">its contributors</a>.'
+  symfony: Symfony™ is a trademark of <a target="_blank" rel="noopener noreferrer" href="https://symfony.com/license">Symfony SAS</a>.
+
+layout:
+  skip: Skip to the content
+  menu: Main menu
+  account: Account
+  my_account: My account
+  admin: Administration
+  login: Sign in
+  signup: Sign up
+  logout: Sign out
+  github: 'The WebSymfony GitHub repository'
+
+theme:
+  to_dark: Switch to dark mode
+  to_light: Switch to light mode
+
+menu:
+  readme: README
+  hello: Hello world!
+  stimulus: JavaScript with Stimulus
+  composer: The composer.json file
+  form: Form example
+  users: Users list
+  error: Custom error page
+
+login:
+  title: Sign in
+  username: User name
+  password: Password
+  submit: Sign in
+  signup: No account yet? Sign up
+
+signup:
+  title: Sign up
+  username: User name
+  email: Email address
+  password: Password
+  confirm: Password again
+  password_hint: At least %count% characters.
+  submit: Create my account
+  login: Already a member? Sign in
+
+account:
+  title: My account
+  welcome: 'Welcome, %username%.'
+  username: User name
+  email: Email address
+  roles: Roles
+  created_at: Member since
+
+admin:
+  menu:
+    dashboard: Dashboard
+    users: Users
+    site: Back to the site
+    logout: Sign out
+  dashboard:
+    title: Administration
+    text: The administration of the site, for its administrators only. Add a CRUD controller in src/Controller/Admin/ and a link in DashboardController::configureMenuItems().
+  user:
+    singular: User
+    plural: Users
+    username: User name
+    email: Email address
+    roles: Roles
+    created_at: Created at
