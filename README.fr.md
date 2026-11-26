@@ -1,4 +1,4 @@
-<!-- phil-dev source-sha256=0aab6eae523d822b3cd562a17fb22e0c709bfe496789f5e05e4b6ca7ca5879c5 -->
+<!-- phil-dev source-sha256=1fad5c9aef1b3b973d745888fcbd5399b2763f5ecfb44dbb4b7165d0fc2660e4 -->
 # WebSkeleton 🦴
 
 [![Latest Version](https://img.shields.io/packagist/v/phil/webskeleton.svg?style=flat-square)](https://packagist.org/packages/phil/webskeleton)
@@ -136,19 +136,21 @@ Avec le binaire Symfony, mettez la même variable dans `.env.local`, avec l'hôt
 | La déclaration d'accessibilité, par `phil/accessibility-statement-bundle` | [phil_accessibility_statement.yaml](config/packages/phil_accessibility_statement.yaml) |
 | Un formulaire de contact protégé du pourriel, par `phil/contact-form-bundle` et `phil/spam-protection-bundle` | [phil_contact_form.yaml](config/packages/phil_contact_form.yaml) |
 | `/sitemap.xml`, chaque page dans chaque langue avec ses alternatives, par `phil/sitemap-bundle` | [LocalizedPagesUrlProvider](src/Shared/Infrastructure/Sitemap/LocalizedPagesUrlProvider.php) |
+| Les règles d'origine croisée des points d'accès JSON sous `/api/`, pour les origines que `CORS_ALLOW_ORIGIN` reconnaît, par `phil/cors-bundle` | [phil_cors.yaml](config/packages/phil_cors.yaml), [CorsTest](tests/Functional/CorsTest.php) |
 | `/.well-known/security.txt`, par `phil/well-known-bundle` | [phil_well_known.yaml](config/packages/phil_well_known.yaml) |
 | Le graphe JSON-LD de chaque page, par `phil/structured-data-bundle` | [phil_structured_data.yaml](config/packages/phil_structured_data.yaml) |
 | Chaque page vérifiée pour l'accessibilité, dans les deux langues, par `phil/accessibility-check`, et chaque route par le test de fumée de `phil/dev-tools` | [AccessibilityTest](tests/Functional/AccessibilityTest.php), [RouteSmokeTest](tests/Functional/RouteSmokeTest.php) |
 
 De WebSymfony restent l'identité de PHIL (logo, droits de Parler Haut, Interagir Librement, thèmes clair et sombre), les
-comptes de membres et leur administration, les règles d'origine croisée de NelmioCorsBundle sur `/api/`, les cinq
-suites de tests, Castor, les portes de qualité et Docker Compose. Les bundles PHIL prennent la place de KnpMenu, de
-Sentry et des extensions Doctrine de Gedmo.
+comptes de membres et leur administration, les règles d'origine croisée sur `/api/`, les cinq suites de tests, Castor,
+les portes de qualité et Docker Compose. Les bundles PHIL prennent la place de KnpMenu, de Sentry, de NelmioCorsBundle
+et des extensions Doctrine de Gedmo.
 
 Chaque paquet PHIL vient de Packagist. Un paquet de PHIL pas encore publié se prend par un dépôt Composer `path` vers une
 copie locale, jusqu'à sa sortie : aujourd'hui `phil/dev-tools` 0.2.1-alpha, depuis `../dev-tools`, un clone de son dépôt
-à côté de celui du gabarit. L'entrée `repositories` de `composer.json` s'en va à la sortie de la version 8.2.0-RC2, une
-fois `phil/dev-tools` 0.2.1-alpha sur Packagist.
+à côté de celui du gabarit, et `phil/cors-bundle` 0.1.0-alpha, depuis `../phil/packages/cors-bundle`, dans un clone du
+monodépôt de PHIL à côté de lui. Les deux entrées `repositories` de `composer.json` s'en vont à la sortie de la version
+8.2.0-RC2, une fois ces deux versions sur Packagist.
 `phil/monitoring-bundle` est requis sans être enregistré : la configuration de `phil/error-tracking-bundle`
 0.1.0-alpha lit une classe qui implémente une de ses interfaces.
 

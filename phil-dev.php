@@ -72,7 +72,7 @@ return [
     'unused' => ['ignore' => [
         'ext-iconv', 'ext-simplexml', 'doctrine/migrations', 'doctrine/doctrine-migrations-bundle', 'symfony/dotenv',
         'symfony/flex', 'symfony/monolog-bundle', 'symfony/runtime', 'symfony/ux-turbo', 'symfony/web-link',
-        'nelmio/cors-bundle', 'phil/accessibility-statement-bundle', 'phil/browser-security-bundle',
+        'phil/accessibility-statement-bundle', 'phil/cors-bundle', 'phil/browser-security-bundle',
         'phil/contact-form-bundle', 'phil/spam-protection-bundle', 'phil/ux-bundle', 'phil/ux-css',
         'phil/well-known-bundle', 'phil/doctrine-behaviours-bundle', 'phil/ux-easyadmin-bundle',
     ]],
