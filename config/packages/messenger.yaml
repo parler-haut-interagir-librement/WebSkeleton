@@ -1,0 +1,14 @@
+# The two buses of phil/ddd-bundle: commands go through a transaction, queries do not. Both are synchronous; a
+# transport is routed here once a message must run later. Messages carry identifiers only.
+# See https://symfony.com/doc/current/messenger.html
+framework:
+    messenger:
+        default_bus: command.bus
+        buses:
+            command.bus:
+                middleware:
+                    - validation
+                    - doctrine_transaction
+            query.bus: ~
+        transports:
+            sync: 'sync://'

@@ -1,0 +1,12 @@
+when@dev: &dev
+    # See https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#full-default-bundle-configuration
+    zenstruck_foundry:
+        persistence:
+            # Flush only once per call of `PersistentObjectFactory::create()`
+            flush_once: true
+        orm:
+            reset:
+                # The tests reset the database with the migrations, as the site runs them.
+                mode: migrate
+
+when@test: *dev

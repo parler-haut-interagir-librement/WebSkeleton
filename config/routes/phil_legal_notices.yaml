@@ -1,0 +1,6 @@
+# The routes of PhilLegalNoticesBundle: the legal notice and the privacy policy, /fr/legal and /en/legal, /fr/privacy and /en/privacy.
+phil_legal_notices:
+    resource: '@PhilLegalNoticesBundle/config/routes.php'
+    prefix: '/{_locale}'
+    requirements:
+        _locale: '%app.locale_requirement%'

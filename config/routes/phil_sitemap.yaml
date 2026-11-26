@@ -1,0 +1,3 @@
+# The routes of PhilSitemapBundle: /sitemap.xml and its files.
+phil_sitemap:
+    resource: '@PhilSitemapBundle/config/routes.php'

@@ -1,0 +1,4 @@
+# The PHIL UX theme of the EasyAdmin administration, linked on every page of every dashboard.
+# See vendor/phil/ux-easyadmin-bundle/doc/installation.md
+phil_ux_easy_admin:
+    theme: true

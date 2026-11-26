@@ -1,0 +1,8 @@
+# The pages of PhilPrivacyBundle under the language prefix: the privacy choices of a member, /fr/privacy-choices and
+# /en/privacy-choices, the consent and the cookie policy.
+phil_privacy:
+    resource: '@PhilPrivacyBundle/config/routes.php'
+    prefix: '/{_locale}/privacy-choices'
+    trailing_slash_on_root: false
+    requirements:
+        _locale: '%app.locale_requirement%'

@@ -1,0 +1,11 @@
+# French and English, French by default. The locale of a page comes from its path, /fr or /en; the list of
+# languages is the parameter app.locales of config/services.yaml.
+# See https://symfony.com/doc/current/translation.html
+framework:
+    default_locale: fr
+    enabled_locales: '%app.locales%'
+    set_content_language_from_locale: true
+    translator:
+        default_path: '%kernel.project_dir%/translations'
+        fallbacks:
+            - fr

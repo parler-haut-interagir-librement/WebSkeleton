@@ -1,0 +1,3 @@
+# The lock store; flock on one server, a store every server shares (PostgreSQL advisory locks, Redis) on several.
+framework:
+    lock: '%env(LOCK_DSN)%'
