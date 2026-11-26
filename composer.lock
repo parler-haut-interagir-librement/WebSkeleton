@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b5cf0096ddc2dc00cfcfae091a5a645a",
+    "content-hash": "be48e0e3c411651aa4944c844dd58229",
     "packages": [
         {
             "name": "composer/semver",
@@ -2206,17 +2206,11 @@
         },
         {
             "name": "phil/ddd-bundle",
-            "version": "0.1.1-alpha",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/parler-haut-interagir-librement/ddd-bundle.git",
-                "reference": "93c319d9b0671c607793f73ddf6cff23e29a4064"
-            },
+            "version": "0.2.0-alpha",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/parler-haut-interagir-librement/ddd-bundle/zipball/93c319d9b0671c607793f73ddf6cff23e29a4064",
-                "reference": "93c319d9b0671c607793f73ddf6cff23e29a4064",
-                "shasum": ""
+                "type": "path",
+                "url": "../phil/packages/ddd-bundle",
+                "reference": "232ba848dcfc8a4dcb9ddf43c73951f936780284"
             },
             "require": {
                 "php": ">=8.5",
@@ -2226,19 +2220,31 @@
                 "symfony/uid": "^8.2"
             },
             "conflict": {
-                "doctrine/dbal": "<4.2"
+                "doctrine/dbal": "<4.2",
+                "symfony/http-kernel": "<8.2",
+                "symfony/maker-bundle": "<1.68",
+                "symfony/serializer": "<8.2"
             },
             "require-dev": {
-                "doctrine/dbal": "^4.2",
+                "doctrine/dbal": "^4.6",
+                "ext-tokenizer": "*",
                 "phpunit/phpunit": "^13.4",
                 "psr/log": "^3.0",
                 "symfony/console": "^8.2",
                 "symfony/event-dispatcher": "^8.2",
+                "symfony/filesystem": "^8.2",
                 "symfony/framework-bundle": "^8.2",
-                "symfony/http-kernel": "^8.2"
+                "symfony/http-foundation": "^8.2",
+                "symfony/http-kernel": "^8.2",
+                "symfony/maker-bundle": "^1.68",
+                "symfony/routing": "^8.2",
+                "symfony/serializer": "^8.2"
             },
             "suggest": {
-                "doctrine/dbal": "To store identifiers in a native uuid column, or BINARY(16) where the platform has none, through Infrastructure\\Doctrine\\IdentifierType"
+                "doctrine/dbal": "To store identifiers in a native uuid column, or BINARY(16) where the platform has none, through Infrastructure\\Doctrine\\IdentifierType",
+                "symfony/http-kernel": "To turn a route placeholder into the identifier class a controller argument declares, through Infrastructure\\HttpKernel\\IdentifierValueResolver",
+                "symfony/maker-bundle": "For the make:ddd:context, make:ddd:identifier, make:ddd:command, make:ddd:query and make:ddd:event commands",
+                "symfony/serializer": "To serialise identifiers as their canonical string and build them back, through Infrastructure\\Serializer\\IdentifierNormalizer"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -2251,7 +2257,11 @@
                     "Phil\\DddBundle\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "Phil\\DddBundle\\Tests\\": "tests/"
+                }
+            },
             "license": [
                 "MIT"
             ],
@@ -2265,12 +2275,10 @@
             ],
             "description": "The few types every bounded context of a Symfony application shares: identifiers, domain events, domain errors, and command and query buses on Messenger.",
             "homepage": "https://ph-il.ca",
-            "support": {
-                "issues": "https://github.com/parler-haut-interagir-librement/ddd-bundle/issues",
-                "source": "https://github.com/parler-haut-interagir-librement/ddd-bundle/tree/0.1.1-alpha"
-            },
-            "time": "2026-11-17T22:00:00+00:00",
-            "published-time": "2026-11-18T01:36:54+00:00"
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "phil/doctrine-behaviours",
@@ -9129,6 +9137,112 @@
             "published-time": "2026-11-25T09:34:44+00:00"
         },
         {
+            "name": "symfony/serializer",
+            "version": "v8.2.0-RC1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/serializer.git",
+                "reference": "fa4f97ffe435a03861499c79ac42cc23b418c075"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/serializer/zipball/fa4f97ffe435a03861499c79ac42cc23b418c075",
+                "reference": "fa4f97ffe435a03861499c79ac42cc23b418c075",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.4.1",
+                "symfony/deprecation-contracts": "^2.5|^3",
+                "symfony/polyfill-ctype": "^1.8"
+            },
+            "conflict": {
+                "phpdocumentor/reflection-docblock": "<5.2|>=7",
+                "phpdocumentor/type-resolver": "<1.5.1",
+                "symfony/cache": "<8.2",
+                "symfony/config": "<8.2",
+                "symfony/console": "<8.2",
+                "symfony/dependency-injection": "<8.2",
+                "symfony/framework-bundle": "<8.2",
+                "symfony/property-access": "<8.1",
+                "symfony/property-info": "<7.4.15",
+                "symfony/type-info": "<8.2"
+            },
+            "require-dev": {
+                "phpdocumentor/reflection-docblock": "^5.2|^6.0",
+                "phpstan/phpdoc-parser": "^1.0|^2.0",
+                "seld/jsonlint": "^1.10",
+                "symfony/cache": "^7.4|^8.0",
+                "symfony/config": "^8.2",
+                "symfony/console": "^8.2",
+                "symfony/dependency-injection": "^8.2",
+                "symfony/error-handler": "^7.4|^8.0",
+                "symfony/filesystem": "^7.4|^8.0",
+                "symfony/finder": "^7.4|^8.0",
+                "symfony/form": "^7.4|^8.0",
+                "symfony/http-foundation": "^7.4|^8.0",
+                "symfony/http-kernel": "^7.4|^8.0",
+                "symfony/messenger": "^7.4|^8.0",
+                "symfony/mime": "^7.4|^8.0",
+                "symfony/property-access": "^8.1",
+                "symfony/property-info": "^7.4.15|~8.0.15|^8.1.2",
+                "symfony/translation-contracts": "^2.5|^3",
+                "symfony/type-info": "^8.2",
+                "symfony/uid": "^7.4|^8.0",
+                "symfony/validator": "^7.4|^8.0",
+                "symfony/var-dumper": "^7.4|^8.0",
+                "symfony/var-exporter": "^7.4|^8.0",
+                "symfony/yaml": "^7.4|^8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Serializer\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Handles serializing and deserializing data structures, including object graphs, into array structures or other formats like XML and JSON.",
+            "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/serializer/tree/v8.2.0-RC1"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/nicolas-grekas",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2026-11-24T18:01:43+00:00",
+            "published-time": "2026-11-25T09:36:10+00:00"
+        },
+        {
             "name": "symfony/service-contracts",
             "version": "v3.8.1",
             "source": {
@@ -14453,7 +14567,14 @@
             "published-time": "2026-11-18T11:18:24+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "package": "phil/ddd-bundle",
+            "version": "0.2.0.0-alpha",
+            "alias": "0.1.99-alpha",
+            "alias_normalized": "0.1.99.0-alpha"
+        }
+    ],
     "minimum-stability": "alpha",
     "stability-flags": {
         "phil/accessibility-check": 15,

@@ -122,6 +122,7 @@ With the Symfony binary, set the same variable in `.env.local`, with the host of
 |---|---|
 | French and English, every page under `/fr` or `/en`, French by default | [routes.yaml](config/routes.yaml), [services.yaml](config/services.yaml), [translations](translations) |
 | Domain, Application and Infrastructure layers in each bounded context, with the buses of `phil/ddd-bundle` | [src](src), [messenger.yaml](config/packages/messenger.yaml) |
+| Typed identifiers of `phil/ddd-bundle` — a Doctrine type each, controller arguments, the Serializer — and its `make:ddd:*` commands in development | [AccountId](src/Account/Domain/AccountId.php), [doc](doc/ddd.md) |
 | Member accounts: sign-up, sign-in, the account page and the sign-out, under `/fr` and `/en`, in the context `Account` | [src/Account](src/Account), [security.yaml](config/packages/security.yaml) |
 | The administration, EasyAdmin in the theme of PHIL UX by `phil/ux-easyadmin-bundle`, for `ROLE_ADMIN` | [DashboardController](src/Shared/Infrastructure/Http/Admin/DashboardController.php), [phil_ux_easy_admin.yaml](config/packages/phil_ux_easy_admin.yaml) |
 | The privacy choices of each member — the export of their data, the deletion of their account, the consent — and the redaction of the logs, by `phil/privacy-bundle` | [phil_privacy.yaml](config/packages/phil_privacy.yaml), [AccountPersonalData](src/Account/Infrastructure/Privacy/AccountPersonalData.php) |
@@ -148,9 +149,11 @@ Doctrine extensions of Gedmo.
 
 Every PHIL package comes from Packagist. A package of PHIL not published yet is taken by a Composer `path` repository
 to a local copy, until its release: today `phil/dev-tools` 0.2.1-alpha, from `../dev-tools`, a clone of its repository
-next to the template's, and `phil/cors-bundle` 0.1.0-alpha, from `../phil/packages/cors-bundle`, in a clone of the PHIL
-monorepository next to it. Both `repositories` entries of `composer.json` go at the release of 8.2.0-RC2, once these
-two versions are on Packagist.
+next to the template's, `phil/cors-bundle` 0.1.0-alpha, from `../phil/packages/cors-bundle`, in a clone of the PHIL
+monorepository next to it, and `phil/ddd-bundle` 0.2.0-alpha, from `../phil/packages/ddd-bundle` in the same clone.
+`phil/ddd-bundle` is required as `0.2.0-alpha as 0.1.99-alpha` until then, since `phil/feature-flags-bundle` 0.1.2-alpha
+asks for `^0.1`. The three `repositories` entries of `composer.json` go at the release of 8.2.0-RC2, once these
+versions are on Packagist, and `phil/ddd-bundle` is then required as `^0.2.0@alpha`.
 `phil/monitoring-bundle` is required without being registered: the configuration of `phil/error-tracking-bundle`
 0.1.0-alpha reads a class that implements one of its interfaces.
 
@@ -213,13 +216,15 @@ the sitemap provider, Twig and the Doctrine entities every context shares.
 src/
 ├── Kernel.php
 ├── Account/
-│   ├── Domain/                 # Role, Accounts (the port)
-│   ├── Application/            # SignUpCommand, SignUpHandler
+│   ├── Domain/                 # AccountId, Role, Accounts (the port)
+│   ├── Application/            # SignUpCommand, ShowAccountQuery, their handlers, AccountView, AccountViews (a port)
 │   └── Infrastructure/
 │       ├── Form/               # the sign-up form
 │       ├── Http/Admin/         # UserCrudController
+│       ├── Http/Api/           # /api/accounts/{account}
 │       ├── Http/Controller/    # login, signup, account, logout
-│       ├── Persistence/Doctrine/  # DoctrineAccounts, Entity/User
+│       ├── Persistence/Doctrine/  # DoctrineAccounts, DoctrineAccountViews, UserRepository, Entity/User,
+│       │                          # Type/AccountIdType
 │       └── Privacy/            # AccountPersonalData, for phil/privacy-bundle
 ├── Shared/
 │   ├── Domain/
@@ -251,9 +256,17 @@ the bus and answers JSON, which the home page calls through a Stimulus controlle
 The command bus runs in a Doctrine transaction, the query bus does not; both are synchronous until a message is routed
 to a transport in [messenger.yaml](config/packages/messenger.yaml). Messages carry identifiers, never whole objects.
 
+The context `Account` shows the identifiers of `phil/ddd-bundle`: [AccountId](src/Account/Domain/AccountId.php) is a
+UUIDv7 of its own class, stored by its DBAL type [AccountIdType](src/Account/Infrastructure/Persistence/Doctrine/Type/AccountIdType.php)
+registered in [doctrine.yaml](config/packages/doctrine.yaml); [ShowAccountAction](src/Account/Infrastructure/Http/Api/ShowAccountAction.php),
+for the administrators, receives the placeholder of `/api/accounts/{account}` as an `AccountId` — anything else is a
+404 — and the Serializer writes the identifier of the answer as its string. The `make:ddd:*` commands of the bundle, in
+the development environment, write a context and its classes in this layout. Both are in [doc/ddd.md](doc/ddd.md).
+
 ### Adding a context
 
-For a context named `Catalog`:
+For a context named `Catalog`, `bin/console make:ddd:context Catalog` writes the folders and a README, and the other
+`make:ddd:*` commands write its identifiers, commands, queries and events ([doc/ddd.md](doc/ddd.md)); then:
 
 1. **The folders**: `src/Catalog/Domain`, `src/Catalog/Application` and `src/Catalog/Infrastructure`, with the
    namespaces `App\Catalog\Domain`, `App\Catalog\Application` and `App\Catalog\Infrastructure`; its tests mirror them
@@ -265,15 +278,16 @@ For a context named `Catalog`:
    `Infrastructure/Http/Controller` (under the language prefix), `Infrastructure/Http/Api` (under `/api`) and
    `Infrastructure/Http/Root`.
 4. **The Doctrine mapping**: a `Catalog` mapping in [doctrine.yaml](config/packages/doctrine.yaml), on
-   `src/Catalog/Infrastructure/Persistence/Doctrine/Entity`, like the `Text` one.
+   `src/Catalog/Infrastructure/Persistence/Doctrine/Entity`, like the `Text` one, and the DBAL type of each of its
+   identifiers under `doctrine.dbal.types`, like `account_id`.
 5. **Deptrac**: `'Catalog'` added to `$contexts` in `phil-dev.php`, which gives it its three layers and both kinds of
    rules.
 
 ## Accounts and administration 🔐
 
 The context `Account` holds the member accounts. [User](src/Account/Infrastructure/Persistence/Doctrine/Entity/User.php)
-is a Doctrine entity of its infrastructure, identified by a UUID, which is also how `phil/privacy-bundle` knows the
-member, never by their email address. The sign-up goes through the command bus: `SignUpCommand`, its handler, and the
+is a Doctrine entity of its infrastructure, identified by an [AccountId](src/Account/Domain/AccountId.php), which is
+also how `phil/privacy-bundle` knows the member, never by their email address. The sign-up goes through the command bus: `SignUpCommand`, its handler, and the
 port `Accounts` of the domain, whose adapter hashes the password and keeps the account.
 
 | Page | Path | What it does |
@@ -284,6 +298,7 @@ port `Accounts` of the domain, whose adapter hashes the password and keeps the a
 | Sign-out | `/fr/logout`, `/en/logout` | By POST with a CSRF token only: a link or an image never signs anyone out. |
 | Privacy choices | `/fr/privacy-choices`, `/en/privacy-choices` | The export of the member's data, the deletion of their account after thirty days, the consent; the deletion asks for the password again when the session is not recent. |
 | Administration | `/admin` | For `ROLE_ADMIN` only, which includes `ROLE_USER`: the accounts, listed and shown, never created nor edited there, the errors of the site, and the feature flags under `/admin/flags`. |
+| Account as JSON | `/api/accounts/{account}` | For `ROLE_ADMIN` only: the identifier, the user name, the roles and the creation date of an account, never its email address nor its password; anything but the identifier of an account is a 404. |
 
 The firewall checks the account again each time it is refreshed from the session (`user_checker_on_refresh: true`), so
 a changed or disabled account is signed out on its next request. The session keeps a crc32c hash of the password hash,

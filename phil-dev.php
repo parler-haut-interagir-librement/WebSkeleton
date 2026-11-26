@@ -20,7 +20,7 @@ return [
     'deptrac' => (static function (): array {
         $contexts = ['Account', 'Text'];
         $integrated = [
-            'DefaultAllowed', 'PhilDddBundleDomain', 'PhilDddBundleApplication', 'PhilSitemap', 'AllowedDoctrine',
+            'DefaultAllowed', 'PhilDddBundleDomain', 'PhilDddBundleApplication', 'PhilDddBundleInfrastructure', 'PhilSitemap', 'AllowedDoctrine',
             'AllowedEasyCorpBundleEasyAdminBundle', 'AllowedSymfonyBridgeDoctrine', 'AllowedSymfonyBundleFrameworkBundle',
             'AllowedSymfonyBundleSecurityBundle', 'AllowedTwig', 'PhilDoctrineBehaviours', 'PhilErrorTrackingBundleInfrastructure',
             'PhilMenuBundleDomain', 'PhilMenuBundleApplication', 'PhilPrivacyBundleDomain', 'PhilPrivacyBundleApplication',

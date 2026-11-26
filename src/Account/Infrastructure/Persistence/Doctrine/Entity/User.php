@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace App\Account\Infrastructure\Persistence\Doctrine\Entity;
 
+use App\Account\Domain\AccountId;
 use App\Account\Domain\Role;
+use App\Account\Infrastructure\Persistence\Doctrine\Type\AccountIdType;
+use App\Account\Infrastructure\Persistence\Doctrine\UserRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use LogicException;
@@ -13,27 +16,26 @@ use Phil\DoctrineBehaviours\Contract\Timestampable;
 use Phil\DoctrineBehaviours\TimestampableEntity;
 use Phil\PrivacyBundle\Application\Contract\DataSubjectUser;
 use Stringable;
-use Symfony\Bridge\Doctrine\Types\UuidType;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Uid\Uuid;
 
 use function Symfony\Component\String\u;
 
 /**
- * An account of the site: it signs in with its user name and its hashed password. Its identifier, a UUID, is also the
- * identifier phil/privacy-bundle knows the member by, never its email address. Its dates are stamped by the
+ * An account of the site: it signs in with its user name and its hashed password. Its identifier, an AccountId stored
+ * by the DBAL type AccountIdType, is also the identifier phil/privacy-bundle knows the member by, never its email
+ * address. Its dates are stamped by the
  * timestamps of phil/doctrine-behaviours-bundle.
  */
-#[ORM\Entity]
+#[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
 final class User implements Stringable, UserInterface, PasswordAuthenticatedUserInterface, DataSubjectUser, Timestampable
 {
     use TimestampableEntity;
 
     #[ORM\Id]
-    #[ORM\Column(type: UuidType::NAME, unique: true)]
-    private Uuid $id;
+    #[ORM\Column(type: AccountIdType::NAME, unique: true)]
+    private AccountId $id;
 
     #[ORM\Column(type: Types::STRING, length: 255, unique: true)]
     private string $email;
@@ -54,7 +56,7 @@ final class User implements Stringable, UserInterface, PasswordAuthenticatedUser
         private string $username,
         string $email,
     ) {
-        $this->id = Uuid::v7();
+        $this->id = AccountId::generate();
         $this->email = self::normalizeEmail($email);
     }
 
@@ -66,7 +68,7 @@ final class User implements Stringable, UserInterface, PasswordAuthenticatedUser
         return u($email)->trim()->lower()->toString();
     }
 
-    public function getId(): Uuid
+    public function getId(): AccountId
     {
         return $this->id;
     }
@@ -85,7 +87,7 @@ final class User implements Stringable, UserInterface, PasswordAuthenticatedUser
      */
     public function __serialize(): array
     {
-        return [$this->id->toRfc4122(), $this->username, hash('crc32c', $this->password), $this->email];
+        return [$this->id->toString(), $this->username, hash('crc32c', $this->password), $this->email];
     }
 
     /**
@@ -94,7 +96,7 @@ final class User implements Stringable, UserInterface, PasswordAuthenticatedUser
     public function __unserialize(array $data): void
     {
         [$id, $this->username, $this->password, $this->email] = $data;
-        $this->id = Uuid::fromString($id);
+        $this->id = AccountId::fromString($id);
     }
 
     #[Override]
@@ -110,7 +112,7 @@ final class User implements Stringable, UserInterface, PasswordAuthenticatedUser
     #[Override]
     public function dataSubjectIdentifier(): string
     {
-        return $this->id->toRfc4122();
+        return $this->id->toString();
     }
 
     /**

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Account\Infrastructure\Persistence\Doctrine\Entity;
 
+use App\Account\Domain\AccountId;
 use App\Account\Infrastructure\Persistence\Doctrine\Entity\User;
 use DateTimeImmutable;
 use Doctrine\ORM\Mapping\Column;
@@ -11,24 +12,24 @@ use LogicException;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
-use Symfony\Component\Uid\UuidV7;
 
 #[CoversClass(User::class)]
 final class UserTest extends TestCase
 {
-    public function testANewAccountHasAUuidAndANormalizedEmail(): void
+    public function testANewAccountHasAnAccountIdAndANormalizedEmail(): void
     {
         $user = new User('ada', '  Ada@Example.COM ');
 
-        self::assertInstanceOf(UuidV7::class, $user->getId());
+        self::assertInstanceOf(AccountId::class, $user->getId());
         self::assertSame('ada', $user->getUsername());
         self::assertSame('ada', $user->getUserIdentifier());
         self::assertSame('ada', (string) $user);
         self::assertSame('ada@example.com', $user->getEmail());
         self::assertSame('ada@example.com', User::normalizeEmail(' ADA@example.com '));
         self::assertSame('', $user->getPassword());
-        self::assertSame($user->getId()->toRfc4122(), $user->dataSubjectIdentifier());
-        self::assertNotEquals(new User('ada', 'ada@example.com')->getId(), $user->getId());
+        self::assertSame($user->getId()->toString(), $user->dataSubjectIdentifier());
+        self::assertTrue(AccountId::fromString($user->dataSubjectIdentifier())->equals($user->getId()));
+        self::assertFalse(new User('ada', 'ada@example.com')->getId()->equals($user->getId()));
     }
 
     public function testEveryAccountHasTheUserRoleOnce(): void
@@ -56,7 +57,7 @@ final class UserTest extends TestCase
         self::assertSame('ada', $copy->getUsername());
         self::assertSame('ada@example.com', $copy->getEmail());
         self::assertSame(
-            [$user->getId()->toRfc4122(), 'ada', hash('crc32c', '$argon2id$hash'), 'ada@example.com'],
+            [$user->getId()->toString(), 'ada', hash('crc32c', '$argon2id$hash'), 'ada@example.com'],
             $user->__serialize(),
         );
     }

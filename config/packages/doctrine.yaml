@@ -2,6 +2,10 @@ doctrine:
     dbal:
         url: '%env(resolve:DATABASE_URL)%'
         profiling_collect_backtrace: '%kernel.debug%'
+        # One DBAL type per identifier of phil/ddd-bundle, named after it in snake case: the column reads back the
+        # identifier class it was written with. `bin/console make:ddd:identifier` writes the type; register it here.
+        types:
+            account_id: App\Account\Infrastructure\Persistence\Doctrine\Type\AccountIdType
     orm:
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
         auto_mapping: true
@@ -13,19 +17,16 @@ doctrine:
                 is_bundle: false
                 dir: '%kernel.project_dir%/src/Account/Infrastructure/Persistence/Doctrine/Entity'
                 prefix: 'App\Account\Infrastructure\Persistence\Doctrine\Entity'
-                alias: Account
             Shared:
                 type: attribute
                 is_bundle: false
                 dir: '%kernel.project_dir%/src/Shared/Infrastructure/Persistence/Doctrine/Entity'
                 prefix: 'App\Shared\Infrastructure\Persistence\Doctrine\Entity'
-                alias: Shared
             Text:
                 type: attribute
                 is_bundle: false
                 dir: '%kernel.project_dir%/src/Text/Infrastructure/Persistence/Doctrine/Entity'
                 prefix: 'App\Text\Infrastructure\Persistence\Doctrine\Entity'
-                alias: Text
 
 when@test:
     doctrine:

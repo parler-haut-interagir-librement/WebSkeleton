@@ -42,6 +42,19 @@ The next version is 8.2.0-RC2.
   `symfony/clock` and `psr/log` are direct requirements, `symfony/http-client-contracts` a development one.
 - `doc/feature-flags-and-circuit-breakers.md`: what is wired, the examples, where a flag is read in the layers (never
   in the Domain), how to add a flag or a circuit, and how to do without the screens.
+- Typed identifiers of `phil/ddd-bundle` 0.2 in the context `Account`: `AccountId`, a UUIDv7 of its own class, is the
+  identifier of `User`, stored by the DBAL type `AccountIdType` registered as `account_id` in `doctrine.yaml` (the same
+  column as before: no migration); `UserRepository::find()` also takes the string of an `AccountId`, as EasyAdmin
+  passes it, and finds nothing for any other string; `AccountPersonalData` turns the identifier of the privacy bundle
+  back into an `AccountId`.
+- `GET /api/accounts/{account}`, for `ROLE_ADMIN`: `ShowAccountAction` receives the placeholder as an `AccountId`
+  through the value resolver of `phil/ddd-bundle` (anything else is a 404), asks `ShowAccountQuery` on the query bus,
+  answered by the port `AccountViews` and its adapter `DoctrineAccountViews`, and writes `AccountView` with the
+  Serializer, whose normaliser from the bundle gives the identifier as its string; no email address, no password.
+  `symfony/serializer` is a direct requirement.
+- `doc/ddd.md`: the typed identifiers from the column to the controller and the JSON, and the `make:ddd:*` commands of
+  `phil/ddd-bundle` with `symfony/maker-bundle` in development, in the layout `src/<Context>/{Domain,Application,Infrastructure}`
+  of the template, with the configuration left to write in YAML.
 
 ### Changed
 
@@ -72,6 +85,13 @@ The next version is 8.2.0-RC2.
   `CorsTest` checks the preflight and the simple request from an allowed origin, and the refusal of a foreign origin,
   of another method and of another header. `phil/cors-bundle` 0.1.0-alpha is taken by a Composer `path` repository to
   `../phil/packages/cors-bundle` until it is on Packagist; the `repositories` entry is removed at the release.
+- `phil/ddd-bundle` 0.2.0-alpha, taken by a Composer `path` repository to `../phil/packages/ddd-bundle` until it is on
+  Packagist, and required as `0.2.0-alpha as 0.1.99-alpha` until then, since `phil/feature-flags-bundle` 0.1.2-alpha
+  asks for `^0.1`; at the release, the `repositories` entry is removed and the requirement becomes `^0.2.0@alpha`.
+- `symfony/uid` is no longer a direct requirement: the classes of `src/` use the identifiers of `phil/ddd-bundle`.
+- The Doctrine mappings of the contexts declare no `alias`, deprecated by DoctrineBundle 3.4.
+- `services.yaml` leaves out the views of the applications, `src/*/Application/**/*View.php`, as it does the commands
+  and the queries.
 
 ## [8.2.0-RC1] - 2026-11-25
 

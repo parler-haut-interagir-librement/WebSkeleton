@@ -63,7 +63,7 @@ final class DashboardControllerTest extends WebTestCase
         self::assertSelectorTextContains('body', 'ada@example.com');
         self::assertSelectorNotExists('a[href="/admin/user/new"]');
 
-        $client->request('GET', '/admin/user/'.$member->getId()->toRfc4122());
+        $client->request('GET', '/admin/user/'.$member->getId()->toString());
         self::assertResponseIsSuccessful();
         self::assertSelectorTextContains('body', 'ada@example.com');
 
