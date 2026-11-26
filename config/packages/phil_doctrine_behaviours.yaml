@@ -1,0 +1,12 @@
+# The behaviours of phil/doctrine-behaviours-bundle: the timestamps of the accounts only. Each other behaviour is
+# turned on here when an entity needs it.
+# See vendor/phil/doctrine-behaviours-bundle/doc/configuration.md
+phil_doctrine_behaviours:
+    timestamps: true
+    blame: false
+    soft_delete: false
+    tree: false
+    deactivation: false
+    position: false
+    translation: false
+    privacy: false

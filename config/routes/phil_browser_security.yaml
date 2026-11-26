@@ -1,0 +1,3 @@
+# The routes of PhilBrowserSecurityBundle: POST /_csp/report, where browsers send the violations of the Content Security Policy.
+phil_browser_security:
+    resource: '@PhilBrowserSecurityBundle/config/routes.php'

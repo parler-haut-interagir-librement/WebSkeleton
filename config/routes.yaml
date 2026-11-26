@@ -1,0 +1,21 @@
+# Every page lives under the prefix of its language, /fr or /en; "/" sends the visitor to the language they prefer.
+# The languages are the parameter app.locales of config/services.yaml. The API and the files of robots and
+# search engines stay outside the prefixes.
+#
+# Each context of src/ puts its controllers in Infrastructure/Http/Controller, Api or Root: the globs find them.
+controllers:
+    resource: '../src/*/Infrastructure/Http/Controller/**/*.php'
+    type: attribute
+    prefix: '/{_locale}'
+    trailing_slash_on_root: false
+    requirements:
+        _locale: '%app.locale_requirement%'
+
+api:
+    resource: '../src/*/Infrastructure/Http/Api/**/*.php'
+    type: attribute
+    prefix: /api
+
+root:
+    resource: '../src/*/Infrastructure/Http/Root/**/*.php'
+    type: attribute

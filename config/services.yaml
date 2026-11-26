@@ -1,0 +1,61 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
+parameters:
+    # System parameters: https://symfony.com/doc/current/performance.html#dump-the-service-container-into-a-single-file
+    .container.dumper.inline_factories: true
+
+    # The languages of the site, the default one first: each is a path prefix (/fr, /en) and a translations file.
+    # Add a language here, in app.locale_requirement, and in translations/, and its pages exist.
+    app.locales: [fr, en]
+    # The same languages, joined by "|": the requirement of the {_locale} route prefix.
+    app.locale_requirement: 'fr|en'
+
+    # Application parameters
+    # The major and minor versions of Symfony, read from the kernel, for the description.
+    symfony_major_version: !php/const Symfony\Component\HttpKernel\Kernel::MAJOR_VERSION
+    symfony_minor_version: !php/const Symfony\Component\HttpKernel\Kernel::MINOR_VERSION
+    brand: 'WebSkeleton'
+    brand_html: '<b>Web</b><i>Skeleton</i>'
+    website: 'https://github.com/parler-haut-interagir-librement/WebSkeleton'
+    copyright_url: 'https://ph-il.ca'
+    version: '8.2.0-RC1'
+    description: 'A Symfony <b>%symfony_major_version%.%symfony_minor_version%</b> site skeleton: bilingual, organised in DDD, with the PHIL UX kit and the PHIL bundles a site needs.'
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        bind:
+            array $locales: '%app.locales%'
+
+    # src/<Context>/{Domain,Application,Infrastructure}, and src/Shared for what every context uses. In each context,
+    # the domain holds plain PHP objects, never services; the application and the infrastructure are services, except
+    # the commands and queries, which are messages, the Doctrine entities and the data of the forms.
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/*/Domain/'
+            - '../src/*/Application/**/{*Query,*Command}.php'
+            - '../src/*/Infrastructure/Persistence/Doctrine/Entity/'
+            - '../src/*/Infrastructure/Form/*Data.php'
+            - '../src/Kernel.php'
+
+    # The ports of each domain, bound to their adapters in the infrastructure.
+    App\Text\Domain\TitleSlugger: '@App\Text\Infrastructure\AsciiTitleSlugger'
+    App\Account\Domain\Accounts: '@App\Account\Infrastructure\Persistence\Doctrine\DoctrineAccounts'
+
+# The fixtures of the dev environment, which the tests load too: see fixtures/ and `castor load-fixtures`.
+when@dev: &fixtures
+    services:
+        _defaults:
+            autowire: true
+            autoconfigure: true
+
+        App\Fixtures\:
+            resource: '../fixtures/'
+
+when@test: *fixtures

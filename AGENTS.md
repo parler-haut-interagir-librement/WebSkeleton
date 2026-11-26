@@ -21,8 +21,8 @@ what every context uses; Deptrac checks the layers inside each context and that 
 - `Domain`: value objects and ports, plain PHP, never services; they throw the `InvalidValue` of `phil/ddd-bundle`.
 - `Application`: commands, queries and their handlers, on the buses of `phil/ddd-bundle`.
 - `Infrastructure`: controllers (`Http/Controller` under the language prefix, `Http/Api` under `/api`, `Http/Root`
-  at the root, found in every context by `config/routes.php`), adapters of the ports, Doctrine entities (one mapping
-  per context in `config/packages/doctrine.php`).
+  at the root, found in every context by `config/routes.yaml`), adapters of the ports, Doctrine entities (one mapping
+  per context in `config/packages/doctrine.yaml`).
 - `src/Shared/Infrastructure`: the controllers of the site pages, the dashboard of the administration, the menu, the
   sitemap provider, Twig; `src/Account`: the member accounts, their pages, their CRUD controller and their module for
   `phil/privacy-bundle`; `src/Text`: the example context, a slug through the three layers.
@@ -55,8 +55,8 @@ castor ci                        # coverage, then every lint
 4. Controllers follow the action pattern: one `*Action` class per route, with `__invoke()`.
 5. Dates are never compared with `==` nor `===`: compare their timestamps or use `<` and `>`.
 6. JavaScript goes in Stimulus controllers, loaded by AssetMapper: no Node.js build, no Webpack Encore.
-7. Configuration files are PHP, under `config/`.
-8. A port of the domain is bound to its adapter in `config/services.php`; messages carry identifiers only.
+7. Configuration files are YAML, under `config/`; only `config/bundles.php` and `config/preload.php` are PHP.
+8. A port of the domain is bound to its adapter in `config/services.yaml`; messages carry identifiers only.
 9. Every text of a page is a translation key, in `translations/messages.fr.yaml` and `messages.en.yaml`.
 
 ## Tests

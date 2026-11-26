@@ -1,0 +1,6 @@
+# phil/accessibility-statement-bundle: no statement is written yet, so the page answers 404 and the footer does not
+# link to it; the site claims nothing no one has evaluated. Write the first version under "statement" once the site
+# is evaluated.
+# See https://github.com/parler-haut-interagir-librement/accessibility-statement-bundle
+phil_accessibility_statement:
+    layout: layout/page.html.twig

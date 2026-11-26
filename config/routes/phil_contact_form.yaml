@@ -1,0 +1,7 @@
+# The routes of PhilContactFormBundle: the contact page, /fr/contact and /en/contact.
+phil_contact_form:
+    resource: '@PhilContactFormBundle/config/routes.php'
+    prefix: '/{_locale}/contact'
+    trailing_slash_on_root: false
+    requirements:
+        _locale: '%app.locale_requirement%'

@@ -1,0 +1,63 @@
+# The member accounts: sign-in by form with a CSRF token, attempts throttled, sign-out by POST with a CSRF token, the
+# user checked again each time it is refreshed from the session. The pages live under the language prefix, /fr/login
+# and /en/login; the administration, under /admin, is for ROLE_ADMIN only.
+# See https://symfony.com/doc/current/security.html
+security:
+    # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
+    password_hashers:
+        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+
+    # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
+    providers:
+        app_user_provider:
+            entity:
+                class: App\Account\Infrastructure\Persistence\Doctrine\Entity\User
+                property: username
+
+    # The values of App\Account\Domain\Role::ADMIN and App\Account\Domain\Role::USER.
+    role_hierarchy:
+        ROLE_ADMIN: [ROLE_USER]
+
+    firewalls:
+        dev:
+            # The profiler, the debug toolbar and the assets are never behind the firewall.
+            pattern: ^/(_profiler(/|$)|(_wdt|assets)/)
+            security: false
+        main:
+            lazy: true
+            provider: app_user_provider
+            # A disabled or changed account is signed out on its next request, not at the end of its session.
+            user_checker_on_refresh: true
+            form_login:
+                login_path: !php/const App\Account\Infrastructure\Http\Controller\LoginAction::ROUTE
+                check_path: !php/const App\Account\Infrastructure\Http\Controller\LoginAction::ROUTE
+                enable_csrf: true
+                csrf_token_id: authenticate
+                default_target_path: !php/const App\Account\Infrastructure\Http\Controller\AccountAction::ROUTE
+            # The sudo mode: the deletion of an account by phil/privacy-bundle asks for the password again when
+            # the session has not proved itself recently.
+            re_authentication_entry_point: form_login
+            logout:
+                # A route of POST only, under the language prefix: a link or an image can never sign anyone out.
+                path: !php/const App\Account\Infrastructure\Http\Controller\LogoutAction::ROUTE
+                enable_csrf: true
+                csrf_token_id: logout
+            # Five failed attempts a minute per user name and IP address, through symfony/rate-limiter.
+            login_throttling:
+                max_attempts: 5
+            # Impersonation stays off. A site that turns it on (https://symfony.com/doc/current/security/impersonating_user.html)
+            # does it only by a POST request with a CSRF token, never by a query parameter.
+
+    # Only the first rule that matches is applied.
+    access_control:
+        - { path: ^/admin, roles: !php/const App\Account\Domain\Role::ADMIN }
+
+when@test:
+    security:
+        password_hashers:
+            # The lowest work factors: secure hashes are not needed by the tests and slow them down.
+            Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:
+                algorithm: auto
+                cost: 4 # Lowest possible value for bcrypt
+                time_cost: 3 # Lowest possible value for argon
+                memory_cost: 10 # Lowest possible value for argon

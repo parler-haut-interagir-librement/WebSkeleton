@@ -1,0 +1,5 @@
+# The menus of phil/menu-bundle, built by the services that implement MenuBuilder: the main menu is
+# App\Shared\Infrastructure\Menu\MainMenuBuilder.
+# See vendor/phil/menu-bundle/doc/installation.md
+phil_menu:
+    allow_localhost: false

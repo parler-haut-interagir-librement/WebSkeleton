@@ -1,0 +1,4 @@
+# The mailer of the contact form; MAILER_DSN chooses the transport, null://null sends nothing.
+framework:
+    mailer:
+        dsn: '%env(MAILER_DSN)%'

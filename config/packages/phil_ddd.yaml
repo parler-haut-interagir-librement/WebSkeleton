@@ -1,0 +1,4 @@
+# phil/ddd-bundle: the buses its CommandBus and QueryBus dispatch to, declared in messenger.yaml.
+phil_ddd:
+    command_bus: command.bus
+    query_bus: query.bus

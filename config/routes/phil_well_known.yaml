@@ -1,0 +1,3 @@
+# The routes of PhilWellKnownBundle: the documents of /.well-known/.
+phil_well_known:
+    resource: '@PhilWellKnownBundle/config/routes.php'

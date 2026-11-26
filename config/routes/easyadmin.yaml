@@ -1,0 +1,5 @@
+# The routes of the EasyAdmin dashboards and of their CRUD controllers, under /admin, and the pages that
+# phil/error-tracking-bundle grafts on them, under /admin/errors.
+easyadmin:
+    resource: .
+    type: easyadmin.routes

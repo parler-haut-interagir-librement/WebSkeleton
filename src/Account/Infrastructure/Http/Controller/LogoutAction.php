@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Attribute\Route;
  * The sign-out, /fr/logout and /en/logout, by POST only and with the CSRF token "logout": the firewall answers it
  * before this action is reached.
  *
- * @see config/packages/security.php
+ * @see config/packages/security.yaml
  */
 #[AsController]
 final readonly class LogoutAction

@@ -1,0 +1,6 @@
+# The routes of PhilAccessibilityStatementBundle: the accessibility statement, /fr/accessibilite and /en/accessibility.
+phil_accessibility_statement:
+    resource: '@PhilAccessibilityStatementBundle/config/routes.php'
+    prefix: '/{_locale}'
+    requirements:
+        _locale: '%app.locale_requirement%'
