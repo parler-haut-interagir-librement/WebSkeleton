@@ -1,4 +1,4 @@
-<!-- phil-dev source-sha256=17d3e9ccb28a53f1a1552f8f3edf12fde6e9cec2ee73d8465c47438e21dd13c8 -->
+<!-- phil-dev source-sha256=a849926b065d4a8ab012ab024f340908a648fb3b1c9160f741a9de11536c7c1b -->
 # WebSkeleton 🦴
 
 [![Latest Version](https://img.shields.io/packagist/v/phil/webskeleton.svg?style=flat-square)](https://packagist.org/packages/phil/webskeleton)
@@ -425,8 +425,9 @@ que [castor.php](castor.php) importe depuis `vendor/phil/dev-tools/resources/cas
 | `castor secret` | Un `APP_SECRET` aléatoire dans `.env.local`, s'il n'en contient pas. |
 | `castor reset-database` | La base SQLite remise à zéro et migrée. |
 | `castor load-fixtures` | La base SQLite remise à zéro et migrée, avec les comptes `admin` et `member` et dix autres. |
-| `castor test` | Toutes les suites PHPUnit ; `--filter` et `--options` passent à PHPUnit. |
-| `castor test:unit`, `test:integration`, `test:api`, `test:functional`, `test:e2e` | Une suite ; `castor test:suite <nom>` lance n'importe quelle suite de `phpunit.dist.xml`. |
+| `castor test` | Toutes les suites PHPUnit sauf E2E ; `--filter` et `--options` passent à PHPUnit. |
+| `castor test:unit`, `test:integration`, `test:api`, `test:functional` | Une suite ; `castor test:suite <nom>` lance n'importe quelle suite de `phpunit.dist.xml`. |
+| `castor test:e2e` | La suite E2E dans un vrai navigateur, Chrome piloté par Panther : elle prouve que le JavaScript des pages s'exécute sous la politique de sécurité du contenu. Chrome et chromedriver doivent être dans le `PATH`, ou laissez `vendor/bin/bdi detect drivers` télécharger le pilote dans `drivers/` après `composer require --dev dbrekelmans/bdi`. Ni `castor test`, ni `castor coverage`, ni `castor ci`, ni l'intégration continue ne la lancent. |
 | `castor test:next` | Les tests sur la prochaine version de PHP, dans son image Docker. |
 | `castor test:schema` | Les migrations sur une base SQLite neuve, puis son schéma comparé au mappage Doctrine. |
 | `castor coverage` | Le rapport de couverture HTML dans `var/coverage/`, et son seuil. |

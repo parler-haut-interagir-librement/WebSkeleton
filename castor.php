@@ -26,7 +26,9 @@ use function Phil\DevTools\Castor\success;
 use function Phil\DevTools\Castor\title;
 
 const PHIL_CASTOR = [
-    'suites' => ['Unit', 'Integration', 'Api', 'Functional', 'E2E'],
+    // E2E is left out: it needs Chrome and chromedriver, and `castor test:e2e` runs it alone, outside `castor test`,
+    // `castor coverage`, `castor ci` and the continuous integration.
+    'suites' => ['Unit', 'Integration', 'Api', 'Functional'],
     'coverage_threshold' => 100,
     'yaml' => ['.github', 'config', 'compose.yaml', 'compose.override.yaml', 'translations'],
     // The tasks of this file that `castor lint` and `castor ci` run after their common steps.

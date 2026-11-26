@@ -413,8 +413,9 @@ hooks are the common tasks of [`phil/dev-tools`](https://packagist.org/packages/
 | `castor secret` | A random `APP_SECRET` in `.env.local`, unless it holds one. |
 | `castor reset-database` | The SQLite database reset and migrated. |
 | `castor load-fixtures` | The SQLite database reset and migrated, with the accounts `admin` and `member` and ten more. |
-| `castor test` | Every PHPUnit suite; `--filter` and `--options` pass on to PHPUnit. |
-| `castor test:unit`, `test:integration`, `test:api`, `test:functional`, `test:e2e` | One suite; `castor test:suite <name>` runs any suite of `phpunit.dist.xml`. |
+| `castor test` | Every PHPUnit suite but E2E; `--filter` and `--options` pass on to PHPUnit. |
+| `castor test:unit`, `test:integration`, `test:api`, `test:functional` | One suite; `castor test:suite <name>` runs any suite of `phpunit.dist.xml`. |
+| `castor test:e2e` | The E2E suite in a real browser, Chrome driven by Panther: it proves that the JavaScript of the pages runs under the Content Security Policy. Chrome and chromedriver must be on the `PATH`, or let `vendor/bin/bdi detect drivers` download the driver into `drivers/` after `composer require --dev dbrekelmans/bdi`. Neither `castor test`, `castor coverage`, `castor ci` nor the continuous integration runs it. |
 | `castor test:next` | The tests on the next PHP version, in its Docker image. |
 | `castor test:schema` | The migrations on a fresh SQLite database, then its schema compared with the Doctrine mapping. |
 | `castor coverage` | The HTML coverage report in `var/coverage/`, and its threshold. |

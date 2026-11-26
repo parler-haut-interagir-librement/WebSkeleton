@@ -6,28 +6,28 @@ namespace App\Tests\E2E;
 
 use App\Shared\Infrastructure\Http\Controller\HomeAction;
 use PHPUnit\Framework\Attributes\CoversClass;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase as E2ETestCase;
-
-// use Symfony\Component\Panther\PantherTestCase as E2ETestCase;
+use Symfony\Component\Panther\PantherTestCase;
 
 /**
- * Panther is not installed by default. To install it run "composer req --dev symfony/panther".
- * Above, comment the first use and uncomment the second one. Same in the test below, uncomment the first line and
- * comment the second one.
+ * The home page in a real browser, Chrome driven by Panther: the theme switcher stays hidden until its Stimulus
+ * controller runs, so seeing it proves that the JavaScript of the page runs under the Content Security Policy. Run by
+ * `castor test:e2e` alone; Chrome and chromedriver must be on the PATH.
+ *
+ * The host is localhost, not 127.0.0.1: phil/structured-data-bundle refuses an IP address as the URL of the site.
  *
  * @see https://github.com/symfony/panther
  */
 #[CoversClass(HomeAction::class)]
-final class HomePageTest extends E2ETestCase
+final class HomePageTest extends PantherTestCase
 {
-    public function testTheHomePageOpensInFrench(): void
+    public function testTheJavaScriptOfTheHomePageRuns(): void
     {
-        // $client = self::createPantherClient();
-        $client = self::createClient();
-        $client->followRedirects();
-        $client->request('GET', '/', server: ['HTTP_ACCEPT_LANGUAGE' => 'fr-CA,fr;q=0.9']);
+        $client = self::createPantherClient(['hostname' => 'localhost']);
+        $client->request('GET', '/fr');
 
-        self::assertSelectorTextContains('body', 'WebSkeleton');
         self::assertSelectorTextSame('h1', 'Bienvenue');
+
+        $client->waitForVisibility('fieldset.isThemeSwitcher', 10);
+        self::assertSelectorIsVisible('fieldset.isThemeSwitcher');
     }
 }

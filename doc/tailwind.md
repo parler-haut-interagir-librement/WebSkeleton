@@ -81,8 +81,8 @@ the switcher:
 }
 ```
 
-In [app.js](../assets/app.js), remove `import './styles/app.css';`: the stylesheet is linked from the layout instead,
-so that it is applied before the first paint.
+The stylesheet stays linked from the layout, never imported from [app.js](../assets/app.js): AssetMapper would turn an
+imported stylesheet into a `data:` module of the import map, which the Content Security Policy refuses.
 
 ## 4. Install the recipes
 
@@ -121,7 +121,8 @@ and `<twig:ThemeSwitcher>` stay as they are, with two differences of the Shadcn 
   `<twig:Card:Title><h2>…</h2></twig:Card:Title>`, where the PHIL UX kit wrote `<twig:Card:Title :level="2">`;
 - `Button` has no `loading`: mark a busy button with `aria-busy="true"` and `disabled`.
 
-In [base.html.twig](../templates/base.html.twig), link the built stylesheet where phil-ux was:
+In [base.html.twig](../templates/base.html.twig), remove the link to phil-ux: the built stylesheet is the one linked
+after it, `styles/app.css`:
 
 ```twig
 <twig:ThemeSwitcher:Script nonce="{{ csp_nonce('script') }}" />

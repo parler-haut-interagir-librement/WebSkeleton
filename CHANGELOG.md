@@ -8,6 +8,25 @@ built on [WebSymfony](https://github.com/parler-haut-interagir-librement/WebSymf
 [MicroSymfony](https://github.com/parler-haut-interagir-librement/MicroSymfony), which follows
 [strangebuzz/MicroSymfony](https://github.com/strangebuzz/MicroSymfony).
 
+## Unreleased
+
+The next version is 8.2.0-RC3.
+
+### Added
+
+- `symfony/panther` 2.4 as a development requirement, its `ServerExtension` in `phpunit.dist.xml` and its variables in
+  `.env.test`: the E2E suite opens `/fr` in Chrome on `localhost` and waits for the theme switcher, hidden until its
+  Stimulus controller runs, which proves that the JavaScript of the page runs under the Content Security Policy.
+  `castor test:e2e` runs it alone, with Chrome and chromedriver on the `PATH`; the suite is left out of the `suites` of
+  `PHIL_CASTOR`, so `castor test`, `castor coverage`, `castor ci` and the continuous integration need no browser.
+
+### Fixed
+
+- The stylesheet of the site, `styles/app.css`, is linked from `base.html.twig` after phil-ux instead of imported by
+  `assets/app.js`: AssetMapper turned the imported stylesheet into a `data:` module of the import map, which the Content
+  Security Policy of `phil/browser-security-bundle` refuses, so the module `app`, Stimulus, Turbo and every controller
+  never ran in a browser. `doc/tailwind.md` follows.
+
 ## [8.2.0-RC2] - 2026-11-26
 
 ### Added

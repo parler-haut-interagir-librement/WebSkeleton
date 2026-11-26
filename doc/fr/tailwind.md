@@ -1,4 +1,4 @@
-<!-- phil-dev source-sha256=d8170fb11caef99448f0ff26abee985ea235b24abb246946ab985bb4891412de -->
+<!-- phil-dev source-sha256=dc3487041bbd3d49f1fb177a03e73efe0ed6138336129f69031e0ab2bfc8b0a6 -->
 # Tailwind à la place de PHIL UX CSS
 
 WebSkeleton est habillé par phil-ux, la feuille de style de `phil/ux-css`, et les recettes du kit PHIL UX. Un site qui
@@ -82,8 +82,8 @@ suivent le sélecteur :
 }
 ```
 
-Dans [app.js](../../assets/app.js), retirez `import './styles/app.css';` : la feuille de style est plutôt liée depuis la
-mise en page, pour qu'elle s'applique avant le premier affichage.
+La feuille de style reste liée depuis la mise en page, jamais importée depuis [app.js](../../assets/app.js) : AssetMapper
+ferait d'une feuille de style importée un module `data:` de l'import map, que la politique de sécurité du contenu refuse.
 
 ## 4. Installer les recettes
 
@@ -122,7 +122,8 @@ Les composants gardent leurs noms et leurs propriétés : `<twig:Button>`, `<twi
   `<twig:Card:Title><h2>…</h2></twig:Card:Title>`, là où le kit PHIL UX écrivait `<twig:Card:Title :level="2">` ;
 - `Button` n'a pas de `loading` : marquez un bouton occupé avec `aria-busy="true"` et `disabled`.
 
-Dans [base.html.twig](../../templates/base.html.twig), liez la feuille de style construite là où se trouvait phil-ux :
+Dans [base.html.twig](../../templates/base.html.twig), retirez le lien vers phil-ux : la feuille de style construite est
+celle liée après lui, `styles/app.css` :
 
 ```twig
 <twig:ThemeSwitcher:Script nonce="{{ csp_nonce('script') }}" />

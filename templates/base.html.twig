@@ -21,6 +21,7 @@
     {%- endif %}
     <twig:ThemeSwitcher:Script nonce="{{ csp_nonce('script') }}" />
     <link rel="stylesheet" href="{{ asset('phil-ux/phil-ux.css') }}">
+    <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
     {% block stylesheets %}{% endblock %}
     {% block javascripts %}{{ importmap('app') }}{% endblock %}
 </head>
