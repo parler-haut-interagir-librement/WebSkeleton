@@ -1,4 +1,4 @@
-<!-- phil-dev source-sha256=1fad5c9aef1b3b973d745888fcbd5399b2763f5ecfb44dbb4b7165d0fc2660e4 -->
+<!-- phil-dev source-sha256=73c90e6a08986930be25a66d5dd87dc5a60125b8f6e593f242f7c2729a098291 -->
 # WebSkeleton 🦴
 
 [![Latest Version](https://img.shields.io/packagist/v/phil/webskeleton.svg?style=flat-square)](https://packagist.org/packages/phil/webskeleton)
@@ -34,6 +34,7 @@ outils PHIL : phil-ux à la place de Pico CSS, le kit PHIL UX et les bundles PHI
 * [Langues](#langues-)
 * [Conception pilotée par le domaine](#conception-pilotée-par-le-domaine-)
 * [Comptes et administration](#comptes-et-administration-)
+* [Indicateurs de fonctionnalité et disjoncteurs](#indicateurs-de-fonctionnalité-et-disjoncteurs-)
 * [Accessibilité](#accessibilité-)
 * [Avant la mise en ligne](#avant-la-mise-en-ligne-)
 * [Étapes facultatives](#étapes-facultatives-)
@@ -128,6 +129,8 @@ Avec le binaire Symfony, mettez la même variable dans `.env.local`, avec l'hôt
 | L'administration, EasyAdmin au thème de PHIL UX par `phil/ux-easyadmin-bundle`, pour `ROLE_ADMIN` | [DashboardController](src/Shared/Infrastructure/Http/Admin/DashboardController.php), [phil_ux_easy_admin.yaml](config/packages/phil_ux_easy_admin.yaml) |
 | Les choix de confidentialité de chaque membre — l'exportation de ses données, la suppression de son compte, le consentement — et le caviardage des journaux, par `phil/privacy-bundle` | [phil_privacy.yaml](config/packages/phil_privacy.yaml), [AccountPersonalData](src/Account/Infrastructure/Privacy/AccountPersonalData.php) |
 | Les erreurs du site gardées dans sa propre base et montrées dans l'administration, par `phil/error-tracking-bundle` | [phil_error_tracking.yaml](config/packages/phil_error_tracking.yaml) |
+| Des indicateurs de fonctionnalité, éteints jusqu'à ce qu'un administrateur les allume sous `/admin/flags`, par `phil/feature-flags-bundle` | [phil_feature_flags.yaml](config/packages/phil_feature_flags.yaml), [doc](doc/fr/feature-flags-and-circuit-breakers.md) |
+| Un disjoncteur autour de chaque tiers que le site appelle, par `phil/circuit-breaker-bundle` | [phil_circuit_breaker.yaml](config/packages/phil_circuit_breaker.yaml), [doc](doc/fr/feature-flags-and-circuit-breakers.md) |
 | Le menu principal, par `phil/menu-bundle` | [MainMenuBuilder](src/Shared/Infrastructure/Menu/MainMenuBuilder.php) |
 | Les dates de création et de modification des comptes, par `phil/doctrine-behaviours-bundle` | [User](src/Account/Infrastructure/Persistence/Doctrine/Entity/User.php), [phil_doctrine_behaviours.yaml](config/packages/phil_doctrine_behaviours.yaml) |
 | phil-ux et les recettes du kit PHIL UX dans `templates/components/` | [base.html.twig](templates/base.html.twig), [components](templates/components) |
@@ -287,7 +290,7 @@ gestionnaire, et le port `Accounts` du domaine, dont l'adaptateur hache le mot d
 | Compte | `/fr/account`, `/en/account` | Le compte du membre, un lien vers ses choix de confidentialité et le bouton qui le déconnecte. |
 | Déconnexion | `/fr/logout`, `/en/logout` | Par POST avec un jeton CSRF seulement : un lien ou une image ne déconnecte jamais personne. |
 | Choix de confidentialité | `/fr/privacy-choices`, `/en/privacy-choices` | L'exportation des données du membre, la suppression de son compte après trente jours, le consentement ; la suppression redemande le mot de passe quand la session n'est pas récente. |
-| Administration | `/admin` | Pour `ROLE_ADMIN` seulement, qui comprend `ROLE_USER` : les comptes, listés et montrés, jamais créés ni modifiés là, et les erreurs du site. |
+| Administration | `/admin` | Pour `ROLE_ADMIN` seulement, qui comprend `ROLE_USER` : les comptes, listés et montrés, jamais créés ni modifiés là, les erreurs du site, et les indicateurs de fonctionnalité sous `/admin/flags`. |
 
 Le pare-feu vérifie de nouveau le compte chaque fois qu'il est rechargé de la session (`user_checker_on_refresh: true`) :
 un compte modifié ou désactivé est déconnecté à sa requête suivante. La session garde un hachage crc32c du hachage du
@@ -312,6 +315,19 @@ Pour connecter les membres par un fournisseur d'identité, par OpenID Connect, a
 connexion par formulaire par [`phil/identity-client-bundle`](https://github.com/parler-haut-interagir-librement/identity-client-bundle),
 comme le montre son guide d'installation : le pare-feu garde `user_checker_on_refresh: true`, et l'inscription, les
 mots de passe et leurs données de développement s'en vont.
+
+## Indicateurs de fonctionnalité et disjoncteurs 🎚️
+
+Une nouvelle fonctionnalité sort derrière un indicateur de [`phil/feature-flags-bundle`](https://github.com/parler-haut-interagir-librement/feature-flags-bundle),
+déclaré éteint dans [phil_feature_flags.yaml](config/packages/phil_feature_flags.yaml) et allumé par un administrateur
+sous `/admin/flags`, avec une raison écrite dans le canal de journal `feature_flags` ; les états vivent dans la base de
+données. Un tiers qui échoue n'est plus appelé pendant un temps, grâce à un circuit de
+[`phil/circuit-breaker-bundle`](https://github.com/parler-haut-interagir-librement/circuit-breaker-bundle) autour de son
+client HTTP, déclaré dans [phil_circuit_breaker.yaml](config/packages/phil_circuit_breaker.yaml) ; chaque circuit a aussi
+un indicateur qui le force à s'ouvrir. Les exemples du gabarit sont l'indicateur `text.slug-page`, qui garde la page
+`/fr/slug` et son lien sur la page d'accueil, et le circuit `http.example`, autour du client à portée `example.client`.
+Ce qui est branché, où un indicateur se lit dans les couches et comment ajouter un indicateur ou un circuit :
+[doc/fr/feature-flags-and-circuit-breakers.md](doc/fr/feature-flags-and-circuit-breakers.md).
 
 ## Accessibilité ♿
 
@@ -340,9 +356,11 @@ Le gabarit ne commence avec rien qui affirme ce que personne n'a vérifié. Avan
    [phil_contact_form.yaml](config/packages/phil_contact_form.yaml) et réglez `MAILER_DSN`.
 5. **`security.txt`** : remplacez le contact dans [phil_well_known.yaml](config/packages/phil_well_known.yaml) et
    repoussez sa date d'expiration, d'au plus un an.
-6. **Plusieurs serveurs** : donnez au verrou (`LOCK_DSN`) et à `cache.app` un stockage que tous les serveurs
-   partagent, et retirez `single_server` de [phil_browser_security.yaml](config/packages/phil_browser_security.yaml) et de
-   [phil_error_tracking.yaml](config/packages/phil_error_tracking.yaml).
+6. **Plusieurs serveurs** : donnez au verrou (`LOCK_DSN`), à `cache.app` et à `cache.circuits` un stockage que tous
+   les serveurs partagent, et retirez `single_server` de
+   [phil_browser_security.yaml](config/packages/phil_browser_security.yaml), de
+   [phil_error_tracking.yaml](config/packages/phil_error_tracking.yaml) et de
+   [phil_circuit_breaker.yaml](config/packages/phil_circuit_breaker.yaml).
 7. **Les comptes** : ne chargez jamais les données de développement, dont les mots de passe sont publics ; créez le
    premier administrateur en vous inscrivant, puis donnez au compte `ROLE_ADMIN` dans la base.
 8. **Les renseignements personnels** : réglez `APP_PUBLIC_ORIGIN` à l'adresse du site, faites les suppressions de
@@ -351,6 +369,9 @@ Le gabarit ne commence avec rien qui affirme ce que personne n'a vérifié. Avan
    témoin que le site ajoute.
 9. **Les erreurs** : réglez `APP_RELEASE` à la version qui tourne, et purgez les vieux événements avec
    `bin/console phil:error-tracking:purge` par cron.
+10. **Les tiers** : renommez le client d'exemple `example.client` et son circuit `http.example` d'après le tiers que le
+    site appelle, ou retirez-les avec `EXAMPLE_API_URL` ; gardez les lignes du canal de journal `feature_flags`, la
+    piste d'audit des indicateurs.
 
 ## Étapes facultatives 🧩
 
