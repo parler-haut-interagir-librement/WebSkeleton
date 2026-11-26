@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b693cdf8bbdf0a4ccbe0f862fdafbc76",
+    "content-hash": "7319d09e9dc5089c147fff25b9feb6b6",
     "packages": [
         {
             "name": "composer/semver",
@@ -1573,16 +1573,16 @@
         },
         {
             "name": "phil/accessibility-check",
-            "version": "0.1.1-alpha",
+            "version": "0.1.2-alpha",
             "source": {
                 "type": "git",
                 "url": "https://github.com/parler-haut-interagir-librement/accessibility-check.git",
-                "reference": "ce9f58e52c11844e568f35da60e9885becac5fdd"
+                "reference": "c56a6881c425f9bcb8f2426f67cd75d239b462da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/parler-haut-interagir-librement/accessibility-check/zipball/ce9f58e52c11844e568f35da60e9885becac5fdd",
-                "reference": "ce9f58e52c11844e568f35da60e9885becac5fdd",
+                "url": "https://api.github.com/repos/parler-haut-interagir-librement/accessibility-check/zipball/c56a6881c425f9bcb8f2426f67cd75d239b462da",
+                "reference": "c56a6881c425f9bcb8f2426f67cd75d239b462da",
                 "shasum": ""
             },
             "require": {
@@ -1644,10 +1644,10 @@
             ],
             "support": {
                 "issues": "https://github.com/parler-haut-interagir-librement/accessibility-check/issues",
-                "source": "https://github.com/parler-haut-interagir-librement/accessibility-check/tree/0.1.1-alpha"
+                "source": "https://github.com/parler-haut-interagir-librement/accessibility-check/tree/0.1.2-alpha"
             },
-            "time": "2026-11-24T22:00:00+00:00",
-            "published-time": "2026-11-25T03:51:27+00:00"
+            "time": "2026-11-25T22:00:00+00:00",
+            "published-time": "2026-11-26T01:18:44+00:00"
         },
         {
             "name": "phil/accessibility-statement",
@@ -1715,16 +1715,16 @@
         },
         {
             "name": "phil/accessibility-statement-bundle",
-            "version": "0.1.0-alpha",
+            "version": "0.1.1-alpha",
             "source": {
                 "type": "git",
                 "url": "https://github.com/parler-haut-interagir-librement/accessibility-statement-bundle.git",
-                "reference": "65904e256e5e7db55629489edf74008e8c1b0f9a"
+                "reference": "14d287a82c5abd740c2be03c8575786ea5845e51"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/parler-haut-interagir-librement/accessibility-statement-bundle/zipball/65904e256e5e7db55629489edf74008e8c1b0f9a",
-                "reference": "65904e256e5e7db55629489edf74008e8c1b0f9a",
+                "url": "https://api.github.com/repos/parler-haut-interagir-librement/accessibility-statement-bundle/zipball/14d287a82c5abd740c2be03c8575786ea5845e51",
+                "reference": "14d287a82c5abd740c2be03c8575786ea5845e51",
                 "shasum": ""
             },
             "require": {
@@ -1738,14 +1738,14 @@
                 "symfony/http-foundation": "^8.2",
                 "symfony/http-kernel": "^8.2",
                 "symfony/routing": "^8.2",
-                "symfony/translation-contracts": "^3.6",
-                "symfony/ux-twig-component": "^3.7",
-                "twig/twig": "^3.21"
+                "symfony/translation-contracts": "^3.8",
+                "symfony/ux-twig-component": "^3.8",
+                "twig/twig": "^3.31.1"
             },
             "require-dev": {
-                "doctrine/dbal": "^4.5",
-                "doctrine/doctrine-bundle": "^3.3",
-                "doctrine/orm": "^3.7",
+                "doctrine/dbal": "^4.6",
+                "doctrine/doctrine-bundle": "^3.4",
+                "doctrine/orm": "^3.8",
                 "phil/legal-notices-bundle": "^0.1@dev",
                 "phil/ux-kit": ">=0.5.0-alpha <1.0",
                 "phpunit/phpunit": "^13.4",
@@ -1758,13 +1758,13 @@
                 "symfony/security-bundle": "^8.2",
                 "symfony/security-core": "^8.2",
                 "symfony/security-csrf": "^8.2",
-                "symfony/service-contracts": "^3.6",
+                "symfony/service-contracts": "^3.8",
                 "symfony/translation": "^8.2",
                 "symfony/twig-bridge": "^8.2",
                 "symfony/twig-bundle": "^8.2",
-                "symfony/ux-toolkit": "^3.7.1",
+                "symfony/ux-toolkit": "^3.8",
                 "symfony/yaml": "^8.2",
-                "twig/html-extra": "^3.24"
+                "twig/html-extra": "^3.31.1"
             },
             "suggest": {
                 "doctrine/orm": "For the \"doctrine\" source, the versions kept in a table",
@@ -1800,7 +1800,7 @@
                     "role": "Developer"
                 }
             ],
-            "description": "The accessibility statement of a Symfony application: versioned, from configuration or a table, at /accessibility and /accessibilite in English and French with the wording of WCAG, EN 301 549 or the Accessible Canada Act, drawn with the PHIL UX kit, a footer link, an admin page that publishes, and a command fed by phil/accessibility-check",
+            "description": "phil/accessibility-statement in Symfony: an accessibility statement page in English and French, its versions, an admin page, and a command fed by audits.",
             "homepage": "https://ph-il.ca",
             "keywords": [
                 "a11y",
@@ -1812,10 +1812,10 @@
             ],
             "support": {
                 "issues": "https://github.com/parler-haut-interagir-librement/accessibility-statement-bundle/issues",
-                "source": "https://github.com/parler-haut-interagir-librement/accessibility-statement-bundle/tree/0.1.0-alpha"
+                "source": "https://github.com/parler-haut-interagir-librement/accessibility-statement-bundle/tree/0.1.1-alpha"
             },
-            "time": "2026-11-15T22:00:00+00:00",
-            "published-time": "2026-11-16T01:18:10+00:00"
+            "time": "2026-11-25T22:00:00+00:00",
+            "published-time": "2026-11-26T01:19:02+00:00"
         },
         {
             "name": "phil/bot-detection-bundle",
@@ -1878,16 +1878,16 @@
         },
         {
             "name": "phil/browser-security-bundle",
-            "version": "0.2.0-alpha",
+            "version": "0.2.1-alpha",
             "source": {
                 "type": "git",
                 "url": "https://github.com/parler-haut-interagir-librement/browser-security-bundle.git",
-                "reference": "90f047eb27f6de8db6a9f13f3f7d1529ab61dc3c"
+                "reference": "2f253d5a0a161751c1b5ebf4b4e83fcb5d57f8f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/parler-haut-interagir-librement/browser-security-bundle/zipball/90f047eb27f6de8db6a9f13f3f7d1529ab61dc3c",
-                "reference": "90f047eb27f6de8db6a9f13f3f7d1529ab61dc3c",
+                "url": "https://api.github.com/repos/parler-haut-interagir-librement/browser-security-bundle/zipball/2f253d5a0a161751c1b5ebf4b4e83fcb5d57f8f5",
+                "reference": "2f253d5a0a161751c1b5ebf4b4e83fcb5d57f8f5",
                 "shasum": ""
             },
             "require": {
@@ -1902,14 +1902,15 @@
                 "psr/event-dispatcher": "^1.0",
                 "symfony/config": "^8.2",
                 "symfony/dependency-injection": "^8.2",
+                "symfony/error-handler": "^8.2",
                 "symfony/http-foundation": "^8.2",
                 "symfony/http-kernel": "^8.2",
                 "symfony/routing": "^8.2"
             },
             "require-dev": {
-                "doctrine/dbal": "^4.5",
-                "doctrine/doctrine-bundle": "^3.3",
-                "doctrine/orm": "^3.7",
+                "doctrine/dbal": "^4.6",
+                "doctrine/doctrine-bundle": "^3.4",
+                "doctrine/orm": "^3.8",
                 "phil/ip-anonymizer": "^0.1@dev",
                 "phil/rate-limit-bundle": "^0.1@dev",
                 "phil/structured-data-bundle": "^0.1@dev",
@@ -1921,16 +1922,16 @@
                 "symfony/clock": "^8.2",
                 "symfony/console": "^8.2",
                 "symfony/event-dispatcher": "^8.2",
-                "symfony/event-dispatcher-contracts": "^3.6",
+                "symfony/event-dispatcher-contracts": "^3.8",
                 "symfony/framework-bundle": "^8.2",
                 "symfony/lock": "^8.2",
                 "symfony/rate-limiter": "^8.2",
                 "symfony/security-bundle": "^8.2",
                 "symfony/security-http": "^8.2",
-                "symfony/service-contracts": "^3.6",
+                "symfony/service-contracts": "^3.8",
                 "symfony/twig-bridge": "^8.2",
                 "symfony/twig-bundle": "^8.2",
-                "twig/twig": "^3.21"
+                "twig/twig": "^3.31.1"
             },
             "suggest": {
                 "doctrine/dbal": "For the violations kept in the table phil_csp_report",
@@ -1952,7 +1953,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "0.1.x-dev"
+                    "dev-main": "0.2.x-dev"
                 }
             },
             "autoload": {
@@ -1985,28 +1986,28 @@
             ],
             "support": {
                 "issues": "https://github.com/parler-haut-interagir-librement/browser-security-bundle/issues",
-                "source": "https://github.com/parler-haut-interagir-librement/browser-security-bundle/tree/0.2.0-alpha"
+                "source": "https://github.com/parler-haut-interagir-librement/browser-security-bundle/tree/0.2.1-alpha"
             },
-            "time": "2026-11-20T22:00:00+00:00",
-            "published-time": "2026-11-21T02:56:27+00:00"
+            "time": "2026-11-25T22:00:00+00:00",
+            "published-time": "2026-11-26T01:19:07+00:00"
         },
         {
             "name": "phil/contact-form-bundle",
-            "version": "0.1.1-alpha",
+            "version": "0.1.3-alpha",
             "source": {
                 "type": "git",
                 "url": "https://github.com/parler-haut-interagir-librement/contact-form-bundle.git",
-                "reference": "d686fe4de7f51ed1a99b4b6ed417bea970de89b0"
+                "reference": "19886c13c5be896cbd393d9d7088023fb64c082d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/parler-haut-interagir-librement/contact-form-bundle/zipball/d686fe4de7f51ed1a99b4b6ed417bea970de89b0",
-                "reference": "d686fe4de7f51ed1a99b4b6ed417bea970de89b0",
+                "url": "https://api.github.com/repos/parler-haut-interagir-librement/contact-form-bundle/zipball/19886c13c5be896cbd393d9d7088023fb64c082d",
+                "reference": "19886c13c5be896cbd393d9d7088023fb64c082d",
                 "shasum": ""
             },
             "require": {
                 "ext-filter": "*",
-                "phil/spam-protection-bundle": "^0.1@dev || ^0.2@dev",
+                "phil/spam-protection-bundle": "^0.3@dev",
                 "php": ">=8.5",
                 "psr/log": "^3.0",
                 "symfony/config": "^8.2",
@@ -2018,7 +2019,7 @@
                 "symfony/options-resolver": "^8.2",
                 "symfony/twig-bridge": "^8.2",
                 "symfony/validator": "^8.2",
-                "twig/twig": "^3.21"
+                "twig/twig": "^3.31.1"
             },
             "require-dev": {
                 "phil/spam-protection": "^0.1@dev",
@@ -2028,6 +2029,7 @@
                 "symfony/event-dispatcher": "^8.2",
                 "symfony/framework-bundle": "^8.2",
                 "symfony/http-kernel": "^8.2",
+                "symfony/messenger": "^8.2",
                 "symfony/routing": "^8.2",
                 "symfony/translation": "^8.2",
                 "symfony/twig-bundle": "^8.2"
@@ -2065,10 +2067,10 @@
             ],
             "support": {
                 "issues": "https://github.com/parler-haut-interagir-librement/contact-form-bundle/issues",
-                "source": "https://github.com/parler-haut-interagir-librement/contact-form-bundle/tree/0.1.1-alpha"
+                "source": "https://github.com/parler-haut-interagir-librement/contact-form-bundle/tree/0.1.3-alpha"
             },
-            "time": "2026-11-17T22:00:00+00:00",
-            "published-time": "2026-11-18T01:36:03+00:00"
+            "time": "2026-11-25T22:00:00+00:00",
+            "published-time": "2026-11-26T01:19:15+00:00"
         },
         {
             "name": "phil/ddd-bundle",
@@ -2509,20 +2511,20 @@
         },
         {
             "name": "phil/error-tracking-bundle",
-            "version": "0.1.0-alpha",
+            "version": "0.1.1-alpha",
             "source": {
                 "type": "git",
                 "url": "https://github.com/parler-haut-interagir-librement/error-tracking-bundle.git",
-                "reference": "1d0bf326df4aabfdf4c59d8a4e9cfe85cb3cc6f3"
+                "reference": "6f77ed8a7b0bdd12a46b45f08aecdfdabb1440ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/parler-haut-interagir-librement/error-tracking-bundle/zipball/1d0bf326df4aabfdf4c59d8a4e9cfe85cb3cc6f3",
-                "reference": "1d0bf326df4aabfdf4c59d8a4e9cfe85cb3cc6f3",
+                "url": "https://api.github.com/repos/parler-haut-interagir-librement/error-tracking-bundle/zipball/6f77ed8a7b0bdd12a46b45f08aecdfdabb1440ed",
+                "reference": "6f77ed8a7b0bdd12a46b45f08aecdfdabb1440ed",
                 "shasum": ""
             },
             "require": {
-                "doctrine/dbal": "^4.5",
+                "doctrine/dbal": "^4.6",
                 "ext-mbstring": "*",
                 "phil/error-tracking": "^0.1.1@dev",
                 "phil/ip-anonymizer": "^0.1@dev",
@@ -2536,16 +2538,19 @@
                 "symfony/http-foundation": "^8.2",
                 "symfony/http-kernel": "^8.2",
                 "symfony/notifier": "^8.2",
-                "symfony/service-contracts": "^3.6"
+                "symfony/service-contracts": "^3.8"
+            },
+            "conflict": {
+                "easycorp/easyadmin-bundle": "<5.10.4"
             },
             "require-dev": {
-                "doctrine/doctrine-bundle": "^3.3",
-                "doctrine/orm": "^3.7",
-                "easycorp/easyadmin-bundle": "^5.8",
-                "monolog/monolog": "^3.0",
+                "doctrine/doctrine-bundle": "^3.4",
+                "doctrine/orm": "^3.8",
+                "easycorp/easyadmin-bundle": "^5.10.4",
+                "monolog/monolog": "^3.13",
                 "phil/monitoring-bundle": "^0.1.1@dev",
-                "phil/notifications-bundle": "^0.1@dev || ^0.2@dev",
-                "phil/privacy-bundle": "^0.1.1@dev",
+                "phil/notifications-bundle": "^0.4@dev",
+                "phil/privacy-bundle": "^0.3@dev",
                 "phil/rate-limit-bundle": "^0.1.1@dev",
                 "phpunit/phpunit": "^13.4",
                 "psr/event-dispatcher": "^1.0",
@@ -2557,7 +2562,7 @@
                 "symfony/css-selector": "^8.2",
                 "symfony/dom-crawler": "^8.2",
                 "symfony/event-dispatcher": "^8.2",
-                "symfony/event-dispatcher-contracts": "^3.6",
+                "symfony/event-dispatcher-contracts": "^3.8",
                 "symfony/framework-bundle": "^8.2",
                 "symfony/messenger": "^8.2",
                 "symfony/process": "^8.2",
@@ -2568,10 +2573,10 @@
                 "symfony/security-csrf": "^8.2",
                 "symfony/twig-bridge": "^8.2",
                 "symfony/twig-bundle": "^8.2",
-                "symfony/ux-twig-component": "^3.7",
+                "symfony/ux-twig-component": "^3.8",
                 "symfony/yaml": "^8.2",
-                "twig/extra-bundle": "^3.24",
-                "twig/twig": "^3.21"
+                "twig/extra-bundle": "^3.31",
+                "twig/twig": "^3.31.1"
             },
             "suggest": {
                 "doctrine/orm": "For the tables added to the schema the ORM generates",
@@ -2624,10 +2629,10 @@
             ],
             "support": {
                 "issues": "https://github.com/parler-haut-interagir-librement/error-tracking-bundle/issues",
-                "source": "https://github.com/parler-haut-interagir-librement/error-tracking-bundle/tree/0.1.0-alpha"
+                "source": "https://github.com/parler-haut-interagir-librement/error-tracking-bundle/tree/0.1.1-alpha"
             },
-            "time": "2026-11-20T22:00:00+00:00",
-            "published-time": "2026-11-21T03:03:54+00:00"
+            "time": "2026-11-25T22:00:00+00:00",
+            "published-time": "2026-11-26T01:19:26+00:00"
         },
         {
             "name": "phil/indexing-consent",
@@ -2816,16 +2821,16 @@
         },
         {
             "name": "phil/legal-notices-bundle",
-            "version": "0.1.0-alpha",
+            "version": "0.1.1-alpha",
             "source": {
                 "type": "git",
                 "url": "https://github.com/parler-haut-interagir-librement/legal-notices-bundle.git",
-                "reference": "0162b28b6a94d9b55ce585b448f7bbded697f166"
+                "reference": "75155ed17ceb3ded26ebc302d9d95804aee57004"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/parler-haut-interagir-librement/legal-notices-bundle/zipball/0162b28b6a94d9b55ce585b448f7bbded697f166",
-                "reference": "0162b28b6a94d9b55ce585b448f7bbded697f166",
+                "url": "https://api.github.com/repos/parler-haut-interagir-librement/legal-notices-bundle/zipball/75155ed17ceb3ded26ebc302d9d95804aee57004",
+                "reference": "75155ed17ceb3ded26ebc302d9d95804aee57004",
                 "shasum": ""
             },
             "require": {
@@ -2841,14 +2846,14 @@
                 "symfony/http-foundation": "^8.2",
                 "symfony/http-kernel": "^8.2",
                 "symfony/routing": "^8.2",
-                "symfony/translation-contracts": "^3.6",
-                "symfony/ux-twig-component": "^3.7",
-                "twig/intl-extra": "^3.30",
-                "twig/twig": "^3.21"
+                "symfony/translation-contracts": "^3.8",
+                "symfony/ux-twig-component": "^3.8",
+                "twig/intl-extra": "^3.31",
+                "twig/twig": "^3.31.1"
             },
             "require-dev": {
-                "phil/markup": "^0.2.1@dev",
-                "phil/privacy-bundle": "^0.1@dev",
+                "phil/markup": "^0.3@dev",
+                "phil/privacy-bundle": "^0.3@dev",
                 "phil/sitemap": "^0.1@dev",
                 "phil/sitemap-bundle": "^0.1@dev",
                 "phil/structured-data": "^0.1@dev",
@@ -2863,10 +2868,10 @@
                 "symfony/translation": "^8.2",
                 "symfony/twig-bridge": "^8.2",
                 "symfony/twig-bundle": "^8.2",
-                "symfony/ux-toolkit": "^3.7.1",
+                "symfony/ux-toolkit": "^3.8",
                 "symfony/yaml": "^8.2",
-                "twig/extra-bundle": "^3.24",
-                "twig/html-extra": "^3.24"
+                "twig/extra-bundle": "^3.31",
+                "twig/html-extra": "^3.31.1"
             },
             "suggest": {
                 "phil/markup": "For bodies written in Markdown, UJO (Universal JSON Output), HTML and the other formats it reads",
@@ -2901,7 +2906,7 @@
                     "role": "Developer"
                 }
             ],
-            "description": "phil/legal-notices in Symfony: the legal notice and privacy policy at /legal and /privacy in each locale, every version at its own address, written in configuration or read from a source, rendered by phil/markup, with retention periods, consent categories, footer links, a check of what a document lacks and an event per version",
+            "description": "phil/legal-notices in Symfony: the legal notice and privacy policy at /legal and /privacy in each locale, every version at its own address, with footer links.",
             "homepage": "https://ph-il.ca",
             "keywords": [
                 "gdpr",
@@ -2912,10 +2917,10 @@
             ],
             "support": {
                 "issues": "https://github.com/parler-haut-interagir-librement/legal-notices-bundle/issues",
-                "source": "https://github.com/parler-haut-interagir-librement/legal-notices-bundle/tree/0.1.0-alpha"
+                "source": "https://github.com/parler-haut-interagir-librement/legal-notices-bundle/tree/0.1.1-alpha"
             },
-            "time": "2026-11-15T22:00:00+00:00",
-            "published-time": "2026-11-16T01:17:55+00:00"
+            "time": "2026-11-25T22:00:00+00:00",
+            "published-time": "2026-11-26T01:19:40+00:00"
         },
         {
             "name": "phil/locale-dimensions",
@@ -3147,16 +3152,16 @@
         },
         {
             "name": "phil/privacy-bundle",
-            "version": "0.3.0-alpha",
+            "version": "0.4.0-alpha",
             "source": {
                 "type": "git",
                 "url": "https://github.com/parler-haut-interagir-librement/privacy-bundle.git",
-                "reference": "beb015d537eaffa9b0b9d3be5a79c44084e49c1a"
+                "reference": "e8498ceb09f02a43362ceb7ae1afad378960b9c0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/parler-haut-interagir-librement/privacy-bundle/zipball/beb015d537eaffa9b0b9d3be5a79c44084e49c1a",
-                "reference": "beb015d537eaffa9b0b9d3be5a79c44084e49c1a",
+                "url": "https://api.github.com/repos/parler-haut-interagir-librement/privacy-bundle/zipball/e8498ceb09f02a43362ceb7ae1afad378960b9c0",
+                "reference": "e8498ceb09f02a43362ceb7ae1afad378960b9c0",
                 "shasum": ""
             },
             "require": {
@@ -3183,7 +3188,7 @@
                 "symfony/security-http": "^8.2",
                 "symfony/workflow": "^8.2",
                 "symfony/yaml": "^8.2",
-                "twig/twig": "^3.31"
+                "twig/twig": "^3.31.1"
             },
             "require-dev": {
                 "doctrine/dbal": "^4.6",
@@ -3257,10 +3262,10 @@
             "homepage": "https://ph-il.ca",
             "support": {
                 "issues": "https://github.com/parler-haut-interagir-librement/privacy-bundle/issues",
-                "source": "https://github.com/parler-haut-interagir-librement/privacy-bundle/tree/0.3.0-alpha"
+                "source": "https://github.com/parler-haut-interagir-librement/privacy-bundle/tree/0.4.0-alpha"
             },
-            "time": "2026-11-24T22:00:00+00:00",
-            "published-time": "2026-11-25T03:53:30+00:00"
+            "time": "2026-11-25T22:00:00+00:00",
+            "published-time": "2026-11-26T01:20:04+00:00"
         },
         {
             "name": "phil/rate-limit",
@@ -3526,22 +3531,23 @@
         },
         {
             "name": "phil/spam-protection-bundle",
-            "version": "0.1.1-alpha",
+            "version": "0.3.1-alpha",
             "source": {
                 "type": "git",
                 "url": "https://github.com/parler-haut-interagir-librement/spam-protection-bundle.git",
-                "reference": "72ae4a91161af2408c0aa888baec89125d306e72"
+                "reference": "042a23c73c36d16c369f9ad48948a050f1a7259d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/parler-haut-interagir-librement/spam-protection-bundle/zipball/72ae4a91161af2408c0aa888baec89125d306e72",
-                "reference": "72ae4a91161af2408c0aa888baec89125d306e72",
+                "url": "https://api.github.com/repos/parler-haut-interagir-librement/spam-protection-bundle/zipball/042a23c73c36d16c369f9ad48948a050f1a7259d",
+                "reference": "042a23c73c36d16c369f9ad48948a050f1a7259d",
                 "shasum": ""
             },
             "require": {
                 "ext-filter": "*",
                 "ext-sodium": "*",
                 "phil/bot-detection-bundle": "^0.1@dev",
+                "phil/rate-limit": "^0.1.1@dev",
                 "phil/spam-protection": "^0.1@dev",
                 "php": ">=8.5",
                 "psr/cache": "^3.0",
@@ -3552,11 +3558,13 @@
                 "symfony/form": "^8.2",
                 "symfony/http-foundation": "^8.2",
                 "symfony/options-resolver": "^8.2",
-                "symfony/translation-contracts": "^3.6"
+                "symfony/translation-contracts": "^3.8"
             },
             "require-dev": {
-                "doctrine/dbal": "^4.5",
-                "doctrine/orm": "^3.7",
+                "doctrine/dbal": "^4.6",
+                "doctrine/orm": "^3.8",
+                "ext-pdo": "*",
+                "ext-pdo_sqlite": "*",
                 "phpunit/phpunit": "^13.4",
                 "symfony/cache": "^8.2",
                 "symfony/clock": "^8.2",
@@ -3579,7 +3587,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "0.1.x-dev"
+                    "dev-main": "0.3.x-dev"
                 }
             },
             "autoload": {
@@ -3599,7 +3607,7 @@
                     "role": "Developer"
                 }
             ],
-            "description": "Spam protection for Symfony forms without captcha, third party or identifier: honeypot, signed single-use token, filling time, browser proof of work, text rules and rate limit, whose outcome is a phil/bot-detection-bundle verdict",
+            "description": "phil/spam-protection in Symfony: keep spam out of your forms without a captcha, a third party or tracking, through checks a person never sees.",
             "homepage": "https://ph-il.ca",
             "keywords": [
                 "Honeypot",
@@ -3611,10 +3619,10 @@
             ],
             "support": {
                 "issues": "https://github.com/parler-haut-interagir-librement/spam-protection-bundle/issues",
-                "source": "https://github.com/parler-haut-interagir-librement/spam-protection-bundle/tree/0.1.1-alpha"
+                "source": "https://github.com/parler-haut-interagir-librement/spam-protection-bundle/tree/0.3.1-alpha"
             },
-            "time": "2026-11-14T22:00:00+00:00",
-            "published-time": "2026-11-15T03:21:09+00:00"
+            "time": "2026-11-24T22:00:00+00:00",
+            "published-time": "2026-11-25T03:53:40+00:00"
         },
         {
             "name": "phil/structured-data",
@@ -3835,16 +3843,16 @@
         },
         {
             "name": "phil/ux-bundle",
-            "version": "0.1.1-alpha",
+            "version": "0.1.2-alpha",
             "source": {
                 "type": "git",
                 "url": "https://github.com/parler-haut-interagir-librement/ux-bundle.git",
-                "reference": "94c0d9189cc870e1b6c2f6a959f7b3e3628a61a6"
+                "reference": "f572859d1a0fb0280a1f90ca68fa15a6e0776e0e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/parler-haut-interagir-librement/ux-bundle/zipball/94c0d9189cc870e1b6c2f6a959f7b3e3628a61a6",
-                "reference": "94c0d9189cc870e1b6c2f6a959f7b3e3628a61a6",
+                "url": "https://api.github.com/repos/parler-haut-interagir-librement/ux-bundle/zipball/f572859d1a0fb0280a1f90ca68fa15a6e0776e0e",
+                "reference": "f572859d1a0fb0280a1f90ca68fa15a6e0776e0e",
                 "shasum": ""
             },
             "require": {
@@ -3856,7 +3864,7 @@
                 "symfony/form": "^8.2",
                 "symfony/http-kernel": "^8.2",
                 "symfony/twig-bundle": "^8.2",
-                "twig/twig": "^3.31"
+                "twig/twig": "^3.31.1"
             },
             "require-dev": {
                 "phpunit/phpunit": "^13.4",
@@ -3903,10 +3911,10 @@
             ],
             "support": {
                 "issues": "https://github.com/parler-haut-interagir-librement/ux-bundle/issues",
-                "source": "https://github.com/parler-haut-interagir-librement/ux-bundle/tree/0.1.1-alpha"
+                "source": "https://github.com/parler-haut-interagir-librement/ux-bundle/tree/0.1.2-alpha"
             },
-            "time": "2026-11-24T22:00:00+00:00",
-            "published-time": "2026-11-25T03:53:52+00:00"
+            "time": "2026-11-25T22:00:00+00:00",
+            "published-time": "2026-11-26T01:20:35+00:00"
         },
         {
             "name": "phil/ux-css",
@@ -3971,22 +3979,22 @@
         },
         {
             "name": "phil/ux-easyadmin-bundle",
-            "version": "0.1.0-alpha",
+            "version": "0.1.1-alpha",
             "source": {
                 "type": "git",
                 "url": "https://github.com/parler-haut-interagir-librement/ux-easyadmin-bundle.git",
-                "reference": "4218afcc85eb319375ba9338ab501f234970d09e"
+                "reference": "3783f8170d0fbfb5ae1def9ef4211b52ddc92dba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/parler-haut-interagir-librement/ux-easyadmin-bundle/zipball/4218afcc85eb319375ba9338ab501f234970d09e",
-                "reference": "4218afcc85eb319375ba9338ab501f234970d09e",
+                "url": "https://api.github.com/repos/parler-haut-interagir-librement/ux-easyadmin-bundle/zipball/3783f8170d0fbfb5ae1def9ef4211b52ddc92dba",
+                "reference": "3783f8170d0fbfb5ae1def9ef4211b52ddc92dba",
                 "shasum": ""
             },
             "require": {
                 "composer-runtime-api": "^2.2",
-                "easycorp/easyadmin-bundle": "^5.10",
-                "phil/ux-css": ">=0.1.0-alpha <1.0",
+                "easycorp/easyadmin-bundle": "^5.10.4",
+                "phil/ux-css": ">=0.5.0-alpha <1.0",
                 "php": ">=8.5",
                 "symfony/asset-mapper": "^8.2",
                 "symfony/config": "^8.2",
@@ -3994,7 +4002,7 @@
                 "symfony/http-kernel": "^8.2"
             },
             "require-dev": {
-                "doctrine/doctrine-bundle": "^3.3",
+                "doctrine/doctrine-bundle": "^3.4",
                 "php-webdriver/webdriver": "^1.16",
                 "phpunit/phpunit": "^13.4",
                 "psr/log": "^3.0",
@@ -4005,8 +4013,8 @@
                 "symfony/routing": "^8.2",
                 "symfony/security-bundle": "^8.2",
                 "symfony/twig-bundle": "^8.2",
-                "symfony/ux-twig-component": "^3.7",
-                "twig/extra-bundle": "^3.23"
+                "symfony/ux-twig-component": "^3.8",
+                "twig/extra-bundle": "^3.31"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -4031,7 +4039,7 @@
                     "role": "Developer"
                 }
             ],
-            "description": "PHIL UX in the EasyAdmin back-office: EasyAdmin's colours, corners and fonts taken from the tokens of phil/ux-css, light and dark, in EasyAdmin's cascade layers, linked on every page of every dashboard",
+            "description": "The EasyAdmin back-office in the colours, corners and fonts of PHIL UX, light and dark, without restyling EasyAdmin itself.",
             "homepage": "https://ph-il.ca",
             "keywords": [
                 "asset-mapper",
@@ -4043,23 +4051,23 @@
             ],
             "support": {
                 "issues": "https://github.com/parler-haut-interagir-librement/ux-easyadmin-bundle/issues",
-                "source": "https://github.com/parler-haut-interagir-librement/ux-easyadmin-bundle/tree/0.1.0-alpha"
+                "source": "https://github.com/parler-haut-interagir-librement/ux-easyadmin-bundle/tree/0.1.1-alpha"
             },
-            "time": "2026-11-13T15:18:50+00:00",
-            "published-time": "2026-11-13T22:46:46+00:00"
+            "time": "2026-11-25T22:00:00+00:00",
+            "published-time": "2026-11-26T01:20:37+00:00"
         },
         {
             "name": "phil/ux-kit",
-            "version": "0.6.0-alpha",
+            "version": "0.7.0-alpha",
             "source": {
                 "type": "git",
                 "url": "https://github.com/parler-haut-interagir-librement/ux-kit.git",
-                "reference": "969790c21c8e9a2660db7d655d80fed213cf054c"
+                "reference": "bbe8e56914702258a1f4039118299e2e67b0541b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/parler-haut-interagir-librement/ux-kit/zipball/969790c21c8e9a2660db7d655d80fed213cf054c",
-                "reference": "969790c21c8e9a2660db7d655d80fed213cf054c",
+                "url": "https://api.github.com/repos/parler-haut-interagir-librement/ux-kit/zipball/bbe8e56914702258a1f4039118299e2e67b0541b",
+                "reference": "bbe8e56914702258a1f4039118299e2e67b0541b",
                 "shasum": ""
             },
             "require": {
@@ -4071,7 +4079,7 @@
                 "symfony/dependency-injection": "^8.2",
                 "symfony/http-foundation": "^8.2",
                 "symfony/http-kernel": "^8.2",
-                "twig/twig": "^3.31"
+                "twig/twig": "^3.31.1"
             },
             "require-dev": {
                 "ext-gd": "*",
@@ -4093,7 +4101,7 @@
                 "symfony/web-link": "^8.2",
                 "symfony/yaml": "^8.2",
                 "twig/extra-bundle": "^3.31",
-                "twig/html-extra": "^3.31"
+                "twig/html-extra": "^3.31.1"
             },
             "suggest": {
                 "ext-gd": "To compare the screenshots of the browser test case of src/Test/ with their references",
@@ -4109,7 +4117,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "0.5.x-dev"
+                    "dev-main": "0.6.x-dev"
                 }
             },
             "autoload": {
@@ -4141,10 +4149,10 @@
             ],
             "support": {
                 "issues": "https://github.com/parler-haut-interagir-librement/ux-kit/issues",
-                "source": "https://github.com/parler-haut-interagir-librement/ux-kit/tree/0.6.0-alpha"
+                "source": "https://github.com/parler-haut-interagir-librement/ux-kit/tree/0.7.0-alpha"
             },
-            "time": "2026-11-24T22:00:00+00:00",
-            "published-time": "2026-11-25T03:52:12+00:00"
+            "time": "2026-11-25T22:00:00+00:00",
+            "published-time": "2026-11-26T01:18:57+00:00"
         },
         {
             "name": "phil/well-known-bundle",
@@ -11478,19 +11486,14 @@
         },
         {
             "name": "phil/dev-tools",
-            "version": "0.1.8-alpha",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/parler-haut-interagir-librement/dev-tools.git",
-                "reference": "e11f161bddd1cbe453443940e10d81124e9c786d"
-            },
+            "version": "0.2.1-alpha",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/parler-haut-interagir-librement/dev-tools/zipball/e11f161bddd1cbe453443940e10d81124e9c786d",
-                "reference": "e11f161bddd1cbe453443940e10d81124e9c786d",
-                "shasum": ""
+                "type": "path",
+                "url": "../dev-tools",
+                "reference": "9a5f418977adf224b2784b7d5df6eab4ae7ad727"
             },
             "require": {
+                "ext-ctype": "*",
                 "ext-dom": "*",
                 "ext-libxml": "*",
                 "ext-mbstring": "*",
@@ -11504,13 +11507,24 @@
                 "ergebnis/phpunit-slow-test-detector": "^2.27",
                 "phpstan/phpstan": "^2.3",
                 "phpunit/phpunit": "^13.4",
+                "psr/log": "^3.0",
                 "shipmonk/composer-dependency-analyser": "^1.8",
+                "symfony/browser-kit": "^8.2",
+                "symfony/dependency-injection": "^8.2",
+                "symfony/framework-bundle": "^8.2",
                 "symfony/http-client": "^8.2",
-                "symfony/phpunit-bridge": "^8.2"
+                "symfony/http-foundation": "^8.2",
+                "symfony/http-kernel": "^8.2",
+                "symfony/phpunit-bridge": "^8.2",
+                "symfony/process": "^8.2",
+                "symfony/routing": "^8.2"
             },
             "suggest": {
+                "symfony/browser-kit": "For RouteSmokeTesting, the route smoke test of a test kernel (8.2 or later)",
+                "symfony/framework-bundle": "For RouteSmokeTesting, the route smoke test of a test kernel (8.2 or later)",
                 "symfony/http-client": "For HttpRecording, to record and replay the HTTP exchanges of integration tests (8.2 or later)",
-                "symfony/phpunit-bridge": "For HttpRecording and the #[UseRecord] attribute of integration tests (8.2 or later)"
+                "symfony/phpunit-bridge": "For HttpRecording and the #[UseRecord] attribute of integration tests (8.2 or later)",
+                "symfony/routing": "For SmokeRoutes and RouteSmokeTesting, the routes a smoke test requests (8.2 or later)"
             },
             "bin": [
                 "bin/phil-dev"
@@ -11531,7 +11545,150 @@
                     "Phil\\DevTools\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "Phil\\DevTools\\Tests\\": "tests/"
+                }
+            },
+            "scripts": {
+                "arkitect": [
+                    "vendor-bin/arkitect/vendor/bin/phparkitect check --config=arkitect.php"
+                ],
+                "bc": [
+                    "@php bin/phil-dev bc"
+                ],
+                "bench": [
+                    "@php bin/phil-dev bench"
+                ],
+                "bench:baseline": [
+                    "@php bin/phil-dev bench --baseline"
+                ],
+                "bench:compare": [
+                    "@php bin/phil-dev bench --compare"
+                ],
+                "bench:worker": [
+                    "@php bin/phil-dev bench:worker"
+                ],
+                "conventions": [
+                    "@php bin/phil-dev check-config"
+                ],
+                "cs": [
+                    "vendor-bin/php-cs-fixer/vendor/bin/php-cs-fixer check --diff"
+                ],
+                "cs:fix": [
+                    "vendor-bin/php-cs-fixer/vendor/bin/php-cs-fixer fix"
+                ],
+                "deps": [
+                    "vendor/bin/composer-dependency-analyser"
+                ],
+                "deps:audit": [
+                    "@php bin/phil-dev audit"
+                ],
+                "deps:normalize": [
+                    "@php bin/phil-dev normalize"
+                ],
+                "deps:normalize:fix": [
+                    "@php bin/phil-dev normalize --fix"
+                ],
+                "deps:unused": [
+                    "@php bin/phil-dev unused"
+                ],
+                "deptrac": [
+                    "@php bin/phil-dev deptrac"
+                ],
+                "docs": [
+                    "@php bin/phil-dev check-docs"
+                ],
+                "docs:lint": [
+                    "@php bin/phil-dev lint-docs"
+                ],
+                "docs:translations": [
+                    "@php bin/phil-dev check-translations"
+                ],
+                "fuzz": [
+                    "@php bin/phil-dev fuzz"
+                ],
+                "gates": [
+                    "@deps",
+                    "@deps:audit",
+                    "@deps:unused",
+                    "@deps:normalize",
+                    "@cs",
+                    "@twig",
+                    "@js",
+                    "@phpstan",
+                    "@rector",
+                    "@deptrac",
+                    "@arkitect",
+                    "@lint:apps",
+                    "@test",
+                    "@infection"
+                ],
+                "hooks": [
+                    "@php bin/phil-dev hooks"
+                ],
+                "hotspots": [
+                    "@php bin/phil-dev hotspots"
+                ],
+                "infection": [
+                    "@php bin/phil-dev infection"
+                ],
+                "infection:changed": [
+                    "@php bin/phil-dev infection --changed"
+                ],
+                "infection:next": [
+                    "@php bin/phil-dev php next -- php bin/phil-dev infection"
+                ],
+                "js": [
+                    "@php bin/phil-dev js"
+                ],
+                "js:fix": [
+                    "@php bin/phil-dev js --fix"
+                ],
+                "lint:apps": [
+                    "@php bin/phil-dev lint-apps"
+                ],
+                "phpstan": [
+                    "vendor-bin/phpstan/vendor/bin/phpstan analyse --no-progress",
+                    "@php bin/phil-dev witnesses"
+                ],
+                "rector": [
+                    "vendor-bin/rector/vendor/bin/rector process --dry-run"
+                ],
+                "rector:fix": [
+                    "vendor-bin/rector/vendor/bin/rector process"
+                ],
+                "sbom": [
+                    "@php bin/phil-dev sbom"
+                ],
+                "taint": [
+                    "@php bin/phil-dev taint"
+                ],
+                "test": [
+                    "@php bin/phil-dev test"
+                ],
+                "test:integration": [
+                    "@php bin/phil-dev test --suite=Integration"
+                ],
+                "test:next": [
+                    "@php bin/phil-dev php next"
+                ],
+                "test:services": [
+                    "@php bin/phil-dev services test"
+                ],
+                "test:unit": [
+                    "@php bin/phil-dev test --suite=Unit"
+                ],
+                "twig": [
+                    "@php bin/phil-dev twig"
+                ],
+                "twig:fix": [
+                    "@php bin/phil-dev twig --fix"
+                ],
+                "twigstan": [
+                    "@php bin/phil-dev twigstan"
+                ]
+            },
             "license": [
                 "MIT"
             ],
@@ -11546,18 +11703,16 @@
             "description": "Shared development tooling for PHIL and Tilttek packages: quality-tool configurations, Composer scripts, documentation checks and the package skeleton.",
             "homepage": "https://ph-il.ca",
             "keywords": [
-                "Skeleton",
                 "dev-tools",
                 "monorepo",
                 "quality",
+                "skeleton",
                 "static-analysis"
             ],
-            "support": {
-                "issues": "https://github.com/parler-haut-interagir-librement/dev-tools/issues",
-                "source": "https://github.com/parler-haut-interagir-librement/dev-tools/tree/0.1.8-alpha"
-            },
-            "time": "2026-11-24T22:00:00+00:00",
-            "published-time": "2026-11-25T03:55:20+00:00"
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -13898,21 +14053,20 @@
         },
         {
             "name": "zenstruck/assert",
-            "version": "v1.7.0",
+            "version": "v1.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zenstruck/assert.git",
-                "reference": "1e32d48847d4e82c345112ca226b21a1a792af0a"
+                "reference": "cc01f59525c904ae94a613ce047490f5e078abc2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zenstruck/assert/zipball/1e32d48847d4e82c345112ca226b21a1a792af0a",
-                "reference": "1e32d48847d4e82c345112ca226b21a1a792af0a",
+                "url": "https://api.github.com/repos/zenstruck/assert/zipball/cc01f59525c904ae94a613ce047490f5e078abc2",
+                "reference": "cc01f59525c904ae94a613ce047490f5e078abc2",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.1",
-                "symfony/polyfill-php81": "^1.23",
                 "symfony/var-exporter": "^5.4|^6.0|^7.0|^8.0"
             },
             "require-dev": {
@@ -13945,7 +14099,7 @@
             ],
             "support": {
                 "issues": "https://github.com/zenstruck/assert/issues",
-                "source": "https://github.com/zenstruck/assert/tree/v1.7.0"
+                "source": "https://github.com/zenstruck/assert/tree/v1.7.1"
             },
             "funding": [
                 {
@@ -13957,8 +14111,8 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-12-07T01:59:12+00:00",
-            "published-time": "2025-12-07T01:59:15+00:00"
+            "time": "2026-11-26T13:31:16+00:00",
+            "published-time": "2026-11-26T13:31:21+00:00"
         },
         {
             "name": "zenstruck/foundry",
@@ -14093,6 +14247,7 @@
     "aliases": [],
     "minimum-stability": "alpha",
     "stability-flags": {
+        "phil/accessibility-check": 15,
         "phil/accessibility-statement-bundle": 15,
         "phil/browser-security-bundle": 15,
         "phil/contact-form-bundle": 15,
