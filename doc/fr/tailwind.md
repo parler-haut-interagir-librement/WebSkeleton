@@ -1,4 +1,4 @@
-<!-- phil-dev source-sha256=925e6a5502a2a1424ac68748d12a31447efaf541e7eb25ad32192bf60e5155ba -->
+<!-- phil-dev source-sha256=d8170fb11caef99448f0ff26abee985ea235b24abb246946ab985bb4891412de -->
 # Tailwind à la place de PHIL UX CSS
 
 WebSkeleton est habillé par phil-ux, la feuille de style de `phil/ux-css`, et les recettes du kit PHIL UX. Un site qui
@@ -88,11 +88,23 @@ mise en page, pour qu'elle s'applique avant le premier affichage.
 ## 4. Installer les recettes
 
 ```sh
-bin/console ux:install badge --kit=shadcn --force
-bin/console ux:install button --kit=shadcn --force
-bin/console ux:install card --kit=shadcn --force
-bin/console ux:install table --kit=shadcn --force
-bin/console ux:install theme-switcher --kit=github.com/parler-haut-interagir-librement/ux-kit-shadcn --force
+bin/console ux:install badge --kit=shadcn --force --no-interaction
+```
+
+```sh
+bin/console ux:install button --kit=shadcn --force --no-interaction
+```
+
+```sh
+bin/console ux:install card --kit=shadcn --force --no-interaction
+```
+
+```sh
+bin/console ux:install table --kit=shadcn --force --no-interaction
+```
+
+```sh
+bin/console ux:install theme-switcher --kit=github.com/parler-haut-interagir-librement/ux-kit-shadcn --force --no-interaction
 ```
 
 `--force` remplace les copies PHIL UX de `templates/components/` ; le contrôleur `theme_switcher_controller.js` de

@@ -396,7 +396,7 @@ the commands and what changes in the templates.
 The recipes in `templates/components/` — `Badge`, `Button`, `Card`, `Table`, `ThemeSwitcher` — are copies the site
 owns. Others come from the kit with the Symfony UX Toolkit:
 
-    bin/console ux:install accordion --kit=github.com/parler-haut-interagir-librement/ux-kit
+    bin/console ux:install accordion --kit=github.com/parler-haut-interagir-librement/ux-kit --no-interaction
 
 ## Tasks 🧰
 

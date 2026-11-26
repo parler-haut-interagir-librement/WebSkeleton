@@ -408,7 +408,7 @@ ce qu'il faut ajouter, les commandes et ce qui change dans les gabarits.
 Les recettes de `templates/components/` — `Badge`, `Button`, `Card`, `Table`, `ThemeSwitcher` — sont des copies qui
 appartiennent au site. Les autres viennent du kit avec le Symfony UX Toolkit :
 
-    bin/console ux:install accordion --kit=github.com/parler-haut-interagir-librement/ux-kit
+    bin/console ux:install accordion --kit=github.com/parler-haut-interagir-librement/ux-kit --no-interaction
 
 ## Tâches 🧰
 

@@ -87,11 +87,23 @@ so that it is applied before the first paint.
 ## 4. Install the recipes
 
 ```sh
-bin/console ux:install badge --kit=shadcn --force
-bin/console ux:install button --kit=shadcn --force
-bin/console ux:install card --kit=shadcn --force
-bin/console ux:install table --kit=shadcn --force
-bin/console ux:install theme-switcher --kit=github.com/parler-haut-interagir-librement/ux-kit-shadcn --force
+bin/console ux:install badge --kit=shadcn --force --no-interaction
+```
+
+```sh
+bin/console ux:install button --kit=shadcn --force --no-interaction
+```
+
+```sh
+bin/console ux:install card --kit=shadcn --force --no-interaction
+```
+
+```sh
+bin/console ux:install table --kit=shadcn --force --no-interaction
+```
+
+```sh
+bin/console ux:install theme-switcher --kit=github.com/parler-haut-interagir-librement/ux-kit-shadcn --force --no-interaction
 ```
 
 `--force` replaces the PHIL UX copies of `templates/components/`; the controller `theme_switcher_controller.js` of
