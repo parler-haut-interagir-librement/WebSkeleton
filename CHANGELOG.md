@@ -8,9 +8,7 @@ built on [WebSymfony](https://github.com/parler-haut-interagir-librement/WebSymf
 [MicroSymfony](https://github.com/parler-haut-interagir-librement/MicroSymfony), which follows
 [strangebuzz/MicroSymfony](https://github.com/strangebuzz/MicroSymfony).
 
-## Unreleased
-
-The next version is 8.2.0-RC2.
+## [8.2.0-RC2] - 2026-11-26
 
 ### Added
 
@@ -61,8 +59,7 @@ The next version is 8.2.0-RC2.
 - Every requirement of `composer.json`, `require` and `require-dev`, at its latest released version: `^X.Y` of the
   latest minor (`^0.Y.Z@alpha` for the PHIL packages), the Symfony components at `8.2.*`; among them
   `phil/privacy-bundle` 0.4, `phil/spam-protection-bundle` 0.3 and `phil/ux-kit` 0.7.
-- `phil/dev-tools` 0.2.1-alpha, taken by a Composer `path` repository to `../dev-tools` until it is on Packagist; the
-  `repositories` entry is removed at the release.
+- `phil/dev-tools` 0.2.1-alpha.
 - `castor.php` imports the common tasks of `phil/dev-tools`, `vendor/phil/dev-tools/resources/castor/tasks.php`, set by
   its `PHIL_CASTOR` constant, and keeps only the template's own tasks: the servers, Docker Compose, the database, the
   environments, `test:schema`, `lint:doctrine` and `check-requirements`. The names of the tasks stay; `castor lint`
@@ -83,11 +80,8 @@ The next version is 8.2.0-RC2.
   `config/packages/phil_cors.yaml`: the origins that the regular expression `CORS_ALLOW_ORIGIN` matches, `GET`, the
   `Content-Type` header, a preflight kept 3600 seconds, no credentials; the preflight is answered before the router.
   `CorsTest` checks the preflight and the simple request from an allowed origin, and the refusal of a foreign origin,
-  of another method and of another header. `phil/cors-bundle` 0.1.0-alpha is taken by a Composer `path` repository to
-  `../phil/packages/cors-bundle` until it is on Packagist; the `repositories` entry is removed at the release.
-- `phil/ddd-bundle` 0.2.0-alpha, taken by a Composer `path` repository to `../phil/packages/ddd-bundle` until it is on
-  Packagist, and required as `0.2.0-alpha as 0.1.99-alpha` until then, since `phil/feature-flags-bundle` 0.1.2-alpha
-  asks for `^0.1`; at the release, the `repositories` entry is removed and the requirement becomes `^0.2.0@alpha`.
+  of another method and of another header.
+- `phil/ddd-bundle` 0.2.0-alpha, with `phil/feature-flags-bundle` 0.1.3-alpha, which accepts it.
 - `symfony/uid` is no longer a direct requirement: the classes of `src/` use the identifiers of `phil/ddd-bundle`.
 - The Doctrine mappings of the contexts declare no `alias`, deprecated by DoctrineBundle 3.4.
 - `services.yaml` leaves out the views of the applications, `src/*/Application/**/*View.php`, as it does the commands

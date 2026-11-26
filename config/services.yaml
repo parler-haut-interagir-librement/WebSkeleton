@@ -21,7 +21,7 @@ parameters:
     brand_html: '<b>Web</b><i>Skeleton</i>'
     website: 'https://github.com/parler-haut-interagir-librement/WebSkeleton'
     copyright_url: 'https://ph-il.ca'
-    version: '8.2.0-RC1'
+    version: '8.2.0-RC2'
     description: 'A Symfony <b>%symfony_major_version%.%symfony_minor_version%</b> site skeleton: bilingual, organised in DDD, with the PHIL UX kit and the PHIL bundles a site needs.'
 
 services:

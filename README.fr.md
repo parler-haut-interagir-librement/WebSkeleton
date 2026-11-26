@@ -1,4 +1,4 @@
-<!-- phil-dev source-sha256=3dc49ca40e5aa4058a41e230a49bc329dfea3b89f3874c59ee96c86d5047f522 -->
+<!-- phil-dev source-sha256=17d3e9ccb28a53f1a1552f8f3edf12fde6e9cec2ee73d8465c47438e21dd13c8 -->
 # WebSkeleton 🦴
 
 [![Latest Version](https://img.shields.io/packagist/v/phil/webskeleton.svg?style=flat-square)](https://packagist.org/packages/phil/webskeleton)
@@ -150,13 +150,7 @@ comptes de membres et leur administration, les règles d'origine croisée sur `/
 les portes de qualité et Docker Compose. Les bundles PHIL prennent la place de KnpMenu, de Sentry, de NelmioCorsBundle
 et des extensions Doctrine de Gedmo.
 
-Chaque paquet PHIL vient de Packagist. Un paquet de PHIL pas encore publié se prend par un dépôt Composer `path` vers une
-copie locale, jusqu'à sa sortie : aujourd'hui `phil/dev-tools` 0.2.1-alpha, depuis `../dev-tools`, un clone de son dépôt
-à côté de celui du gabarit, `phil/cors-bundle` 0.1.0-alpha, depuis `../phil/packages/cors-bundle`, dans un clone du
-monodépôt de PHIL à côté de lui, et `phil/ddd-bundle` 0.2.0-alpha, depuis `../phil/packages/ddd-bundle`, dans le même
-clone. `phil/ddd-bundle` est requis comme `0.2.0-alpha as 0.1.99-alpha` jusque-là, puisque `phil/feature-flags-bundle`
-0.1.2-alpha demande `^0.1`. Les trois entrées `repositories` de `composer.json` s'en vont à la sortie de la version
-8.2.0-RC2, une fois ces versions sur Packagist, et `phil/ddd-bundle` est alors requis comme `^0.2.0@alpha`.
+Chaque paquet PHIL vient de Packagist.
 `phil/monitoring-bundle` est requis sans être enregistré : la configuration de `phil/error-tracking-bundle`
 0.1.0-alpha lit une classe qui implémente une de ses interfaces.
 

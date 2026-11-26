@@ -147,13 +147,7 @@ the member accounts and their administration, the cross-origin rules on `/api/`,
 quality gates and Docker Compose. The PHIL bundles take the place of KnpMenu, of Sentry, of NelmioCorsBundle and of the
 Doctrine extensions of Gedmo.
 
-Every PHIL package comes from Packagist. A package of PHIL not published yet is taken by a Composer `path` repository
-to a local copy, until its release: today `phil/dev-tools` 0.2.1-alpha, from `../dev-tools`, a clone of its repository
-next to the template's, `phil/cors-bundle` 0.1.0-alpha, from `../phil/packages/cors-bundle`, in a clone of the PHIL
-monorepository next to it, and `phil/ddd-bundle` 0.2.0-alpha, from `../phil/packages/ddd-bundle` in the same clone.
-`phil/ddd-bundle` is required as `0.2.0-alpha as 0.1.99-alpha` until then, since `phil/feature-flags-bundle` 0.1.2-alpha
-asks for `^0.1`. The three `repositories` entries of `composer.json` go at the release of 8.2.0-RC2, once these
-versions are on Packagist, and `phil/ddd-bundle` is then required as `^0.2.0@alpha`.
+Every PHIL package comes from Packagist.
 `phil/monitoring-bundle` is required without being registered: the configuration of `phil/error-tracking-bundle`
 0.1.0-alpha reads a class that implements one of its interfaces.
 
