@@ -4,22 +4,24 @@ declare(strict_types=1);
 
 namespace App\Account\Infrastructure\Privacy;
 
+use App\Account\Domain\AccountId;
 use App\Account\Infrastructure\Persistence\Doctrine\Entity\User;
+use App\Account\Infrastructure\Persistence\Doctrine\Type\AccountIdType;
 use DateTimeInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Override;
+use Phil\DddBundle\Domain\Exception\InvalidValue;
 use Phil\PrivacyBundle\Application\Contract\PersonalDataEraser;
 use Phil\PrivacyBundle\Application\Contract\PersonalDataExporter;
 use Phil\PrivacyBundle\Domain\Retention\ErasureEffect;
 use Phil\PrivacyBundle\Domain\Subject\DataSubject;
 use Phil\PrivacyBundle\Domain\Subject\ErasureReport;
 use Phil\PrivacyBundle\Domain\Subject\ModuleName;
-use Symfony\Bridge\Doctrine\Types\UuidType;
-use Symfony\Component\Uid\Uuid;
 
 /**
  * The account in the export and the erasure of phil/privacy-bundle, as the module "account": the export gives what the
- * account holds, the erasure deletes it. The member is known by the UUID of their account.
+ * account holds, the erasure deletes it. The member is known by the AccountId of their account, as a
+ * string; any other string names no account.
  *
  * @see AccountPersonalDataTest
  */
@@ -44,7 +46,8 @@ final readonly class AccountPersonalData implements PersonalDataExporter, Person
     #[Override]
     public function export(DataSubject $subject): array
     {
-        $user = Uuid::isValid($subject->value) ? $this->entityManager->find(User::class, Uuid::fromString($subject->value)) : null;
+        $id = $this->accountId($subject);
+        $user = $id instanceof AccountId ? $this->entityManager->find(User::class, $id) : null;
         if (!$user instanceof User) {
             return [];
         }
@@ -64,15 +67,25 @@ final readonly class AccountPersonalData implements PersonalDataExporter, Person
     #[Override]
     public function erase(DataSubject $subject): ErasureReport
     {
-        if (Uuid::isValid($subject->value)) {
+        $id = $this->accountId($subject);
+        if ($id instanceof AccountId) {
             $this->entityManager->createQueryBuilder()
                 ->delete(User::class, 'u')
                 ->where('u.id = :id')
-                ->setParameter('id', Uuid::fromString($subject->value), UuidType::NAME)
+                ->setParameter('id', $id, AccountIdType::NAME)
                 ->getQuery()
                 ->execute();
         }
 
         return ErasureReport::of(self::MODULE, ['user' => ErasureEffect::Deleted]);
+    }
+
+    private function accountId(DataSubject $subject): ?AccountId
+    {
+        try {
+            return AccountId::fromString($subject->value);
+        } catch (InvalidValue) {
+            return null;
+        }
     }
 }

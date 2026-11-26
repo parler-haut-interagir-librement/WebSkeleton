@@ -27,6 +27,10 @@ what every context uses; Deptrac checks the layers inside each context and that 
   sitemap provider, Twig; `src/Account`: the member accounts, their pages, their CRUD controller and their module for
   `phil/privacy-bundle`; `src/Text`: the example context, a slug through the three layers.
 - `src/Shared` never uses a context: it names their pages by their route names (`account_login`, `admin_user_index`).
+- An aggregate is identified by an identifier of `phil/ddd-bundle` (`AccountId`), with its DBAL type in
+  `Infrastructure/Persistence/Doctrine/Type`, registered under `doctrine.dbal.types` in YAML; a controller types its
+  argument with the identifier class. `bin/console make:ddd:*` (dev) writes contexts, identifiers, commands, queries
+  and events in this layout: see `doc/ddd.md`.
 - `fixtures/` holds the Foundry factories and stories of the dev and test environments, outside `src/`.
 
 ## Tasks
@@ -82,5 +86,5 @@ its reason.
 - Validate every input, with a form or constraints.
 - The sign-out and every action that changes something are POST requests with a CSRF token; impersonation stays off.
 - A module that keeps personal data gives `phil/privacy-bundle` a `PersonalDataExporter` and a `PersonalDataEraser`,
-  and knows the member by the UUID of their account, never by their email address.
+  and knows the member by the `AccountId` of their account, never by their email address.
 - `castor lint:composer` runs `composer audit`; Composer refuses a version with a known advisory.

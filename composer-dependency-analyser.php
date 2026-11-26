@@ -16,9 +16,7 @@ return new Configuration()
     // Used through the configuration, the templates, the front controller or the console, never by a class of src/;
     // phil/monitoring-bundle only gives the interface phil/error-tracking-bundle 0.1.0-alpha needs: see phil-dev.php.
     ->ignoreErrorsOnPackages([
-        'doctrine/doctrine-bundle',
         'doctrine/doctrine-migrations-bundle',
-        'doctrine/persistence',
         'phil/accessibility-statement-bundle',
         'phil/browser-security-bundle',
         'phil/contact-form-bundle',

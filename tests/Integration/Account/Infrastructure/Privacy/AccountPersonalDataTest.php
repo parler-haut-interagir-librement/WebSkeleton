@@ -57,6 +57,7 @@ final class AccountPersonalDataTest extends KernelTestCase
 
         self::assertSame([], $this->module()->export(DataSubject::fromString('0196b6a0-0000-7000-8000-000000000000')));
         self::assertSame([], $this->module()->export(DataSubject::fromString('not-a-uuid')));
+        self::assertSame([], $this->module()->export(DataSubject::fromString('0196b6a0-0000-4000-8000-000000000000')));
     }
 
     public function testTheErasureDeletesTheAccountOnlyAndCanRunAgain(): void
