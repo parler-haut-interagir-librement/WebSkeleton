@@ -1,0 +1,10 @@
+# Cross-origin requests, allowed on the JSON endpoints under /api only, from the origins of CORS_ALLOW_ORIGIN.
+# See vendor/phil/cors-bundle/doc/configuration.md for every option.
+phil_cors:
+    paths:
+        # CORS_ALLOW_ORIGIN is a regular expression anchored by ^ and $; no credentials, so no cookie travels.
+        '^/api/':
+            allow_origin_patterns: ['%env(CORS_ALLOW_ORIGIN)%']
+            allow_methods: [GET]
+            allow_headers: [Content-Type]
+            max_age: 3600

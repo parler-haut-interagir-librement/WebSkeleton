@@ -48,6 +48,12 @@ The next version is 8.2.0-RC2.
 - The configuration back in YAML: `config/packages/*.yaml`, those of the PHIL bundles among them, with `when@dev`,
   `when@test` and `when@prod` blocks, `config/routes.yaml`, `config/routes/*.yaml` and `config/services.yaml`; only
   `config/bundles.php` and `config/preload.php` stay PHP. `castor lint:yaml` checks `config/` too.
+- `phil/cors-bundle` instead of `nelmio/cors-bundle` for the cross-origin rules of `/api/`, in
+  `config/packages/phil_cors.yaml`: the origins that the regular expression `CORS_ALLOW_ORIGIN` matches, `GET`, the
+  `Content-Type` header, a preflight kept 3600 seconds, no credentials; the preflight is answered before the router.
+  `CorsTest` checks the preflight and the simple request from an allowed origin, and the refusal of a foreign origin,
+  of another method and of another header. `phil/cors-bundle` 0.1.0-alpha is taken by a Composer `path` repository to
+  `../phil/packages/cors-bundle` until it is on Packagist; the `repositories` entry is removed at the release.
 
 ## [8.2.0-RC1] - 2026-11-25
 

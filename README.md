@@ -133,19 +133,21 @@ With the Symfony binary, set the same variable in `.env.local`, with the host of
 | The accessibility statement, by `phil/accessibility-statement-bundle` | [phil_accessibility_statement.yaml](config/packages/phil_accessibility_statement.yaml) |
 | A contact form protected against spam, by `phil/contact-form-bundle` and `phil/spam-protection-bundle` | [phil_contact_form.yaml](config/packages/phil_contact_form.yaml) |
 | `/sitemap.xml`, every page in every language with its alternates, by `phil/sitemap-bundle` | [LocalizedPagesUrlProvider](src/Shared/Infrastructure/Sitemap/LocalizedPagesUrlProvider.php) |
+| The cross-origin rules of the JSON endpoints under `/api/`, for the origins that `CORS_ALLOW_ORIGIN` matches, by `phil/cors-bundle` | [phil_cors.yaml](config/packages/phil_cors.yaml), [CorsTest](tests/Functional/CorsTest.php) |
 | `/.well-known/security.txt`, by `phil/well-known-bundle` | [phil_well_known.yaml](config/packages/phil_well_known.yaml) |
 | The JSON-LD graph of each page, by `phil/structured-data-bundle` | [phil_structured_data.yaml](config/packages/phil_structured_data.yaml) |
 | Every page checked for accessibility, in both languages, by `phil/accessibility-check`, and every route by the smoke test of `phil/dev-tools` | [AccessibilityTest](tests/Functional/AccessibilityTest.php), [RouteSmokeTest](tests/Functional/RouteSmokeTest.php) |
 
 From WebSymfony stay the PHIL identity (logo, copyright of Parler Haut, Interagir Librement, light and dark themes),
-the member accounts and their administration, the cross-origin rules of NelmioCorsBundle on `/api/`, the five test
-suites, Castor, the quality gates and Docker Compose. The PHIL bundles take the place of KnpMenu, of Sentry and of the
+the member accounts and their administration, the cross-origin rules on `/api/`, the five test suites, Castor, the
+quality gates and Docker Compose. The PHIL bundles take the place of KnpMenu, of Sentry, of NelmioCorsBundle and of the
 Doctrine extensions of Gedmo.
 
 Every PHIL package comes from Packagist. A package of PHIL not published yet is taken by a Composer `path` repository
 to a local copy, until its release: today `phil/dev-tools` 0.2.1-alpha, from `../dev-tools`, a clone of its repository
-next to the template's. The `repositories` entry of `composer.json` goes at the release of 8.2.0-RC2, once
-`phil/dev-tools` 0.2.1-alpha is on Packagist.
+next to the template's, and `phil/cors-bundle` 0.1.0-alpha, from `../phil/packages/cors-bundle`, in a clone of the PHIL
+monorepository next to it. Both `repositories` entries of `composer.json` go at the release of 8.2.0-RC2, once these
+two versions are on Packagist.
 `phil/monitoring-bundle` is required without being registered: the configuration of `phil/error-tracking-bundle`
 0.1.0-alpha reads a class that implements one of its interfaces.
 

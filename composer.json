@@ -39,10 +39,10 @@
         "doctrine/orm": "^3.8",
         "doctrine/persistence": "^4.2",
         "easycorp/easyadmin-bundle": "^5.10",
-        "nelmio/cors-bundle": "^2.6",
         "phil/accessibility-statement-bundle": "^0.1.1@alpha",
         "phil/browser-security-bundle": "^0.2.1@alpha",
         "phil/contact-form-bundle": "^0.1.3@alpha",
+        "phil/cors-bundle": "^0.1@alpha",
         "phil/ddd-bundle": "^0.1.1@alpha",
         "phil/doctrine-behaviours": "^0.3.1@alpha",
         "phil/doctrine-behaviours-bundle": "^0.3@alpha",
@@ -140,6 +140,16 @@
                 "symlink": true,
                 "versions": {
                     "phil/dev-tools": "0.2.1-alpha"
+                }
+            }
+        },
+        {
+            "type": "path",
+            "url": "../phil/packages/cors-bundle",
+            "options": {
+                "symlink": true,
+                "versions": {
+                    "phil/cors-bundle": "0.1.0-alpha"
                 }
             }
         }
