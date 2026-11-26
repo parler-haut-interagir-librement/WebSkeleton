@@ -1,4 +1,4 @@
-<!-- phil-dev source-sha256=2bbb4d8fe0f18a2f8a639245078b5bb42841004344bb255390983f2d72ae27fa -->
+<!-- phil-dev source-sha256=9a60241024cf38e701bec76d406dad663f3f2670da13f608988c9bde617fb414 -->
 # WebSkeleton 🦴
 
 [![Latest Version](https://img.shields.io/packagist/v/phil/webskeleton.svg?style=flat-square)](https://packagist.org/packages/phil/webskeleton)
@@ -30,6 +30,7 @@ outils PHIL : phil-ux à la place de Pico CSS, le kit PHIL UX et les bundles PHI
 * [Prérequis](#prérequis-)
 * [Pile technologique](#pile-technologique-)
 * [Ce qu'il ajoute à WebSymfony](#ce-quil-ajoute-à-websymfony-)
+* [Configuration](#configuration-)
 * [Langues](#langues-)
 * [Conception pilotée par le domaine](#conception-pilotée-par-le-domaine-)
 * [Comptes et administration](#comptes-et-administration-)
@@ -120,22 +121,22 @@ Avec le binaire Symfony, mettez la même variable dans `.env.local`, avec l'hôt
 
 | Fonctionnalité | Où |
 |---|---|
-| Le français et l'anglais, chaque page sous `/fr` ou `/en`, le français par défaut | [routes.php](config/routes.php), [services.php](config/services.php), [translations](translations) |
-| Les couches Domain, Application et Infrastructure de chaque contexte délimité, avec les bus de `phil/ddd-bundle` | [src](src), [messenger.php](config/packages/messenger.php) |
-| Les comptes de membres : l'inscription, la connexion, la page du compte et la déconnexion, sous `/fr` et `/en`, dans le contexte `Account` | [src/Account](src/Account), [security.php](config/packages/security.php) |
-| L'administration, EasyAdmin au thème de PHIL UX par `phil/ux-easyadmin-bundle`, pour `ROLE_ADMIN` | [DashboardController](src/Shared/Infrastructure/Http/Admin/DashboardController.php), [phil_ux_easy_admin.php](config/packages/phil_ux_easy_admin.php) |
-| Les choix de confidentialité de chaque membre — l'exportation de ses données, la suppression de son compte, le consentement — et le caviardage des journaux, par `phil/privacy-bundle` | [phil_privacy.php](config/packages/phil_privacy.php), [AccountPersonalData](src/Account/Infrastructure/Privacy/AccountPersonalData.php) |
-| Les erreurs du site gardées dans sa propre base et montrées dans l'administration, par `phil/error-tracking-bundle` | [phil_error_tracking.php](config/packages/phil_error_tracking.php) |
+| Le français et l'anglais, chaque page sous `/fr` ou `/en`, le français par défaut | [routes.yaml](config/routes.yaml), [services.yaml](config/services.yaml), [translations](translations) |
+| Les couches Domain, Application et Infrastructure de chaque contexte délimité, avec les bus de `phil/ddd-bundle` | [src](src), [messenger.yaml](config/packages/messenger.yaml) |
+| Les comptes de membres : l'inscription, la connexion, la page du compte et la déconnexion, sous `/fr` et `/en`, dans le contexte `Account` | [src/Account](src/Account), [security.yaml](config/packages/security.yaml) |
+| L'administration, EasyAdmin au thème de PHIL UX par `phil/ux-easyadmin-bundle`, pour `ROLE_ADMIN` | [DashboardController](src/Shared/Infrastructure/Http/Admin/DashboardController.php), [phil_ux_easy_admin.yaml](config/packages/phil_ux_easy_admin.yaml) |
+| Les choix de confidentialité de chaque membre — l'exportation de ses données, la suppression de son compte, le consentement — et le caviardage des journaux, par `phil/privacy-bundle` | [phil_privacy.yaml](config/packages/phil_privacy.yaml), [AccountPersonalData](src/Account/Infrastructure/Privacy/AccountPersonalData.php) |
+| Les erreurs du site gardées dans sa propre base et montrées dans l'administration, par `phil/error-tracking-bundle` | [phil_error_tracking.yaml](config/packages/phil_error_tracking.yaml) |
 | Le menu principal, par `phil/menu-bundle` | [MainMenuBuilder](src/Shared/Infrastructure/Menu/MainMenuBuilder.php) |
-| Les dates de création et de modification des comptes, par `phil/doctrine-behaviours-bundle` | [User](src/Account/Infrastructure/Persistence/Doctrine/Entity/User.php), [phil_doctrine_behaviours.php](config/packages/phil_doctrine_behaviours.php) |
+| Les dates de création et de modification des comptes, par `phil/doctrine-behaviours-bundle` | [User](src/Account/Infrastructure/Persistence/Doctrine/Entity/User.php), [phil_doctrine_behaviours.yaml](config/packages/phil_doctrine_behaviours.yaml) |
 | phil-ux et les recettes du kit PHIL UX dans `templates/components/` | [base.html.twig](templates/base.html.twig), [components](templates/components) |
-| Une politique de sécurité du contenu avec nonces et les en-têtes de sécurité, par `phil/browser-security-bundle` | [phil_browser_security.php](config/packages/phil_browser_security.php) |
-| Les mentions légales et la politique de confidentialité, dans les deux langues, par `phil/legal-notices-bundle` | [phil_legal_notices.php](config/packages/phil_legal_notices.php), [legal](legal) |
-| La déclaration d'accessibilité, par `phil/accessibility-statement-bundle` | [phil_accessibility_statement.php](config/packages/phil_accessibility_statement.php) |
-| Un formulaire de contact protégé du pourriel, par `phil/contact-form-bundle` et `phil/spam-protection-bundle` | [phil_contact_form.php](config/packages/phil_contact_form.php) |
+| Une politique de sécurité du contenu avec nonces et les en-têtes de sécurité, par `phil/browser-security-bundle` | [phil_browser_security.yaml](config/packages/phil_browser_security.yaml) |
+| Les mentions légales et la politique de confidentialité, dans les deux langues, par `phil/legal-notices-bundle` | [phil_legal_notices.yaml](config/packages/phil_legal_notices.yaml), [legal](legal) |
+| La déclaration d'accessibilité, par `phil/accessibility-statement-bundle` | [phil_accessibility_statement.yaml](config/packages/phil_accessibility_statement.yaml) |
+| Un formulaire de contact protégé du pourriel, par `phil/contact-form-bundle` et `phil/spam-protection-bundle` | [phil_contact_form.yaml](config/packages/phil_contact_form.yaml) |
 | `/sitemap.xml`, chaque page dans chaque langue avec ses alternatives, par `phil/sitemap-bundle` | [LocalizedPagesUrlProvider](src/Shared/Infrastructure/Sitemap/LocalizedPagesUrlProvider.php) |
-| `/.well-known/security.txt`, par `phil/well-known-bundle` | [phil_well_known.php](config/packages/phil_well_known.php) |
-| Le graphe JSON-LD de chaque page, par `phil/structured-data-bundle` | [phil_structured_data.php](config/packages/phil_structured_data.php) |
+| `/.well-known/security.txt`, par `phil/well-known-bundle` | [phil_well_known.yaml](config/packages/phil_well_known.yaml) |
+| Le graphe JSON-LD de chaque page, par `phil/structured-data-bundle` | [phil_structured_data.yaml](config/packages/phil_structured_data.yaml) |
 
 De WebSymfony restent l'identité de PHIL (logo, droits de Parler Haut, Interagir Librement, thèmes clair et sombre), les
 comptes de membres et leur administration, les règles d'origine croisée de NelmioCorsBundle sur `/api/`, les cinq
@@ -147,19 +148,41 @@ copie locale du monodépôt `phil-prerelease`, jusqu'à sa sortie ; le gabarit n
 `phil/monitoring-bundle` est requis sans être enregistré : la configuration de `phil/error-tracking-bundle`
 0.1.0-alpha lit une classe qui implémente une de ses interfaces.
 
+## Configuration 🗂️
+
+La configuration de Symfony et des bundles est en YAML, sous `config/` : `config/packages/*.yaml`, avec des blocs
+`when@dev`, `when@test` et `when@prod` pour ce qui change selon l'environnement, `config/routes.yaml`,
+`config/routes/*.yaml` et `config/services.yaml`. Les bundles de PHIL sont configurés dans le même format, tel que leurs
+recettes Flex l'écrivent, et une recette ajoute ses propres fichiers à côté de ceux-là. Seuls `config/bundles.php` et
+`config/preload.php` restent en PHP. `castor lint:yaml` vérifie chaque fichier de `config/`, et `castor lint:container`
+vérifie le conteneur qu'ils construisent.
+
+```yaml
+# config/packages/phil_sitemap.yaml
+phil_sitemap:
+    default_section: main
+
+when@dev: &dev
+    phil_sitemap:
+        allow_localhost: true
+
+when@test: *dev
+```
+
 ## Langues 🌍
 
 Chaque page vit sous le préfixe de sa langue : `/fr`, `/en`. Le français est la langue par défaut : `/` envoie le
 visiteur vers la langue que son navigateur préfère parmi celles du site, le français s'il n'en préfère aucune. La mise
 en page relie chaque page à ses autres langues, et le plan du site les donne comme alternatives.
 
-Les langues tiennent dans une liste, `app.locales` dans [config/services.php](config/services.php), la langue par
-défaut en premier. Pour ajouter l'espagnol :
+Les langues sont la liste `app.locales` dans [config/services.yaml](config/services.yaml), la langue par défaut en
+premier, et `app.locale_requirement` à côté, les mêmes codes joints par `|` pour le préfixe des routes. Pour ajouter
+l'espagnol :
 
-1. ajoutez `'es'` à la liste ;
+1. ajoutez `es` à `app.locales` et à `app.locale_requirement`, `fr|en|es` ;
 2. copiez `translations/messages.en.yaml` en `translations/messages.es.yaml` et traduisez-le ;
 3. donnez aux documents légaux leur texte `es` dans `legal/` et dans
-   [phil_legal_notices.php](config/packages/phil_legal_notices.php).
+   [phil_legal_notices.yaml](config/packages/phil_legal_notices.yaml).
 
 Les pages de `/es` existent alors, avec les routes des bundles PHIL sous le même préfixe.
 
@@ -218,12 +241,12 @@ Le contexte d'exemple, `Text`, traverse les trois couches : [Slug](src/Text/Doma
 se valide lui-même et lance l'`InvalidValue` de `phil/ddd-bundle` ; [TitleSlugger](src/Text/Domain/TitleSlugger.php)
 est son port ; [SlugifyTitleQuery](src/Text/Application/SlugifyTitleQuery.php) et son gestionnaire répondent sur le
 bus de requêtes ; [AsciiTitleSlugger](src/Text/Infrastructure/AsciiTitleSlugger.php) est l'adaptateur sur le slugger
-de Symfony, lié au port dans [services.php](config/services.php) ;
+de Symfony, lié au port dans [services.yaml](config/services.yaml) ;
 [SlugifyAction](src/Text/Infrastructure/Http/Api/SlugifyAction.php) interroge le bus et répond en JSON, ce que la page
 d'accueil appelle par un contrôleur Stimulus.
 
 Le bus de commandes s'exécute dans une transaction Doctrine, le bus de requêtes non ; les deux sont synchrones tant
-qu'aucun message n'est routé vers un transport dans [messenger.php](config/packages/messenger.php). Les messages
+qu'aucun message n'est routé vers un transport dans [messenger.yaml](config/packages/messenger.yaml). Les messages
 portent des identifiants, jamais des objets entiers.
 
 ### Ajouter un contexte
@@ -233,13 +256,13 @@ Pour un contexte nommé `Catalog` :
 1. **Les dossiers** : `src/Catalog/Domain`, `src/Catalog/Application` et `src/Catalog/Infrastructure`, avec les
    espaces de noms `App\Catalog\Domain`, `App\Catalog\Application` et `App\Catalog\Infrastructure` ; ses tests les
    reprennent sous `tests/Unit/Catalog/` et `tests/Integration/Catalog/`.
-2. **Les services** : rien à ajouter pour les dossiers, puisque [services.php](config/services.php) charge `src/` et
+2. **Les services** : rien à ajouter pour les dossiers, puisque [services.yaml](config/services.yaml) charge `src/` et
    écarte chaque `src/*/Domain/` ainsi que les commandes et requêtes de chaque `src/*/Application/`. Chaque port du
    domaine y reçoit son alias vers son adaptateur, à côté de `TitleSlugger`.
-3. **Les routes** : rien à ajouter non plus : [routes.php](config/routes.php) trouve les contrôleurs de chaque contexte
+3. **Les routes** : rien à ajouter non plus : [routes.yaml](config/routes.yaml) trouve les contrôleurs de chaque contexte
    dans `Infrastructure/Http/Controller` (sous le préfixe de langue), `Infrastructure/Http/Api` (sous `/api`) et
    `Infrastructure/Http/Root`.
-4. **Le mapping Doctrine** : un mapping `Catalog` dans [doctrine.php](config/packages/doctrine.php), sur
+4. **Le mapping Doctrine** : un mapping `Catalog` dans [doctrine.yaml](config/packages/doctrine.yaml), sur
    `src/Catalog/Infrastructure/Persistence/Doctrine/Entity`, comme celui de `Text`.
 5. **Deptrac** : `'Catalog'` ajouté à `$contexts` dans `phil-dev.php`, ce qui lui donne ses trois couches et les deux
    sortes de règles.
@@ -290,18 +313,18 @@ Le gabarit ne commence avec rien qui affirme ce que personne n'a vérifié. Avan
 
 1. **Le secret** : mettez `APP_SECRET` dans l'environnement du serveur, ou dans les secrets de Symfony.
 2. **Les documents légaux** : remplissez l'identité du site dans
-   [phil_legal_notices.php](config/packages/phil_legal_notices.php), adaptez les textes de `legal/`, puis publiez
+   [phil_legal_notices.yaml](config/packages/phil_legal_notices.yaml), adaptez les textes de `legal/`, puis publiez
    chaque version (une date `published_at`, `state` retiré). D'ici là, `/fr/legal` et `/fr/privacy` répondent 404.
    `bin/console phil:legal-notices:check` signale ce qui manque à un texte.
 3. **La déclaration d'accessibilité** : écrivez sa première version une fois le site évalué ; d'ici là, sa page
    répond 404 et le pied de page n'y renvoie pas.
 4. **Le formulaire de contact** : remplacez l'expéditeur et le destinataire d'exemple dans
-   [phil_contact_form.php](config/packages/phil_contact_form.php) et réglez `MAILER_DSN`.
-5. **`security.txt`** : remplacez le contact dans [phil_well_known.php](config/packages/phil_well_known.php) et
+   [phil_contact_form.yaml](config/packages/phil_contact_form.yaml) et réglez `MAILER_DSN`.
+5. **`security.txt`** : remplacez le contact dans [phil_well_known.yaml](config/packages/phil_well_known.yaml) et
    repoussez sa date d'expiration, d'au plus un an.
 6. **Plusieurs serveurs** : donnez au verrou (`LOCK_DSN`) et à `cache.app` un stockage que tous les serveurs
-   partagent, et retirez `single_server` de [phil_browser_security.php](config/packages/phil_browser_security.php) et de
-   [phil_error_tracking.php](config/packages/phil_error_tracking.php).
+   partagent, et retirez `single_server` de [phil_browser_security.yaml](config/packages/phil_browser_security.yaml) et de
+   [phil_error_tracking.yaml](config/packages/phil_error_tracking.yaml).
 7. **Les comptes** : ne chargez jamais les données de développement, dont les mots de passe sont publics ; créez le
    premier administrateur en vous inscrivant, puis donnez au compte `ROLE_ADMIN` dans la base.
 8. **Les renseignements personnels** : réglez `APP_PUBLIC_ORIGIN` à l'adresse du site, faites les suppressions de
@@ -319,7 +342,7 @@ Les comptes se connectent par mot de passe par défaut. Pour les connecter par l
 
     composer require phil/identity-client-bundle
 
-Remplacez `form_login` dans [security.php](config/packages/security.php) par l'authentificateur du bundle, gardez
+Remplacez `form_login` dans [security.yaml](config/packages/security.yaml) par l'authentificateur du bundle, gardez
 `user_checker_on_refresh: true`, et importez les routes d'`oidc_login` comme le montre le
 [guide d'installation du bundle](https://github.com/parler-haut-interagir-librement/identity-client-bundle/blob/main/doc/installation.md).
 
@@ -367,7 +390,7 @@ propre à l'application, chaque exception avec sa raison.
 | `castor lint:php` | PHP-CS-Fixer : `@Symfony`, `@Symfony:risky`, types stricts et comparaisons strictes. |
 | `castor lint:twig` | `lint:twig`, puis le style des gabarits. |
 | `castor lint:js` | Biome sur les contrôleurs Stimulus. |
-| `castor lint:yaml`, `lint:container`, `lint:doctrine` | Les fichiers YAML, le conteneur et le mappage Doctrine. |
+| `castor lint:yaml`, `lint:container`, `lint:doctrine` | Les fichiers YAML (`config/` compris), le conteneur et le mappage Doctrine. |
 | `castor stan` | PHPStan au niveau maximal, avec une couverture des types à 100 %, une limite de complexité cognitive et des appels interdits. |
 | `castor lint:rector` | Rector n'a plus rien à changer. |
 | `castor lint:architecture` | Arkitect sur la forme des classes ; Deptrac sur les couches DDD et les bibliothèques que chacune peut utiliser. |
