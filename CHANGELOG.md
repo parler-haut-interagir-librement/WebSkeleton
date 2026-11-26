@@ -8,7 +8,7 @@ built on [WebSymfony](https://github.com/parler-haut-interagir-librement/WebSymf
 [MicroSymfony](https://github.com/parler-haut-interagir-librement/MicroSymfony), which follows
 [strangebuzz/MicroSymfony](https://github.com/strangebuzz/MicroSymfony).
 
-## [Unreleased]
+## [8.2.0-RC1] - 2026-11-25
 
 ### Added
 
