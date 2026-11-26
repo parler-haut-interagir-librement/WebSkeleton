@@ -1,4 +1,4 @@
-<!-- phil-dev source-sha256=73c90e6a08986930be25a66d5dd87dc5a60125b8f6e593f242f7c2729a098291 -->
+<!-- phil-dev source-sha256=3dc49ca40e5aa4058a41e230a49bc329dfea3b89f3874c59ee96c86d5047f522 -->
 # WebSkeleton 🦴
 
 [![Latest Version](https://img.shields.io/packagist/v/phil/webskeleton.svg?style=flat-square)](https://packagist.org/packages/phil/webskeleton)
@@ -125,6 +125,7 @@ Avec le binaire Symfony, mettez la même variable dans `.env.local`, avec l'hôt
 |---|---|
 | Le français et l'anglais, chaque page sous `/fr` ou `/en`, le français par défaut | [routes.yaml](config/routes.yaml), [services.yaml](config/services.yaml), [translations](translations) |
 | Les couches Domain, Application et Infrastructure de chaque contexte délimité, avec les bus de `phil/ddd-bundle` | [src](src), [messenger.yaml](config/packages/messenger.yaml) |
+| Les identifiants typés de `phil/ddd-bundle` — un type Doctrine chacun, les arguments de contrôleur, le Serializer — et ses commandes `make:ddd:*` en développement | [AccountId](src/Account/Domain/AccountId.php), [doc](doc/fr/ddd.md) |
 | Les comptes de membres : l'inscription, la connexion, la page du compte et la déconnexion, sous `/fr` et `/en`, dans le contexte `Account` | [src/Account](src/Account), [security.yaml](config/packages/security.yaml) |
 | L'administration, EasyAdmin au thème de PHIL UX par `phil/ux-easyadmin-bundle`, pour `ROLE_ADMIN` | [DashboardController](src/Shared/Infrastructure/Http/Admin/DashboardController.php), [phil_ux_easy_admin.yaml](config/packages/phil_ux_easy_admin.yaml) |
 | Les choix de confidentialité de chaque membre — l'exportation de ses données, la suppression de son compte, le consentement — et le caviardage des journaux, par `phil/privacy-bundle` | [phil_privacy.yaml](config/packages/phil_privacy.yaml), [AccountPersonalData](src/Account/Infrastructure/Privacy/AccountPersonalData.php) |
@@ -151,9 +152,11 @@ et des extensions Doctrine de Gedmo.
 
 Chaque paquet PHIL vient de Packagist. Un paquet de PHIL pas encore publié se prend par un dépôt Composer `path` vers une
 copie locale, jusqu'à sa sortie : aujourd'hui `phil/dev-tools` 0.2.1-alpha, depuis `../dev-tools`, un clone de son dépôt
-à côté de celui du gabarit, et `phil/cors-bundle` 0.1.0-alpha, depuis `../phil/packages/cors-bundle`, dans un clone du
-monodépôt de PHIL à côté de lui. Les deux entrées `repositories` de `composer.json` s'en vont à la sortie de la version
-8.2.0-RC2, une fois ces deux versions sur Packagist.
+à côté de celui du gabarit, `phil/cors-bundle` 0.1.0-alpha, depuis `../phil/packages/cors-bundle`, dans un clone du
+monodépôt de PHIL à côté de lui, et `phil/ddd-bundle` 0.2.0-alpha, depuis `../phil/packages/ddd-bundle`, dans le même
+clone. `phil/ddd-bundle` est requis comme `0.2.0-alpha as 0.1.99-alpha` jusque-là, puisque `phil/feature-flags-bundle`
+0.1.2-alpha demande `^0.1`. Les trois entrées `repositories` de `composer.json` s'en vont à la sortie de la version
+8.2.0-RC2, une fois ces versions sur Packagist, et `phil/ddd-bundle` est alors requis comme `^0.2.0@alpha`.
 `phil/monitoring-bundle` est requis sans être enregistré : la configuration de `phil/error-tracking-bundle`
 0.1.0-alpha lit une classe qui implémente une de ses interfaces.
 
@@ -218,13 +221,15 @@ menu, le fournisseur du plan du site, Twig et les entités Doctrine que tous les
 src/
 ├── Kernel.php
 ├── Account/
-│   ├── Domain/                 # Role, Accounts (the port)
-│   ├── Application/            # SignUpCommand, SignUpHandler
+│   ├── Domain/                 # AccountId, Role, Accounts (the port)
+│   ├── Application/            # SignUpCommand, ShowAccountQuery, their handlers, AccountView, AccountViews (a port)
 │   └── Infrastructure/
 │       ├── Form/               # the sign-up form
 │       ├── Http/Admin/         # UserCrudController
+│       ├── Http/Api/           # /api/accounts/{account}
 │       ├── Http/Controller/    # login, signup, account, logout
-│       ├── Persistence/Doctrine/  # DoctrineAccounts, Entity/User
+│       ├── Persistence/Doctrine/  # DoctrineAccounts, DoctrineAccountViews, UserRepository, Entity/User,
+│       │                          # Type/AccountIdType
 │       └── Privacy/            # AccountPersonalData, for phil/privacy-bundle
 ├── Shared/
 │   ├── Domain/
@@ -258,9 +263,19 @@ Le bus de commandes s'exécute dans une transaction Doctrine, le bus de requête
 qu'aucun message n'est routé vers un transport dans [messenger.yaml](config/packages/messenger.yaml). Les messages
 portent des identifiants, jamais des objets entiers.
 
+Le contexte `Account` montre les identifiants de `phil/ddd-bundle` : [AccountId](src/Account/Domain/AccountId.php) est un
+UUIDv7 de sa propre classe, enregistré par son type DBAL [AccountIdType](src/Account/Infrastructure/Persistence/Doctrine/Type/AccountIdType.php),
+déclaré dans [doctrine.yaml](config/packages/doctrine.yaml) ; [ShowAccountAction](src/Account/Infrastructure/Http/Api/ShowAccountAction.php),
+pour les administrateurs, reçoit le paramètre de `/api/accounts/{account}` sous forme d'`AccountId` — toute autre valeur
+est un 404 — et le Serializer écrit l'identifiant de la réponse sous forme de chaîne. Les commandes `make:ddd:*` du
+bundle, dans l'environnement de développement, écrivent un contexte et ses classes selon cette disposition. Les deux
+sont dans [doc/fr/ddd.md](doc/fr/ddd.md).
+
 ### Ajouter un contexte
 
-Pour un contexte nommé `Catalog` :
+Pour un contexte nommé `Catalog`, `bin/console make:ddd:context Catalog` écrit les dossiers et un README, et les autres
+commandes `make:ddd:*` écrivent ses identifiants, commandes, requêtes et événements ([doc/fr/ddd.md](doc/fr/ddd.md)) ;
+ensuite :
 
 1. **Les dossiers** : `src/Catalog/Domain`, `src/Catalog/Application` et `src/Catalog/Infrastructure`, avec les
    espaces de noms `App\Catalog\Domain`, `App\Catalog\Application` et `App\Catalog\Infrastructure` ; ses tests les
@@ -272,15 +287,16 @@ Pour un contexte nommé `Catalog` :
    dans `Infrastructure/Http/Controller` (sous le préfixe de langue), `Infrastructure/Http/Api` (sous `/api`) et
    `Infrastructure/Http/Root`.
 4. **Le mapping Doctrine** : un mapping `Catalog` dans [doctrine.yaml](config/packages/doctrine.yaml), sur
-   `src/Catalog/Infrastructure/Persistence/Doctrine/Entity`, comme celui de `Text`.
+   `src/Catalog/Infrastructure/Persistence/Doctrine/Entity`, comme celui de `Text`, et le type DBAL de chacun de ses
+   identifiants sous `doctrine.dbal.types`, comme `account_id`.
 5. **Deptrac** : `'Catalog'` ajouté à `$contexts` dans `phil-dev.php`, ce qui lui donne ses trois couches et les deux
    sortes de règles.
 
 ## Comptes et administration 🔐
 
 Le contexte `Account` contient les comptes de membres. [User](src/Account/Infrastructure/Persistence/Doctrine/Entity/User.php)
-est une entité Doctrine de son infrastructure, identifiée par un UUID, qui est aussi ce par quoi `phil/privacy-bundle`
-connaît le membre, jamais par son adresse courriel. L'inscription passe par le bus de commandes : `SignUpCommand`, son
+est une entité Doctrine de son infrastructure, identifiée par un [AccountId](src/Account/Domain/AccountId.php), qui est
+aussi ce par quoi `phil/privacy-bundle` connaît le membre, jamais par son adresse courriel. L'inscription passe par le bus de commandes : `SignUpCommand`, son
 gestionnaire, et le port `Accounts` du domaine, dont l'adaptateur hache le mot de passe et garde le compte.
 
 | Page | Chemin | Ce qu'elle fait |
@@ -291,6 +307,7 @@ gestionnaire, et le port `Accounts` du domaine, dont l'adaptateur hache le mot d
 | Déconnexion | `/fr/logout`, `/en/logout` | Par POST avec un jeton CSRF seulement : un lien ou une image ne déconnecte jamais personne. |
 | Choix de confidentialité | `/fr/privacy-choices`, `/en/privacy-choices` | L'exportation des données du membre, la suppression de son compte après trente jours, le consentement ; la suppression redemande le mot de passe quand la session n'est pas récente. |
 | Administration | `/admin` | Pour `ROLE_ADMIN` seulement, qui comprend `ROLE_USER` : les comptes, listés et montrés, jamais créés ni modifiés là, les erreurs du site, et les indicateurs de fonctionnalité sous `/admin/flags`. |
+| Compte en JSON | `/api/accounts/{account}` | Pour `ROLE_ADMIN` seulement : l'identifiant, le nom d'utilisateur, les rôles et la date de création d'un compte, jamais son adresse courriel ni son mot de passe ; tout ce qui n'est pas l'identifiant d'un compte est un 404. |
 
 Le pare-feu vérifie de nouveau le compte chaque fois qu'il est rechargé de la session (`user_checker_on_refresh: true`) :
 un compte modifié ou désactivé est déconnecté à sa requête suivante. La session garde un hachage crc32c du hachage du
