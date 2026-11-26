@@ -49,7 +49,7 @@ services:
     App\Account\Domain\Accounts: '@App\Account\Infrastructure\Persistence\Doctrine\DoctrineAccounts'
 
 # The fixtures of the dev environment, which the tests load too: see fixtures/ and `castor load-fixtures`.
-when@dev: &fixtures
+when@dev:
     services:
         _defaults:
             autowire: true
@@ -58,4 +58,19 @@ when@dev: &fixtures
         App\Fixtures\:
             resource: '../fixtures/'
 
-when@test: *fixtures
+when@test:
+    services:
+        _defaults:
+            autowire: true
+            autoconfigure: true
+
+        App\Fixtures\:
+            resource: '../fixtures/'
+
+        # The answers of the HTTP clients in the tests, and the client of the example circuit, reached by its test.
+        App\Tests\Support\MockResponses:
+            public: true
+
+        test.example.client:
+            alias: example.client
+            public: true

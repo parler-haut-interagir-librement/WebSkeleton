@@ -1,0 +1,5 @@
+# The screens of phil/feature-flags-bundle, /admin/flags, behind the access rule of /admin: ROLE_ADMIN only. They are
+# linked from the menu of the administration.
+phil_feature_flags_admin:
+    resource: '@PhilFeatureFlagsBundle/config/routes/admin.php'
+    prefix: /admin/flags

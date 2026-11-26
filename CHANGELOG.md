@@ -24,6 +24,24 @@ The next version is 8.2.0-RC2.
 - `doc/accessibility.md`: the accessibility test, and how a site checks what its authors publish with the validator
   constraint `AccessibleContent` or the workflow guard `PublicationGuard` of `phil/accessibility-check`, neither
   wired by default.
+- Feature flags by `phil/feature-flags-bundle` 0.1: the flags declared in `config/packages/phil_feature_flags.yaml`,
+  their states and the flags created in the administration kept in the database (a migration creates the two tables
+  on SQLite, PostgreSQL and MySQL), each change authorized for `ROLE_ADMIN`, with a reason, and written to the
+  `feature_flags` log channel before it applies; the screens under `/admin/flags`, linked from the dashboard, in the
+  layout of the site. The adapters live in `src/Account/Infrastructure/FeatureFlags`: the member signed in is the
+  subject of the targeting rules.
+- The flag `text.slug-page` of the example, off by default: the page of the slug of a title, `/fr/slug` and
+  `/en/slug`, which works without JavaScript, answers 404 while it is off (`#[IsFeatureEnabled]` on
+  `SlugPageAction`), and the home page links to it only while it is on (`feature_enabled()` in Twig); both ways are
+  tested.
+- Circuit breakers by `phil/circuit-breaker-bundle` 0.2, declared in `config/packages/phil_circuit_breaker.yaml`,
+  their states in the cache pool `cache.circuits` shared by the workers (`single_server` in production), each circuit
+  forced open by its flag `circuit-open.<key>`. The example circuit `http.example` guards the scoped client
+  `example.client`, whose base URI is `EXAMPLE_API_URL`; a test opens it with server errors. In the test environment,
+  every HTTP client answers from `tests/Support/MockResponses`: no request leaves the machine. `symfony/http-client`,
+  `symfony/clock` and `psr/log` are direct requirements, `symfony/http-client-contracts` a development one.
+- `doc/feature-flags-and-circuit-breakers.md`: what is wired, the examples, where a flag is read in the layers (never
+  in the Domain), how to add a flag or a circuit, and how to do without the screens.
 
 ### Changed
 

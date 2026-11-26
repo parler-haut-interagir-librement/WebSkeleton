@@ -31,6 +31,11 @@ final class DashboardController extends AbstractDashboardController
     public const string ROUTE = 'admin';
 
     /**
+     * The list of the feature flags, imported by config/routes/phil_feature_flags.yaml.
+     */
+    public const string FEATURE_FLAGS_ROUTE = 'phil_feature_flags_admin_list';
+
+    /**
      * @param list<string> $locales
      */
     public function __construct(
@@ -66,6 +71,8 @@ final class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('admin.menu.dashboard', 'fa fa-gauge');
         yield MenuItem::linkToRoute('admin.menu.users', 'fa fa-users', 'admin_user_index');
         yield ErrorTrackingAdmin::menuItem(self::ROUTE, 'admin.menu.errors');
+        // The screens of phil/feature-flags-bundle, under /admin/flags, outside EasyAdmin.
+        yield MenuItem::linkToUrl('admin.menu.flags', 'fa fa-toggle-on', $this->generateUrl(self::FEATURE_FLAGS_ROUTE));
         yield MenuItem::linkToUrl('admin.menu.site', 'fa fa-house', $this->generateUrl(HomeAction::class));
     }
 

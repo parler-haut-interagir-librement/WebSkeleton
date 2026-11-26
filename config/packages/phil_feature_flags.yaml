@@ -1,0 +1,28 @@
+# The feature flags of phil/feature-flags-bundle: a new feature ships behind a flag, off, and is turned on without a
+# deploy. The flags are declared here; their states, and the flags created in the administration, are kept in the
+# database of the site (the tables phil_feature_flags_definition and phil_feature_flags_state). Every change is
+# authorized for ROLE_ADMIN, carries a reason and is written to the "feature_flags" log channel before it applies.
+# The screens are under /admin/flags, behind the access rule of /admin. Each circuit of phil_circuit_breaker.yaml also
+# gets a flag, circuit-open.<key>, that forces it open.
+# A flag is read in the Application or the Infrastructure of a context, never in its Domain.
+# See doc/feature-flags-and-circuit-breakers.md and vendor/phil/feature-flags-bundle/doc/configuration.md
+phil_feature_flags:
+    # The member signed in is the subject of the targeting rules; a visitor has an empty context.
+    context_resolver: App\Account\Infrastructure\FeatureFlags\MemberContextResolver
+    doctrine:
+        connection: default
+    toggle:
+        authorizer: App\Account\Infrastructure\FeatureFlags\AdministratorToggleAuthorizer
+        auditor: App\Account\Infrastructure\FeatureFlags\LogToggleAuditor
+    admin:
+        actor_provider: App\Account\Infrastructure\FeatureFlags\AdministratorActorProvider
+        layout: admin/feature_flags.html.twig
+    flags:
+        # The example of the template: the page of the slug of a title, /fr/slug and /en/slug, without JavaScript,
+        # and its link on the home page. Off until an administrator turns it on.
+        text.slug-page:
+            active: false
+            description: The page of the slug of a title, and its link on the home page.
+            owner: text
+            kind: release
+            expires_on: '2027-11-26'

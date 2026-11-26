@@ -26,6 +26,10 @@
         <input id="slugify-input" type="text" {{ stimulus_target('api', 'title') }} {{ stimulus_action('api', 'slugify', 'input') }}>
         <label for="slugify-output">{{ 'home.slugify.output'|trans }}</label>
         <input id="slugify-output" type="text" readonly {{ stimulus_target('api', 'slug') }}>
+        {#- The feature flag of the template, off by default: see config/packages/phil_feature_flags.yaml. #}
+        {%- if feature_enabled('text.slug-page') %}
+        <p><a href="{{ path('App\\Text\\Infrastructure\\Http\\Controller\\SlugPageAction') }}">{{ 'home.slugify.page'|trans }}</a></p>
+        {%- endif %}
     </section>
 
     <p>

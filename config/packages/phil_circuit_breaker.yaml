@@ -1,0 +1,26 @@
+# The circuit breakers of phil/circuit-breaker-bundle: a third party that fails is no longer called for a while, so the
+# site answers at once instead of waiting on it. One circuit per HTTP client or destination; the bundle puts the client
+# behind its circuit, and a request refused while it is open throws CircuitOpen, a TransportExceptionInterface.
+# Each circuit also has a flag of phil_feature_flags.yaml, circuit-open.<key>, that an administrator turns on to force
+# it open.
+# See doc/feature-flags-and-circuit-breakers.md and vendor/phil/circuit-breaker-bundle/doc/configuration.md
+phil_circuit_breaker:
+    # The states are shared by every worker through this pool, on the filesystem like cache.app.
+    cache_pool: cache.circuits
+    circuits:
+        # The example of the template, around the scoped client example.client of framework.yaml: half the calls of a
+        # minute failed, out of five at least, and the client is not called for thirty seconds. A site renames it
+        # after the third party it calls, or removes it with its client.
+        http.example:
+            failure_rate_percent: 50
+            minimum_calls: 5
+            window_seconds: 60
+            open_seconds: 30
+            slow_call_milliseconds: 5000
+            http_client: example.client
+
+when@prod:
+    phil_circuit_breaker:
+        # The template runs on one server, like the lock and cache.app: a site on several gives cache.circuits a shared
+        # adapter, Redis for instance, and removes this line.
+        single_server: true

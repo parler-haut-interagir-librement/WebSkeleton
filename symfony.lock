@@ -69,6 +69,9 @@
     "phil/browser-security-bundle": {
         "version": "0.2.0-alpha"
     },
+    "phil/circuit-breaker-bundle": {
+        "version": "0.2.0-alpha"
+    },
     "phil/contact-form-bundle": {
         "version": "0.1.1-alpha"
     },
@@ -83,6 +86,9 @@
     },
     "phil/error-tracking-bundle": {
         "version": "0.1.0-alpha"
+    },
+    "phil/feature-flags-bundle": {
+        "version": "0.1.2-alpha"
     },
     "phil/legal-notices-bundle": {
         "version": "0.1.0-alpha"

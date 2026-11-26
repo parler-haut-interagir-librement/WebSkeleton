@@ -1,0 +1,12 @@
+{#-
+ # The layout of the screens of phil/feature-flags-bundle, /admin/flags, in the layout of the site, with a link back to
+ # the dashboard. The screens of the bundle are in English, whatever the language of the site, and give the title.
+ #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <p><a href="{{ path('admin') }}">{{ 'admin.menu.dashboard'|trans }}</a></p>
+    <div lang="en" class="isStack">
+        {% block content %}{% endblock %}
+    </div>
+{% endblock %}

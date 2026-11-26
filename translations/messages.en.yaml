@@ -53,6 +53,7 @@ home:
     text: The slug below is asked of the application through the query bus, on each keystroke, by a Stimulus controller.
     input: Title
     output: Slug
+    page: The same, on a page without JavaScript
   contact: Write to us
 
 contact:
@@ -95,6 +96,7 @@ admin:
     dashboard: Dashboard
     users: Users
     errors: Errors
+    flags: Feature flags
     site: Back to the site
     account: My account
   dashboard:
@@ -107,3 +109,8 @@ admin:
     email: Email address
     roles: Roles
     created_at: Created on
+
+slug:
+  title: The slug of a title
+  text: The title is sent by the form, and its slug is asked of the application through the query bus. This page is behind a feature flag.
+  submit: Make the slug

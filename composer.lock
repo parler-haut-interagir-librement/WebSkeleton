@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c03e76f947949840d030958a7bbe0c28",
+    "content-hash": "b5cf0096ddc2dc00cfcfae091a5a645a",
     "packages": [
         {
             "name": "composer/semver",
@@ -1926,6 +1926,139 @@
             "published-time": "2026-11-26T01:19:07+00:00"
         },
         {
+            "name": "phil/circuit-breaker",
+            "version": "0.1.1-alpha",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/parler-haut-interagir-librement/circuit-breaker.git",
+                "reference": "0fcfccbe96a1b4a0a9286f7709e4e461c153099d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/parler-haut-interagir-librement/circuit-breaker/zipball/0fcfccbe96a1b4a0a9286f7709e4e461c153099d",
+                "reference": "0fcfccbe96a1b4a0a9286f7709e4e461c153099d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.5",
+                "psr/clock": "^1.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^13.4"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "0.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Phil\\CircuitBreaker\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Philippe Gamache",
+                    "email": "philippe@ph-il.ca",
+                    "homepage": "https://github.com/ph-il",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Stop calling a third party that keeps failing, and resume when it recovers: one circuit per service, with failure thresholds and states shared by processes.",
+            "homepage": "https://ph-il.ca",
+            "keywords": [
+                "circuit-breaker",
+                "fault-tolerance",
+                "resilience",
+                "third-party"
+            ],
+            "support": {
+                "issues": "https://github.com/parler-haut-interagir-librement/circuit-breaker/issues",
+                "source": "https://github.com/parler-haut-interagir-librement/circuit-breaker/tree/0.1.1-alpha"
+            },
+            "time": "2026-11-17T22:00:00+00:00",
+            "published-time": "2026-11-18T01:36:48+00:00"
+        },
+        {
+            "name": "phil/circuit-breaker-bundle",
+            "version": "0.2.0-alpha",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/parler-haut-interagir-librement/circuit-breaker-bundle.git",
+                "reference": "c79812a3cb92f5787aff664fb2f067e62e577625"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/parler-haut-interagir-librement/circuit-breaker-bundle/zipball/c79812a3cb92f5787aff664fb2f067e62e577625",
+                "reference": "c79812a3cb92f5787aff664fb2f067e62e577625",
+                "shasum": ""
+            },
+            "require": {
+                "phil/circuit-breaker": "^0.1@dev",
+                "phil/rate-limit": "^0.1@dev",
+                "php": ">=8.5",
+                "psr/clock": "^1.0",
+                "symfony/config": "^8.2",
+                "symfony/dependency-injection": "^8.2",
+                "symfony/http-foundation": "^8.2",
+                "symfony/http-kernel": "^8.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^13.4",
+                "psr/cache": "^3.0",
+                "symfony/cache": "^8.2",
+                "symfony/http-client": "^8.2",
+                "symfony/http-client-contracts": "^3.6"
+            },
+            "suggest": {
+                "psr/cache": "To keep the circuit states in a cache pool",
+                "symfony/http-client": "To put an HTTP client behind its circuit",
+                "symfony/web-profiler-bundle": "For the profiler panel of the circuits"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "0.2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Phil\\CircuitBreakerBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Philippe Gamache",
+                    "email": "philippe@ph-il.ca",
+                    "homepage": "https://github.com/ph-il",
+                    "role": "Developer"
+                }
+            ],
+            "description": "phil/circuit-breaker in Symfony: circuits declared in configuration, their states shared by all workers, and HTTP clients that stop calling a failing service.",
+            "homepage": "https://ph-il.ca",
+            "keywords": [
+                "circuit-breaker",
+                "http-client",
+                "resilience",
+                "symfony-bundle"
+            ],
+            "support": {
+                "issues": "https://github.com/parler-haut-interagir-librement/circuit-breaker-bundle/issues",
+                "source": "https://github.com/parler-haut-interagir-librement/circuit-breaker-bundle/tree/0.2.0-alpha"
+            },
+            "time": "2026-11-20T22:00:00+00:00",
+            "published-time": "2026-11-21T02:56:20+00:00"
+        },
+        {
             "name": "phil/contact-form-bundle",
             "version": "0.1.3-alpha",
             "source": {
@@ -2632,6 +2765,83 @@
             },
             "time": "2026-11-25T22:00:00+00:00",
             "published-time": "2026-11-26T01:19:26+00:00"
+        },
+        {
+            "name": "phil/feature-flags-bundle",
+            "version": "0.1.2-alpha",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/parler-haut-interagir-librement/feature-flags-bundle.git",
+                "reference": "f7e16b470b31049c4e208e55e1a9f6f993920df7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/parler-haut-interagir-librement/feature-flags-bundle/zipball/f7e16b470b31049c4e208e55e1a9f6f993920df7",
+                "reference": "f7e16b470b31049c4e208e55e1a9f6f993920df7",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/dbal": "^4.6",
+                "doctrine/orm": "^3.8",
+                "ext-mbstring": "*",
+                "phil/circuit-breaker": "^0.1@dev",
+                "phil/circuit-breaker-bundle": "^0.2@dev",
+                "phil/ddd-bundle": "^0.1@dev",
+                "phil/enums": "^0.3@dev",
+                "php": ">=8.5",
+                "psr/clock": "^1.0",
+                "psr/log": "^3.0",
+                "symfony/config": "^8.2",
+                "symfony/console": "^8.2",
+                "symfony/dependency-injection": "^8.2",
+                "symfony/http-foundation": "^8.2",
+                "symfony/http-kernel": "^8.2",
+                "symfony/routing": "^8.2",
+                "twig/twig": "^3.31.1"
+            },
+            "require-dev": {
+                "doctrine/doctrine-bundle": "^3.4",
+                "phpunit/phpunit": "^13.4",
+                "symfony/cache": "^8.2",
+                "symfony/clock": "^8.2",
+                "symfony/expression-language": "^8.2",
+                "symfony/framework-bundle": "^8.2",
+                "symfony/twig-bundle": "^8.2"
+            },
+            "suggest": {
+                "symfony/web-profiler-bundle": "For the profiler panel of the flags"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "0.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Phil\\FeatureFlagsBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Philippe Gamache",
+                    "email": "philippe@ph-il.ca",
+                    "homepage": "https://github.com/ph-il",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Turn a feature off without a deploy, roll it out gradually or run an A/B test in Symfony, with audited changes, admin screens and Twig functions.",
+            "homepage": "https://ph-il.ca",
+            "support": {
+                "issues": "https://github.com/parler-haut-interagir-librement/feature-flags-bundle/issues",
+                "source": "https://github.com/parler-haut-interagir-librement/feature-flags-bundle/tree/0.1.2-alpha"
+            },
+            "time": "2026-11-25T22:00:00+00:00",
+            "published-time": "2026-11-26T01:19:28+00:00"
         },
         {
             "name": "phil/indexing-consent",
@@ -14249,6 +14459,7 @@
         "phil/accessibility-check": 15,
         "phil/accessibility-statement-bundle": 15,
         "phil/browser-security-bundle": 15,
+        "phil/circuit-breaker-bundle": 15,
         "phil/contact-form-bundle": 15,
         "phil/cors-bundle": 15,
         "phil/ddd-bundle": 15,
@@ -14256,6 +14467,7 @@
         "phil/doctrine-behaviours": 15,
         "phil/doctrine-behaviours-bundle": 15,
         "phil/error-tracking-bundle": 15,
+        "phil/feature-flags-bundle": 15,
         "phil/legal-notices-bundle": 15,
         "phil/menu-bundle": 15,
         "phil/monitoring-bundle": 15,

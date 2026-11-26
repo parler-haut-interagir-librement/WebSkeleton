@@ -18,8 +18,22 @@ framework:
     php_errors:
         log: true
 
+    # The outbound HTTP calls: one scoped client per third party, each behind its circuit in phil_circuit_breaker.yaml.
+    http_client:
+        default_options:
+            timeout: 10
+        scoped_clients:
+            # The example of the template, behind the circuit http.example: a site renames it after the third party it
+            # calls, with its base URI, or removes it with its circuit.
+            example.client:
+                base_uri: '%env(EXAMPLE_API_URL)%'
+                timeout: 5
+
 when@test:
     framework:
         test: true
         session:
             storage_factory_id: session.storage.factory.mock_file
+        # No request of the tests leaves the machine: each answer comes from this factory, which the tests set.
+        http_client:
+            mock_response_factory: App\Tests\Support\MockResponses

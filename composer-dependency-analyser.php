@@ -58,5 +58,9 @@ return new Configuration()
     ], [ErrorType::UNUSED_DEPENDENCY])
     // The .env files are read by the front controller and the console through the runtime, the tests read them directly.
     ->ignoreErrorsOnPackage('symfony/dotenv', [ErrorType::PROD_DEPENDENCY_ONLY_IN_DEV])
+    // The circuits and the HTTP clients behind them are declared in the configuration; only the tests reach them, and the
+    // clock is the service the circuits and the feature flags measure time on.
+    ->ignoreErrorsOnPackages(['phil/circuit-breaker-bundle', 'symfony/http-client'], [ErrorType::PROD_DEPENDENCY_ONLY_IN_DEV])
+    ->ignoreErrorsOnPackage('symfony/clock', [ErrorType::UNUSED_DEPENDENCY])
     // Required by Symfony and its components, which the analysis does not follow.
     ->ignoreErrorsOnExtensions(['ext-ctype', 'ext-iconv', 'ext-simplexml', 'ext-xml'], [ErrorType::UNUSED_DEPENDENCY]);
