@@ -32,6 +32,8 @@ what every context uses; Deptrac checks the layers inside each context and that 
 ## Tasks
 
 Every task runs through [Castor](https://castor.jolicode.com) (`castor.php`); `composer.json` holds no task script.
+The common tasks come from `vendor/phil/dev-tools/resources/castor/tasks.php`, set by `PHIL_CASTOR` in `castor.php`,
+which keeps only the template's own tasks.
 
 ```bash
 castor start                     # APP_SECRET, SQLite and migrations, then the Symfony binary's web server
@@ -44,7 +46,7 @@ castor coverage                  # the coverage report and its threshold
 castor lint                      # every lint and the static analysis
 castor stan                      # PHPStan only
 castor fix                       # every fixer
-castor ci                        # coverage, then every lint
+castor ci                        # coverage, every lint, then test:schema
 ```
 
 ## Code style
