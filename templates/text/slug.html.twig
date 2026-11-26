@@ -1,0 +1,26 @@
+{#-
+ # The page of the slug of a title, behind the feature flag text.slug-page: see SlugPageAction.
+ #}
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'slug.title'|trans }} · {{ parent() }}{% endblock %}
+
+{% block body %}
+    <h1>{{ 'slug.title'|trans }}</h1>
+    <p>{{ 'slug.text'|trans }}</p>
+
+    <form method="get" action="{{ path('App\\Text\\Infrastructure\\Http\\Controller\\SlugPageAction') }}">
+        <label for="slug-title">{{ 'home.slugify.input'|trans }}</label>
+        <input id="slug-title" name="title" type="text" value="{{ title }}" required{% if error %} aria-invalid="true" aria-describedby="slug-error"{% endif %}>
+        <twig:Button type="submit">{{ 'slug.submit'|trans }}</twig:Button>
+    </form>
+
+    {% if error %}
+        <p id="slug-error" role="alert">{{ error }}</p>
+    {% elseif slug is not null %}
+        <dl>
+            <dt>{{ 'home.slugify.output'|trans }}</dt>
+            <dd><output for="slug-title">{{ slug }}</output></dd>
+        </dl>
+    {% endif %}
+{% endblock %}

@@ -53,6 +53,7 @@ home:
     text: Le slug ci-dessous est demandé à l’application par le bus de requêtes, à chaque frappe, par un contrôleur Stimulus.
     input: Titre
     output: Slug
+    page: La même chose, sur une page sans JavaScript
   contact: Nous écrire
 
 contact:
@@ -95,6 +96,7 @@ admin:
     dashboard: Tableau de bord
     users: Utilisateurs
     errors: Erreurs
+    flags: Drapeaux de fonctionnalité
     site: Retour au site
     account: Mon compte
   dashboard:
@@ -107,3 +109,8 @@ admin:
     email: Adresse courriel
     roles: Rôles
     created_at: Créé le
+
+slug:
+  title: Le slug d’un titre
+  text: Le titre est envoyé par le formulaire, et son slug est demandé à l’application par le bus de requêtes. Cette page est derrière un drapeau de fonctionnalité.
+  submit: Faire le slug

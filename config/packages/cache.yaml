@@ -15,8 +15,9 @@ framework:
         #app: cache.adapter.apcu
 
         # Namespaced pools use the above "app" backend by default
-        #pools:
-            #my.dedicated.cache: null
+        pools:
+            # The states of the circuits of phil_circuit_breaker.yaml, shared by every worker.
+            cache.circuits: null
 
 when@test:
     framework:

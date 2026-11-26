@@ -24,6 +24,8 @@ return [
             'AllowedEasyCorpBundleEasyAdminBundle', 'AllowedSymfonyBridgeDoctrine', 'AllowedSymfonyBundleFrameworkBundle',
             'AllowedSymfonyBundleSecurityBundle', 'AllowedTwig', 'PhilDoctrineBehaviours', 'PhilErrorTrackingBundleInfrastructure',
             'PhilMenuBundleDomain', 'PhilMenuBundleApplication', 'PhilPrivacyBundleDomain', 'PhilPrivacyBundleApplication',
+            'PhilFeatureFlagsBundleDomain', 'PhilFeatureFlagsBundleApplication', 'PhilFeatureFlagsBundleInfrastructure',
+            'AllowedPsrLog',
         ];
         /** @var array<string, string> $layers */
         $layers = [];
@@ -57,6 +59,7 @@ return [
             'allow' => [
                 '^Doctrine\\\\(Bundle\\\\DoctrineBundle|DBAL|ORM|Persistence)\\\\.*',
                 '^EasyCorp\\\\Bundle\\\\EasyAdminBundle\\\\.*',
+                '^Psr\\\\Log\\\\.*',
                 '^Symfony\\\\Bridge\\\\Doctrine\\\\.*',
                 '^Symfony\\\\Bundle\\\\FrameworkBundle\\\\.*',
                 '^Symfony\\\\Bundle\\\\SecurityBundle\\\\.*',

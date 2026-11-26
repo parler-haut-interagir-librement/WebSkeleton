@@ -33,6 +33,7 @@ the PHIL tools: phil-ux in place of Pico CSS, the PHIL UX kit, and the PHIL bund
 * [Languages](#languages-)
 * [Domain-driven design](#domain-driven-design-)
 * [Accounts and administration](#accounts-and-administration-)
+* [Feature flags and circuit breakers](#feature-flags-and-circuit-breakers-)
 * [Accessibility](#accessibility-)
 * [Before going live](#before-going-live-)
 * [Optional steps](#optional-steps-)
@@ -125,6 +126,8 @@ With the Symfony binary, set the same variable in `.env.local`, with the host of
 | The administration, EasyAdmin in the theme of PHIL UX by `phil/ux-easyadmin-bundle`, for `ROLE_ADMIN` | [DashboardController](src/Shared/Infrastructure/Http/Admin/DashboardController.php), [phil_ux_easy_admin.yaml](config/packages/phil_ux_easy_admin.yaml) |
 | The privacy choices of each member — the export of their data, the deletion of their account, the consent — and the redaction of the logs, by `phil/privacy-bundle` | [phil_privacy.yaml](config/packages/phil_privacy.yaml), [AccountPersonalData](src/Account/Infrastructure/Privacy/AccountPersonalData.php) |
 | The errors of the site kept in its own database and shown in the administration, by `phil/error-tracking-bundle` | [phil_error_tracking.yaml](config/packages/phil_error_tracking.yaml) |
+| Feature flags, off until an administrator turns them on under `/admin/flags`, by `phil/feature-flags-bundle` | [phil_feature_flags.yaml](config/packages/phil_feature_flags.yaml), [doc](doc/feature-flags-and-circuit-breakers.md) |
+| A circuit breaker around each third party the site calls, by `phil/circuit-breaker-bundle` | [phil_circuit_breaker.yaml](config/packages/phil_circuit_breaker.yaml), [doc](doc/feature-flags-and-circuit-breakers.md) |
 | The main menu, by `phil/menu-bundle` | [MainMenuBuilder](src/Shared/Infrastructure/Menu/MainMenuBuilder.php) |
 | The creation and update dates of the accounts, by `phil/doctrine-behaviours-bundle` | [User](src/Account/Infrastructure/Persistence/Doctrine/Entity/User.php), [phil_doctrine_behaviours.yaml](config/packages/phil_doctrine_behaviours.yaml) |
 | phil-ux and the recipes of the PHIL UX kit in `templates/components/` | [base.html.twig](templates/base.html.twig), [components](templates/components) |
@@ -280,7 +283,7 @@ port `Accounts` of the domain, whose adapter hashes the password and keeps the a
 | Account | `/fr/account`, `/en/account` | The account of the member, a link to their privacy choices and the button that signs them out. |
 | Sign-out | `/fr/logout`, `/en/logout` | By POST with a CSRF token only: a link or an image never signs anyone out. |
 | Privacy choices | `/fr/privacy-choices`, `/en/privacy-choices` | The export of the member's data, the deletion of their account after thirty days, the consent; the deletion asks for the password again when the session is not recent. |
-| Administration | `/admin` | For `ROLE_ADMIN` only, which includes `ROLE_USER`: the accounts, listed and shown, never created nor edited there, and the errors of the site. |
+| Administration | `/admin` | For `ROLE_ADMIN` only, which includes `ROLE_USER`: the accounts, listed and shown, never created nor edited there, the errors of the site, and the feature flags under `/admin/flags`. |
 
 The firewall checks the account again each time it is refreshed from the session (`user_checker_on_refresh: true`), so
 a changed or disabled account is signed out on its next request. The session keeps a crc32c hash of the password hash,
@@ -304,6 +307,19 @@ To sign members in with an identity provider through OpenID Connect instead of p
 [`phil/identity-client-bundle`](https://github.com/parler-haut-interagir-librement/identity-client-bundle), as its
 installation guide shows: the firewall keeps `user_checker_on_refresh: true`, and the sign-up, the passwords and their
 fixtures go.
+
+## Feature flags and circuit breakers 🎚️
+
+A new feature ships behind a flag of [`phil/feature-flags-bundle`](https://github.com/parler-haut-interagir-librement/feature-flags-bundle),
+declared off in [phil_feature_flags.yaml](config/packages/phil_feature_flags.yaml) and turned on by an administrator
+under `/admin/flags`, with a reason written to the `feature_flags` log channel; the states live in the database. A
+third party that fails is no longer called for a while, thanks to a circuit of
+[`phil/circuit-breaker-bundle`](https://github.com/parler-haut-interagir-librement/circuit-breaker-bundle) around its
+HTTP client, declared in [phil_circuit_breaker.yaml](config/packages/phil_circuit_breaker.yaml); each circuit also has
+a flag that forces it open. The examples of the template are the flag `text.slug-page`, which guards the page
+`/fr/slug` and its link on the home page, and the circuit `http.example`, around the scoped client `example.client`.
+What is wired, where a flag is read in the layers, and how to add a flag or a circuit:
+[doc/feature-flags-and-circuit-breakers.md](doc/feature-flags-and-circuit-breakers.md).
 
 ## Accessibility ♿
 
@@ -330,9 +346,10 @@ The template starts with nothing that claims what no one has checked. Before a s
    [phil_contact_form.yaml](config/packages/phil_contact_form.yaml) and set `MAILER_DSN`.
 5. **`security.txt`**: replace the contact in [phil_well_known.yaml](config/packages/phil_well_known.yaml) and push its
    expiry date back, at most a year ahead.
-6. **Several servers**: give the lock (`LOCK_DSN`) and `cache.app` a store every server shares, and remove
-   `single_server` from [phil_browser_security.yaml](config/packages/phil_browser_security.yaml) and
-   [phil_error_tracking.yaml](config/packages/phil_error_tracking.yaml).
+6. **Several servers**: give the lock (`LOCK_DSN`), `cache.app` and `cache.circuits` a store every server shares, and
+   remove `single_server` from [phil_browser_security.yaml](config/packages/phil_browser_security.yaml),
+   [phil_error_tracking.yaml](config/packages/phil_error_tracking.yaml) and
+   [phil_circuit_breaker.yaml](config/packages/phil_circuit_breaker.yaml).
 7. **The accounts**: never load the fixtures, whose passwords are public; create the first administrator by signing up,
    then give the account `ROLE_ADMIN` in the database.
 8. **Personal data**: set `APP_PUBLIC_ORIGIN` to the address of the site, run the account deletions that are due with
@@ -341,6 +358,9 @@ The template starts with nothing that claims what no one has checked. Before a s
    cookie the site adds.
 9. **The errors**: set `APP_RELEASE` to the version that runs, and purge the old events with
    `bin/console phil:error-tracking:purge` from cron.
+10. **The third parties**: rename the example client `example.client` and its circuit `http.example` after the third
+    party the site calls, or remove them with `EXAMPLE_API_URL`; keep the lines of the `feature_flags` log channel,
+    the audit trail of the flags.
 
 ## Optional steps 🧩
 

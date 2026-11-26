@@ -1,6 +1,7 @@
 monolog:
     channels:
         - deprecation # Deprecations are logged in the dedicated "deprecation" channel when it exists
+        - feature_flags # Every change to a feature flag, before it applies: who, which flag, before, after and why
 
 when@dev:
     monolog:
@@ -59,3 +60,10 @@ when@prod:
                 type: stream
                 channels: [deprecation]
                 path: php://stderr
+            # The audit trail of the feature flags, every line kept, not only those before an error.
+            feature_flags:
+                type: stream
+                path: php://stderr
+                level: info
+                channels: [feature_flags]
+                formatter: monolog.formatter.json

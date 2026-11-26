@@ -34,4 +34,6 @@ return [
     EasyCorp\Bundle\EasyAdminBundle\EasyAdminBundle::class => ['all' => true],
     Phil\UxEasyAdminBundle\PhilUxEasyAdminBundle::class => ['all' => true],
     Zenstruck\Foundry\ZenstruckFoundryBundle::class => ['dev' => true, 'test' => true],
+    Phil\CircuitBreakerBundle\PhilCircuitBreakerBundle::class => ['all' => true],
+    Phil\FeatureFlagsBundle\PhilFeatureFlagsBundle::class => ['all' => true],
 ];
