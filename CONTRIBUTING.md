@@ -26,7 +26,8 @@ castor ci      # the tests with their coverage threshold, then every lint and th
 A pull request:
 
 - adds tests for what it changes, each naming what it covers with `#[CoversClass]` or `#[CoversNothing]`; the
-  [smoke tests](tests/Functional/StaticRoutesSmokeTest.php) already request every route;
+  [smoke test](tests/Functional/RouteSmokeTest.php) already requests every route, and the
+  [accessibility test](tests/Functional/AccessibilityTest.php) checks every page;
 - keeps `castor ci` green, the coverage at its threshold and PHPStan at the maximum level without a new exception;
 - documents what it changes in the README and in the `Unreleased` section of the [CHANGELOG](CHANGELOG.md);
 - holds only the commits of its change.

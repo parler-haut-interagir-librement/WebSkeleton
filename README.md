@@ -33,6 +33,7 @@ the PHIL tools: phil-ux in place of Pico CSS, the PHIL UX kit, and the PHIL bund
 * [Languages](#languages-)
 * [Domain-driven design](#domain-driven-design-)
 * [Accounts and administration](#accounts-and-administration-)
+* [Accessibility](#accessibility-)
 * [Before going live](#before-going-live-)
 * [Optional steps](#optional-steps-)
 * [Tasks](#tasks-)
@@ -134,6 +135,7 @@ With the Symfony binary, set the same variable in `.env.local`, with the host of
 | `/sitemap.xml`, every page in every language with its alternates, by `phil/sitemap-bundle` | [LocalizedPagesUrlProvider](src/Shared/Infrastructure/Sitemap/LocalizedPagesUrlProvider.php) |
 | `/.well-known/security.txt`, by `phil/well-known-bundle` | [phil_well_known.yaml](config/packages/phil_well_known.yaml) |
 | The JSON-LD graph of each page, by `phil/structured-data-bundle` | [phil_structured_data.yaml](config/packages/phil_structured_data.yaml) |
+| Every page checked for accessibility, in both languages, by `phil/accessibility-check`, and every route by the smoke test of `phil/dev-tools` | [AccessibilityTest](tests/Functional/AccessibilityTest.php), [RouteSmokeTest](tests/Functional/RouteSmokeTest.php) |
 
 From WebSymfony stay the PHIL identity (logo, copyright of Parler Haut, Interagir Librement, light and dark themes),
 the member accounts and their administration, the cross-origin rules of NelmioCorsBundle on `/api/`, the five test
@@ -141,7 +143,9 @@ suites, Castor, the quality gates and Docker Compose. The PHIL bundles take the 
 Doctrine extensions of Gedmo.
 
 Every PHIL package comes from Packagist. A package of PHIL not published yet is taken by a Composer `path` repository
-to a local copy of the `phil-prerelease` monorepo, until its release; the template needs none today.
+to a local copy, until its release: today `phil/dev-tools` 0.2.1-alpha, from `../dev-tools`, a clone of its repository
+next to the template's. The `repositories` entry of `composer.json` goes at the release of 8.2.0-RC2, once
+`phil/dev-tools` 0.2.1-alpha is on Packagist.
 `phil/monitoring-bundle` is required without being registered: the configuration of `phil/error-tracking-bundle`
 0.1.0-alpha reads a class that implements one of its interfaces.
 
@@ -299,6 +303,16 @@ To sign members in with an identity provider through OpenID Connect instead of p
 installation guide shows: the firewall keeps `user_checker_on_refresh: true`, and the sign-up, the passwords and their
 fixtures go.
 
+## Accessibility ♿
+
+Every page of the site is checked by [`phil/accessibility-check`](https://github.com/parler-haut-interagir-librement/accessibility-check)
+on each run of the tests: [AccessibilityTest](tests/Functional/AccessibilityTest.php) requests the pages of the route
+smoke test, in French and in English, as a visitor and as an administrator, and fails on an accessibility error; a
+warning is written out and passes. A route or a rule is left out in the test itself, with its reason.
+
+To check what the authors of a site publish — a validator constraint on a form, a guard that holds back a publication
+in a workflow — see [doc/accessibility.md](doc/accessibility.md). Nothing of it is wired by default.
+
 ## Before going live 🚀
 
 The template starts with nothing that claims what no one has checked. Before a site is public:
@@ -339,6 +353,13 @@ Replace `form_login` in [security.yaml](config/packages/security.yaml) with the 
 [installation guide of the bundle](https://github.com/parler-haut-interagir-librement/identity-client-bundle/blob/main/doc/installation.md)
 shows.
 
+### Tailwind instead of PHIL UX CSS
+
+The template is dressed by phil-ux and the PHIL UX kit. A site that prefers Tailwind CSS takes the Shadcn kit of the
+Symfony UX Toolkit and `phil/ux-kit-shadcn`, the PHIL UX recipes in Tailwind under the same names and props, with
+`symfonycasts/tailwind-bundle` on AssetMapper: [doc/tailwind.md](doc/tailwind.md) gives what to remove, what to add,
+the commands and what changes in the templates.
+
 ### More recipes of the PHIL UX kit
 
 The recipes in `templates/components/` — `Badge`, `Button`, `Card`, `Table`, `ThemeSwitcher` — are copies the site
@@ -348,7 +369,11 @@ owns. Others come from the kit with the Symfony UX Toolkit:
 
 ## Tasks 🧰
 
-`castor` lists every task. The main ones:
+`castor` lists every task. The tests, the coverage, the lints, the fixers, the local continuous integration and the git
+hooks are the common tasks of [`phil/dev-tools`](https://packagist.org/packages/phil/dev-tools), which
+[castor.php](castor.php) imports from `vendor/phil/dev-tools/resources/castor/tasks.php` and sets with its
+`PHIL_CASTOR` constant; the file keeps the template's own tasks — servers, database, environments, `test:schema` and
+`lint:doctrine`. Run `composer install` before the first task. The main ones:
 
 | Task | What it does |
 |---|---|
@@ -358,14 +383,14 @@ owns. Others come from the kit with the Symfony UX Toolkit:
 | `castor reset-database` | The SQLite database reset and migrated. |
 | `castor load-fixtures` | The SQLite database reset and migrated, with the accounts `admin` and `member` and ten more. |
 | `castor test` | Every PHPUnit suite; `--filter` and `--options` pass on to PHPUnit. |
-| `castor test:unit`, `test:integration`, `test:api`, `test:functional`, `test:e2e` | One suite. |
+| `castor test:unit`, `test:integration`, `test:api`, `test:functional`, `test:e2e` | One suite; `castor test:suite <name>` runs any suite of `phpunit.dist.xml`. |
 | `castor test:next` | The tests on the next PHP version, in its Docker image. |
 | `castor test:schema` | The migrations on a fresh SQLite database, then its schema compared with the Doctrine mapping. |
 | `castor coverage` | The HTML coverage report in `var/coverage/`, and its threshold. |
 | `castor infection` | Mutation testing. |
-| `castor lint` | Every lint and the static analysis. |
+| `castor lint` | Every lint and the static analysis, then `lint:doctrine`. |
 | `castor fix` | Rector, PHP-CS-Fixer, Twig-CS-Fixer, Biome and composer-normalize. |
-| `castor ci` | The continuous integration, locally: coverage, `test:schema`, then every lint. |
+| `castor ci` | The continuous integration, locally: coverage, every lint, then `test:schema`. |
 | `castor hooks` | The git hooks: the fast checks on the staged files before each commit. |
 
 ## Quality gates 🚦

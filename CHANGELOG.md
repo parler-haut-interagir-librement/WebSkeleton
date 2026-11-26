@@ -10,8 +10,41 @@ built on [WebSymfony](https://github.com/parler-haut-interagir-librement/WebSymf
 
 ## Unreleased
 
+The next version is 8.2.0-RC2.
+
+### Added
+
+- `doc/tailwind.md`: Tailwind CSS instead of PHIL UX CSS, with the Shadcn kit of the Symfony UX Toolkit,
+  `phil/ux-kit-shadcn` for the PHIL recipes under the same names and props, and `symfonycasts/tailwind-bundle` on
+  AssetMapper — what to remove, what to add, the commands and what changes in the templates. PHIL UX stays the default.
+- An accessibility test in the functional suite: `phil/accessibility-check` on the HTML of every page of the route smoke
+  test, in French and in English, as a visitor and as an administrator; an error fails, a warning is written out. A route
+  or a rule is left out in `EXCLUDED_ROUTES` or `DISABLED_RULES`, with its reason; the pages of EasyAdmin are left out
+  for the icon-only menus of its layout. `phil/accessibility-check` is a direct development requirement.
+- `doc/accessibility.md`: the accessibility test, and how a site checks what its authors publish with the validator
+  constraint `AccessibleContent` or the workflow guard `PublicationGuard` of `phil/accessibility-check`, neither
+  wired by default.
+
 ### Changed
 
+- Every requirement of `composer.json`, `require` and `require-dev`, at its latest released version: `^X.Y` of the
+  latest minor (`^0.Y.Z@alpha` for the PHIL packages), the Symfony components at `8.2.*`; among them
+  `phil/privacy-bundle` 0.4, `phil/spam-protection-bundle` 0.3 and `phil/ux-kit` 0.7.
+- `phil/dev-tools` 0.2.1-alpha, taken by a Composer `path` repository to `../dev-tools` until it is on Packagist; the
+  `repositories` entry is removed at the release.
+- `castor.php` imports the common tasks of `phil/dev-tools`, `vendor/phil/dev-tools/resources/castor/tasks.php`, set by
+  its `PHIL_CASTOR` constant, and keeps only the template's own tasks: the servers, Docker Compose, the database, the
+  environments, `test:schema`, `lint:doctrine` and `check-requirements`. The names of the tasks stay; `castor lint`
+  runs `lint:doctrine` after the common lints, `castor ci` runs `test:schema` after the coverage and the lints, and
+  `castor test:suite <name>` runs one suite. `bin/coverage-checker.php` is gone: `castor coverage` checks the
+  threshold itself.
+- A migration drops the tables of `phil/privacy-bundle` whose features the template leaves off — the requests without
+  an account, the consent to tracked emails, the erasure workflow —, which the bundle no longer maps from 0.4.
+- PHPUnit writes without colours, so that `castor coverage` reads the summary of its text report;
+  `castor test --options=--colors=always` shows them.
+- The route smoke test, `RouteSmokeTest`, on `Testing\RouteSmokeTesting` of `phil/dev-tools`, with one set of route
+  parameters per language of `app.locales`.
+- The titles of the cards of the home page are `h2`, under its `h1`.
 - The configuration back in YAML: `config/packages/*.yaml`, those of the PHIL bundles among them, with `when@dev`,
   `when@test` and `when@prod` blocks, `config/routes.yaml`, `config/routes/*.yaml` and `config/services.yaml`; only
   `config/bundles.php` and `config/preload.php` stay PHP. `castor lint:yaml` checks `config/` too.

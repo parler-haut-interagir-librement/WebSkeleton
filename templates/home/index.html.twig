@@ -10,7 +10,7 @@
         {%- for feature in ['languages', 'ddd', 'ux', 'bundles'] %}
         <twig:Card>
             <twig:Card:Header>
-                <twig:Card:Title>{{ ('home.feature.' ~ feature ~ '.title')|trans }}</twig:Card:Title>
+                <twig:Card:Title :level="2">{{ ('home.feature.' ~ feature ~ '.title')|trans }}</twig:Card:Title>
             </twig:Card:Header>
             <twig:Card:Content>
                 <p>{{ ('home.feature.' ~ feature ~ '.text')|trans }}</p>

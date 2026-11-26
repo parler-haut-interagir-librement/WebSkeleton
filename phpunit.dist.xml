@@ -6,10 +6,12 @@
     through the kernel. E2E drives a real browser through Panther, once it is installed.
     Every test names what it covers, with #[CoversClass] or #[CoversNothing]: coverage counts only what a test
     sets out to test.
+    Colours stay off: castor coverage reads the summary of the text report, which PHPUnit would otherwise write
+    with the colour codes of the terminal; the PHPUnit option colors=always, given to castor test, shows them.
 -->
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
-         colors="true"
+         colors="false"
          failOnDeprecation="true"
          failOnNotice="true"
          failOnWarning="true"

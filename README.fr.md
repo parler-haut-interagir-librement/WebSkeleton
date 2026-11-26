@@ -1,4 +1,4 @@
-<!-- phil-dev source-sha256=9a60241024cf38e701bec76d406dad663f3f2670da13f608988c9bde617fb414 -->
+<!-- phil-dev source-sha256=0aab6eae523d822b3cd562a17fb22e0c709bfe496789f5e05e4b6ca7ca5879c5 -->
 # WebSkeleton 🦴
 
 [![Latest Version](https://img.shields.io/packagist/v/phil/webskeleton.svg?style=flat-square)](https://packagist.org/packages/phil/webskeleton)
@@ -34,6 +34,7 @@ outils PHIL : phil-ux à la place de Pico CSS, le kit PHIL UX et les bundles PHI
 * [Langues](#langues-)
 * [Conception pilotée par le domaine](#conception-pilotée-par-le-domaine-)
 * [Comptes et administration](#comptes-et-administration-)
+* [Accessibilité](#accessibilité-)
 * [Avant la mise en ligne](#avant-la-mise-en-ligne-)
 * [Étapes facultatives](#étapes-facultatives-)
 * [Tâches](#tâches-)
@@ -137,6 +138,7 @@ Avec le binaire Symfony, mettez la même variable dans `.env.local`, avec l'hôt
 | `/sitemap.xml`, chaque page dans chaque langue avec ses alternatives, par `phil/sitemap-bundle` | [LocalizedPagesUrlProvider](src/Shared/Infrastructure/Sitemap/LocalizedPagesUrlProvider.php) |
 | `/.well-known/security.txt`, par `phil/well-known-bundle` | [phil_well_known.yaml](config/packages/phil_well_known.yaml) |
 | Le graphe JSON-LD de chaque page, par `phil/structured-data-bundle` | [phil_structured_data.yaml](config/packages/phil_structured_data.yaml) |
+| Chaque page vérifiée pour l'accessibilité, dans les deux langues, par `phil/accessibility-check`, et chaque route par le test de fumée de `phil/dev-tools` | [AccessibilityTest](tests/Functional/AccessibilityTest.php), [RouteSmokeTest](tests/Functional/RouteSmokeTest.php) |
 
 De WebSymfony restent l'identité de PHIL (logo, droits de Parler Haut, Interagir Librement, thèmes clair et sombre), les
 comptes de membres et leur administration, les règles d'origine croisée de NelmioCorsBundle sur `/api/`, les cinq
@@ -144,7 +146,9 @@ suites de tests, Castor, les portes de qualité et Docker Compose. Les bundles P
 Sentry et des extensions Doctrine de Gedmo.
 
 Chaque paquet PHIL vient de Packagist. Un paquet de PHIL pas encore publié se prend par un dépôt Composer `path` vers une
-copie locale du monodépôt `phil-prerelease`, jusqu'à sa sortie ; le gabarit n'en a besoin d'aucun aujourd'hui.
+copie locale, jusqu'à sa sortie : aujourd'hui `phil/dev-tools` 0.2.1-alpha, depuis `../dev-tools`, un clone de son dépôt
+à côté de celui du gabarit. L'entrée `repositories` de `composer.json` s'en va à la sortie de la version 8.2.0-RC2, une
+fois `phil/dev-tools` 0.2.1-alpha sur Packagist.
 `phil/monitoring-bundle` est requis sans être enregistré : la configuration de `phil/error-tracking-bundle`
 0.1.0-alpha lit une classe qui implémente une de ses interfaces.
 
@@ -307,6 +311,18 @@ connexion par formulaire par [`phil/identity-client-bundle`](https://github.com/
 comme le montre son guide d'installation : le pare-feu garde `user_checker_on_refresh: true`, et l'inscription, les
 mots de passe et leurs données de développement s'en vont.
 
+## Accessibilité ♿
+
+Chaque page du site est vérifiée par [`phil/accessibility-check`](https://github.com/parler-haut-interagir-librement/accessibility-check)
+à chaque exécution des tests : [AccessibilityTest](tests/Functional/AccessibilityTest.php) requiert les pages du test de
+fumée des routes, en français et en anglais, comme visiteur et comme administrateur, et échoue sur une erreur
+d'accessibilité ; un avertissement est affiché et le test passe. Une route ou une règle est exclue dans le test même,
+avec sa raison.
+
+Pour vérifier ce que publient les auteurs d'un site — une contrainte du validateur sur un formulaire, une garde qui retient
+une publication dans un workflow —, voyez [doc/fr/accessibility.md](doc/fr/accessibility.md). Rien n'en est branché par
+défaut.
+
 ## Avant la mise en ligne 🚀
 
 Le gabarit ne commence avec rien qui affirme ce que personne n'a vérifié. Avant qu'un site soit public :
@@ -346,6 +362,13 @@ Remplacez `form_login` dans [security.yaml](config/packages/security.yaml) par l
 `user_checker_on_refresh: true`, et importez les routes d'`oidc_login` comme le montre le
 [guide d'installation du bundle](https://github.com/parler-haut-interagir-librement/identity-client-bundle/blob/main/doc/installation.md).
 
+### Tailwind à la place de PHIL UX CSS
+
+Le gabarit est habillé par phil-ux et le kit PHIL UX. Un site qui préfère Tailwind CSS prend le kit Shadcn du Symfony UX
+Toolkit et `phil/ux-kit-shadcn`, les recettes PHIL UX en Tailwind sous les mêmes noms et les mêmes propriétés, avec
+`symfonycasts/tailwind-bundle` sur AssetMapper : [doc/fr/tailwind.md](doc/fr/tailwind.md) donne ce qu'il faut retirer,
+ce qu'il faut ajouter, les commandes et ce qui change dans les gabarits.
+
 ### D'autres recettes du kit PHIL UX
 
 Les recettes de `templates/components/` — `Badge`, `Button`, `Card`, `Table`, `ThemeSwitcher` — sont des copies qui
@@ -355,7 +378,11 @@ appartiennent au site. Les autres viennent du kit avec le Symfony UX Toolkit :
 
 ## Tâches 🧰
 
-`castor` liste toutes les tâches. Les principales :
+`castor` liste toutes les tâches. Les tests, la couverture, les vérifications, les correcteurs, l'intégration continue
+locale et les crochets git sont les tâches communes de [`phil/dev-tools`](https://packagist.org/packages/phil/dev-tools),
+que [castor.php](castor.php) importe depuis `vendor/phil/dev-tools/resources/castor/tasks.php` et règle par sa constante
+`PHIL_CASTOR` ; le fichier garde les tâches propres au gabarit — les serveurs, la base de données, les environnements,
+`test:schema` et `lint:doctrine`. Lancez `composer install` avant la première tâche. Les principales :
 
 | Tâche | Ce qu'elle fait |
 |---|---|
@@ -365,14 +392,14 @@ appartiennent au site. Les autres viennent du kit avec le Symfony UX Toolkit :
 | `castor reset-database` | La base SQLite remise à zéro et migrée. |
 | `castor load-fixtures` | La base SQLite remise à zéro et migrée, avec les comptes `admin` et `member` et dix autres. |
 | `castor test` | Toutes les suites PHPUnit ; `--filter` et `--options` passent à PHPUnit. |
-| `castor test:unit`, `test:integration`, `test:api`, `test:functional`, `test:e2e` | Une suite. |
+| `castor test:unit`, `test:integration`, `test:api`, `test:functional`, `test:e2e` | Une suite ; `castor test:suite <nom>` lance n'importe quelle suite de `phpunit.dist.xml`. |
 | `castor test:next` | Les tests sur la prochaine version de PHP, dans son image Docker. |
 | `castor test:schema` | Les migrations sur une base SQLite neuve, puis son schéma comparé au mappage Doctrine. |
 | `castor coverage` | Le rapport de couverture HTML dans `var/coverage/`, et son seuil. |
 | `castor infection` | Les tests de mutation. |
-| `castor lint` | Toutes les vérifications et l'analyse statique. |
+| `castor lint` | Toutes les vérifications et l'analyse statique, puis `lint:doctrine`. |
 | `castor fix` | Rector, PHP-CS-Fixer, Twig-CS-Fixer, Biome et composer-normalize. |
-| `castor ci` | L'intégration continue, en local : la couverture, `test:schema`, puis toutes les vérifications. |
+| `castor ci` | L'intégration continue, en local : la couverture, toutes les vérifications, puis `test:schema`. |
 | `castor hooks` | Les crochets git : les vérifications rapides des fichiers indexés avant chaque commit. |
 
 ## Portes de qualité 🚦
