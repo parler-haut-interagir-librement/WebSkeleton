@@ -11,7 +11,7 @@ Stimulus, Turbo, phil-ux and the recipes of the PHIL UX kit, Symfony Security fo
 the administration, plus the PHIL bundles a site needs: `phil/ddd-bundle`, `phil/browser-security-bundle`,
 `phil/legal-notices-bundle`, `phil/accessibility-statement-bundle`, `phil/contact-form-bundle`,
 `phil/spam-protection-bundle`, `phil/sitemap-bundle`, `phil/well-known-bundle`, `phil/structured-data-bundle`,
-`phil/privacy-bundle`, `phil/error-tracking-bundle`, `phil/menu-bundle`, `phil/doctrine-behaviours-bundle` and
+`phil/privacy-bundle`, `phil/error-tracking-bundle`, `phil/monitoring-bundle`, `phil/menu-bundle`, `phil/doctrine-behaviours-bundle` and
 `phil/ux-easyadmin-bundle`. French and English, every page under `/fr` or `/en`, French by default.
 
 `src/` is organised by bounded context, `src/<Context>/{Domain,Application,Infrastructure}`, with `src/Shared` for

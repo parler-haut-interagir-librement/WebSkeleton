@@ -23,6 +23,11 @@ security:
             # The profiler, the debug toolbar and the assets are never behind the firewall.
             pattern: ^/(_profiler(/|$)|(_wdt|assets)/)
             security: false
+        health:
+            # The endpoints of the uptime monitors, /_health/…, need no session and no user: a monitor never meets
+            # a login page. The detailed view checks its own bearer token.
+            pattern: ^/_health/
+            security: false
         main:
             lazy: true
             provider: app_user_provider

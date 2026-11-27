@@ -97,6 +97,7 @@ admin:
     users: Utilisateurs
     errors: Erreurs
     flags: Drapeaux de fonctionnalité
+    queues: Files de messages
     site: Retour au site
     account: Mon compte
   dashboard:

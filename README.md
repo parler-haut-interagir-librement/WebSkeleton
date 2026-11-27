@@ -127,6 +127,7 @@ With the Symfony binary, set the same variable in `.env.local`, with the host of
 | The administration, EasyAdmin in the theme of PHIL UX by `phil/ux-easyadmin-bundle`, for `ROLE_ADMIN` | [DashboardController](src/Shared/Infrastructure/Http/Admin/DashboardController.php), [phil_ux_easy_admin.yaml](config/packages/phil_ux_easy_admin.yaml) |
 | The privacy choices of each member — the export of their data, the deletion of their account, the consent — and the redaction of the logs, by `phil/privacy-bundle` | [phil_privacy.yaml](config/packages/phil_privacy.yaml), [AccountPersonalData](src/Account/Infrastructure/Privacy/AccountPersonalData.php) |
 | The errors of the site kept in its own database and shown in the administration, by `phil/error-tracking-bundle` | [phil_error_tracking.yaml](config/packages/phil_error_tracking.yaml) |
+| The endpoints of the uptime monitors under `/_health`, the health checks of the database, the cache and the error store, the maintenance mode and the page of the Messenger queues under `/admin/queues`, by `phil/monitoring-bundle` | [phil_monitoring.yaml](config/packages/phil_monitoring.yaml), [HealthTest](tests/Functional/HealthTest.php) |
 | Feature flags, off until an administrator turns them on under `/admin/flags`, by `phil/feature-flags-bundle` | [phil_feature_flags.yaml](config/packages/phil_feature_flags.yaml), [doc](doc/feature-flags-and-circuit-breakers.md) |
 | A circuit breaker around each third party the site calls, by `phil/circuit-breaker-bundle` | [phil_circuit_breaker.yaml](config/packages/phil_circuit_breaker.yaml), [doc](doc/feature-flags-and-circuit-breakers.md) |
 | The main menu, by `phil/menu-bundle` | [MainMenuBuilder](src/Shared/Infrastructure/Menu/MainMenuBuilder.php) |
@@ -148,8 +149,6 @@ quality gates and Docker Compose. The PHIL bundles take the place of KnpMenu, of
 Doctrine extensions of Gedmo.
 
 Every PHIL package comes from Packagist.
-`phil/monitoring-bundle` is required without being registered: the configuration of `phil/error-tracking-bundle`
-0.1.0-alpha reads a class that implements one of its interfaces.
 
 ## Configuration 🗂️
 
@@ -365,9 +364,18 @@ The template starts with nothing that claims what no one has checked. Before a s
    `bin/console messenger:consume scheduler_phil_privacy` (with `symfony/scheduler`) or `bin/console
    phil:privacy:deletions` from cron, and declare in [config/privacy/cookies.yaml](config/privacy/cookies.yaml) every
    cookie the site adds.
-9. **The errors**: set `APP_RELEASE` to the version that runs, and purge the old events with
-   `bin/console phil:error-tracking:purge` from cron.
-10. **The third parties**: rename the example client `example.client` and its circuit `http.example` after the third
+9. **The errors**: set `APP_RELEASE` to the version that runs, purge the old events with
+   `bin/console phil:error-tracking:purge` from cron, and give the alerts a destination, a chatter transport of
+   `symfony/notifier`: without one, each alert is a warning in the log. Route
+   `Phil\ErrorTrackingBundle\Application\Message\AlertErrorGroup` to an asynchronous transport in
+   [messenger.yaml](config/packages/messenger.yaml), with a worker, so that a slow chat never slows the page that failed.
+10. **The monitors**: point the uptime monitor at `/_health/ready`, which answers `503` while a check is down, and set
+    `HEALTH_TOKEN` to a long random string for those that read `/_health/details`. Declare each scheduled task under
+    `heartbeats.tasks` of [phil_monitoring.yaml](config/packages/phil_monitoring.yaml), have it beat with
+    `bin/console phil:monitoring:heartbeat <task>` once it succeeded, and run `bin/console phil:monitoring:watch` every
+    minute from cron: a late task is alerted on the chat channel of `symfony/notifier`.
+    `bin/console phil:monitoring:maintenance enable` puts the site under maintenance during a deploy.
+11. **The third parties**: rename the example client `example.client` and its circuit `http.example` after the third
     party the site calls, or remove them with `EXAMPLE_API_URL`; keep the lines of the `feature_flags` log channel,
     the audit trail of the flags.
 

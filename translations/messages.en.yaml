@@ -97,6 +97,7 @@ admin:
     users: Users
     errors: Errors
     flags: Feature flags
+    queues: Queues
     site: Back to the site
     account: My account
   dashboard:

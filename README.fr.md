@@ -1,4 +1,4 @@
-<!-- phil-dev source-sha256=a849926b065d4a8ab012ab024f340908a648fb3b1c9160f741a9de11536c7c1b -->
+<!-- phil-dev source-sha256=44cb5f41ee0ba5e61d57a54da3c42c7c480e81a46265d7f0ab55eb0737f67bf1 -->
 # WebSkeleton 🦴
 
 [![Latest Version](https://img.shields.io/packagist/v/phil/webskeleton.svg?style=flat-square)](https://packagist.org/packages/phil/webskeleton)
@@ -130,6 +130,7 @@ Avec le binaire Symfony, mettez la même variable dans `.env.local`, avec l'hôt
 | L'administration, EasyAdmin au thème de PHIL UX par `phil/ux-easyadmin-bundle`, pour `ROLE_ADMIN` | [DashboardController](src/Shared/Infrastructure/Http/Admin/DashboardController.php), [phil_ux_easy_admin.yaml](config/packages/phil_ux_easy_admin.yaml) |
 | Les choix de confidentialité de chaque membre — l'exportation de ses données, la suppression de son compte, le consentement — et le caviardage des journaux, par `phil/privacy-bundle` | [phil_privacy.yaml](config/packages/phil_privacy.yaml), [AccountPersonalData](src/Account/Infrastructure/Privacy/AccountPersonalData.php) |
 | Les erreurs du site gardées dans sa propre base et montrées dans l'administration, par `phil/error-tracking-bundle` | [phil_error_tracking.yaml](config/packages/phil_error_tracking.yaml) |
+| Les points d'accès des moniteurs de disponibilité sous `/_health`, les contrôles de santé de la base de données, du cache et du magasin d'erreurs, le mode maintenance et la page des files de Messenger sous `/admin/queues`, par `phil/monitoring-bundle` | [phil_monitoring.yaml](config/packages/phil_monitoring.yaml), [HealthTest](tests/Functional/HealthTest.php) |
 | Des indicateurs de fonctionnalité, éteints jusqu'à ce qu'un administrateur les allume sous `/admin/flags`, par `phil/feature-flags-bundle` | [phil_feature_flags.yaml](config/packages/phil_feature_flags.yaml), [doc](doc/fr/feature-flags-and-circuit-breakers.md) |
 | Un disjoncteur autour de chaque tiers que le site appelle, par `phil/circuit-breaker-bundle` | [phil_circuit_breaker.yaml](config/packages/phil_circuit_breaker.yaml), [doc](doc/fr/feature-flags-and-circuit-breakers.md) |
 | Le menu principal, par `phil/menu-bundle` | [MainMenuBuilder](src/Shared/Infrastructure/Menu/MainMenuBuilder.php) |
@@ -151,8 +152,6 @@ les portes de qualité et Docker Compose. Les bundles PHIL prennent la place de 
 et des extensions Doctrine de Gedmo.
 
 Chaque paquet PHIL vient de Packagist.
-`phil/monitoring-bundle` est requis sans être enregistré : la configuration de `phil/error-tracking-bundle`
-0.1.0-alpha lit une classe qui implémente une de ses interfaces.
 
 ## Configuration 🗂️
 
@@ -378,9 +377,20 @@ Le gabarit ne commence avec rien qui affirme ce que personne n'a vérifié. Avan
    comptes échues avec `bin/console messenger:consume scheduler_phil_privacy` (avec `symfony/scheduler`) ou `bin/console
    phil:privacy:deletions` par cron, et déclarez dans [config/privacy/cookies.yaml](config/privacy/cookies.yaml) chaque
    témoin que le site ajoute.
-9. **Les erreurs** : réglez `APP_RELEASE` à la version qui tourne, et purgez les vieux événements avec
-   `bin/console phil:error-tracking:purge` par cron.
-10. **Les tiers** : renommez le client d'exemple `example.client` et son circuit `http.example` d'après le tiers que le
+9. **Les erreurs** : réglez `APP_RELEASE` à la version qui tourne, purgez les vieux événements avec
+   `bin/console phil:error-tracking:purge` par cron, et donnez une destination aux alertes, un transport chatter de
+   `symfony/notifier` : sans lui, chaque alerte est un avertissement dans le journal. Acheminez
+   `Phil\ErrorTrackingBundle\Application\Message\AlertErrorGroup` vers un transport asynchrone dans
+   [messenger.yaml](config/packages/messenger.yaml), avec un worker, pour qu'un clavardage lent ne ralentisse jamais la
+   page qui a échoué.
+10. **Les moniteurs** : pointez le moniteur de disponibilité sur `/_health/ready`, qui répond `503` tant qu'un contrôle
+    est en panne, et réglez `HEALTH_TOKEN` à une longue chaîne aléatoire pour ceux qui lisent `/_health/details`.
+    Déclarez chaque tâche planifiée sous `heartbeats.tasks` de [phil_monitoring.yaml](config/packages/phil_monitoring.yaml),
+    faites-la battre avec `bin/console phil:monitoring:heartbeat <task>` une fois réussie, et lancez
+    `bin/console phil:monitoring:watch` chaque minute par cron : une tâche en retard est signalée sur le canal de
+    clavardage de `symfony/notifier`. `bin/console phil:monitoring:maintenance enable` met le site en maintenance
+    pendant un déploiement.
+11. **Les tiers** : renommez le client d'exemple `example.client` et son circuit `http.example` d'après le tiers que le
     site appelle, ou retirez-les avec `EXAMPLE_API_URL` ; gardez les lignes du canal de journal `feature_flags`, la
     piste d'audit des indicateurs.
 

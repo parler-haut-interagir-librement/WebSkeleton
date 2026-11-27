@@ -110,6 +110,7 @@
         "ergebnis/phpunit-slow-test-detector": "^2.29",
         "phil/accessibility-check": "^0.1.2@alpha",
         "phil/dev-tools": "^0.2.1@alpha",
+        "phil/error-tracking": "^0.1.1@alpha",
         "phpunit/phpunit": "^13.4",
         "shipmonk/composer-dependency-analyser": "^1.8",
         "symfony/browser-kit": "~8.2.0",

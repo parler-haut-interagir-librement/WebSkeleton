@@ -1,0 +1,16 @@
+# The watch of the site by phil/monitoring-bundle: the endpoints of the uptime monitors under /_health, the maintenance
+# mode, the heartbeats of the scheduled tasks and the page of the Messenger queues, /admin/queues, behind the access
+# rule of /admin. The readiness probe runs the checks declared here and the check of phil/error-tracking-bundle,
+# error_tracking, which answers "degraded" when too many new groups of errors appear at once.
+# See vendor/phil/monitoring-bundle/doc/configuration.md
+phil_monitoring:
+    health:
+        # The bearer token of /_health/details, from the environment; the view answers 404 while it is unset.
+        token: '%env(default::HEALTH_TOKEN)%'
+        database: [default]
+        cache_pools: [cache.app]
+    maintenance:
+        # The administrators still see the site, to check it before they end the maintenance.
+        allowed_roles: [ROLE_ADMIN]
+    queues:
+        layout: admin/monitoring.html.twig

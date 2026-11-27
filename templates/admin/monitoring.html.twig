@@ -1,0 +1,13 @@
+{#-
+ # The layout of the page of the Messenger queues of phil/monitoring-bundle, /admin/queues, in the layout of the site,
+ # with a link back to the dashboard. The page of the bundle is in English, whatever the language of the site, and
+ # gives the title.
+ #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <p><a href="{{ path('admin') }}">{{ 'admin.menu.dashboard'|trans }}</a></p>
+    <div lang="en" class="isStack">
+        {% block content %}{% endblock %}
+    </div>
+{% endblock %}
