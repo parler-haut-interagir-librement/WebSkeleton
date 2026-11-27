@@ -8,6 +8,25 @@ built on [WebSymfony](https://github.com/parler-haut-interagir-librement/WebSymf
 [MicroSymfony](https://github.com/parler-haut-interagir-librement/MicroSymfony), which follows
 [strangebuzz/MicroSymfony](https://github.com/strangebuzz/MicroSymfony).
 
+## Unreleased
+
+The next version is 8.2.0-RC4.
+
+### Added
+
+- The watch of the site by `phil/monitoring-bundle`, registered and configured in `config/packages/phil_monitoring.yaml`:
+  the endpoints of the uptime monitors, `/_health/live`, `/_health/ready` and `/_health/details`, outside any firewall,
+  the detailed view for the bearer of `HEALTH_TOKEN` only; the checks of the database, of `cache.app` and of the store
+  of `phil/error-tracking-bundle`, `error_tracking`, degraded when too many new groups of errors appear at once; the
+  maintenance mode, which administrators see through; and the page of the Messenger queues, `/admin/queues`, for
+  `ROLE_ADMIN`, linked from the menu of the administration.
+
+### Changed
+
+- The alerts of `phil/error-tracking-bundle` go through the command bus as an `AlertErrorGroup` message, handled at once
+  until a transport is routed in `config/packages/messenger.yaml`, instead of being sent in the request outside
+  Messenger.
+
 ## [8.2.0-RC3] - 2026-11-26
 
 ### Added

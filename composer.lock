@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "771eb2fe4648ab14119513e373cddf14",
+    "content-hash": "7d93fd9e7a07585bcefc9f17c64144e8",
     "packages": [
         {
             "name": "composer/semver",
@@ -14610,6 +14610,7 @@
         "phil/dev-tools": 15,
         "phil/doctrine-behaviours": 15,
         "phil/doctrine-behaviours-bundle": 15,
+        "phil/error-tracking": 15,
         "phil/error-tracking-bundle": 15,
         "phil/feature-flags-bundle": 15,
         "phil/legal-notices-bundle": 15,

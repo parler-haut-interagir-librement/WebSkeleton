@@ -1,14 +1,12 @@
 # The errors of the site, kept in its own database by phil/error-tracking-bundle: the exceptions of the requests, of
 # the messages and of the commands, grouped, with their personal data scrubbed. The administration shows them under
-# /admin/errors, in the dashboard. Alerts without a chatter transport are logged; they are sent in the request, until a
-# transport routes them.
+# /admin/errors, in the dashboard, and phil/monitoring-bundle checks the store and counts the new groups in its health
+# check, error_tracking (config/packages/phil_monitoring.yaml). The alerts go through the command bus as an
+# AlertErrorGroup message, handled at once until config/packages/messenger.yaml routes it to a transport; without a
+# chatter transport, each one is logged as a warning.
 # See vendor/phil/error-tracking-bundle/doc/configuration.md
 phil_error_tracking:
     release: '%env(default::APP_RELEASE)%'
-    alerts:
-        async: false
-    # A check of phil/monitoring-bundle, which the site does not register.
-    health_check: false
     admin:
         enabled: true
 

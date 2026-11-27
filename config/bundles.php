@@ -28,6 +28,7 @@ return [
     Phil\WellKnownBundle\PhilWellKnownBundle::class => ['all' => true],
     Phil\DoctrineBehavioursBundle\PhilDoctrineBehavioursBundle::class => ['all' => true],
     Phil\ErrorTrackingBundle\PhilErrorTrackingBundle::class => ['all' => true],
+    Phil\MonitoringBundle\PhilMonitoringBundle::class => ['all' => true],
     Phil\MenuBundle\PhilMenuBundle::class => ['all' => true],
     Phil\PrivacyBundle\PhilPrivacyBundle::class => ['all' => true],
     Symfony\Bundle\SecurityBundle\SecurityBundle::class => ['all' => true],

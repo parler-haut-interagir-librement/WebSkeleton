@@ -1,0 +1,11 @@
+# The routes of PhilMonitoringBundle: the endpoints of the uptime monitors, /_health/live, /_health/ready and
+# /_health/details, outside any firewall (config/packages/security.yaml), and the page of the Messenger queues,
+# /admin/queues, behind the access rule of /admin: ROLE_ADMIN only. The page is linked from the menu of the
+# administration.
+phil_monitoring_health:
+    resource: '@PhilMonitoringBundle/config/routes/health.php'
+    prefix: /_health
+
+phil_monitoring_queues:
+    resource: '@PhilMonitoringBundle/config/routes/queues.php'
+    prefix: /admin/queues

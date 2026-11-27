@@ -13,8 +13,7 @@ return new Configuration()
     ->addPathToScan(__DIR__.'/migrations', isDev: false)
     ->addPathToScan(__DIR__.'/tests', isDev: true)
     ->addPathToScan(__DIR__.'/fixtures', isDev: true)
-    // Used through the configuration, the templates, the front controller or the console, never by a class of src/;
-    // phil/monitoring-bundle only gives the interface phil/error-tracking-bundle 0.1.0-alpha needs: see phil-dev.php.
+    // Used through the configuration, the templates, the front controller or the console, never by a class of src/.
     ->ignoreErrorsOnPackages([
         'doctrine/doctrine-migrations-bundle',
         'phil/accessibility-statement-bundle',

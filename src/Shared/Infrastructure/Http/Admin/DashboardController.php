@@ -36,6 +36,11 @@ final class DashboardController extends AbstractDashboardController
     public const string FEATURE_FLAGS_ROUTE = 'phil_feature_flags_admin_list';
 
     /**
+     * The page of the Messenger queues, imported by config/routes/phil_monitoring.yaml.
+     */
+    public const string QUEUES_ROUTE = 'phil_monitoring_queues';
+
+    /**
      * @param list<string> $locales
      */
     public function __construct(
@@ -73,6 +78,8 @@ final class DashboardController extends AbstractDashboardController
         yield ErrorTrackingAdmin::menuItem(self::ROUTE, 'admin.menu.errors');
         // The screens of phil/feature-flags-bundle, under /admin/flags, outside EasyAdmin.
         yield MenuItem::linkToUrl('admin.menu.flags', 'fa fa-toggle-on', $this->generateUrl(self::FEATURE_FLAGS_ROUTE));
+        // The page of the Messenger queues of phil/monitoring-bundle, under /admin/queues, outside EasyAdmin.
+        yield MenuItem::linkToUrl('admin.menu.queues', 'fa fa-list-check', $this->generateUrl(self::QUEUES_ROUTE));
         yield MenuItem::linkToUrl('admin.menu.site', 'fa fa-house', $this->generateUrl(HomeAction::class));
     }
 
